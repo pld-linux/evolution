@@ -1,5 +1,5 @@
 %define		mver		1.2
-%define		subver		1
+%define		subver		2
 
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
