@@ -142,7 +142,7 @@ Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
 Palmem.
 
 %prep
-%setup -q -a1
+%setup -q
 
 %build
 
