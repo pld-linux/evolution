@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/gnome/html
 %{_datadir}/gnome/ui
 %{_datadir}/images/evolution
-%{_datadir}/pixmaps/*
+%{_pixmapsdir}/*
 %{_datadir}/mime-info/*
 
 %files devel
