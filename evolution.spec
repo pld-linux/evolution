@@ -1,16 +1,10 @@
 
-#
-# todo:
-# - remove from *.pc files or make as shared libpcs and libpas
-#   (not required or required by multisync pkg)
-#
-
 %bcond_without ldap
 
 %define		mver		1.4
 %define		subver	5
 %define		_db3ver	3.1.17
-%define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db3-headers-%{_db3ver}
+%define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db-%{_db3ver}
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -18,41 +12,45 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
 # Source0-md5:	f16a86d6eaa9d9683f215586fcdac374
-Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
-# Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
-Patch0:		%{name}-nostaticdb3.patch
-Patch1:		%{name}-nolibs.patch
-Patch2:		%{name}-configure_in.patch
-Patch3:		%{name}-desktop.patch
-Patch4:		%{name}-pldify.patch
+Source1:	http://www.sleepycat.com/update/snapshot/db-%{_db3ver}.tar.gz
+# Source1-md5:	5baeb94fb934d0bf783ea42117c400be
+#Patch0:		%{name}-nostaticdb3.patch
+Patch0:		%{name}-nolibs.patch
+Patch1:		%{name}-configure_in.patch
+Patch2:		%{name}-desktop.patch
+Patch3:		%{name}-pldify.patch
+Patch4:		%{name}-iconv_flush.patch
+Patch5:		%{name}-div_by_zero.patch
+Patch6:		%{name}-ipv6.patch
+Patch7:		%{name}-ipv6_smtp.patch
+Patch8:		%{name}-timezone_offsets.patch
+Patch9:		%{name}-gethostbyaddr.patch
+Patch10:	%{name}-addrconfig.patch
+Patch11:	%{name}-libpcs_libpas.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel
-BuildRequires:	ORBit2-devel >= 2.7.5-1
+BuildRequires:	ORBit2-devel >= 2.8.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	db3
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:1.99.9
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
-BuildRequires:	gnome-vfs2-devel
-BuildRequires:	gtk+2-devel
-BuildRequires:	gtk-doc >= 0.6
+BuildRequires:	gnome-vfs2-devel >= 2.4.0
+BuildRequires:	gtk-doc >= 1.1
 BuildRequires:	gtkhtml-devel >= 3.0.8
 BuildRequires:	intltool >= 0.18
-BuildRequires:	libbonoboui-devel >= 2.3.3-2
 BuildRequires:	libglade2-devel
-BuildRequires:	libgnomecanvas-devel
-BuildRequires:	libgnomeprintui-devel >= 2.2.1
-BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
+BuildRequires:	libgnomeprintui-devel >= 2.4.0
+BuildRequires:	libgnomeui-devel >= 2.4.0
 BuildRequires:	libsoup-devel >= 1.99.23
 BuildRequires:	libtool
 BuildRequires:	libxml2
@@ -70,7 +68,6 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	GConf2
 Requires:	bonobo-activation
-Requires:	db3 = %{_db3ver}
 Requires:	gal >= 1:1.99.9
 Requires:	gtkhtml >= 3.0.8
 Requires:	libglade2
@@ -103,15 +100,15 @@ Requires:	%{name} = %{version}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
 Requires:	gal-devel >= 1:1.99.9
-Requires:	gnome-vfs2-devel
+Requires:	gnome-vfs2-devel >= 2.4.0
 Requires:	gtkhtml-devel >= 3.0.8
-Requires:	libglade2-devel
-Requires:	libgnomeprintui-devel >= 2.2.1
-Requires:	libgnomeui-devel >= 2.3.3.1-2
-Requires:	libsoup-devel
+Requires:	libglade2-devel >= 2.0.1
+Requires:	libgnomeprintui-devel >= 2.4.0
+Requires:	libgnomeui-devel >= 2.4.0
+Requires:	libsoup-devel >= 1.99.23
 Requires:	nspr-devel
 Requires:	nss-devel
-%{?with_ldap:Requires:	openldap-devel}
+%{?with_ldap:Requires:	openldap-devel >= 2.0.0}
 Requires:	openssl-devel >= 0.9.7c
 Obsoletes:	evolution2-devel
 
@@ -166,9 +163,27 @@ Palmem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
+%patch4 -p0
+%patch5 -p0
+%patch6 -p0
+%patch7 -p0
+%patch8 -p0
+%patch9 -p1
+%patch10 -p0
+%patch11 -p1
 
 %build
+# first build db3
+cd %{_dbdir}/build_unix
+CFLAGS="%{rpmcflags} -fno-rtti -fno-implicit-templates" \
+CXXFLAGS="%{rpmcflags} -fno-rtti -fno-implicit-templates" \
+../dist/configure \
+	--prefix=%{_prefix} \
+	--enable-static
+%{__make}
+cd $RPM_BUILD_DIR/%{name}-%{version}
+
+# build evolution
 rm -f missing
 glib-gettextize --copy --force
 intltoolize --copy --force
@@ -199,8 +214,8 @@ cd ..
 	--with-nss-libs="%{_libdir}" \
 	--enable-ipv6=yes \
 	--with-html-dir=%{_gtkdocdir} \
-	--with-db3-includes=%{_dbdir} \
-	--with-db3-libs=/lib \
+	--with-db3-includes=%{_dbdir}/build_unix \
+	--with-db3-libs=%{_dbdir}/build_unix \
 	--with-kde-applnk-path=no
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
