@@ -233,7 +233,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/*/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/libemiscwidgets.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 
-%find_lang %{name} --all-name
+%find_lang %{name} --all-name --with-gnome
 
 %clean
 # rm -rf $RPM_BUILD_ROOT
