@@ -1,20 +1,20 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version: 	0.10
+Version: 	0.11
 Release:	1
 Copyright:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
+#Patch0:		%{name}-DESTDIR.patch
+#Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.37
 BuildRequires:	gtkhtml-devel >= 0.8.2
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
-BuildRequires:  gnome-vfs-devel >= 0.4.2
+BuildRequires:  gnome-vfs-devel >= 1.0.1
 BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-libs-devel >= 1.2.9
 # needed for PALM Pilot support - not yet
@@ -74,17 +74,19 @@ Pakiet zawiera statyczne biblioteki Evolution.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+#%patch0 -p1
+#%patch1 -p1
 
 %build
 rm missing
-libtoolize --copy --force
-gettextize --copy --force
-aclocal -I macros
-autoconf
+#libtoolize --copy --force
+#gettextize --copy --force
+#aclocal -I macros
+#autoconf
 automake -a -c
-./configure \
+
+%configure2_13 \
+	--prefix=%{_prefix} \
 	--enable-pilot-conduits=no \
 	--enable-ldap=yes \
 	--enable-nntp=yes
