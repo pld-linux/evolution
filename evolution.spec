@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	6.2
+%define		subver	7
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -17,30 +17,29 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	3
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	b6a16cfd84808d037772840ad4cbce94
+# Source0-md5:	a553123fb726360a853f32fd1003ef3b
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
-Patch2:		%{name}-debugreg.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.6.0
 BuildRequires:	ORBit2-devel >= 1:2.10.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.91
+BuildRequires:	evolution-data-server-devel >= 0.0.92
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.7
+BuildRequires:	gal-devel >= 1:2.1.8
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.11
+BuildRequires:	gtkhtml-devel >= 3.1.12
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.3.6
 BuildRequires:	libgnomeprintui-devel >= 2.6.0
@@ -64,9 +63,9 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.91
-Requires:	gal >= 1:2.1.7
-Requires:	gtkhtml >= 3.1.11
+Requires:	evolution-data-server >= 0.0.92
+Requires:	gal >= 1:2.1.8
+Requires:	gtkhtml >= 3.1.12
 Requires:	libglade2 >= 1:2.3.6
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -96,9 +95,9 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.7
+Requires:	gal-devel >= 1:2.1.8
 Requires:	gnome-vfs2-devel >= 2.6.0
-Requires:	gtkhtml-devel >= 3.1.11
+Requires:	gtkhtml-devel >= 3.1.12
 Requires:	libglade2-devel >= 1:2.3.6
 Requires:	libgnomeprintui-devel >= 2.6.0
 Requires:	libgnomeui-devel >= 2.6.0
@@ -204,7 +203,6 @@ Palmem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 mv po/{no,nb}.po
 
