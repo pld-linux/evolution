@@ -14,7 +14,7 @@ URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.37
 BuildRequires:	bonobo-conf-devel
-BuildRequires:	gtkhtml-devel >= 0.8.2
+BuildRequires:	gtkhtml-devel >= 0.10.1
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
 BuildRequires:  gnome-vfs-devel >= 1.0.1
@@ -24,7 +24,7 @@ BuildRequires:	gnome-libs-devel >= 1.2.9
 #BuildRequires:	gnome-pilot-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gal-devel >= 0.5.99.5
+BuildRequires:	gal-devel >= 0.9.1
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	openssl-devel
 BuildRequires:	libglade-devel
