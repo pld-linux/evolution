@@ -11,7 +11,7 @@
 %bcond_without	pilot		# build without pilot support
 
 %define		mver		2.1
-%define		subver	4
+%define		subver	5
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -23,7 +23,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	7ea0196135c8efe66d90de13228e80c7
+# Source0-md5:	66cac9d9a156660484408da4e6ec3d04
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
@@ -34,10 +34,10 @@ BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 1.1.4
+BuildRequires:	evolution-data-server-devel >= 1.1.5
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.3.3
+BuildRequires:	gal-devel >= 1:2.3.4
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.0}
@@ -67,8 +67,8 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.9.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.1.4
-Requires:	gal >= 1:2.3.3
+Requires:	evolution-data-server >= 1.1.5
+Requires:	gal >= 1:2.3.4
 Requires:	gtkhtml >= 3.5.6
 Requires:	libglade2 >= 1:2.5.0
 Requires:	psmisc
@@ -100,7 +100,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.3.3
+Requires:	gal-devel >= 1:2.3.4
 Requires:	gnome-vfs2-devel >= 2.9.90
 Requires:	gtkhtml-devel >= 3.5.6
 Requires:	libglade2-devel >= 1:2.5.0
@@ -334,6 +334,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/evolution/*/default/C
 %lang(ja) %dir %{_datadir}/evolution/*/default/ja
 %lang(nl) %dir %{_datadir}/evolution/*/default/nl
+%lang(pt) %dir %{_datadir}/evolution/*/default/pt
 %lang(zh_CN) %dir %{_datadir}/evolution/*/default/zh_CN
 %{_datadir}/evolution/*/errors
 %{_datadir}/evolution/*/etspec
@@ -341,8 +342,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/*/help
 %{_datadir}/evolution/*/images
 %{_datadir}/evolution/*/ui
+%{_datadir}/evolution/*/weather
 %{_datadir}/mime-info/*
-%{_datadir}/evolution-*/weather
 %{_datadir}/idl/evolution-*/Evolution-Component.idl
 %{_datadir}/idl/evolution-*/Evolution-ConfigControl.idl
 %{_datadir}/idl/evolution-*/Evolution-Offline.idl
@@ -377,6 +378,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/*/default/C/mail
 %lang(ja) %{_datadir}/evolution/*/default/ja/mail
 %lang(nl) %{_datadir}/evolution/*/default/nl/mail
+%lang(pt) %{_datadir}/evolution/*/default/pt/mail
 %lang(zh_CN) %{_datadir}/evolution/*/default/zh_CN/mail
 %{_datadir}/idl/evolution-*/Composer.idl
 %{_datadir}/idl/evolution-*/Evolution-Composer.idl
