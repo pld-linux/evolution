@@ -12,7 +12,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	3
+Release:	4
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
@@ -31,6 +31,7 @@ Patch8:		%{name}-timezone_offsets.patch
 Patch9:		%{name}-gethostbyaddr.patch
 Patch10:	%{name}-addrconfig.patch
 Patch11:	%{name}-libpcs_libpas.patch
+Patch12:	%{name}-no-static-in-shared.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.8.0
@@ -170,12 +171,12 @@ Palmem.
 %patch9 -p1
 %patch10 -p0
 %patch11 -p1
+%patch12 -p1
 
 %build
-# first build db3
+# first build db3 (only static, C interface)
 cd %{_dbdir}/build_unix
-CFLAGS="%{rpmcflags} -fno-rtti -fno-implicit-templates" \
-CXXFLAGS="%{rpmcflags} -fno-rtti -fno-implicit-templates" \
+CFLAGS="%{rpmcflags}" \
 ../dist/configure \
 	--prefix=%{_prefix} \
 	--enable-static
@@ -183,7 +184,6 @@ CXXFLAGS="%{rpmcflags} -fno-rtti -fno-implicit-templates" \
 cd $RPM_BUILD_DIR/%{name}-%{version}
 
 # build evolution
-rm -f missing
 glib-gettextize --copy --force
 intltoolize --copy --force
 %{__libtoolize}
