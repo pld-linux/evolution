@@ -8,6 +8,7 @@ Release:	3.1
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.gz
+# Source0-md5:	024e62b7cd37315d40b16d76b072e59d
 Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-am.patch
 Patch2:		%{name}-omf.patch
