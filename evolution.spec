@@ -3,18 +3,18 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version: 	0.13
+Version: 	0.15
 Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
-URL:		http://www.helixcode.com/apps/evolution.php3
+URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 1.0.3
-BuildRequires:	bonobo-conf-devel
-BuildRequires:	gtkhtml-devel >= 0.11
+BuildRequires:	bonobo-conf-devel >= 0.11
+BuildRequires:	gtkhtml-devel >= 0.14
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
 BuildRequires:  gnome-vfs-devel >= 1.0.1
@@ -26,7 +26,7 @@ BuildRequires:	gnome-print-devel >= 0.25
 #BuildRequires:	gnome-pilot-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.9.0
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gal-devel >= 0.11
+BuildRequires:	gal-devel >= 0.13
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	openssl-devel
 BuildRequires:	libglade-devel >= 0.14
@@ -93,6 +93,7 @@ Pakiet zawiera statyczne biblioteki Evolution.
 #autoconf
 #automake -a -c
 
+CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 %configure2_13 \
 	--prefix=%{_prefix} \
 	--enable-pilot-conduits=no \
