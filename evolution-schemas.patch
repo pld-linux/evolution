@@ -1,0 +1,12 @@
+--- evolution-1.5.93/shell/apps_evolution_shell.schemas.in.in.orig	2004-08-23 09:52:00.950219440 +0200
++++ evolution-1.5.93/shell/apps_evolution_shell.schemas.in.in	2004-08-23 09:52:41.296085936 +0200
+@@ -89,8 +89,8 @@
+       <applyto>/apps/evolution/shell/view_defaults/height</applyto>
+       <owner>evolution</owner>
+       <type>int</type>
++      <default>480</default>
+       <locale name="C">
+-        <default>480</default>
+         <short>Default window height</short>
+       </locale>
+     </schema>
