@@ -3,8 +3,8 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	1.0.5
-Release:	5
+Version:	1.0.7
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.bz2
@@ -18,12 +18,10 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	bonobo-conf-devel >= 0.14
 BuildRequires:	bonobo-devel >= 1.0.15-2
-BuildRequires:	cyrus-sasl-devel
-BuildRequires:	db3-devel
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 0.19.2
-BuildRequires:	gdk-pixbuf-devel >= 0.9.0
+BuildRequires:	gdk-pixbuf-gnome-devel >= 0.9.0
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.9
 BuildRequires:	gnome-print-devel >= 0.25
@@ -37,7 +35,6 @@ BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 BuildRequires:	oaf-devel >= 0.6.7
 BuildRequires:	openldap-devel >= 2.0.0
-BuildRequires:	openssl-devel
 BuildRequires:	python
 BuildRequires:	scrollkeeper
 Requires:	scrollkeeper >= 0.1.4
