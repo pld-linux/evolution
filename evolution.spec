@@ -10,7 +10,7 @@ Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
 Group(pt):	Aplicações/Correio Eletrônico
-Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
