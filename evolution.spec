@@ -12,7 +12,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	5
+%define		subver	1
 %define		snap		20031227
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
@@ -20,38 +20,38 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	%{mver}
-Release:	1.%{snap}.1
+Version:	%{mver}.%{subver}
+Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source0:	%{name}-%{version}-%{snap}.tar.bz2
-# Source0-md5:	bd57771715162ddde879c4e1ac2f2ba2
-#Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
+# Source0-md5:	7b852abda6b8324cd1b4ce80eaee1c0e
+#Source0:	%{name}-%{version}-%{snap}.tar.bz2
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	GConf2-devel
+BuildRequires:	GConf2-devel >= 2.5.0
 BuildRequires:	ORBit2-devel >= 2.9.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 2.1.1
+BuildRequires:	gal-devel >= 2.1.2
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.5.0
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.4
+BuildRequires:	gtkhtml-devel >= 3.1.5
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libglade2-devel >= 2.3.0
 BuildRequires:	libgnomeprintui-devel >= 2.5.0
 BuildRequires:	libgnomeui-devel >= 2.5.0
-BuildRequires:	libsoup-devel >= 2.1.2
+BuildRequires:	libsoup-devel >= 2.1.3
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	evolution-data-server-devel >= 0.0.3
+BuildRequires:	evolution-data-server-devel >= 0.0.4
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
@@ -62,14 +62,14 @@ BuildRequires:	scrollkeeper >= 0.1.4
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
-Requires:	GConf2
+Requires:	GConf2 >= 2.5.0
 Requires:	bonobo-activation
-Requires:	gal >= 2.1.1
-Requires:	gtkhtml >= 3.1.4
-Requires:	libglade2
+Requires:	gal >= 2.1.2
+Requires:	gtkhtml >= 3.1.5
+Requires:	libglade2 >= 2.3.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
-Requires:	evolution-data-server >= 0.0.3
+Requires:	evolution-data-server >= 0.0.4
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -98,13 +98,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 2.1.1
+Requires:	gal-devel >= 2.1.2
 Requires:	gnome-vfs2-devel >= 2.5.0
-Requires:	gtkhtml-devel >= 3.1.4
+Requires:	gtkhtml-devel >= 3.1.5
 Requires:	libglade2-devel >= 2.3.0
 Requires:	libgnomeprintui-devel >= 2.5.0
 Requires:	libgnomeui-devel >= 2.5.0
-Requires:	libsoup-devel >= 2.1.2
+Requires:	libsoup-devel >= 2.1.3
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
