@@ -293,6 +293,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 %dir %{_datadir}/evolution/%{mver}
 %dir %{_datadir}/evolution/%{mver}/default_user
 %dir %{_datadir}/evolution/%{mver}/views
+%{_datadir}/evolution/%{mver}/*.xml
+%{_datadir}/evolution/%{mver}/default_user/searches.xml
+%{_datadir}/evolution/%{mver}/default_user/vfolders.xml
 %{_datadir}/evolution/%{mver}/etspec
 %{_datadir}/evolution/%{mver}/glade
 %{_datadir}/evolution/%{mver}/images
@@ -333,14 +336,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-calendar-importers/*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_1.5.server
 %{_libdir}/evolution/%{mver}/camel-providers/*.urls
-%{_datadir}/evolution/%{mver}/addresstypes.xml
-%{_datadir}/evolution/%{mver}/filtertypes.xml
-%{_datadir}/evolution/%{mver}/searchtypes.xml
-%{_datadir}/evolution/%{mver}/vfoldertypes.xml
 %{_datadir}/evolution/%{mver}/views/mail*
 %{_datadir}/evolution/%{mver}/default_user/local
-%{_datadir}/evolution/%{mver}/default_user/searches.xml
-%{_datadir}/evolution/%{mver}/default_user/vfolders.xml
 %{_datadir}/evolution/%{mver}/default_user/views/mail*
 %{_datadir}/idl/evolution-%{mver}/Composer.idl
 %{_datadir}/idl/evolution-%{mver}/Evolution-Composer.idl
