@@ -1,0 +1,34 @@
+--- evolution-1.5.7/addressbook/conduit/address-conduit.c.wiget	2004-04-27 09:48:43.990156969 +0200
++++ evolution-1.5.7/addressbook/conduit/address-conduit.c	2004-04-27 09:49:06.555421970 +0200
+@@ -494,7 +494,6 @@
+ 		return E_CONTACT_EMAIL_2;
+ 	case E_CONTACT_EMAIL_2:
+ 		return E_CONTACT_EMAIL_3;
+-	default:
+ 	}
+ 
+ 	return E_CONTACT_FIELD_LAST;
+@@ -509,7 +508,6 @@
+ 	switch (*field) {
+ 	case E_CONTACT_PHONE_HOME:
+ 		return E_CONTACT_PHONE_HOME_2;
+-	default:
+ 	}
+ 
+ 	return E_CONTACT_FIELD_LAST;
+@@ -524,7 +522,6 @@
+ 	switch (*field) {
+ 	case E_CONTACT_PHONE_BUSINESS:
+ 		return E_CONTACT_PHONE_BUSINESS_2;
+-	default:
+ 	}
+ 
+ 	return E_CONTACT_FIELD_LAST;
+@@ -541,7 +538,6 @@
+ 		return E_CONTACT_PHONE_HOME_FAX;
+ 	case E_CONTACT_PHONE_HOME_FAX:
+ 		return E_CONTACT_PHONE_OTHER_FAX;
+-	default:
+ 	}
+ 
+ 	return E_CONTACT_FIELD_LAST;
