@@ -139,7 +139,7 @@ cd libical; autoconf; cd ..
 
 CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 %configure2_13 \
-	--prefix=%{_prefix} \
+	--disable-gtk-doc \
 	--enable-pilot-conduits=no \
 	--with-openldap=yes \
 	--with-static-ldap=no \
