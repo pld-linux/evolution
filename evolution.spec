@@ -28,7 +28,6 @@ Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-gnome-icon-theme.patch
 Patch3:		%{name}-GG-IM.patch
 Patch4:		%{name}-desktop.patch
-#Patch5:		%{name}-libcom_err_include.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.6.2
 BuildRequires:	ORBit2-devel >= 1:2.10.3
@@ -212,7 +211,6 @@ Palmem.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-#%{?with_kerberos5:%patch5 -p1}
 
 mv po/{no,nb}.po
 
