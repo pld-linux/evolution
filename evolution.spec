@@ -15,6 +15,7 @@ Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-am.patch
 Patch2:		%{name}-omf.patch
 Patch3:		%{name}-libpisock.patch
+Patch4:		%{name}-no-static-ldap.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf-devel >= 1.0.7
 BuildRequires:	ORBit-devel >= 0.5.8
@@ -30,6 +31,7 @@ BuildRequires:	gdk-pixbuf-gnome-devel >= 0.9.0
 BuildRequires:	gdk-pixbuf-devel >= 0.18.0
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.9
+BuildRequires:	gnome-pilot-devel
 BuildRequires:	gnome-print-devel >= 0.35
 BuildRequires:	gnome-vfs-devel >= 1.0.5
 BuildRequires:	gtk+-devel > 1.2.0
@@ -43,8 +45,6 @@ BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 BuildRequires:	oaf-devel >= 0.6.10
 BuildRequires:	openldap-devel >= 2.0.0
-#propably some m4 stuff is buggy so opeldap-static is required at now... :(
-BuildRequires:	openldap-static >= 2.0.0
 BuildRequires:	python
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	libxml >= 1.8.17
@@ -154,6 +154,7 @@ Palmem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
@@ -162,11 +163,16 @@ rm -f missing
 xml-i18n-toolize --copy --force
 %{__libtoolize}
 %{__gettextize}
-%{__aclocal} -I %{_aclocaldir}/gnome
+%{__aclocal} -I %{_aclocaldir}/gnome -I macros
 %{__autoconf}
 %{__automake}
 cd libical
+# workaround for libtoolize to install ltmain.sh in . not ..
+touch install-sh
+%{__libtoolize}
+%{__aclocal}
 %{__autoconf}
+%{__automake}
 cd ..
 CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0 -I/usr/include"
 %configure \
