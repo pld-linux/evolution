@@ -1,5 +1,5 @@
 %define		mver		1.2
-%define		subver		0
+%define		subver		1
 
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
@@ -24,7 +24,7 @@ BuildRequires:	bonobo-conf-devel >= 0.16
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 0.21
+BuildRequires:	gal-devel >= 0.22
 BuildRequires:	gdk-pixbuf-gnome-devel >= 0.9.0
 BuildRequires:	gdk-pixbuf-devel >= 0.18.0
 BuildRequires:	gettext-devel
@@ -59,6 +59,7 @@ Requires:	oaf >= 0.6.7
 Requires:	libglade >= 0.17
 Requires:	gtkhtml >= 1.0.0-2
 Requires:	db3 = 3.1.17
+Requires:	gal >= 0.22
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -88,7 +89,7 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel
+Requires:	gal-devel >= 0.22
 Requires:	gdk-pixbuf-devel
 Requires:	gnome-libs-devel
 Requires:	gnome-print-devel
