@@ -174,7 +174,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime-info/*
 %{_datadir}/libical-evolution
 %{_applnkdir}/Network/Mail/*
-%{_applnkdir}/Applications/*
 %{_pixmapsdir}/*
 
 %files devel
