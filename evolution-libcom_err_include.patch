@@ -1,0 +1,12 @@
+diff -urN aa/evolution-1.5.92/camel/camel-sasl-gssapi.c evolution-1.5.92/camel/camel-sasl-gssapi.c
+--- aa/evolution-1.5.92/camel/camel-sasl-gssapi.c	2004-02-25 21:11:07.000000000 +0100
++++ evolution-1.5.92/camel/camel-sasl-gssapi.c	2004-08-03 16:13:54.464940208 +0200
+@@ -28,7 +28,7 @@
+ #ifdef HAVE_KRB5
+ 
+ #include <string.h>
+-#include <com_err.h>
++#include <et/com_err.h>
+ #ifdef HAVE_MIT_KRB5
+ #include <gssapi/gssapi.h>
+ #include <gssapi/gssapi_generic.h>
