@@ -43,6 +43,9 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:  freetype-static >= 2.0.5
+BuildRequires:	scrollkeeper
+BuildRequires:	kernel-headers
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
