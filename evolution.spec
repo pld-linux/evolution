@@ -7,27 +7,31 @@ Copyright:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
-BuildRequires:	bonobo-devel >= 0.31
-BuildRequires:	gtkhtml-devel >= 0.8-2
+BuildRequires:	bonobo-devel >= 0.37
+BuildRequires:	gtkhtml-devel >= 0.8.2
 BuildRequires:	libunicode-devel >= 0.4
-BuildRequires:	oaf-devel >= 0.5.1
+BuildRequires:	oaf-devel >= 0.6.2
 BuildRequires:  gnome-vfs-devel >= 0.4.2
-BuildRequires:	gnome-print-devel >= 0.20
+BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-libs-devel >= 1.2.9
+# needed for PALM Pilot support - not yet
+#BuildRequires:	gnome-pilot-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gal-devel >= 0.5
+BuildRequires:	gal-devel >= 0.5.99.5
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	libglade-devel
-BuildRequires:	ORBit-devel
+BuildRequires:	ORBit-devel >= 0.5.6
+BuildRequires:	GConf-devel >= 0.6
 BuildRequires:	gettext-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	autoconf
 BuildRequires:	automake
-#BuildRequires:	xml-i18n-tools
+BuildRequires:	xml-i18n-tools > 0.8.2
 BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -71,15 +75,19 @@ Pakiet zawiera statyczne biblioteki Evolution.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm missing
-gettextize --copy --force
-automake -a -c
-aclocal -I macros
 libtoolize --copy --force
+gettextize --copy --force
+aclocal -I macros
 autoconf
-%configure 
+automake -a -c
+./configure \
+	--enable-pilot-conduits=no \
+	--enable-ldap=yes \
+	--enable-nntp=yes
 %{__make}
 
 %install
