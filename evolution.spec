@@ -3,11 +3,14 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±øka Adresowa
 Name:		evolution
-Version: 	0.15
+Version:	0.15
 Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
+Group(de):	Applikationen/Post
+Group(pl):	Aplikacje/Poczta
+Group(pt):	AplicaÁıes/Correio EletrÙnico
+Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
@@ -17,7 +20,7 @@ BuildRequires:	bonobo-conf-devel >= 0.11
 BuildRequires:	gtkhtml-devel >= 0.14
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
-BuildRequires:  gnome-vfs-devel >= 1.0.1
+BuildRequires:	gnome-vfs-devel >= 1.0.1
 BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-libs-devel >= 1.2.9
 #BuildRequires:	gnome-xml >= 1.8.10
@@ -40,25 +43,32 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
-communications tool.  The tools which make up Evolution will
-be tightly integrated with one another and act as a seamless
-personal information-management tool. 
+communications tool. The tools which make up Evolution will be tightly
+integrated with one another and act as a seamless personal
+information-management tool.
 
 %description -l pl
-Evolution to program pocztowy GNOME, kalendarz, ksi±øka adresowa
-i narzÍdzie komunikacyjne. 
+Evolution to program pocztowy GNOME, kalendarz, ksi±øka adresowa i
+narzÍdzie komunikacyjne.
 
 %package devel
-Summary:        Header files for evolution
+Summary:	Header files for evolution
 Summary(pl):	Pliki nag≥Ûwkowe i dokumentacja
-Group:          Development/Libraries
-Requires:       %{name} = %{version}
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Requires:	%{name} = %{version}
 
 %description devel
 This package contains the files necessary to develop applications
@@ -69,10 +79,17 @@ Pakiet zawiera pliki potrzebne do rozwoju aplikacji uøywaj±cych
 bibliotek programu Evolution.
 
 %package static
-Summary:        Static libraries for evolution
+Summary:	Static libraries for evolution
 Summary(pl):	Biblioteki statyczne dla evolution
-Group:          Development/Libraries
-Requires:       %{name} = %{version}
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Requires:	%{name} = %{version}
 
 %description static
 This package contains static libraries for Evolution.
@@ -86,7 +103,7 @@ Pakiet zawiera statyczne biblioteki Evolution.
 #%patch1 -p1
 
 %build
-#rm missing
+#rm -f missing
 #libtoolize --copy --force
 #gettextize --copy --force
 #aclocal -I macros
@@ -99,7 +116,7 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 	--enable-pilot-conduits=no \
 	--enable-ldap=yes \
 	--enable-nntp=yes \
-	--with-gnome-includes=%{_prefix}/include/gnome-vfs-1.0/
+	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/
 %{__make}
 
 %install
@@ -126,6 +143,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
 %attr(755,root,root) %{_libdir}/*.so*
+%dir %{_libdir}/evolution
+%dir %{_libdir}/evolution/*
+%dir %{_libdir}/evolution/*/*
 %{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
@@ -142,9 +162,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*.la
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.la
 %{_includedir}/*.h
+%dir %{_includedir}/camel
 %{_includedir}/camel/*.h
+%dir %{_includedir}/ename
 %{_includedir}/ename/*.h
+%dir %{_includedir}/evolution
+%dir %{_includedir}/evolution/*
 %{_includedir}/evolution/*/*.h
+%dir %{_includedir}/libicalvcal
 %{_includedir}/libicalvcal/*.h
 %{_datadir}/idl/*.idl
 
