@@ -139,6 +139,7 @@ aplicações.
 
 %package mail
 Summary:	Evolution mail component
+Summary(pl):	Modu³ pocztowy Evolution
 Group:		X11/Applications
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
@@ -148,25 +149,36 @@ Requires(post):		GConf2
 %description mail
 Evolution mail.
 
+%description mail -l pl
+Modu³ pocztowy Evolution.
+
 %package addressbook
 Summary:	Evolution addressbook component
+Summary(pl):	Modu³ ksi±¿ki adresowej Evolution
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
-Requires(post,postun):	/sbin/ldconfig
+Requires(post):	/sbin/ldconfig
 Requires(post):		GConf2
 
 %description addressbook
 Evolution addressbook.
 
+%description addressbook -l pl
+Ksi±¿ka adresowa Evolution.
+
 %package calendar
 Summary:	Evolution calendar and todo component
+Summary(pl):	Modu³ kalendarza i listy zadañ Evolution
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
-Requires(post,postun):	/sbin/ldconfig
+Requires(post):	/sbin/ldconfig
 Requires(post):		GConf2
 
 %description calendar
 Evolution calendar and todo component.
+
+%description calendar -l pl
+Kalendarz i lista zadañ Evolution.
 
 %package pilot
 Summary:	Evolution conduits for gnome-pilot
@@ -176,11 +188,12 @@ Requires:	%{name} = %{version}-%{release}
 Obsoletes:	evolution2-pilot
 
 %description pilot
-This package contains conduits needed by gnome-pilot to synchronize your
-Palm with Evolution.
+This package contains conduits needed by gnome-pilot to synchronize
+your Palm with Evolution.
 
 %description pilot -l pl
-Ten pakiet zawiera dodatki do synchronizacji danych Evolution z Palmem.
+Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
+Palmem.
 
 %prep
 %setup -q
@@ -190,7 +203,6 @@ Ten pakiet zawiera dodatki do synchronizacji danych Evolution z Palmem.
 mv po/{no,nb}.po
 
 %build
-# build evolution
 glib-gettextize --copy --force
 intltoolize --copy --force
 %{__libtoolize}
@@ -265,15 +277,13 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %gconf_schema_install
 
-%postun addressbook
-/sbin/ldconfig
+%postun addressbook -p /sbin/ldconfig
 
 %post calendar
 /sbin/ldconfig
 %gconf_schema_install
 
-%postun calendar
-/sbin/ldconfig
+%postun calendar -p /sbin/ldconfig
 
 %files -f evolution.lang
 %defattr(644,root,root,755)
