@@ -10,7 +10,7 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 
 %define		mver		1.5
-%define		subver	92
+%define		subver	92.1
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -21,8 +21,8 @@ Version:	%{mver}.%{subver}
 Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	636cc27bb01d897dad50554651ab62df
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
+# Source0-md5:	4e83d43dbecc60d2ce88c961183b29e7
 Source1:	%{name}-e-pilot-settings.c
 Source2:	%{name}-e-pilot-settings.h
 Patch0:		%{name}-locale-names.patch
