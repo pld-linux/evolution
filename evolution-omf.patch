@@ -1,22 +1,23 @@
-diff -Nuard evolution-1.0.8.orgi/help/C/evolution-C.omf evolution-1.0.8/help/C/evolution-C.omf
---- evolution-1.0.8.orgi/help/C/evolution-C.omf	Mon Mar 25 22:40:14 2002
-+++ evolution-1.0.8/help/C/evolution-C.omf	Thu Oct  3 19:39:50 2002
-@@ -1,14 +1,23 @@
+diff -Nur evolution-1.2.0.orig/help/C/evolution-C.omf evolution-1.2.0.chng/help/C/evolution-C.omf
+--- evolution-1.2.0.orig/help/C/evolution-C.omf	Tue Sep 24 17:45:25 2002
++++ evolution-1.2.0.chng/help/C/evolution-C.omf	Thu Nov 14 22:17:31 2002
+@@ -1,16 +1,22 @@
  <?xml version="1.0" standalone="no"?>
 +<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
  <omf>
    <resource>
-+  <creator/>
+-   <creator>
+-     Ximian, Inc.
+-   </creator>
++    <creator>
++      Ximian, Inc.
++    </creator>
      <title>
        Evolution Manual
      </title>
--    <subject>
--      <category>GNOME|Applications</category>
--    </subject>
+     <date>2002</date>
+-    <subject category="GNOME|Applications"/>
 -    <format mime="text/html"/>
-+    <date>
-+	2002-10-03
-+    </date>
 +    <version identifier="" date="2002-10-03"/>
 +    <subject category="GNOME|Applikasjoner"/>
 +    <description/>
@@ -28,34 +29,33 @@ diff -Nuard evolution-1.0.8.orgi/help/C/evolution-C.omf evolution-1.0.8/help/C/e
 +    <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
    </resource>
  </omf>
-+
-diff -Nuard evolution-1.0.8.orgi/help/no/evolution-no.omf evolution-1.0.8/help/no/evolution-no.omf
---- evolution-1.0.8.orgi/help/no/evolution-no.omf	Wed Dec  5 11:26:54 2001
-+++ evolution-1.0.8/help/no/evolution-no.omf	Thu Oct  3 19:38:47 2002
-@@ -1,14 +1,22 @@
+diff -Nur evolution-1.2.0.orig/help/no/evolution-no.omf evolution-1.2.0.chng/help/no/evolution-no.omf
+--- evolution-1.2.0.orig/help/no/evolution-no.omf	Tue Sep 24 17:45:27 2002
++++ evolution-1.2.0.chng/help/no/evolution-no.omf	Thu Nov 14 22:20:38 2002
+@@ -1,16 +1,22 @@
 -<?xml version="1.0" standalone="no"?>
 +<?xml version="1.0" encoding="ISO-8859-13" standalone="no"?>
 +<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
  <omf>
    <resource>
-+  <creator/>
+-   <creator>
+-     Ximian, Inc.
+-   </creator>
++    <creator>
++      Ximian, Inc.
++    </creator>
      <title>
-       Evolution brukerhåndbok
+       Evolution brukerhÃ¥ndbok
      </title>
--    <subject>
--      <category>GNOME|Applikasjoner</category>
--    </subject>
-+    <date>
-+	2002-10-03
-+    </date>
+     <date>2002</date>
 +    <version identifier="" date="2002-10-03"/>
-+    <subject category="GNOME|Applikasjoner"/>
+     <subject category="GNOME|Applikasjoner"/>
 +    <description/>
 +    <type/>
      <format mime="text/sgml"/>
      <identifier url="index.html"/>
      <language code="no"/>
 +    <relation seriesid="f98af356-d6f5-11d6-94dd-a55e7b20f7b9"/>
-+    <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
++    <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>    
    </resource>
  </omf>

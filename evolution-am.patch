@@ -1,5 +1,21 @@
---- evolution-1.0.5/doc/devel/Makefile.am~	Tue Jul 31 10:45:42 2001
-+++ evolution-1.0.5/doc/devel/Makefile.am	Sat May 18 12:40:29 2002
+diff -Nur evolution-1.2.0.orig/camel/Makefile.am evolution-1.2.0.chng/camel/Makefile.am
+--- evolution-1.2.0.orig/camel/Makefile.am	Tue Sep  3 13:57:52 2002
++++ evolution-1.2.0.chng/camel/Makefile.am	Thu Nov 14 14:20:52 2002
+@@ -231,9 +231,10 @@
+ camel_lock_helper_SOURCES = 			\
+ 	camel-lock-helper.c 			\
+ 	camel-lock-helper.h			\
+-	camel-lock.c				\
+ 	camel-lock.h
+ 
++camel_lock_helper_LDADD = camel-lock.o
++
+ camel_index_control_SOURCES =			\
+ 	camel-index-control.c
+ 
+diff -Nur evolution-1.2.0.orig/doc/devel/Makefile.am evolution-1.2.0.chng/doc/devel/Makefile.am
+--- evolution-1.2.0.orig/doc/devel/Makefile.am	Tue Jul 31 08:45:42 2001
++++ evolution-1.2.0.chng/doc/devel/Makefile.am	Thu Nov 14 14:16:21 2002
 @@ -144,7 +144,7 @@
  	fi)
  
@@ -9,18 +25,111 @@
  
  #
  # Require gtk-doc when making dist
---- evolution-1.0.5/camel/Makefile.am~	Sun May 19 00:48:25 2002
-+++ evolution-1.0.5/camel/Makefile.am	Sun May 19 00:51:00 2002
-@@ -202,9 +202,10 @@
- camel_lock_helper_SOURCES = 			\
- 	camel-lock-helper.c 			\
- 	camel-lock-helper.h			\
--	camel-lock.c				\
--	camel-lock.h
-+	camel-lock.h
+diff -Nur evolution-1.2.0.orig/my-evolution/Makefile.am evolution-1.2.0.chng/my-evolution/Makefile.am
+--- evolution-1.2.0.orig/my-evolution/Makefile.am	Fri Sep 13 16:53:20 2002
++++ evolution-1.2.0.chng/my-evolution/Makefile.am	Thu Nov 14 20:35:57 2002
+@@ -24,36 +24,41 @@
+ $(MAIL_GENERATED): $(IDLS)
+ 	$(ORBIT_IDL) -I $(srcdir) `$(GNOME_CONFIG) --cflags idl` $(top_srcdir)/mail/Mailer.idl
  
-+camel_lock_helper_LDADD = camel-lock.o
-+			       
- install-exec-hook:
- 	@if test -n "$(CAMEL_LOCK_HELPER_USER)"; then \
- 	    if test `whoami` = root ; then \
+-summary_sources =				\
+-	$(MAIL_GENERATED)			\
++summary_sources_c =				\
++	Mailer-common.c				\
++	Mailer-skels.c				\
++	Mailer-stubs.c				\
+ 	component-factory.c			\
+-	component-factory.h			\
+ 	e-cell-tri.c				\
+-	e-cell-tri.h				\
+ 	e-summary.c				\
+-	e-summary.h				\
+ 	e-summary-calendar.c			\
+-	e-summary-calendar.h			\
+ 	e-summary-factory.c			\
+-	e-summary-factory.h			\
+ 	e-summary-mail.c			\
+-	e-summary-mail.h			\
+ 	e-summary-offline-handler.c		\
+-	e-summary-offline-handler.h		\
+ 	e-summary-preferences.c			\
+-	e-summary-preferences.h			\
+ 	e-summary-rdf.c				\
+-	e-summary-rdf.h				\
+ 	e-summary-shown.c			\
+-	e-summary-shown.h			\
+ 	e-summary-table.c			\
+-	e-summary-table.h			\
+ 	e-summary-tasks.c			\
++	e-summary-weather.c			\
++	metar.c
++
++summary_sources_h =				\
++	Mailer.h				\
++	component-factory.h			\
++	e-cell-tri.h				\
++	e-summary.h				\
++	e-summary-calendar.h			\
++	e-summary-factory.h			\
++	e-summary-mail.h			\
++	e-summary-offline-handler.h		\
++	e-summary-preferences.h			\
++	e-summary-rdf.h				\
++	e-summary-shown.h			\
++	e-summary-table.h			\
+ 	e-summary-tasks.h			\
+ 	e-summary-type.h			\
+-	e-summary-weather.c			\
+ 	e-summary-weather.h			\
+-	metar.c					\
+ 	metar.h					\
+ 	my-evolution-html.h			\
+ 	weather.h
+@@ -73,14 +78,22 @@
+ 	$(top_builddir)/libwombat/libwombat.la				\
+ 	$(EVOLUTION_EXECUTIVE_SUMMARY_LIBS)
+ 
++noinst_LIBRARIES = libevoltmp.a
++
++libevoltmp_a_SOURCES = 		\
++	$(summary_sources_c)	\
++	$(summary_sources_h)
++
+ if ENABLE_SHLIB_COMPONENTS
+ 
+ lib_LTLIBRARIES = libevolution-executive-summary.la
+ 
+ libevolution_executive_summary_la_SOURCES = \
+-	$(summary_sources)
++	$(summary_sources_h)
++
+ 
+-libevolution_executive_summary_la_LIBADD = \
++libevolution_executive_summary_la_LIBADD = 	\
++	libevoltmp.a				\
+ 	$(summary_libs)
+ 
+ else
+@@ -88,10 +101,11 @@
+ bin_PROGRAMS = evolution-executive-summary
+ 
+ evolution_executive_summary_SOURCES =		\
+-	$(summary_sources)			\
++	$(summary_sources_h)			\
+ 	$(summary_exe_sources)
+ 
+ evolution_executive_summary_LDADD =		\
++	libevoltmp.a				\
+ 	$(summary_libs)
+ 
+ endif
+@@ -112,7 +126,8 @@
+ @XML_I18N_MERGE_OAF_RULE@
+ 
+ EXTRA_DIST = 				\
+-	$(summary_sources)		\
++	$(summary_sources_c)		\
++	$(summary_sources_h)		\
+ 	$(summary_exe_sources)		\
+ 	$(oaf_files)			\
+ 	$(oaf_in_files)			\

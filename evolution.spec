@@ -1,13 +1,16 @@
+%define		mver		1.2
+%define		subver		0
+
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	1.0.8
-Release:	3
+Version:	%{mver}.%{subver}
+Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-am.patch
 Patch2:		%{name}-omf.patch
@@ -17,28 +20,36 @@ BuildRequires:	ORBit-devel >= 0.5.8
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	bonobo-conf-devel >= 0.14
+BuildRequires:	bonobo-conf-devel >= 0.16
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 0.19.2
+BuildRequires:	gal-devel >= 0.21
 BuildRequires:	gdk-pixbuf-gnome-devel >= 0.9.0
+BuildRequires:	gdk-pixbuf-devel >= 0.18.0
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.9
-BuildRequires:	gnome-print-devel >= 0.25
-BuildRequires:	gnome-vfs-devel >= 1.0.1
+BuildRequires:	gnome-print-devel >= 0.35
+BuildRequires:	gnome-vfs-devel >= 1.0.5
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gtkhtml-devel >= 1.0.2
-BuildRequires:	intltool
+BuildRequires:	gtkhtml-devel >= 1.1.5
+BuildRequires:	intltool >= 0.18
 BuildRequires:	libglade-gnome-devel >= 0.14
+BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	libtool
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	oaf-devel >= 0.6.7
+BuildRequires:	oaf-devel >= 0.6.10
 BuildRequires:	openldap-devel >= 2.0.0
+#propably some m4 stuff is buggy so opeldap-static is required at now... :(
+BuildRequires:	openldap-static >= 2.0.0
 BuildRequires:	python
-BuildRequires:	scrollkeeper
+BuildRequires:	scrollkeeper >= 0.1.4
+BuildRequires:	libxml >= 1.8.17
+BuildRequires:	soup-devel >= 0.7.4
+BuildRequires:	db3 = 3.1.17
+BuildRequires:	pkgconfig
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	scrollkeeper >= 0.1.4
@@ -47,6 +58,7 @@ Requires:	GConf >= 1.0.7
 Requires:	oaf >= 0.6.7
 Requires:	libglade >= 0.17
 Requires:	gtkhtml >= 1.0.0-2
+Requires:	db3 = 3.1.17
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -144,15 +156,16 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 	--disable-gtk-doc \
 	--enable-pilot-conduits=no \
 	--with-openldap=yes \
-	--with-static-ldap=no \
-	--enable-nntp=yes \
+	--without-static-ldap \
+	--enable-nntp=no \
 	--with-gnome-includes=/usr/X11R6/include/gnome-vfs-1.0/ \
 	--enable-file-locking=fcntl --enable-dot-locking=no \
 	--with-nspr-includes="/usr/include/nspr" \
 	--with-nss-includes="/usr/include/nss" \
 	--with-nspr-libs="/usr/lib" \
-	--with-nss-libs="/usr/lib"
-%{__make}
+	--with-nss-libs="/usr/lib" 
+%{__make} \
+	GTKHTML_DATADIR=%{_datadir}/idl
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -161,6 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	desktopdir=%{_applnkdir}/Network/Mail \
 	omf_dest_dir=%{_omf_dest_dir}/%{name} \
+	GTKHTML_DATADIR=%{_datadir}/idl \
 	HTML_DIR=%{_gtkdocdir}
 
 %find_lang %{name} --with-gnome --all-name
@@ -187,7 +201,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution/*
 %dir %{_libdir}/evolution/*/*
 %{_mandir}/man1/*
-%{_libdir}/evolution/camel-providers/*/*.urls
+%{_libdir}/evolution/%{mver}/camel-providers/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
 %{_datadir}/gnome/ui/*
