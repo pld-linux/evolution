@@ -3,7 +3,7 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version:	0.15
+Version:	0.99.0
 Release:	1
 License:	GPL
 Group:		Applications/Mail
@@ -14,10 +14,10 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{versio
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	libxml-devel >= 1.8.7
+BuildRequires:	libxml-devel >= 1.8.10
 BuildRequires:	bonobo-devel >= 1.0.3
 BuildRequires:	bonobo-conf-devel >= 0.11
-BuildRequires:	gtkhtml-devel >= 0.14
+BuildRequires:	gtkhtml-devel >= 0.16
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
 BuildRequires:	gnome-vfs-devel >= 1.0.1
@@ -29,7 +29,7 @@ BuildRequires:	gnome-print-devel >= 0.25
 #BuildRequires:	gnome-pilot-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.9.0
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gal-devel >= 0.13
+BuildRequires:	gal-devel >= 0.18
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	openssl-devel
 BuildRequires:	libglade-devel >= 0.14
@@ -114,7 +114,8 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 %configure2_13 \
 	--prefix=%{_prefix} \
 	--enable-pilot-conduits=no \
-	--enable-ldap=yes \
+	--with-openldap=yes \
+	--with-static-ldap=no \
 	--enable-nntp=yes \
 	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/
 %{__make}
