@@ -1,6 +1,6 @@
 diff -urN aaa/evolution2-1.3.2.99/data/evolution.desktop.in evolution2-1.3.2.99/data/evolution.desktop.in
---- aaa/evolution2-1.3.2.99/data/evolution.desktop.in	Sat Mar 29 23:49:09 2003
-+++ evolution2-1.3.2.99/data/evolution.desktop.in	Fri Apr 18 23:29:14 2003
+--- aaa/evolution2-1.3.2.99/data/evolution.desktop.in.in	Sat Mar 29 23:49:09 2003
++++ evolution2-1.3.2.99/data/evolution.desktop.in.in	Fri Apr 18 23:29:14 2003
 @@ -1,6 +1,8 @@
  [Desktop Entry]
 -_Name=Ximian Evolution
@@ -9,8 +9,8 @@ diff -urN aaa/evolution2-1.3.2.99/data/evolution.desktop.in evolution2-1.3.2.99/
 +Name[pl]=Ximian Evolution
 +Comment=The Evolution groupware suite
 +Comment[pl]=Zestaw programów do pracy grupowej Evolution
- Exec=evolution-1.3
- Icon=evolution-1.3.png
+ Exec=evolution-@BASE_VERSION@
+ Icon=evolution-@BASE_VERSION@.png
  Terminal=false
 @@ -10,3 +12,5 @@
  X-GNOME-Bugzilla-Bugzilla=Ximian
