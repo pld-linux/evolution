@@ -120,10 +120,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/evolution/*/*/*.so.*
-%attr(755,root,root) %{_libdir}/*.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
+%attr(755,root,root) %{_libdir}/*.so*
 %{_libdir}/evolution/camel-providers/*/*.urls
-%dir %{_datadir}/evolution
+%dir %{_datadir}/evolution/*
 %{_datadir}/oaf/*.oaf
 %{_datadir}/gnome/html
 %{_datadir}/gnome/ui
@@ -138,9 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.la
-%attr(755,root,root) %{_libdir}/*.so
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.la
-%attr(755,root,root) %{_libdir}/evolution/*/*/*.so
 %{_includedir}/*.h
 %{_includedir}/camel/*.h
 %{_includedir}/ename/*.h
