@@ -1,0 +1,21 @@
+--- evolution-1.2.1/acinclude.m4.orig	Wed Sep  4 22:28:05 2002
++++ evolution-1.2.1/acinclude.m4	Fri Jan 17 13:53:38 2003
+@@ -106,15 +106,11 @@
+ 		AC_DEFINE(HAVE_LDAP)
+ 
+ 		case $with_static_ldap in
+-		no|"")
+-			if test -f $with_openldap/lib/libldap.la; then
+-				with_static_ldap=yes
+-			else
+-				with_static_ldap=no
+-			fi
++		yes)
++			with_static_ldap=yes
+ 			;;
+ 		*)
+-			with_static_ldap=yes
++			with_static_ldap=no
+ 			;;
+ 		esac
+ 
