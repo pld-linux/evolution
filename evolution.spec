@@ -58,7 +58,7 @@ BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
-BuildRequires:	openssl-devel >= 0.9.7
+BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
@@ -111,7 +111,7 @@ Requires:	libsoup-devel
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel}
-Requires:	openssl-devel >= 0.9.7
+Requires:	openssl-devel >= 0.9.7c
 Obsoletes:	evolution2-devel
 
 %description devel
