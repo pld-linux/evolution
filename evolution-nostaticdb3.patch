@@ -1,0 +1,33 @@
+diff -Nur evolution-1.0/configure.in evolution-1.0.new/configure.in
+--- evolution-1.0/configure.in	Wed Nov 21 21:04:58 2001
++++ evolution-1.0.new/configure.in	Fri Dec 14 20:16:57 2001
+@@ -328,7 +328,7 @@
+ 	ac_cv_db3_ldadd=""
+ 
+ 	for name in db db3 db-3.1; do
+-		LIBS="$LIBS_save $with_db3_libs/lib${name}.a"
++		LIBS="$LIBS_save $with_db3_libs/lib${name}.so"
+ 		AC_TRY_LINK([
+ 			#ifdef HAVE_DB3_DB_H
+ 			#include <db3/db.h>
+@@ -339,7 +339,7 @@
+ 			DB *db;
+ 			db_create (&db, 0, 0);
+ 		], [
+-			ac_cv_db3_ldadd="$with_db3_libs/lib${name}.a"
++			ac_cv_db3_ldadd="$with_db3_libs/lib${name}.so"
+ 			break
+ 		])
+ 	done
+diff -Nur evolution-1.0/libical/configure.in evolution-1.0.new/libical/configure.in
+--- evolution-1.0/libical/configure.in	Tue Oct 30 02:49:29 2001
++++ evolution-1.0.new/libical/configure.in	Fri Dec 14 20:17:31 2001
+@@ -94,8 +94,6 @@
+ src/Makefile
+ src/libical/Makefile
+ src/libical/icalversion.h
+-src/libicalss/Makefile
+-src/libicalvcal/Makefile
+ test-data/Makefile
+ zoneinfo/Makefile
+ ])
