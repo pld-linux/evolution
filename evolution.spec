@@ -135,8 +135,10 @@ gettextize --copy --force
 aclocal -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
-cd libical; autoconf; cd ..
-
+cd
+libical
+%{__autoconf}
+cd ..
 CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 %configure \
 	--disable-gtk-doc \
