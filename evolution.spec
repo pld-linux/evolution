@@ -18,7 +18,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
@@ -131,7 +131,7 @@ Summary:	Static libraries for evolution
 Summary(pl):	Biblioteki statyczne dla evolution
 Summary(pt_BR):	Bibliotecas est醫icas para desenvolvimento
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name}-devel = %{version}
 Obsoletes:	evolution2-static
 
 %description static
