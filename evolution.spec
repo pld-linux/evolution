@@ -15,12 +15,12 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.2.0
+Version:	2.2.1.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	a93991fb80c7fa88f6758661c8931f6b
+# Source0-md5:	0d41c89ace6485da3ef9c76ece68ae9c
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
@@ -31,22 +31,22 @@ BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 1.2.0
+BuildRequires:	evolution-data-server-devel >= 1.2.1
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.4.0
+BuildRequires:	gal-devel >= 1:2.4.1
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.0}
 BuildRequires:	gnome-vfs2-devel >= 2.10.0
-BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.6.0
+BuildRequires:	gtk-doc >= 1.3
+BuildRequires:	gtkhtml-devel >= 3.6.1
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
-BuildRequires:	intltool >= 0.30
-BuildRequires:	libglade2-devel >= 1:2.5.0
-BuildRequires:	libgnomeprintui-devel >= 2.10.0
+BuildRequires:	intltool >= 0.33
+BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	libgnomeprintui-devel >= 2.10.1
 BuildRequires:	libgnomeui-devel >= 2.10.0
-BuildRequires:	libsoup-devel >= 2.2.2
+BuildRequires:	libsoup-devel >= 2.2.3
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
@@ -62,12 +62,12 @@ Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
-Requires:	GConf2 >= 2.9.2
+Requires:	GConf2 >= 2.10.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.2.0
-Requires:	gal >= 1:2.4.0
-Requires:	gtkhtml >= 3.6.0
-Requires:	libglade2 >= 1:2.5.0
+Requires:	evolution-data-server >= 1.2.1
+Requires:	gal >= 1:2.4.1
+Requires:	gtkhtml >= 3.6.1
+Requires:	libglade2 >= 1:2.5.1
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
 Obsoletes:	evolution2
@@ -97,13 +97,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.4.0
+Requires:	gal-devel >= 1:2.4.1
 Requires:	gnome-vfs2-devel >= 2.10.0
-Requires:	gtkhtml-devel >= 3.6.0
-Requires:	libglade2-devel >= 1:2.5.0
-Requires:	libgnomeprintui-devel >= 2.10.0
+Requires:	gtkhtml-devel >= 3.6.1
+Requires:	libglade2-devel >= 1:2.5.1
+Requires:	libgnomeprintui-devel >= 2.10.1
 Requires:	libgnomeui-devel >= 2.10.0
-Requires:	libsoup-devel >= 2.2.2
+Requires:	libsoup-devel >= 2.2.3
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
