@@ -1,13 +1,15 @@
+# TODO:
+# - avoid linking with static db3
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
 Version: 	0.11
 Release:	1
-Copyright:	GPL
+License:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
-#Patch0:		%{name}-DESTDIR.patch
-#Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
+Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.37
@@ -26,12 +28,14 @@ BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	libglade-devel
 BuildRequires:	ORBit-devel >= 0.5.6
 BuildRequires:	GConf-devel >= 0.6
+BuildRequires:	xml-i18n-tools > 0.8.2
+BuildRequires:	db3-devel
+BuildRequires:	db3-static
 BuildRequires:	gettext-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	xml-i18n-tools > 0.8.2
 BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
