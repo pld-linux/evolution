@@ -133,8 +133,8 @@ xml-i18n-toolize --copy --force
 libtoolize --copy --force
 gettextize --copy --force
 aclocal -I %{_aclocaldir}/gnome
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 cd libical; autoconf; cd ..
 
 CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
