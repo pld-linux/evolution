@@ -240,7 +240,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f evolution-1.4.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS* README 
+%doc AUTHORS ChangeLog NEWS* README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/*.so.*
