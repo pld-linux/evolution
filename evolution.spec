@@ -100,13 +100,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so.*.*
-%attr(755,root,root) %{_libdir}/*.so.*.*
+%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so.*
+%attr(755,root,root) %{_libdir}/*.so.*
 %{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oafinfo
 %{_datadir}/gnome/apps/Applications/*.desktop
-%{_datadir}/gnome/html
+%{_datadir}/gnome/html/*
 %{_datadir}/gnome/ui
 %{_datadir}/images/evolution
 %{_pixmapsdir}/*
