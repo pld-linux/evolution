@@ -13,6 +13,7 @@ Release:	0.1
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
+# Source0-md5:	d9a6f15317e5f208af6e64f7894dbabb
 Source1:	%{name}-db3-headers-%{_db3ver}.tar.bz2
 Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-am.patch
