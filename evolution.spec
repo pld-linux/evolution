@@ -73,12 +73,13 @@ Pakiet zawiera statyczne biblioteki Evolution.
 %patch0 -p1
 
 %build
+rm missing
 gettextize --copy --force
-libtoolize --copy --force
 automake -a -c
 aclocal -I macros
+libtoolize --copy --force
 autoconf
-%configure
+%configure 
 %{__make}
 
 %install
