@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	90
+%define		subver	91
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -17,38 +17,37 @@ Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereço
 Summary(zh_CN):	Evolution - GNOME2¸öÈËºÍ¹¤×÷×éÐÅÏ¢¹ÜÀí¹¤¾ß(°üÀ¨µç×ÓÓÊ¼þ£¬ÈÕÀúºÍµØÖ·±¡)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	2
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	c33c6a84de4049202cd72dea934a3240
+# Source0-md5:	a811de01ad2d2cff5f908bb677f56510
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
-Patch2:		%{name}-schemas.patch
-Patch3:		%{name}-gnome-icon-theme.patch
-Patch4:		%{name}-GG-IM.patch
-Patch5:		%{name}-desktop.patch
+Patch2:		%{name}-gnome-icon-theme.patch
+Patch3:		%{name}-GG-IM.patch
+Patch4:		%{name}-desktop.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.6.2
 BuildRequires:	ORBit2-devel >= 1:2.10.3
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.95
+BuildRequires:	evolution-data-server-devel >= 0.0.96
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.11
+BuildRequires:	gal-devel >= 1:2.1.12
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.17
+BuildRequires:	gtkhtml-devel >= 3.1.18
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.0
 BuildRequires:	libgnomeprintui-devel >= 2.6.1
 BuildRequires:	libgnomeui-devel >= 2.6.1.1
-BuildRequires:	libsoup-devel >= 2.1.11
+BuildRequires:	libsoup-devel >= 2.1.12
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
@@ -67,9 +66,9 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.95
-Requires:	gal >= 1:2.1.11
-Requires:	gtkhtml >= 3.1.17
+Requires:	evolution-data-server >= 0.0.96
+Requires:	gal >= 1:2.1.12
+Requires:	gtkhtml >= 3.1.18
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -99,13 +98,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.11
+Requires:	gal-devel >= 1:2.1.12
 Requires:	gnome-vfs2-devel >= 2.6.1.1
-Requires:	gtkhtml-devel >= 3.1.17
+Requires:	gtkhtml-devel >= 3.1.18
 Requires:	libglade2-devel >= 1:2.4.0
 Requires:	libgnomeprintui-devel >= 2.6.1
 Requires:	libgnomeui-devel >= 2.6.1.1
-Requires:	libsoup-devel >= 2.1.11
+Requires:	libsoup-devel >= 2.1.12
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
@@ -164,7 +163,7 @@ Summary(pl):	Modu³ ksi±¿ki adresowej Evolution
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
-Requires(post):		GConf2
+Requires(post):	GConf2
 Provides:	%{name}-component = %{version}-%{release}
 
 %description addressbook
@@ -179,7 +178,7 @@ Summary(pl):	Modu³ kalendarza i listy zadañ Evolution
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
-Requires(post):		GConf2
+Requires(post):	GConf2
 Provides:	%{name}-component = %{version}-%{release}
 
 %description calendar
@@ -210,7 +209,6 @@ Palmem.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 mv po/{no,nb}.po
 
