@@ -45,7 +45,7 @@ BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
-Buildrequires:	gtk-doc >= 0.6
+BuildRequires:	gtk-doc >= 0.6
 BuildRequires:	gtkhtml-devel >= 3.0.8
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libbonoboui-devel >= 2.3.3-2
