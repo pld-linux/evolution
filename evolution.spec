@@ -14,12 +14,17 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{versio
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
+Requires: scrollkeeper >= 0.1.4
+Requires: bonobo >= 1.0.14
+Requires: GConf >= 1.0.7
+Requires: oaf >= 0.6.7
+Requires: libglade >= 0.17
 BuildRequires:	libxml-devel >= 1.8.10
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	bonobo-conf-devel >= 0.11
 BuildRequires:	gtkhtml-devel >= 1.0.0
 BuildRequires:	libunicode-devel >= 0.4
-BuildRequires:	oaf-devel >= 0.6.2
+BuildRequires:	oaf-devel >= 0.6.7
 BuildRequires:	gnome-vfs-devel >= 1.0.1
 BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-libs-devel >= 1.2.9
@@ -34,7 +39,7 @@ BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	openssl-devel
 BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	ORBit-devel >= 0.5.8
-BuildRequires:	GConf-devel >= 0.6
+BuildRequires:	GConf-devel >= 1.0.7
 BuildRequires:	xml-i18n-tools > 0.8.2
 BuildRequires:	db3-devel
 BuildRequires:	db3-static
