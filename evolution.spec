@@ -1,20 +1,16 @@
-# TODO:
-# - avoid linking with static db3
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
 Name:		evolution
-Version:	1.0
-Release:	3
+Version:	1.0.1
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
 Group(pt):	Aplicações/Correio Eletrônico
 Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
-Patch2:		%{name}-nostaticdb3.patch
+Patch0:		%{name}-nostaticdb3.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf-devel >= 1.0.7
 BuildRequires:	ORBit-devel >= 0.5.8
@@ -26,18 +22,16 @@ BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	db3-devel
 BuildRequires:	flex
-BuildRequires:	freetype-static >= 2.0.5
-BuildRequires:	gal-devel >= 0.18
+BuildRequires:	freetype-devel >= 2.0.5
+BuildRequires:	gal-devel >= 0.19
 BuildRequires:	gdk-pixbuf-devel >= 0.9.0
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.9
-# needed for PALM Pilot support - not yet
-#BuildRequires:	gnome-pilot-devel
 BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-vfs-devel >= 1.0.1
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gtkhtml-devel >= 1.0.0-2
-BuildRequires:	intltool 
+BuildRequires:	gtkhtml-devel >= 1.0.1
+BuildRequires:	intltool
 BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	libxml-devel >= 1.8.10
@@ -124,21 +118,22 @@ aplicações.
 
 %prep
 %setup -q
-#%patch0 -p1
-#%patch1 -p1
-%patch2 -p1
+%patch0 -p1
 
 %build
-#rm -f missing
-#libtoolize --copy --force
-#gettextize --copy --force
-#aclocal -I macros
+sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
+mv -f configure.in.tmp configure.in
+rm -f missing
+xml-i18n-toolize --copy --force
+libtoolize --copy --force
+gettextize --copy --force
+aclocal -I %{_aclocaldir}/gnome
 autoconf
+automake -a -c
 cd libical; autoconf; cd ..
-#automake -a -c
 
 CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
-%configure2_13 \
+%configure \
 	--disable-gtk-doc \
 	--enable-pilot-conduits=no \
 	--with-openldap=yes \
@@ -174,15 +169,15 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
-%attr(755,root,root) %{_libdir}/*.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/*/*.so.*
+%attr(755,root,root) %{_libdir}/*.so.*.*.*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/*
 %dir %{_libdir}/evolution/*/*
 %{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
-%{_datadir}/omf/*
+%{_datadir}/omf/evolution
 %{_datadir}/gnome/ui
 %{_datadir}/gnome/html/*
 %{_datadir}/images/evolution
@@ -193,8 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/*.la
+%attr(755,root,root) %{_libdir}/*.??
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.la
 %{_includedir}/*
 %{_datadir}/idl/*.idl
