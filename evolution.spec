@@ -2,6 +2,7 @@
 # - avoid linking with static db3
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
+Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
 Name:		evolution
 Version:	1.0
 Release:	3
@@ -14,47 +15,44 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{versio
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-Requires: scrollkeeper >= 0.1.4
-Requires: bonobo >= 1.0.14
-Requires: GConf >= 1.0.7
-Requires: oaf >= 0.6.7
-Requires: libglade >= 0.17
-Requires: gtkhtml >= 1.0.0-2
-BuildRequires:	libxml-devel >= 1.8.10
-BuildRequires:	bonobo-devel >= 1.0.15-2
-BuildRequires:	bonobo-conf-devel >= 0.11
-BuildRequires:	gtkhtml-devel >= 1.0.0-2
-BuildRequires:	libunicode-devel >= 0.4
-BuildRequires:	oaf-devel >= 0.6.7
-BuildRequires:	gnome-vfs-devel >= 1.0.1
-BuildRequires:	gnome-print-devel >= 0.25
-BuildRequires:	gnome-libs-devel >= 1.2.9
-#BuildRequires:	gnome-xml >= 1.8.10
-BuildRequires:	gnome-print-devel >= 0.25
-# needed for PALM Pilot support - not yet
-#BuildRequires:	gnome-pilot-devel
-BuildRequires:	gdk-pixbuf-devel >= 0.9.0
-BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gal-devel >= 0.18
-BuildRequires:	openldap-devel >= 2.0.0
-BuildRequires:	openssl-devel
-BuildRequires:	libglade-devel >= 0.14
-BuildRequires:	ORBit-devel >= 0.5.8
 BuildRequires:	GConf-devel >= 1.0.7
-BuildRequires:	intltool 
-BuildRequires:	db3-devel
-BuildRequires:	db3-static
-BuildRequires:	gettext-devel
-BuildRequires:	nspr-devel
-BuildRequires:	nss-devel
-BuildRequires:	bison
-BuildRequires:	flex
+BuildRequires:	ORBit-devel >= 0.5.8
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:  freetype-static >= 2.0.5
+BuildRequires:	bison
+BuildRequires:	bonobo-conf-devel >= 0.11
+BuildRequires:	bonobo-devel >= 1.0.15-2
+BuildRequires:	cyrus-sasl-devel
+BuildRequires:	db3-devel
+BuildRequires:	db3-static
+BuildRequires:	flex
+BuildRequires:	freetype-static >= 2.0.5
+BuildRequires:	gal-devel >= 0.18
+BuildRequires:	gdk-pixbuf-devel >= 0.9.0
+BuildRequires:	gettext-devel
+BuildRequires:	gnome-libs-devel >= 1.2.9
+# needed for PALM Pilot support - not yet
+#BuildRequires:	gnome-pilot-devel
+BuildRequires:	gnome-print-devel >= 0.25
+BuildRequires:	gnome-vfs-devel >= 1.0.1
+BuildRequires:	gtk+-devel > 1.2.0
+BuildRequires:	gtkhtml-devel >= 1.0.0-2
+BuildRequires:	intltool 
+BuildRequires:	libglade-devel >= 0.14
+BuildRequires:	libunicode-devel >= 0.4
+BuildRequires:	libxml-devel >= 1.8.10
+BuildRequires:	nspr-devel
+BuildRequires:	nss-devel
+BuildRequires:	oaf-devel >= 0.6.7
+BuildRequires:	openldap-devel >= 2.0.0
+BuildRequires:	openssl-devel
 BuildRequires:	scrollkeeper
-BuildRequires:	kernel-headers
-BuildRequires:  cyrus-sasl-devel
+Requires:	scrollkeeper >= 0.1.4
+Requires:	bonobo >= 1.0.14
+Requires:	GConf >= 1.0.7
+Requires:	oaf >= 0.6.7
+Requires:	libglade >= 0.17
+Requires:	gtkhtml >= 1.0.0-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -69,9 +67,14 @@ information-management tool.
 Evolution to program pocztowy GNOME, kalendarz, ksi±¿ka adresowa i
 narzêdzie komunikacyjne.
 
+%description -l pt_BR
+Evolution é um cliente de email para o GNOME com calendário e outras
+ferramentas interessantes.
+
 %package devel
 Summary:	Header files for evolution
 Summary(pl):	Pliki nag³ówkowe i dokumentacja
+Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimento
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -90,9 +93,14 @@ using Evolution's libraries.
 Pakiet zawiera pliki potrzebne do rozwoju aplikacji u¿ywaj±cych
 bibliotek programu Evolution.
 
+%description -l pt_BR devel
+Este pacote contém os arquivos necessários para desenvolvimento de
+aplicações utilizando as bibliotecas do Evolution.
+
 %package static
 Summary:	Static libraries for evolution
 Summary(pl):	Biblioteki statyczne dla evolution
+Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -108,6 +116,10 @@ This package contains static libraries for Evolution.
 
 %description -l pl static
 Pakiet zawiera statyczne biblioteki Evolution.
+
+%description -l pt_BR static
+Este pacote contém as bibliotecas estáticas para desenvolvimento de
+aplicações.
 
 %prep
 %setup -q
