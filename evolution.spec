@@ -10,7 +10,7 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 
 %define		mver		1.5
-%define		subver	94
+%define		subver	94.1
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -22,7 +22,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ce59d18b6e40f67077b95fbdec8f12c4
+# Source0-md5:	02afa72a16e0308ab610c55ca751e317
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
@@ -261,8 +261,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # strip doesn't pass these files and they aren't necessary, so remove them
 # probably this should be done differently, but I have no idea
-rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/*/*.a
-rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/libemiscwidgets.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/libemiscwidgets.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
@@ -304,105 +304,104 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS* README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeconduit.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libemiscwidgets.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeselectnames.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeshell.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeutil.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-a11y.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-importer.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-widgets-a11y.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-alarm-notify
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/killev
+%attr(755,root,root) %{_libdir}/evolution/*/libeconduit.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libemiscwidgets.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libeselectnames.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libeshell.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libeutil.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-importer.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-widgets-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/evolution-alarm-notify
+%attr(755,root,root) %{_libdir}/evolution/*/killev
 # addressbook requires it:
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libcamel*.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libcamel*.so.*
 %dir %{_libdir}/evolution
-%dir %{_libdir}/evolution/%{mver}
-%dir %{_libdir}/evolution/%{mver}/components
-%{_libdir}/bonobo/servers/GNOME_Evolution_Shell_1.5.server
-%dir %{_datadir}/idl/evolution-%{mver}
+%dir %{_libdir}/evolution/*
+%dir %{_libdir}/evolution/*/components
+%{_libdir}/bonobo/servers/GNOME_Evolution_Shell_*.server
+%dir %{_datadir}/idl/evolution-*
 %dir %{_datadir}/evolution
-%dir %{_datadir}/evolution/%{mver}
-%dir %{_datadir}/evolution/%{mver}/views
-%{_datadir}/evolution/%{mver}/*.xml
-%dir %{_datadir}/evolution/%{mver}/default
-%dir %{_datadir}/evolution/%{mver}/default/C
-%{_datadir}/evolution/%{mver}/errors
-%{_datadir}/evolution/%{mver}/etspec
-%{_datadir}/evolution/%{mver}/glade
-%{_datadir}/evolution/%{mver}/help
-%{_datadir}/evolution/%{mver}/images
-%{_datadir}/evolution/%{mver}/ui
+%dir %{_datadir}/evolution/*
+%dir %{_datadir}/evolution/*/views
+%{_datadir}/evolution/*/*.xml
+%dir %{_datadir}/evolution/*/default
+%dir %{_datadir}/evolution/*/default/C
+%{_datadir}/evolution/*/errors
+%{_datadir}/evolution/*/etspec
+%{_datadir}/evolution/*/glade
+%{_datadir}/evolution/*/help
+%{_datadir}/evolution/*/images
+%{_datadir}/evolution/*/ui
 %{_datadir}/mime-info/*
-%{_datadir}/idl/evolution-%{mver}/Evolution-Component.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution-ConfigControl.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution-Offline.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution-Shell.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution-Wizard.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution-common.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution.idl
-%{_datadir}/idl/evolution-%{mver}/GNOME_Evolution_Importer.idl
+%{_datadir}/idl/evolution-*/Evolution-Component.idl
+%{_datadir}/idl/evolution-*/Evolution-ConfigControl.idl
+%{_datadir}/idl/evolution-*/Evolution-Offline.idl
+%{_datadir}/idl/evolution-*/Evolution-Shell.idl
+%{_datadir}/idl/evolution-*/Evolution-Wizard.idl
+%{_datadir}/idl/evolution-*/Evolution-common.idl
+%{_datadir}/idl/evolution-*/Evolution.idl
+%{_datadir}/idl/evolution-*/GNOME_Evolution_Importer.idl
 %{_desktopdir}/*
 %{_pixmapsdir}/*
-%{_sysconfdir}/gconf/schemas/apps_evolution_shell-1.5.schemas
+%{_sysconfdir}/gconf/schemas/apps_evolution_shell-*.schemas
 %{_omf_dest_dir}/%{name}
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/*.so
-%{_libdir}/evolution/%{mver}/*.la
+%attr(755,root,root) %{_libdir}/evolution/*/*.so
+%{_libdir}/evolution/*/*.la
 %{_libdir}/evolution/*/*/*.la
 %{_includedir}/*
 %{_pkgconfigdir}/*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/evolution/%{mver}/*.a
+%{_libdir}/evolution/*/*.a
 
 %files mail
 %defattr(644,root,root,755)
-%dir %{_libdir}/evolution/%{mver}/camel*
-%dir %{_libdir}/evolution/%{mver}/evolution-calendar-importers
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-mail-importers.so*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/camel/*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-mail.so
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/camel-providers/*.so
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-calendar-importers/*.so
-%{_libdir}/bonobo/servers/GNOME_Evolution_Mail_1.5.server
-%{_libdir}/bonobo/servers/GNOME_Evolution_Mail_Importers_1.5.server
-%{_libdir}/evolution/%{mver}/camel-providers/*.urls
-%{_datadir}/evolution/%{mver}/views/mail*
-%{_datadir}/evolution/%{mver}/default/C/mail
-%{_datadir}/idl/evolution-%{mver}/Composer.idl
-%{_datadir}/idl/evolution-%{mver}/Evolution-Composer.idl
-%{_sysconfdir}/gconf/schemas/evolution-mail-1.5.schemas
+%dir %{_libdir}/evolution/*/camel*
+%dir %{_libdir}/evolution/*/evolution-calendar-importers
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-mail-importers.so*
+%attr(755,root,root) %{_libdir}/evolution/*/camel/*
+%attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-mail.so
+%attr(755,root,root) %{_libdir}/evolution/*/camel-providers/*.so
+%attr(755,root,root) %{_libdir}/evolution/*/evolution-calendar-importers/*.so
+%{_libdir}/bonobo/servers/GNOME_Evolution_Mail_*.server
+%{_libdir}/evolution/*/camel-providers/*.urls
+%{_datadir}/evolution/*/views/mail*
+%{_datadir}/evolution/*/default/C/mail
+%{_datadir}/idl/evolution-*/Composer.idl
+%{_datadir}/idl/evolution-*/Evolution-Composer.idl
+%{_sysconfdir}/gconf/schemas/evolution-mail-*.schemas
 
 %files addressbook
 %defattr(644,root,root,755)
-%dir %{_libdir}/evolution/%{mver}/evolution-addressbook-importers
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-clean
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-export
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/csv2vcard
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-addressbook.so
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-addressbook-a11y.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-importers/lib*.so
+%dir %{_libdir}/evolution/*/evolution-addressbook-importers
+%attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-clean
+%attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-export
+%attr(755,root,root) %{_libdir}/evolution/*/csv2vcard
+%attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-addressbook.so
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-addressbook-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-importers/lib*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
-%{_datadir}/evolution/%{mver}/views/addressbook*
-%{_datadir}/evolution/%{mver}/ecps
-%{_datadir}/idl/evolution-%{mver}/Evolution-Addressbook-SelectNames.idl
-%{_sysconfdir}/gconf/schemas/apps_evolution_addressbook-1.5.schemas
+%{_datadir}/evolution/*/views/addressbook*
+%{_datadir}/evolution/*/ecps
+%{_datadir}/idl/evolution-*/Evolution-Addressbook-SelectNames.idl
+%{_sysconfdir}/gconf/schemas/apps_evolution_addressbook-*.schemas
 
 %files calendar
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-calendar.so
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-calendar-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-calendar.so
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-calendar-a11y.so.*
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
-%{_datadir}/evolution/%{mver}/views/calendar*
-%{_datadir}/evolution/%{mver}/views/tasks*
-%{_datadir}/idl/evolution-%{mver}/evolution-calendar.idl
-%{_sysconfdir}/gconf/schemas/apps_evolution_calendar-1.5.schemas
+%{_datadir}/evolution/*/views/calendar*
+%{_datadir}/evolution/*/views/tasks*
+%{_datadir}/idl/evolution-*/evolution-calendar.idl
+%{_sysconfdir}/gconf/schemas/apps_evolution_calendar-*.schemas
 
 %files pilot
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/conduits/*
+%attr(755,root,root) %{_libdir}/evolution/*/conduits/*
 %{_datadir}/gnome-pilot/conduits/*
