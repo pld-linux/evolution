@@ -15,7 +15,7 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	libxml-devel >= 1.8.10
-BuildRequires:	bonobo-devel >= 1.0.3
+BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	bonobo-conf-devel >= 0.11
 BuildRequires:	gtkhtml-devel >= 0.16
 BuildRequires:	libunicode-devel >= 0.4
@@ -143,35 +143,29 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
-%attr(755,root,root) %{_libdir}/*.so*
+%attr(755,root,root) %{_libdir}/*.so.*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/*
 %dir %{_libdir}/evolution/*/*
 %{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
-%{_datadir}/gnome/html
+%{_datadir}/omf/*
 %{_datadir}/gnome/ui
+%{_datadir}/gnome/html/*
 %{_datadir}/images/evolution
 %{_datadir}/mime-info/*
-%{_datadir}/libical/zoneinfo
+%{_datadir}/libical-evolution
 %{_applnkdir}/Network/Mail/*
+%{_applnkdir}/Applications/*
 %{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/*.so
 %attr(755,root,root) %{_libdir}/*.la
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.la
-%{_includedir}/*.h
-%dir %{_includedir}/camel
-%{_includedir}/camel/*.h
-%dir %{_includedir}/ename
-%{_includedir}/ename/*.h
-%dir %{_includedir}/evolution
-%dir %{_includedir}/evolution/*
-%{_includedir}/evolution/*/*.h
-%dir %{_includedir}/libicalvcal
-%{_includedir}/libicalvcal/*.h
+%{_includedir}/*
 %{_datadir}/idl/*.idl
 
 %files static
