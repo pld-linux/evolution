@@ -39,7 +39,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	evolution-data-server >= 0.0.3
+BuildRequires:	evolution-data-server-devel >= 0.0.3
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
@@ -57,6 +57,7 @@ Requires:	gtkhtml >= 3.1.4
 Requires:	libglade2
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
+Requires:	evolution-data-server >= 0.0.3
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
