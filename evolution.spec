@@ -1,11 +1,11 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version: 	0.9
+Version: 	0.10
 Release:	1
 Copyright:	GPL
 Group:		Applications/Mail
-Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.gz
+Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
@@ -27,6 +27,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	autoconf
 BuildRequires:	automake
+#BuildRequires:	xml-i18n-tools
 BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -73,8 +74,9 @@ Pakiet zawiera statyczne biblioteki Evolution.
 
 %build
 gettextize --copy --force
+libtoolize --copy --force
 automake -a -c
-#aclocal -I macros
+aclocal -I macros
 autoconf
 %configure
 %{__make}
