@@ -123,15 +123,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
 %attr(755,root,root) %{_libdir}/*.so*
 %{_libdir}/evolution/camel-providers/*/*.urls
-%dir %{_datadir}/evolution/*
+%{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
 %{_datadir}/gnome/html
 %{_datadir}/gnome/ui
-#%{_datadir}/gnome/help
 %{_datadir}/images/evolution
 %{_datadir}/mime-info/*
 %{_datadir}/libical/zoneinfo
-#%{_datadir}/locale/*/LC_MESSAGES/*.mo
 %{_applnkdir}/Network/Mail/*
 %{_pixmapsdir}/*
 
