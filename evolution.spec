@@ -3,11 +3,11 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	1.0.7
+Version:	1.0.8
 Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.gz
 Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-am.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
