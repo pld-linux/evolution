@@ -3,7 +3,7 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version: 	0.11
+Version: 	0.13
 Release:	1
 License:	GPL
 Group:		Applications/Mail
@@ -12,23 +12,25 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
-BuildRequires:	bonobo-devel >= 0.37
+BuildRequires:	bonobo-devel >= 1.0.3
 BuildRequires:	bonobo-conf-devel
-BuildRequires:	gtkhtml-devel >= 0.10.1
+BuildRequires:	gtkhtml-devel >= 0.11
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
 BuildRequires:  gnome-vfs-devel >= 1.0.1
 BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-libs-devel >= 1.2.9
+#BuildRequires:	gnome-xml >= 1.8.10
+BuildRequires:	gnome-print-devel >= 0.25
 # needed for PALM Pilot support - not yet
 #BuildRequires:	gnome-pilot-devel
-BuildRequires:	gdk-pixbuf-devel >= 0.8
+BuildRequires:	gdk-pixbuf-devel >= 0.9.0
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gal-devel >= 0.9.1
+BuildRequires:	gal-devel >= 0.11
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	openssl-devel
-BuildRequires:	libglade-devel
-BuildRequires:	ORBit-devel >= 0.5.6
+BuildRequires:	libglade-devel >= 0.14
+BuildRequires:	ORBit-devel >= 0.5.8
 BuildRequires:	GConf-devel >= 0.6
 BuildRequires:	xml-i18n-tools > 0.8.2
 BuildRequires:	db3-devel
@@ -84,18 +86,19 @@ Pakiet zawiera statyczne biblioteki Evolution.
 #%patch1 -p1
 
 %build
-rm missing
+#rm missing
 #libtoolize --copy --force
 #gettextize --copy --force
 #aclocal -I macros
 #autoconf
-automake -a -c
+#automake -a -c
 
 %configure2_13 \
 	--prefix=%{_prefix} \
 	--enable-pilot-conduits=no \
 	--enable-ldap=yes \
-	--enable-nntp=yes
+	--enable-nntp=yes \
+	--with-gnome-includes=%{_prefix}/include/gnome-vfs-1.0/
 %{__make}
 
 %install
