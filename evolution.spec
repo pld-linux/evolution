@@ -31,6 +31,7 @@ BuildRequires:	gtk+-devel > 1.2.0
 BuildRequires:	gtkhtml-devel >= 1.0.2
 BuildRequires:	intltool
 BuildRequires:	libglade-gnome-devel >= 0.14
+BuildRequires:	libtool
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -38,14 +39,14 @@ BuildRequires:	oaf-devel >= 0.6.7
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	python
 BuildRequires:	scrollkeeper
+Requires(post,postun):	/sbin/ldconfig
+Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	scrollkeeper >= 0.1.4
 Requires:	bonobo >= 1.0.14
 Requires:	GConf >= 1.0.7
 Requires:	oaf >= 0.6.7
 Requires:	libglade >= 0.17
 Requires:	gtkhtml >= 1.0.0-2
-Prereq:		/sbin/ldconfig
-Prereq:		scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
@@ -132,7 +133,7 @@ rm -f missing
 xml-i18n-toolize --copy --force
 %{__libtoolize}
 %{__gettextize}
-aclocal -I %{_aclocaldir}/gnome
+%{__aclocal} -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
 cd libical
