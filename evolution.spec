@@ -175,7 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 
 gzip -9nf AUTHORS ChangeLog NEWS
 
-%find_lang %{name} --with-gnome --all-names
+%find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
