@@ -59,7 +59,7 @@ BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
-BuildRequires:	openssl-devel >= 0.9.7c
+BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pilot-link-devel >= 0.11.4
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
