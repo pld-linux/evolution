@@ -3,21 +3,21 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version:	0.99.0
+Version:	1.0
 Release:	1
 License:	GPL
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
 Group(pt):	Aplicações/Correio Eletrônico
-Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	libxml-devel >= 1.8.10
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	bonobo-conf-devel >= 0.11
-BuildRequires:	gtkhtml-devel >= 0.16
+BuildRequires:	gtkhtml-devel >= 1.0.0
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
 BuildRequires:	gnome-vfs-devel >= 1.0.1
@@ -46,6 +46,7 @@ BuildRequires:	automake
 BuildRequires:  freetype-static >= 2.0.5
 BuildRequires:	scrollkeeper
 BuildRequires:	kernel-headers
+BuildRequires:  cyrus-sasl-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
