@@ -1,0 +1,24 @@
+2003-09-22  Not Zed  <NotZed@Ximian.com>
+
+	** See bug #41610
+
+	* providers/pop3/camel-pop3-folder.c (cmd_tocache): protect a
+	divide by 0 for 0 length messages.
+
+Index: camel/providers/pop3/camel-pop3-folder.c
+===================================================================
+RCS file: /cvs/gnome/evolution/camel/providers/pop3/camel-pop3-folder.c,v
+retrieving revision 1.59
+diff -u -3 -r1.59 camel-pop3-folder.c
+--- camel/providers/pop3/camel-pop3-folder.c	18 Jun 2003 17:55:40 -0000	1.59
++++ camel/providers/pop3/camel-pop3-folder.c	22 Sep 2003 22:55:00 -0000
+@@ -365,7 +365,8 @@
+ 		w += n;
+ 		if (w > fi->size)
+ 			w = fi->size;
+-		camel_operation_progress(NULL, (w * 100) / fi->size);
++		if (fi->size != 0)
++			camel_operation_progress(NULL, (w * 100) / fi->size);
+ 	}
+ 
+ 	/* it all worked, output a '#' to say we're a-ok */
