@@ -134,7 +134,7 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 	--with-nspr-includes="/usr/include/nspr" \
 	--with-nss-includes="/usr/include/nss" \
 	--with-nspr-libs="/usr/lib" \
-	--with-mss-libs="/usr/lib"
+	--with-nss-libs="/usr/lib"
 %{__make}
 
 %install
