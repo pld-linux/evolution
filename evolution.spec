@@ -324,6 +324,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/*
 %dir %{_libdir}/evolution/*/components
+%dir %{_libdir}/evolution/*/conduits
 %{_libdir}/bonobo/servers/GNOME_Evolution_Shell_*.server
 %dir %{_datadir}/idl/evolution-*
 %dir %{_datadir}/evolution
