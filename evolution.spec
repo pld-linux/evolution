@@ -10,7 +10,7 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 
 %define		mver		1.5
-%define		subver	92.1
+%define		subver	92.2
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -22,9 +22,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	4e83d43dbecc60d2ce88c961183b29e7
-Source1:	%{name}-e-pilot-settings.c
-Source2:	%{name}-e-pilot-settings.h
+# Source0-md5:	bead4c65cd147e678648cc6c6ab262e7
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-gnome-icon-theme.patch
@@ -217,9 +215,6 @@ Palmem.
 %{?with_kerberos5:%patch5 -p1}
 
 mv po/{no,nb}.po
-
-install %{SOURCE1} widgets/misc/e-pilot-settings.c
-install %{SOURCE2} widgets/misc/e-pilot-settings.h
 
 %build
 glib-gettextize --copy --force
