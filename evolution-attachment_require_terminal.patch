@@ -1,20 +1,6 @@
-diff -Nuard evolution-1.4.5.orig/mail/ChangeLog evolution-1.4.5/mail/ChangeLog
---- evolution-1.4.5.orig/mail/ChangeLog	2003-09-12 20:40:39.000000000 +0200
-+++ evolution-1.4.5/mail/ChangeLog	2003-11-24 20:44:22.421899736 +0100
-@@ -1,3 +1,9 @@
-+2003-11-23  Marcin Krzyzanowski  <krzak@pld-linux.org>
-+	
-+	* mail-display.c (launch_cb): check if application launcher
-+	is described that he need terminal, if yes launch GNOME
-+	preffered terminal. Fixes bug #51288.
-+
- 2003-09-11  Jeffrey Stedfast  <fejj@ximian.com>
- 
- 	* mail-format.c (handle_text_plain): Don't set inend until after
-diff -Nuard evolution-1.4.5.orig/mail/mail-display.c evolution-1.4.5/mail/mail-display.c
---- evolution-1.4.5.orig/mail/mail-display.c	2003-09-11 18:20:32.000000000 +0200
-+++ evolution-1.4.5/mail/mail-display.c	2003-11-24 20:36:45.816314336 +0100
-@@ -371,6 +371,7 @@
+--- evolution-1.4.6/mail/mail-display.c~	2003-10-08 18:06:09.000000000 +0200
++++ evolution-1.4.6/mail/mail-display.c	2004-03-19 11:36:20.991908864 +0100
+@@ -374,6 +374,7 @@
  	GList *apps, *children, *c;
  	GnomeVFSMimeApplication *app;
  	char *command, *filename;
@@ -22,7 +8,7 @@ diff -Nuard evolution-1.4.5.orig/mail/mail-display.c evolution-1.4.5/mail/mail-d
  	const char *tmpdir;
  	
  	handler = mail_lookup_handler (g_object_get_data(user_data, "mime_type"));
-@@ -419,11 +420,26 @@
+@@ -422,9 +423,24 @@
  		return;
  	}
  	
@@ -46,8 +32,5 @@ diff -Nuard evolution-1.4.5.orig/mail/mail-display.c evolution-1.4.5/mail/mail-d
  				   "file://" : "", filename);
 +	g_free (terminal);
  	g_free (filename);
--	
-+
+ 	
  	system (command);
- 	g_free (command);
- }
