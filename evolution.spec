@@ -16,7 +16,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
@@ -27,6 +27,7 @@ Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-configure_in.patch
 Patch3:		%{name}-desktop.patch
+Patch4:		%{name}-pldify.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.7.5-1
@@ -161,6 +162,7 @@ Palmem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 rm -f missing
