@@ -8,6 +8,7 @@
 # Conditionals:
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
+%bcond_without	pilot		# build without pilot support
 
 %define		mver		2.0
 %define		subver	1
@@ -39,7 +40,7 @@ BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:2.2.2
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
-BuildRequires:	gnome-pilot-devel >= 2.0.0
+%{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.0}
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
 BuildRequires:	gtkhtml-devel >= 3.2.2
@@ -55,7 +56,7 @@ BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 #BuildRequires:	openssl-devel >= 0.9.7d
-BuildRequires:	pilot-link-devel >= 0.11.4
+%{?with_pilot:BuildRequires:	pilot-link-devel >= 0.11.4}
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
@@ -220,7 +221,8 @@ intltoolize --copy --force
 %{__automake}
 %configure \
 	--enable-gtk-doc \
-	--enable-pilot-conduits=yes \
+	%{?with_pilot:--enable-pilot-conduits=yes} \
+	%{!?with_pilot:--enable-pilot-conduits=no} \
 	%{?with_ldap:--with-openldap=yes} \
 	%{!?with_ldap:--with-openldap=no} \
 	%{?with_kerberos5:--with-krb5=%{_prefix}} \
@@ -403,7 +405,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-*/evolution-calendar.idl
 %{_sysconfdir}/gconf/schemas/apps_evolution_calendar-*.schemas
 
+%if %{with pilot}
 %files pilot
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/*/conduits/*
 %{_datadir}/gnome-pilot/conduits/*
+%endif
