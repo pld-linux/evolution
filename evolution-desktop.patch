@@ -6,5 +6,5 @@ diff -urN evolution-1.5.93.orig/data/evolution.desktop.in.in evolution-1.5.93/da
  X-GNOME-Bugzilla-Product=Evolution
  X-GNOME-Bugzilla-OtherBinaries=evolution-data-server-1.0;evolution-exchange-storage;evolution-alarm-notify;
 -
-+Encoding=UTF-8                                                                 
++Encoding=UTF-8
 +# vi: encoding=utf-8 
