@@ -1,25 +1,31 @@
-%define		_prefix		/usr/X11R6
-
 Summary:	The GNOME Email/Calendar/Addressbook Suite
+Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version: 	0.5.1
+Version: 	0.6
 Release:	1
 Copyright:	GPL
-Group:		Applications/Productivity
+Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.gz
 URL:		http://www.helixcode.com/aoos/evolution.php3
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	camel
-Requires:	gtkhtml >= 0.6.1
-Requires:	libunicode >= 0.4
-Requires:	libxml >= 1.8.7
-BuildRequires:	bonobo-devel >= 0.18
+BuildRequires:	libxml-devel >= 1.8.7
+BuildRequires:	bonobo-devel >= 0.20
 BuildRequires:	gtkhtml-devel >= 0.6.1
-BuildRequires:	gnome-vfs-devel >= 0.3.1
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.5.1
+BuildRequires:  gnome-vfs-devel >= 0.3.1
 BuildRequires:	gnome-print-devel >= 0.20
+BuildRequires:	gnome-libs
 BuildRequires:	gdk-pixbuf-devel >= 0.8
+BuildRequires:	gtk+-devel > 1.2.0
+BuildRequires:	gal-devel >= 0.2.1
+BuildRequires:	libglade-devel
+BuildRequires:	ORBit-devel
+BuildRequires:	gettext-devel
+BuildRequires:	bison
+BuildRequires:	flex
+BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define         _prefix         /usr/X11R6
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
@@ -27,35 +33,54 @@ communications tool.  The tools which make up Evolution will
 be tightly integrated with one another and act as a seamless
 personal information-management tool. 
 
+%description -l pl
+Evolution to program pocztowy GNOME, kalendarz, ksi±¿ka adresowa
+i narzêdzie komunikacyjne. 
+
 %package devel
-Summary:        Development libraries and header files for evolution
+Summary:        Header files for evolution
+Summary(pl):	Pliki nag³ówkowe i dokumentacja
 Group:          Development/Libraries
-Requires:       %name = %{PACKAGE_VERSION}
-Provides:	camel-devel
+Requires:       %{name} = %{version}
 
 %description devel
-Evolution is the GNOME mailer, calendar, contact manager and
-communications tool.  The tools which make up Evolution will
-be tightly integrated with one another and act as a seamless
-personal information-management tool.
-
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
+%description -l pl devel
+Pakiet zawiera pliki potrzebne do rozwoju aplikacji u¿ywaj±cych
+bibliotek programu Evolution.
+
+%package static
+Summary:        Static libraries for evolution
+Summary(pl):	Biblioteki statyczne dla evolution
+Group:          Development/Libraries
+Requires:       %{name} = %{version}
+
+%description static
+This package contains static libraries for Evolution.
+
+%description -l pl static
+Pakiet zawiera statyczne biblioteki Evolution.
+
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
-CFLAGS="-pipe $RPM_OPT_FLAGS" ./configure	\
-	--prefix=%{_prefix} --sysconfdir=%{_sysconfdir}	\
-	--localstatedir=%{_localstatedir}
+gettextize -c -f
+%configure
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} prefix=$RPM_BUILD_ROOT%{_prefix} \
-	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
-	localstatedir=$RPM_BUILD_ROOT%{_localstatedir} install
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	desktopdir=%{_applnkdir}/Network/Mail
+
+gzip -9nf AUTHORS ChangeLog NEWS
+
+%find_lang %{name} --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -63,27 +88,30 @@ rm -rf $RPM_BUILD_ROOT
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%files
-%defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog INSTALL NEWS README
-%{_prefix}/share/evolution
-%{_prefix}/share/oaf/*.oafinfo
-%{_prefix}/share/idl/*.idl
-%{_prefix}/share/gnome/help/evolution
-%{_prefix}/share/gnome/apps/Applications/*.desktop
-%{_prefix}/share/images/evolution
-%{_prefix}/share/locale/*
-%{_prefix}/share/pixmaps/*
-%{_prefix}/share/mime-info/*
-%{_prefix}/bin/*
-%{_prefix}/lib/evolution/camel-providers/*/*.so*
-%{_prefix}/lib/evolution/camel-providers/*/*.urls
-%{_prefix}/lib/*.so.*
+%files -f %{name}.lang
+%defattr(644,root,root,755)
+%doc *.gz
+%{_datadir}/evolution
+%{_datadir}/oaf/*.oafinfo
+%{_datadir}/idl/*.idl
+%{_datadir}/gnome/help/evolution
+%{_datadir}/gnome/apps/Applications/*.desktop
+%{_datadir}/images/evolution
+%{_datadir}/locale/*
+%{_datadir}/pixmaps/*
+%{_datadir}/mime-info/*
+%{_bindir}/*
+%{_libdir}/evolution/camel-providers/*/*.so*
+%{_libdir}/evolution/camel-providers/*/*.urls
+%{_libdir}/*.so.*
 
 %files devel
-%{_prefix}/include/camel
-%{_prefix}/include/ename
-%{_prefix}/include/evolution
-%{_prefix}/lib/*so
-%{_prefix}/lib/*a
-%{_prefix}/lib/evolution/camel-providers/*/*a
+%defattr(644,root,root,755)
+%{_includedir}/*
+%{_libdir}/*.so
+%{_libdir}/evolution/camel-providers/*/*.so
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/*.a
+%{_libdir}/evolution/camel-providers/*/*.a
