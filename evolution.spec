@@ -2,8 +2,8 @@ Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
 Name:		evolution
-Version:	1.0.3
-Release:	1
+Version:	1.0.4
+Release:	0.1
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.bz2
@@ -14,20 +14,20 @@ BuildRequires:	ORBit-devel >= 0.5.8
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	bonobo-conf-devel >= 0.11
+BuildRequires:	bonobo-conf-devel >= 0.14
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	db3-devel
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 0.19
+BuildRequires:	gal-devel >= 0.19.2
 BuildRequires:	gdk-pixbuf-devel >= 0.9.0
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel >= 1.2.9
 BuildRequires:	gnome-print-devel >= 0.25
 BuildRequires:	gnome-vfs-devel >= 1.0.1
 BuildRequires:	gtk+-devel > 1.2.0
-BuildRequires:	gtkhtml-devel >= 1.0.1
+BuildRequires:	gtkhtml-devel >= 1.0.2
 BuildRequires:	intltool
 BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	libunicode-devel >= 0.4
