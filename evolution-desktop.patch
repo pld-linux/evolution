@@ -16,5 +16,5 @@ diff -urN aaa/evolution2-1.3.2.99/data/evolution.desktop.in evolution2-1.3.2.99/
  X-GNOME-Bugzilla-Bugzilla=Ximian
  X-GNOME-Bugzilla-Product=evolution
  X-GNOME-Bugzilla-OtherBinaries=evolution-wombat;evolution-exchange-storage;
-+
++Encoding=UTF-8
 +# vi: encoding=utf-8
