@@ -2,7 +2,7 @@ Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
 Name:		evolution
-Version:	1.0.2
+Version:	1.0.3
 Release:	1
 License:	GPL
 Group:		Applications/Mail
