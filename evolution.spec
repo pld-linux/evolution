@@ -8,7 +8,7 @@
 %bcond_without ldap
 
 %define		mver		1.4
-%define		subver	4
+%define		subver	5
 %define		_db3ver	3.1.17
 %define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db3-headers-%{_db3ver}
 
@@ -18,11 +18,11 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	3
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	5a109e2b17f2b69d36526057412e9c52
+# Source0-md5:	f16a86d6eaa9d9683f215586fcdac374
 Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
 # Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
 Patch0:		%{name}-nostaticdb3.patch
