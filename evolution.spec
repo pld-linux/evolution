@@ -4,7 +4,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	1.0.8
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.gz
@@ -50,6 +50,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define         _prefix         /usr/X11R6
 %define		_mandir		%{_prefix}/man
 %define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
+%define		_gtkdocdir	%{_defaultdocdir}/gtk-doc/html
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
@@ -142,7 +143,7 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 	--with-openldap=yes \
 	--with-static-ldap=no \
 	--enable-nntp=yes \
-	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/ \
+	--with-gnome-includes=/usr/X11R6/include/gnome-vfs-1.0/ \
 	--enable-file-locking=fcntl --enable-dot-locking=no \
 	--with-nspr-includes="/usr/include/nspr" \
 	--with-nss-includes="/usr/include/nss" \
@@ -156,7 +157,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	desktopdir=%{_applnkdir}/Network/Mail \
-	omf_dest_dir=%{_omf_dest_dir}/%{name}
+	omf_dest_dir=%{_omf_dest_dir}/%{name} \
+	HTML_DIR=%{_gtkdocdir}
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -186,7 +188,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
 %{_datadir}/gnome/ui/*
-%{_datadir}/gnome/html/*
 %{_datadir}/images
 %{_datadir}/mime-info/*
 %{_datadir}/libical-evolution
@@ -200,6 +201,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*.??
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.la
 %{_includedir}/*
+%{_gtkdocdir}/*
 
 %files static
 %defattr(644,root,root,755)
