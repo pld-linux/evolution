@@ -6,10 +6,11 @@
 #   - dependencies, i.e.: mail should require addressbook?
 #
 # Conditionals:
-%bcond_without ldap     # build without ldap support
+%bcond_without	ldap		# build without ldap support
+%bcond_without	kerberos5	# build without kerberos5 support
 
 %define		mver		1.5
-%define		subver	91
+%define		subver	92
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -21,28 +22,32 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	a811de01ad2d2cff5f908bb677f56510
+# Source0-md5:	636cc27bb01d897dad50554651ab62df
+Source1:	%{name}-e-pilot-settings.c
+Source2:	%{name}-e-pilot-settings.h
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-gnome-icon-theme.patch
 Patch3:		%{name}-GG-IM.patch
 Patch4:		%{name}-desktop.patch
+Patch5:		%{name}-libcom_err_include.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.6.2
 BuildRequires:	ORBit2-devel >= 1:2.10.3
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.96
+BuildRequires:	evolution-data-server-devel >= 0.0.97
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.12
+BuildRequires:	gal-devel >= 1:2.1.13
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.18
+BuildRequires:	gtkhtml-devel >= 3.1.19
+%{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.0
 BuildRequires:	libgnomeprintui-devel >= 2.6.1
@@ -66,9 +71,9 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.96
-Requires:	gal >= 1:2.1.12
-Requires:	gtkhtml >= 3.1.18
+Requires:	evolution-data-server >= 0.0.97
+Requires:	gal >= 1:2.1.13
+Requires:	gtkhtml >= 3.1.19
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -98,9 +103,9 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.12
+Requires:	gal-devel >= 1:2.1.13
 Requires:	gnome-vfs2-devel >= 2.6.1.1
-Requires:	gtkhtml-devel >= 3.1.18
+Requires:	gtkhtml-devel >= 3.1.19
 Requires:	libglade2-devel >= 1:2.4.0
 Requires:	libgnomeprintui-devel >= 2.6.1
 Requires:	libgnomeui-devel >= 2.6.1.1
@@ -209,8 +214,12 @@ Palmem.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%{?with_kerberos5:%patch5 -p1}
 
 mv po/{no,nb}.po
+
+install %{SOURCE1} widgets/misc/e-pilot-settings.c
+install %{SOURCE2} widgets/misc/e-pilot-settings.h
 
 %build
 glib-gettextize --copy --force
@@ -225,6 +234,8 @@ intltoolize --copy --force
 	--enable-pilot-conduits=yes \
 	%{?with_ldap:--with-openldap=yes} \
 	%{!?with_ldap:--with-openldap=no} \
+	%{?with_kerberos5:--with-krb5=%{_prefix}} \
+	%{!?with_kerberos5:--with-krb5=no} \
 	--without-static-ldap \
 	--enable-nntp=yes \
 	--enable-file-locking=fcntl \
