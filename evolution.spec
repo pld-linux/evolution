@@ -4,6 +4,10 @@
 #   - etspec?
 #   - ui?
 #   - dependencies, i.e.: mail should require addressbook?
+# - Patch 3 requires missing gg icons:
+#   /usr/share/icons/hicolor/16x16/apps/im-gadugadu.png
+#   /usr/share/icons/hicolor/48x48/apps/im-gadugadu.png
+#   They should be added here or to gnome-icon-theme
 #
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
