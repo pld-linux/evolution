@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	5
+%define		subver	6
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -17,11 +17,11 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	4
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	451dce3d4568cd208873e88281605de1
+# Source0-md5:	59bbcb9c9e90e3c2f978b94664498d73
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
@@ -30,21 +30,21 @@ BuildRequires:	ORBit2-devel >= 1:2.10.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.90
+BuildRequires:	evolution-data-server-devel >= 0.0.91
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.6
+BuildRequires:	gal-devel >= 1:2.1.7
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.9
+BuildRequires:	gtkhtml-devel >= 3.1.11
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.3.6
 BuildRequires:	libgnomeprintui-devel >= 2.6.0
 BuildRequires:	libgnomeui-devel >= 2.6.0
-BuildRequires:	libsoup-devel >= 2.1.8
+BuildRequires:	libsoup-devel >= 2.1.9
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
@@ -62,9 +62,9 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	GConf2 >= 2.6.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.90
-Requires:	gal >= 1:2.1.6
-Requires:	gtkhtml >= 3.1.9
+Requires:	evolution-data-server >= 0.0.91
+Requires:	gal >= 1:2.1.7
+Requires:	gtkhtml >= 3.1.11
 Requires:	libglade2 >= 1:2.3.6
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -94,13 +94,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.6
+Requires:	gal-devel >= 1:2.1.7
 Requires:	gnome-vfs2-devel >= 2.6.0
-Requires:	gtkhtml-devel >= 3.1.9
+Requires:	gtkhtml-devel >= 3.1.11
 Requires:	libglade2-devel >= 1:2.3.6
 Requires:	libgnomeprintui-devel >= 2.6.0
 Requires:	libgnomeui-devel >= 2.6.0
-Requires:	libsoup-devel >= 2.1.8
+Requires:	libsoup-devel >= 2.1.9
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
@@ -365,6 +365,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/evolution/%{mver}/evolution-addressbook-importers
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-addressbook.so
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-addressbook-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-importers/lib*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 %{_datadir}/evolution/%{mver}/views/addressbook*
