@@ -1,0 +1,61 @@
+diff -Nuard evolution-1.0.8.orgi/help/C/evolution-C.omf evolution-1.0.8/help/C/evolution-C.omf
+--- evolution-1.0.8.orgi/help/C/evolution-C.omf	Mon Mar 25 22:40:14 2002
++++ evolution-1.0.8/help/C/evolution-C.omf	Thu Oct  3 19:39:50 2002
+@@ -1,14 +1,23 @@
+ <?xml version="1.0" standalone="no"?>
++<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
+ <omf>
+   <resource>
++  <creator/>
+     <title>
+       Evolution Manual
+     </title>
+-    <subject>
+-      <category>GNOME|Applications</category>
+-    </subject>
+-    <format mime="text/html"/>
++    <date>
++	2002-10-03
++    </date>
++    <version identifier="" date="2002-10-03"/>
++    <subject category="GNOME|Applikasjoner"/>
++    <description/>
++    <type/>
++    <format mime="text/sgml"/>
+     <identifier url="index.html"/>
+     <language code="C"/>
++    <relation seriesid="f98af356-d6f5-11d6-94dd-a55e7b20f7b9"/>
++    <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
+   </resource>
+ </omf>
++
+diff -Nuard evolution-1.0.8.orgi/help/no/evolution-no.omf evolution-1.0.8/help/no/evolution-no.omf
+--- evolution-1.0.8.orgi/help/no/evolution-no.omf	Wed Dec  5 11:26:54 2001
++++ evolution-1.0.8/help/no/evolution-no.omf	Thu Oct  3 19:38:47 2002
+@@ -1,14 +1,22 @@
+-<?xml version="1.0" standalone="no"?>
++<?xml version="1.0" encoding="ISO-8859-13" standalone="no"?>
++<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
+ <omf>
+   <resource>
++  <creator/>
+     <title>
+       Evolution brukerhåndbok
+     </title>
+-    <subject>
+-      <category>GNOME|Applikasjoner</category>
+-    </subject>
++    <date>
++	2002-10-03
++    </date>
++    <version identifier="" date="2002-10-03"/>
++    <subject category="GNOME|Applikasjoner"/>
++    <description/>
++    <type/>
+     <format mime="text/sgml"/>
+     <identifier url="index.html"/>
+     <language code="no"/>
++    <relation seriesid="f98af356-d6f5-11d6-94dd-a55e7b20f7b9"/>
++    <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
+   </resource>
+ </omf>
