@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	9
+%define		subver	9.1
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -21,7 +21,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	66d872fa014dcdcfd2735c55c4ceee70
+# Source0-md5:	f075b47071c81950258d51aef50cc657
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-schemas.patch
@@ -41,7 +41,7 @@ BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.15
+BuildRequires:	gtkhtml-devel >= 3.1.16
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.0
 BuildRequires:	libgnomeprintui-devel >= 2.6.1
@@ -67,7 +67,7 @@ Requires:	GConf2 >= 2.6.1
 Requires:	bonobo-activation
 Requires:	evolution-data-server >= 0.0.94
 Requires:	gal >= 1:2.1.9
-Requires:	gtkhtml >= 3.1.15
+Requires:	gtkhtml >= 3.1.16
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -99,7 +99,7 @@ Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
 Requires:	gal-devel >= 1:2.1.10
 Requires:	gnome-vfs2-devel >= 2.6.1.1
-Requires:	gtkhtml-devel >= 3.1.15
+Requires:	gtkhtml-devel >= 3.1.16
 Requires:	libglade2-devel >= 1:2.4.0
 Requires:	libgnomeprintui-devel >= 2.6.1
 Requires:	libgnomeui-devel >= 2.6.1.1
