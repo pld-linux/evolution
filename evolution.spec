@@ -92,11 +92,11 @@ Requires:	%{name} = %{version}
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
-%description -l pl devel
+%description devel -l pl
 Pakiet zawiera pliki potrzebne do rozwoju aplikacji u¿ywaj±cych
 bibliotek programu Evolution.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 Este pacote contém os arquivos necessários para desenvolvimento de
 aplicações utilizando as bibliotecas do Evolution.
 
@@ -110,10 +110,10 @@ Requires:	%{name} = %{version}
 %description static
 This package contains static libraries for Evolution.
 
-%description -l pl static
+%description static -l pl
 Pakiet zawiera statyczne biblioteki Evolution.
 
-%description -l pt_BR static
+%description static -l pt_BR
 Este pacote contém as bibliotecas estáticas para desenvolvimento de
 aplicações.
 
