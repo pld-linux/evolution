@@ -63,8 +63,6 @@ Requires:	db3 = 3.1.17
 Requires:	gal >= 0.22
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _prefix         /usr/X11R6
-%define		_mandir		%{_prefix}/man
 %define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 %define		_gtkdocdir	%{_defaultdocdir}/gtk-doc/html
 
