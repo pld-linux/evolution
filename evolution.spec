@@ -4,7 +4,7 @@ Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
 Version:	1.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
@@ -45,6 +45,8 @@ BuildRequires:	intltool
 BuildRequires:	db3-devel
 BuildRequires:	db3-static
 BuildRequires:	gettext-devel
+BuildRequires:	nspr-devel
+BuildRequires:	nss-devel
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	autoconf
@@ -128,7 +130,11 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 	--with-static-ldap=no \
 	--enable-nntp=yes \
 	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/ \
-	--enable-file-locking=fcntl --enable-dot-locking=no
+	--enable-file-locking=fcntl --enable-dot-locking=no \
+	--with-nspr-includes="/usr/include/nspr" \
+	--with-nss-includes="/usr/include/nss" \
+	--with-nspr-libs="/usr/lib" \
+	--with-mss-libs="/usr/lib"
 %{__make}
 
 %install
@@ -168,6 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime-info/*
 %{_datadir}/libical-evolution
 %{_applnkdir}/Network/Mail/*
+%{_applnkdir}/Applications/*
 %{_pixmapsdir}/*
 
 %files devel
