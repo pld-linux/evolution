@@ -8,8 +8,8 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
-#Patch0:		%{name}-DESTDIR.patch
-#Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
+Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.37
