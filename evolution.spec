@@ -27,20 +27,20 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1.99.3.99-0.20030425.1
+BuildRequires:	gal-devel >= 1.99.4
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 Buildrequires:	gtk-doc >= 0.6
-BuildRequires:	gtkhtml-devel >= 3.0.2-0.20030425.1
+BuildRequires:	gtkhtml-devel >= 3.0.3
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libbonoboui-devel
 BuildRequires:	libglade2-devel
 BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgnomeprintui-devel >= 2.2.1
 BuildRequires:	libgnomeui-devel
-BuildRequires:	libsoup-devel >= 1.99.17-0.20030425.1
+BuildRequires:	libsoup-devel >= 1.99.20
 BuildRequires:	libtool
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	libxml2
@@ -59,8 +59,8 @@ Requires(post):		GConf2
 Requires:	GConf2
 Requires:	bonobo-activation
 Requires:	db3 = %{_db3ver}
-Requires:	gal >= 1.99.3.99-0.20030425.1
-Requires:	gtkhtml >= 3.0.2-0.20030425.1
+Requires:	gal >= 1.99.4
+Requires:	gtkhtml >= 3.0.3
 Requires:	libglade2
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -89,9 +89,9 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1.99.3.99-0.20030425.1
+Requires:	gal-devel >= 1.99.4
 Requires:	gnome-vfs2-devel
-Requires:	gtkhtml-devel >= 3.0.2-0.20030425.1
+Requires:	gtkhtml-devel >= 3.0.3
 Requires:	libglade2-devel
 Requires:	libgnomeprintui-devel >= 2.2.1
 Requires:	libgnomeui-devel
