@@ -73,8 +73,6 @@ Requires:	evolution-data-server >= 0.0.4
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	no_install_post_chrpath	1
-
 %description
 Evolution is the GNOME2 mailer, calendar, contact manager and
 communications tool. The tools which make up Evolution will be tightly
