@@ -19,7 +19,6 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{versio
 # Source0-md5:	f16a86d6eaa9d9683f215586fcdac374
 Source1:	http://www.sleepycat.com/update/snapshot/db-%{_db3ver}.tar.gz
 # Source1-md5:	5baeb94fb934d0bf783ea42117c400be
-#Patch0:		%{name}-nostaticdb3.patch
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-configure_in.patch
 Patch2:		%{name}-desktop.patch
