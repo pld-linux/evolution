@@ -41,7 +41,7 @@ BuildRequires:	openssl-devel
 BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	ORBit-devel >= 0.5.8
 BuildRequires:	GConf-devel >= 1.0.7
-BuildRequires:	xml-i18n-tools > 0.8.2
+BuildRequires:	intltool 
 BuildRequires:	db3-devel
 BuildRequires:	db3-static
 BuildRequires:	gettext-devel
@@ -168,7 +168,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/mime-info/*
 %{_datadir}/libical-evolution
 %{_applnkdir}/Network/Mail/*
-%{_applnkdir}/Applications/*
 %{_pixmapsdir}/*
 
 %files devel
