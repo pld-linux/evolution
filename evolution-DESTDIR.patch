@@ -1,0 +1,58 @@
+diff -urN evolution-0.9.org/doc/devel/calendar/cal-client/Makefile.am evolution-0.9/doc/devel/calendar/cal-client/Makefile.am
+--- evolution-0.9.org/doc/devel/calendar/cal-client/Makefile.am	Thu Mar 15 19:13:55 2001
++++ evolution-0.9/doc/devel/calendar/cal-client/Makefile.am	Thu Mar 15 19:15:08 2001
+@@ -118,7 +118,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do			\
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR);	\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR);	\
+ 	done
+ 
+ dist-hook:
+diff -urN evolution-0.9.org/doc/devel/calendar/cal-util/Makefile.am evolution-0.9/doc/devel/calendar/cal-util/Makefile.am
+--- evolution-0.9.org/doc/devel/calendar/cal-util/Makefile.am	Thu Mar 15 19:13:55 2001
++++ evolution-0.9/doc/devel/calendar/cal-util/Makefile.am	Thu Mar 15 19:16:41 2001
+@@ -129,7 +129,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do			\
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR);	\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR);	\
+ 	done
+ 
+ dist-hook:
+diff -urN evolution-0.9.org/doc/devel/executive-summary/Makefile.am evolution-0.9/doc/devel/executive-summary/Makefile.am
+--- evolution-0.9.org/doc/devel/executive-summary/Makefile.am	Thu Mar 15 19:13:55 2001
++++ evolution-0.9/doc/devel/executive-summary/Makefile.am	Thu Mar 15 19:21:36 2001
+@@ -112,7 +112,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do		\
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR);		\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR);		\
+ 	done
+ 
+ dist-hook:
+diff -urN evolution-0.9.org/doc/devel/importer/Makefile.am evolution-0.9/doc/devel/importer/Makefile.am
+--- evolution-0.9.org/doc/devel/importer/Makefile.am	Thu Mar 15 19:13:55 2001
++++ evolution-0.9/doc/devel/importer/Makefile.am	Thu Mar 15 19:20:27 2001
+@@ -22,9 +22,7 @@
+ DOC_DIR_INSTALL_FILES =					\
+ 	evolution-shell-importer.args			\
+ 	evolution-shell-importer.hierarchy		\
+-	evolution-shell-importer.signals		\
+ 	evolution-shell-importer.types			\
+-	evolution-shell-importer-decl.txt		\
+ 	evolution-shell-importer-sections.txt
+ 
+ SOURCE_FILES =								\
+@@ -114,7 +112,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do			\
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR);	\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR);	\
+ 	done
+ 
+ dist-hook:
