@@ -1,0 +1,12 @@
+diff -urN evolution-1.5.7.orig/addressbook/gui/component/apps_evolution_addressbook-1.5.schemas evolution-1.5.7/addressbook/gui/component/apps_evolution_addressbook-1.5.schemas
+--- evolution-1.5.7.orig/addressbook/gui/component/apps_evolution_addressbook-1.5.schemas	2004-04-19 20:09:04.000000000 +0200
++++ evolution-1.5.7/addressbook/gui/component/apps_evolution_addressbook-1.5.schemas	2004-04-20 11:25:12.585485888 +0200
+@@ -305,7 +305,7 @@
+       <applyto>/apps/evolution/addressbook/display/vpane_position</applyto>
+       <owner>evolution-addressbook</owner>
+       <type>int</type>
+-      <default></default>
++      <default>150</default>
+       <locale name="C">
+         <short>Position of the vertical pane in main view</short>
+       </locale>
