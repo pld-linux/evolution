@@ -1,0 +1,26 @@
+--- evolution-1.0.5/doc/devel/Makefile.am~	Tue Jul 31 10:45:42 2001
++++ evolution-1.0.5/doc/devel/Makefile.am	Sat May 18 12:40:29 2002
+@@ -144,7 +144,7 @@
+ 	fi)
+ 
+ #	  echo '-- Installing $(srcdir)/html/index.sgml' ; \
+-#	  $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR); \
++#	  $(INSTALL_DATA) $(srcdir)/html/index.sgml $(DESTDIR)$(TARGET_DIR)
+ 
+ #
+ # Require gtk-doc when making dist
+--- evolution-1.0.5/camel/Makefile.am~	Sun May 19 00:48:25 2002
++++ evolution-1.0.5/camel/Makefile.am	Sun May 19 00:51:00 2002
+@@ -202,9 +202,10 @@
+ camel_lock_helper_SOURCES = 			\
+ 	camel-lock-helper.c 			\
+ 	camel-lock-helper.h			\
+-	camel-lock.c				\
+-	camel-lock.h
++	camel-lock.h
+ 
++camel_lock_helper_LDADD = camel-lock.o
++			       
+ install-exec-hook:
+ 	@if test -n "$(CAMEL_LOCK_HELPER_USER)"; then \
+ 	    if test `whoami` = root ; then \
