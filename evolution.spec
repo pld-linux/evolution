@@ -17,7 +17,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
@@ -61,6 +61,7 @@ BuildRequires:	which
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
+Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.0
 Requires:	bonobo-activation
 Requires:	evolution-data-server >= 0.0.91
@@ -146,6 +147,7 @@ Group:		X11/Applications
 Requires:	%{name}-addressbook = %{version}-%{release}
 Requires(post,postun):	/sbin/ldconfig
 Requires(post):		GConf2
+Provides:	%{name}-component = %{version}-%{release}
 
 %description mail
 Evolution mail.
@@ -160,6 +162,7 @@ Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
 Requires(post):		GConf2
+Provides:	%{name}-component = %{version}-%{release}
 
 %description addressbook
 Evolution addressbook.
@@ -174,6 +177,7 @@ Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
 Requires(post):		GConf2
+Provides:	%{name}-component = %{version}-%{release}
 
 %description calendar
 Evolution calendar and todo component.
