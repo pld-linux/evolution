@@ -1,9 +1,0 @@
-diff -urN aaa/evolution-1.4.5/data/evolution.desktop.in.in evolution-1.4.5/data/evolution.desktop.in.in
---- aaa/evolution-1.4.5/data/evolution.desktop.in.in	2003-06-16 16:40:40.000000000 +0200
-+++ evolution-1.4.5/data/evolution.desktop.in.in	2003-12-21 18:05:13.000000000 +0100
-@@ -10,3 +10,5 @@
- X-GNOME-Bugzilla-Bugzilla=Ximian
- X-GNOME-Bugzilla-Product=evolution
- X-GNOME-Bugzilla-OtherBinaries=evolution-wombat;evolution-exchange-storage;
-+Encoding=UTF-8
-+# vi: encoding=utf-8
