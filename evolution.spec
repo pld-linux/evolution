@@ -10,7 +10,7 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 
 %define		mver		2.0
-%define		subver	0
+%define		subver	1
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -22,7 +22,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	9b36c4b99cd03bb4178569f90ac32022
+# Source0-md5:	ceb42376f51410a6b0d83454836e542a
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
@@ -33,16 +33,16 @@ BuildRequires:	ORBit2-devel >= 1:2.10.3
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 1.0.0
+BuildRequires:	evolution-data-server-devel >= 1.0.1
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.2.1
+BuildRequires:	gal-devel >= 1:2.2.2
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.2.1
+BuildRequires:	gtkhtml-devel >= 3.2.2
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.0
@@ -67,9 +67,9 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.99
-Requires:	gal >= 1:2.2.1
-Requires:	gtkhtml >= 3.2.1
+Requires:	evolution-data-server >= 1.0.1
+Requires:	gal >= 1:2.2.2
+Requires:	gtkhtml >= 3.2.2
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -99,9 +99,9 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.2.1
+Requires:	gal-devel >= 1:2.2.2
 Requires:	gnome-vfs2-devel >= 2.6.1.1
-Requires:	gtkhtml-devel >= 3.2.1
+Requires:	gtkhtml-devel >= 3.2.2
 Requires:	libglade2-devel >= 1:2.4.0
 Requires:	libgnomeprintui-devel >= 2.6.1
 Requires:	libgnomeui-devel >= 2.6.1.1
