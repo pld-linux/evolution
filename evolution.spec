@@ -13,6 +13,7 @@ Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
 URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.37
+BuildRequires:	bonobo-conf-devel
 BuildRequires:	gtkhtml-devel >= 0.8.2
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.2
@@ -25,6 +26,7 @@ BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel > 1.2.0
 BuildRequires:	gal-devel >= 0.5.99.5
 BuildRequires:	openldap-devel >= 2.0.0
+BuildRequires:	openssl-devel
 BuildRequires:	libglade-devel
 BuildRequires:	ORBit-devel >= 0.5.6
 BuildRequires:	GConf-devel >= 0.6
@@ -117,32 +119,36 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so.*
+%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_libdir}/evolution/*/*/*.so.*
 %attr(755,root,root) %{_libdir}/*.so.*
 %{_libdir}/evolution/camel-providers/*/*.urls
-%{_datadir}/evolution
-%{_datadir}/oaf/*.oafinfo
+%dir %{_datadir}/evolution
+%{_datadir}/oaf/*.oaf
 %{_datadir}/gnome/html
 %{_datadir}/gnome/ui
-%{_datadir}/gnome/apps
+#%{_datadir}/gnome/help
 %{_datadir}/images/evolution
 %{_datadir}/mime-info/*
+%{_datadir}/libical/zoneinfo
+#%{_datadir}/locale/*/LC_MESSAGES/*.mo
+%{_applnkdir}/Network/Mail/*
 %{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.la
 %attr(755,root,root) %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.la
-%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so
+%attr(755,root,root) %{_libdir}/evolution/*/*/*.la
+%attr(755,root,root) %{_libdir}/evolution/*/*/*.so
 %{_includedir}/*.h
 %{_includedir}/camel/*.h
 %{_includedir}/ename/*.h
-%{_includedir}/evolution
-%{_includedir}/libicalvcal
+%{_includedir}/evolution/*/*.h
+%{_includedir}/libicalvcal/*.h
 %{_datadir}/idl/*.idl
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/*.a
-%{_libdir}/evolution/camel-providers/*/*.a
+%{_libdir}/evolution/*/*/*.a
