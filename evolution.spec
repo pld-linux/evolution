@@ -2,14 +2,14 @@ Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±øka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend·rio e cat·logo de endereÁos
 Name:		evolution
-Version:	1.0.1
+Version:	1.0.2
 Release:	1
 License:	GPL
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
 Group(pl):	Aplikacje/Poczta
 Group(pt):	AplicaÁıes/Correio EletrÙnico
-Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nostaticdb3.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf-devel >= 1.0.7
@@ -34,7 +34,6 @@ BuildRequires:	gtkhtml-devel >= 1.0.1
 BuildRequires:	intltool
 BuildRequires:	libglade-devel >= 0.14
 BuildRequires:	libunicode-devel >= 0.4
-BuildRequires:	libxml-devel >= 1.8.10
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 BuildRequires:	oaf-devel >= 0.6.7
@@ -48,9 +47,13 @@ Requires:	GConf >= 1.0.7
 Requires:	oaf >= 0.6.7
 Requires:	libglade >= 0.17
 Requires:	gtkhtml >= 1.0.0-2
+Prereq:		/sbin/ldconfig
+Prereq:		scrollkeeper
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _prefix         /usr/X11R6
+%define		_mandir		%{_prefix}/man
+%define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
@@ -78,6 +81,21 @@ Group(pl):	Programowanie/Biblioteki
 Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
 Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Requires:	cyrus-sasl-devel
+Requires:	freetype-devel
+Requires:	gal-devel
+Requires:	gdk-pixbuf-devel
+Requires:	gnome-libs-devel
+Requires:	gnome-print-devel
+Requires:	gnome-vfs-devel
+Requires:	gtkhtml-devel
+Requires:	libglade-devel
+Requires:	libunicode-devel
+Requires:	nspr-devel
+Requires:	nss-devel
+Requires:	oaf-devel
+Requires:	openldap-devel
+Requires:	openssl-devel
 Requires:	%{name} = %{version}
 
 %description devel
@@ -152,17 +170,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	desktopdir=%{_applnkdir}/Network/Mail
+	desktopdir=%{_applnkdir}/Network/Mail \
+	omf_dest_dir=%{_omf_dest_dir}/omf/%{name}
 
 gzip -9nf AUTHORS ChangeLog NEWS
 
-%find_lang %{name} --with-gnome
+%find_lang %{name} --with-gnome --all-names
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+%post
+/sbin/ldconfig
+/usr/bin/scrollkeeper-update
+
+%postun
+/sbin/ldconfig
+/usr/bin/scrollkeeper-update
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -174,15 +198,17 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/*
 %dir %{_libdir}/evolution/*/*
+%{_mandir}/man1/*
 %{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oaf
-%{_datadir}/omf/evolution
 %{_datadir}/gnome/ui
 %{_datadir}/gnome/html/*
-%{_datadir}/images/evolution
+%{_datadir}/images
 %{_datadir}/mime-info/*
 %{_datadir}/libical-evolution
+%{_datadir}/idl/*.idl
+%{_omf_dest_dir}/omf/%{name}
 %{_applnkdir}/Network/Mail/*
 %{_pixmapsdir}/*
 
@@ -191,7 +217,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/*.??
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.la
 %{_includedir}/*
-%{_datadir}/idl/*.idl
 
 %files static
 %defattr(644,root,root,755)
