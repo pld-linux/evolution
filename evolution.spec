@@ -45,6 +45,7 @@ BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 BuildRequires:	oaf-devel >= 0.6.10
 BuildRequires:	openldap-devel >= 2.0.0
+BuildRequires:	pilot-link-devel >= 0.11.4
 BuildRequires:	python
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	libxml >= 1.8.17
