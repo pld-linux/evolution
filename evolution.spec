@@ -42,6 +42,7 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:1.99.9
+BuildRequires:	gcc-g77
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
@@ -64,6 +65,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
 BuildRequires:	scrollkeeper >= 0.1.4
+BuildRequires:	which
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
