@@ -27,7 +27,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1.99.7
+BuildRequires:	gal-devel >= 1:1.99.7
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel
@@ -59,8 +59,8 @@ Requires(post):		GConf2
 Requires:	GConf2
 Requires:	bonobo-activation
 Requires:	db3 = %{_db3ver}
-Requires:	gal >= 1.99.4
-Requires:	gtkhtml >= 3.0.3
+Requires:	gal >= 1:1.99.7
+Requires:	gtkhtml >= 3.0.5
 Requires:	libglade2
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -89,9 +89,9 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1.99.4
+Requires:	gal-devel >= 1:1.99.7
 Requires:	gnome-vfs2-devel
-Requires:	gtkhtml-devel >= 3.0.3
+Requires:	gtkhtml-devel >= 3.0.5
 Requires:	libglade2-devel
 Requires:	libgnomeprintui-devel >= 2.2.1
 Requires:	libgnomeui-devel
@@ -205,19 +205,18 @@ rm -rf $RPM_BUILD_ROOT
 	omf_dest_dir=%{_omf_dest_dir}/%{name} \
 	GTKHTML_DATADIR=%{_datadir}/idl
 
-# strip doesn't pass this files and they aren't necessary, so remove them
+# strip doesn't pass these files and they aren't necessary, so remove them
 # probably this should be done differently, but I have no idea
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/*/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/libemiscwidgets.a
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.a
+rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 
-%find_lang %{name} --with-gnome --all-name
+%find_lang evolution-1.4 --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig %{_libdir}/evolution/%{mver}
 /sbin/ldconfig
 /usr/bin/scrollkeeper-update
 %gconf_schema_install
@@ -226,12 +225,12 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 /usr/bin/scrollkeeper-update
 
-%files -f %{name}.lang
+%files -f evolution-1.4.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS* README 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/*.so.*.*.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/*.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/camel/*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-ldif-importer
@@ -269,7 +268,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/*
 %{_sysconfdir}/gconf/schemas/*
 %{_omf_dest_dir}/%{name}
-%{_datadir}/gnome/help/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -285,5 +283,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files pilot
 %defattr(644,root,root,755)
-%{_libdir}/gnome-pilot/conduits/*
+%attr(755,root,root) %{_libdir}/gnome-pilot/conduits/*
 %{_datadir}/gnome-pilot/conduits/*
