@@ -160,8 +160,6 @@ rm -rf $RPM_BUILD_ROOT
 	desktopdir=%{_applnkdir}/Network/Mail \
 	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
-gzip -9nf AUTHORS ChangeLog NEWS
-
 %find_lang %{name} --with-gnome --all-name
 
 %clean
@@ -177,7 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS ChangeLog NEWS
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
