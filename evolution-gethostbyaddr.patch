@@ -1,0 +1,32 @@
+2003-09-19  Jeffrey Stedfast  <fejj@ximian.com>
+
+	* e-host-utils.c (e_gethostbyaddr_r): Work around a bug in glibc
+	2.3.2's gethostbyaddr_r() implementation.
+
+Index: evolution/e-util/e-host-utils.c
+diff -u evolution/e-util/e-host-utils.c:1.14.4.1 evolution/e-util/e-host-utils.c:1.14.4.2
+--- evolution/e-util/e-host-utils.c:1.14.4.1	Mon Sep 29 11:39:44 2003
++++ evolution/e-util/e-host-utils.c	Wed Oct  8 16:36:22 2003
+@@ -337,8 +337,21 @@
+ 	int retval;
+ 	
+ 	retval = gethostbyaddr_r (addr, addrlen, type, host, buf, buflen, &hp, herr);
+-	if (hp != NULL)
++	
++	if (hp != NULL) {
+ 		*herr = 0;
++		retval = 0;
++	} else if (retval == 0) {
++		/* glibc 2.3.2 workaround - it seems that
++		 * gethostbyaddr_r will sometimes return 0 on fail and
++		 * fill @host with garbage strings from /etc/hosts
++		 * (failure to parse the file? who knows). Luckily, it
++		 * seems that we can rely on @hp being NULL on
++		 * fail.
++		 */
++		retval = -1;
++	}
++	
+ 	return retval;
+ #endif
+ #else /* No support for gethostbyaddr_r */
