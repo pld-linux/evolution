@@ -19,7 +19,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
@@ -366,12 +366,10 @@ rm -rf $RPM_BUILD_ROOT
 %files mail
 %defattr(644,root,root,755)
 %dir %{_libdir}/evolution/*/camel*
-%dir %{_libdir}/evolution/*/evolution-calendar-importers
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-mail-importers.so*
 %attr(755,root,root) %{_libdir}/evolution/*/camel/*
 %attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-mail.so
 %attr(755,root,root) %{_libdir}/evolution/*/camel-providers/*.so
-%attr(755,root,root) %{_libdir}/evolution/*/evolution-calendar-importers/*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_*.server
 %{_libdir}/evolution/*/camel-providers/*.urls
 %{_datadir}/evolution/*/views/mail*
@@ -397,8 +395,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files calendar
 %defattr(644,root,root,755)
+%dir %{_libdir}/evolution/*/evolution-calendar-importers
 %attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-calendar.so
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-calendar-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/evolution-calendar-importers/*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
 %{_datadir}/evolution/*/views/calendar*
 %{_datadir}/evolution/*/views/tasks*
