@@ -12,7 +12,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	1
+%define		subver	2
 %define		snap		20031227
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
@@ -25,7 +25,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	7b852abda6b8324cd1b4ce80eaee1c0e
+# Source0-md5:	63286660ea5673cb0f1f828c3b627685
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.5.0
@@ -35,23 +35,23 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 2.1.2
+BuildRequires:	gal-devel >= 1:2.1.3
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.5.0
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.5
+BuildRequires:	gtkhtml-devel >= 3.1.6
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libglade2-devel >= 2.3.0
 BuildRequires:	libgnomeprintui-devel >= 2.5.0
 BuildRequires:	libgnomeui-devel >= 2.5.0
-BuildRequires:	libsoup-devel >= 2.1.3
+BuildRequires:	libsoup-devel >= 2.1.4
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	evolution-data-server-devel >= 0.0.4
+BuildRequires:	evolution-data-server-devel >= 0.0.5
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
@@ -295,11 +295,11 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 %dir %{_datadir}/idl/evolution-%{mver}
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/%{mver}
-%dir %{_datadir}/evolution/%{mver}/default_user
+#%dir %{_datadir}/evolution/%{mver}/default_user
 %dir %{_datadir}/evolution/%{mver}/views
 %{_datadir}/evolution/%{mver}/*.xml
-%{_datadir}/evolution/%{mver}/default_user/searches.xml
-%{_datadir}/evolution/%{mver}/default_user/vfolders.xml
+#%{_datadir}/evolution/%{mver}/default_user/searches.xml
+#%{_datadir}/evolution/%{mver}/default_user/vfolders.xml
 %{_datadir}/evolution/%{mver}/etspec
 %{_datadir}/evolution/%{mver}/glade
 %{_datadir}/evolution/%{mver}/images
@@ -341,8 +341,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_1.5.server
 %{_libdir}/evolution/%{mver}/camel-providers/*.urls
 %{_datadir}/evolution/%{mver}/views/mail*
-%{_datadir}/evolution/%{mver}/default_user/local
-%{_datadir}/evolution/%{mver}/default_user/views/mail*
+#%{_datadir}/evolution/%{mver}/default_user/local
+#%{_datadir}/evolution/%{mver}/default_user/views/mail*
 %{_datadir}/idl/evolution-%{mver}/Composer.idl
 %{_datadir}/idl/evolution-%{mver}/Evolution-Composer.idl
 %{_sysconfdir}/gconf/schemas/evolution-mail-1.5.schemas
@@ -352,8 +352,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-addressbook.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 %{_datadir}/evolution/%{mver}/views/addressbook*
-%{_datadir}/evolution/%{mver}/default_user/addressbook*
-%{_datadir}/evolution/%{mver}/default_user/views/addressbook*
+#%{_datadir}/evolution/%{mver}/default_user/addressbook*
+#%{_datadir}/evolution/%{mver}/default_user/views/addressbook*
 %{_datadir}/evolution/%{mver}/ecps
 %{_datadir}/idl/evolution-%{mver}/Evolution-Addressbook-SelectNames.idl
 %{_sysconfdir}/gconf/schemas/apps_evolution_addressbook-1.5.schemas
@@ -365,8 +365,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
 %{_datadir}/evolution/%{mver}/views/calendar*
 %{_datadir}/evolution/%{mver}/views/tasks*
-%{_datadir}/evolution/%{mver}/default_user/views/calendar*
-%{_datadir}/evolution/%{mver}/default_user/views/tasks*
+#%{_datadir}/evolution/%{mver}/default_user/views/calendar*
+#%{_datadir}/evolution/%{mver}/default_user/views/tasks*
 %{_datadir}/idl/evolution-%{mver}/evolution-calendar.idl
 %{_sysconfdir}/gconf/schemas/apps_evolution_calendar-1.5.schemas
 
