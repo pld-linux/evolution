@@ -1,0 +1,3 @@
+- added calendar patch (fixes sigsegv on calendar startup)
+- fixes schemas patch
+- rel 0.%%{_snap}.2
