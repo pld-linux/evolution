@@ -1,7 +1,7 @@
-diff -urN evolution.orig/addressbook/gui/contact-editor/e-contact-editor.c evolution/addressbook/gui/contact-editor/e-contact-editor.c
---- evolution.orig/addressbook/gui/contact-editor/e-contact-editor.c	2004-06-02 12:02:59.915611392 +0200
-+++ evolution/addressbook/gui/contact-editor/e-contact-editor.c	2004-06-02 12:11:13.388592096 +0200
-@@ -178,6 +178,7 @@
+diff -urN aa/evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor.c evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor.c
+--- aa/evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor.c	2005-01-28 19:40:16.000000000 +0100
++++ evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor.c	2005-02-12 22:29:33.797115680 +0100
+@@ -182,6 +182,7 @@
  	{ E_CONTACT_IM_AIM,       N_ ("AIM")       },
  	{ E_CONTACT_IM_JABBER,    N_ ("Jabber")    },
  	{ E_CONTACT_IM_YAHOO,     N_ ("Yahoo")     },
@@ -9,9 +9,17 @@ diff -urN evolution.orig/addressbook/gui/contact-editor/e-contact-editor.c evolu
  	{ E_CONTACT_IM_MSN,       N_ ("MSN")       },
  	{ E_CONTACT_IM_ICQ,       N_ ("ICQ")       },
  	{ E_CONTACT_IM_GROUPWISE, N_ ("GroupWise") }
-diff -urN evolution.orig/addressbook/gui/contact-editor/e-contact-editor-im.c evolution/addressbook/gui/contact-editor/e-contact-editor-im.c
---- evolution.orig/addressbook/gui/contact-editor/e-contact-editor-im.c	2004-06-02 12:02:59.890615192 +0200
-+++ evolution/addressbook/gui/contact-editor/e-contact-editor-im.c	2004-06-02 12:10:24.371043896 +0200
+@@ -2819,6 +2820,7 @@
+ 	E_CONTACT_IM_GROUPWISE,
+ 	E_CONTACT_IM_JABBER,
+ 	E_CONTACT_IM_YAHOO,
++	E_CONTACT_IM_GADUGADU,
+ 	E_CONTACT_IM_MSN,
+ 	E_CONTACT_IM_ICQ,
+ 	E_CONTACT_PHOTO,
+diff -urN aa/evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor-im.c evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor-im.c
+--- aa/evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor-im.c	2004-11-26 16:51:28.000000000 +0100
++++ evolution-2.1.5/addressbook/gui/contact-editor/e-contact-editor-im.c	2005-02-12 22:28:24.788606568 +0100
 @@ -63,6 +63,7 @@
          N_("Novell Groupwise"),
  	N_("Jabber"),
@@ -28,22 +36,34 @@ diff -urN evolution.orig/addressbook/gui/contact-editor/e-contact-editor-im.c ev
  	"im-msn",
  	"im-icq"
  };
-diff -urN evolution.orig/addressbook/gui/widgets/eab-contact-display.c evolution/addressbook/gui/widgets/eab-contact-display.c
---- evolution.orig/addressbook/gui/widgets/eab-contact-display.c	2004-06-02 12:03:00.574511224 +0200
-+++ evolution/addressbook/gui/widgets/eab-contact-display.c	2004-06-02 12:09:01.088704736 +0200
-@@ -55,6 +55,7 @@
+diff -urN aa/evolution-2.1.5/addressbook/gui/widgets/eab-contact-display.c evolution-2.1.5/addressbook/gui/widgets/eab-contact-display.c
+--- aa/evolution-2.1.5/addressbook/gui/widgets/eab-contact-display.c	2005-01-24 18:28:37.000000000 +0100
++++ evolution-2.1.5/addressbook/gui/widgets/eab-contact-display.c	2005-02-12 22:33:05.345955368 +0100
+@@ -57,6 +57,7 @@
  #define JABBER_ICON       "im-jabber"
  #define MSN_ICON          "im-msn"
  #define YAHOO_ICON        "im-yahoo"
-+#define GADUGADU_ICON	   "im-gadugadu"
++#define GADUGADU_ICON	    "im-gadugadu"
  #define VIDEOCONF_ICON    "stock_video-conferencing"
  
  #define MAX_COMPACT_IMAGE_DIMENSION 48
-@@ -356,6 +358,7 @@
- 	accum_attribute (accum, contact, _("Jabber"), E_CONTACT_IM_JABBER_HOME_1, JABBER_ICON, 0);
- 	accum_attribute (accum, contact, _("MSN"), E_CONTACT_IM_MSN_HOME_1, MSN_ICON, 0);
- 	accum_attribute (accum, contact, _("Yahoo"), E_CONTACT_IM_YAHOO_HOME_1, YAHOO_ICON, 0);
-+	accum_attribute (accum, contact, _("Gadu-Gadu"), E_CONTACT_IM_GADUGADU_HOME_1, GADUGADU_ICON, 0);
+@@ -349,6 +350,7 @@
+ 	accum_multival_attribute (accum, contact, _("Jabber"), E_CONTACT_IM_JABBER, JABBER_ICON, 0);
+ 	accum_multival_attribute (accum, contact, _("MSN"), E_CONTACT_IM_MSN, MSN_ICON, 0);
+ 	accum_multival_attribute (accum, contact, _("Yahoo"), E_CONTACT_IM_YAHOO, YAHOO_ICON, 0);
++	accum_multival_attribute (accum, contact, _("Gadu-Gadu"), E_CONTACT_IM_GADUGADU, GADUGADU_ICON, 0);
  
  	if (accum->len > 0)
-		gtk_html_stream_printf (html_stream, accum->str);
+ 		gtk_html_stream_printf (html_stream, accum->str);
+diff -urN aa/evolution-2.1.5/plugins/bbdb/gaimbuddies.c evolution-2.1.5/plugins/bbdb/gaimbuddies.c
+--- aa/evolution-2.1.5/plugins/bbdb/gaimbuddies.c	2005-01-31 19:34:41.000000000 +0100
++++ evolution-2.1.5/plugins/bbdb/gaimbuddies.c	2005-02-12 22:37:40.473129680 +0100
+@@ -286,6 +286,8 @@
+ 		return E_CONTACT_IM_YAHOO;
+ 	if (! strcmp (proto, "prpl-jabber"))
+ 		return E_CONTACT_IM_JABBER;
++	if (! strcmp (proto, "prpl-gg"))
++		return E_CONTACT_IM_GADUGADU;
+ 
+ 	return E_CONTACT_IM_AIM;
+ }
