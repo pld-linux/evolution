@@ -96,6 +96,7 @@ Requires:	gtkhtml-devel >= 3.0.7-2
 Requires:	libglade2-devel
 Requires:	libgnomeprintui-devel >= 2.2.1
 Requires:	libgnomeui-devel >= 2.3.3.1-2
+Requires:	libsoup-devel
 Requires:	nspr-devel
 Requires:	nss-devel
 Requires:	openldap-devel
