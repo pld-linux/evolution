@@ -14,6 +14,7 @@ Group(pt):	Aplicações/Correio Eletrônico
 Source0:	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-use_AM_GNU_GETTEXT.patch
+Patch2:		%{name}-nostaticdb3.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf-devel >= 1.0.7
 BuildRequires:	ORBit-devel >= 0.5.8
@@ -24,7 +25,6 @@ BuildRequires:	bonobo-conf-devel >= 0.11
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	cyrus-sasl-devel
 BuildRequires:	db3-devel
-BuildRequires:	db3-static
 BuildRequires:	flex
 BuildRequires:	freetype-static >= 2.0.5
 BuildRequires:	gal-devel >= 0.18
@@ -46,6 +46,7 @@ BuildRequires:	nss-devel
 BuildRequires:	oaf-devel >= 0.6.7
 BuildRequires:	openldap-devel >= 2.0.0
 BuildRequires:	openssl-devel
+BuildRequires:	python
 BuildRequires:	scrollkeeper
 Requires:	scrollkeeper >= 0.1.4
 Requires:	bonobo >= 1.0.14
@@ -125,13 +126,15 @@ aplicações.
 %setup -q
 #%patch0 -p1
 #%patch1 -p1
+%patch2 -p1
 
 %build
 #rm -f missing
 #libtoolize --copy --force
 #gettextize --copy --force
 #aclocal -I macros
-#autoconf
+autoconf
+cd libical; autoconf; cd ..
 #automake -a -c
 
 CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
