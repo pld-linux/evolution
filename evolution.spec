@@ -1,5 +1,5 @@
 %define		mver		1.3
-%define		subver	3
+%define		subver	92
 %define		_db3ver	3.1.17
 %define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db3-headers-%{_db3ver}
 
@@ -12,14 +12,13 @@ Version:	%{mver}.%{subver}
 Release:	0.1
 License:	GPL
 Group:		Applications/Mail
-Source0:	ftp://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	d9a6f15317e5f208af6e64f7894dbabb
-Source1:	%{name}-db3-headers-%{_db3ver}.tar.bz2
+# Source0-md5:	c652b5873188d460e38bd73abbf1308f
+Source0:	http://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
+# Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
+Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
 Patch0:		%{name}-nostaticdb3.patch
-Patch1:		%{name}-am.patch
 Patch2:		%{name}-configure_in.patch
 Patch3:		%{name}-desktop.patch
-Patch4:		%{name}-gnome_prefix.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel
 BuildRequires:	ORBit2-devel >= 2.3.0
@@ -28,20 +27,20 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1.99.4
+BuildRequires:	gal-devel >= 1.99.6
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 Buildrequires:	gtk-doc >= 0.6
-BuildRequires:	gtkhtml-devel >= 3.0.3
+BuildRequires:	gtkhtml-devel >= 3.0.4
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libbonoboui-devel
 BuildRequires:	libglade2-devel
 BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgnomeprintui-devel >= 2.2.1
 BuildRequires:	libgnomeui-devel
-BuildRequires:	libsoup-devel >= 1.99.20
+BuildRequires:	libsoup-devel >= 1.99.22
 BuildRequires:	libtool
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	libxml2
@@ -152,10 +151,8 @@ Palmem.
 %prep
 %setup -q -a 1
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 rm -f missing
@@ -241,6 +238,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-launch-composer
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/csv2vcard
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/killev
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/load-*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{mver}
 %dir %{_libdir}/evolution/%{mver}/camel*
@@ -259,8 +257,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{mver}/glade
 %{_datadir}/evolution/%{mver}/images
 %{_datadir}/evolution/%{mver}/ui
-%dir %{_datadir}/evolution/%{mver}/tools
-%attr(755,root,root) %{_datadir}/evolution/%{mver}/tools/*
 %{_datadir}/evolution/%{mver}/views
 %{_datadir}/evolution/%{mver}/zoneinfo
 %{_datadir}/mime-info/*
