@@ -4,7 +4,7 @@ Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
 Version:	1.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Group(de):	Applikationen/Post
@@ -19,10 +19,11 @@ Requires: bonobo >= 1.0.14
 Requires: GConf >= 1.0.7
 Requires: oaf >= 0.6.7
 Requires: libglade >= 0.17
+Requires: gtkhtml >= 1.0.0-2
 BuildRequires:	libxml-devel >= 1.8.10
 BuildRequires:	bonobo-devel >= 1.0.15-2
 BuildRequires:	bonobo-conf-devel >= 0.11
-BuildRequires:	gtkhtml-devel >= 1.0.0
+BuildRequires:	gtkhtml-devel >= 1.0.0-2
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.6.7
 BuildRequires:	gnome-vfs-devel >= 1.0.1
@@ -126,7 +127,8 @@ CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
 	--with-openldap=yes \
 	--with-static-ldap=no \
 	--enable-nntp=yes \
-	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/
+	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/ \
+	--enable-file-locking=fcntl --enable-dot-locking=no
 %{__make}
 
 %install
