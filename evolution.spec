@@ -28,12 +28,12 @@ Patch2:		%{name}-schemas.patch
 Patch3:		%{name}-gnome-icon-theme.patch
 Patch4:		%{name}-GG-IM.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	GConf2-devel >= 2.6.1
+BuildRequires:	GConf2-devel >= 2.6.2
 BuildRequires:	ORBit2-devel >= 1:2.10.2
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.94-2
+BuildRequires:	evolution-data-server-devel >= 0.0.94.1
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:2.1.10
@@ -64,10 +64,10 @@ Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
-Requires:	GConf2 >= 2.6.1
+Requires:	GConf2 >= 2.6.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.94
-Requires:	gal >= 1:2.1.9
+Requires:	evolution-data-server >= 0.0.94.1
+Requires:	gal >= 1:2.1.10
 Requires:	gtkhtml >= 3.1.16
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
