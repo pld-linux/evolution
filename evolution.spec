@@ -1,5 +1,5 @@
 %define		mver		1.4
-%define		subver	0
+%define		subver	3
 %define		_db3ver	3.1.17
 %define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db3-headers-%{_db3ver}
 
@@ -12,8 +12,8 @@ Version:	%{mver}.%{subver}
 Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	cc671769a912e315dc895f5b458e1a33
+Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
+# Source0-md5:	4cfed9d2f6a5a7ae71caa8f68494a15a
 Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
 # Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
 Patch0:		%{name}-nostaticdb3.patch
@@ -239,7 +239,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-wombat
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-clean
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-import
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-launch-composer
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/csv2vcard
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/killev
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/load-*
