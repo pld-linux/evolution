@@ -10,7 +10,7 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 
 %define		mver		1.5
-%define		subver	92.2
+%define		subver	93
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -22,35 +22,35 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	bead4c65cd147e678648cc6c6ab262e7
+# Source0-md5:	a01dc293bca189461f6cbd61b0a5a0ee
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-gnome-icon-theme.patch
 Patch3:		%{name}-GG-IM.patch
 Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-libcom_err_include.patch
+#Patch5:		%{name}-libcom_err_include.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.6.2
 BuildRequires:	ORBit2-devel >= 1:2.10.3
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.97
+BuildRequires:	evolution-data-server-devel >= 0.0.98
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.13
+BuildRequires:	gal-devel >= 1:2.1.14
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.19
+BuildRequires:	gtkhtml-devel >= 3.1.20
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.0
 BuildRequires:	libgnomeprintui-devel >= 2.6.1
 BuildRequires:	libgnomeui-devel >= 2.6.1.1
-BuildRequires:	libsoup-devel >= 2.1.12
+BuildRequires:	libsoup-devel >= 2.1.13
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
@@ -69,9 +69,9 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.97
-Requires:	gal >= 1:2.1.13
-Requires:	gtkhtml >= 3.1.19
+Requires:	evolution-data-server >= 0.0.98
+Requires:	gal >= 1:2.1.14
+Requires:	gtkhtml >= 3.1.20
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -101,13 +101,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.13
+Requires:	gal-devel >= 1:2.1.14
 Requires:	gnome-vfs2-devel >= 2.6.1.1
-Requires:	gtkhtml-devel >= 3.1.19
+Requires:	gtkhtml-devel >= 3.1.20
 Requires:	libglade2-devel >= 1:2.4.0
 Requires:	libgnomeprintui-devel >= 2.6.1
 Requires:	libgnomeui-devel >= 2.6.1.1
-Requires:	libsoup-devel >= 2.1.12
+Requires:	libsoup-devel >= 2.1.13
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
@@ -212,7 +212,7 @@ Palmem.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%{?with_kerberos5:%patch5 -p1}
+#%{?with_kerberos5:%patch5 -p1}
 
 mv po/{no,nb}.po
 
@@ -245,7 +245,8 @@ intltoolize --copy --force
 	--disable-schemas-install \
 	--enable-nss=yes \
 	--enable-smime=yes \
-	--enable-static
+	--enable-static \
+	--enable-file-chooser
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
 # (required if you use ORBit2-devel 2.7.2)
