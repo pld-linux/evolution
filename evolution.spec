@@ -29,7 +29,7 @@ BuildRequires:	gnome-vfs-devel >= 1.0.1
 BuildRequires:	gtk+-devel > 1.2.0
 BuildRequires:	gtkhtml-devel >= 1.0.2
 BuildRequires:	intltool
-BuildRequires:	libglade-devel >= 0.14
+BuildRequires:	libglade-gnome-devel >= 0.14
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
