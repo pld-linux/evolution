@@ -7,7 +7,7 @@ Copyright:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-DESTDIR.patch
-URL:		http://www.helixcode.com/aoos/evolution.php3
+URL:		http://www.helixcode.com/apps/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.31
 BuildRequires:	gtkhtml-devel >= 0.8-2
