@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	9.2
+%define		subver	90
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
@@ -21,7 +21,7 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	3aa5a9f7c390a6b164906fa83ed31605
+# Source0-md5:	c33c6a84de4049202cd72dea934a3240
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-schemas.patch
@@ -29,20 +29,20 @@ Patch3:		%{name}-gnome-icon-theme.patch
 Patch4:		%{name}-GG-IM.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.6.2
-BuildRequires:	ORBit2-devel >= 1:2.10.2
+BuildRequires:	ORBit2-devel >= 1:2.10.3
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.94.1
+BuildRequires:	evolution-data-server-devel >= 0.0.95
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.10
+BuildRequires:	gal-devel >= 1:2.1.11
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.16
+BuildRequires:	gtkhtml-devel >= 3.1.17
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.0
 BuildRequires:	libgnomeprintui-devel >= 2.6.1
@@ -66,9 +66,9 @@ Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.6.2
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.94.1
-Requires:	gal >= 1:2.1.10
-Requires:	gtkhtml >= 3.1.16
+Requires:	evolution-data-server >= 0.0.95
+Requires:	gal >= 1:2.1.11
+Requires:	gtkhtml >= 3.1.17
 Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -98,9 +98,9 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.10
+Requires:	gal-devel >= 1:2.1.11
 Requires:	gnome-vfs2-devel >= 2.6.1.1
-Requires:	gtkhtml-devel >= 3.1.16
+Requires:	gtkhtml-devel >= 3.1.17
 Requires:	libglade2-devel >= 1:2.4.0
 Requires:	libgnomeprintui-devel >= 2.6.1
 Requires:	libgnomeui-devel >= 2.6.1.1
@@ -378,6 +378,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/evolution/%{mver}/evolution-addressbook-importers
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-clean
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-export
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/csv2vcard
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-addressbook.so
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-addressbook-a11y.so.*
