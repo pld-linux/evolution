@@ -5,6 +5,8 @@
 #   (not required or required by multisync pkg)
 #
 
+%bcond_without ldap
+
 %define		mver		1.4
 %define		subver	4
 %define		_db3ver	3.1.17
@@ -34,6 +36,7 @@ BuildRequires:	ORBit2-devel >= 2.7.5-1
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
+BuildRequires:	db3
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:1.99.9
@@ -54,7 +57,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	openldap-devel >= 2.0.0
+%{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 BuildRequires:	openssl-devel >= 0.9.7
 BuildRequires:	pilot-link-devel >= 0.11.4
 BuildRequires:	pkgconfig
@@ -107,7 +110,7 @@ Requires:	libgnomeui-devel >= 2.3.3.1-2
 Requires:	libsoup-devel
 Requires:	nspr-devel
 Requires:	nss-devel
-Requires:	openldap-devel
+%{?with_ldap:Requires:	openldap-devel}
 Requires:	openssl-devel >= 0.9.7
 Obsoletes:	evolution2-devel
 
@@ -184,7 +187,8 @@ cd ..
 %configure \
 	--enable-gtk-doc \
 	--enable-pilot-conduits=yes \
-	--with-openldap=yes \
+	%{?with_ldap:--with-openldap=yes} \
+	%{!?with_ldap:--with-openldap=no} \
 	--without-static-ldap \
 	--enable-nntp=no \
 	--enable-file-locking=fcntl --enable-dot-locking=no \
