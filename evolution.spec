@@ -15,7 +15,7 @@ BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.5.1
 BuildRequires:  gnome-vfs-devel >= 0.4.2
 BuildRequires:	gnome-print-devel >= 0.20
-BuildRequires:	gnome-libs-devel
+BuildRequires:	gnome-libs-devel >= 1.2.9
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel > 1.2.0
 BuildRequires:	gal-devel >= 0.5
@@ -74,7 +74,7 @@ Pakiet zawiera statyczne biblioteki Evolution.
 %build
 gettextize --copy --force
 automake -a -c
-aclocal -I macros
+#aclocal -I macros
 autoconf
 %configure
 %{__make}
@@ -105,20 +105,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oafinfo
-%{_datadir}/gnome/apps/Applications/*.desktop
-%{_datadir}/gnome/html/*
+%{_datadir}/gnome/html
 %{_datadir}/gnome/ui
+%{_datadir}/gnome/apps
 %{_datadir}/images/evolution
-%{_pixmapsdir}/*
 %{_datadir}/mime-info/*
+%{_pixmapsdir}/*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/*.la
 %attr(755,root,root) %{_libdir}/*.so
-%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so
 %attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.la
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so
+%{_includedir}/*.h
+%{_includedir}/camel/*.h
+%{_includedir}/ename/*.h
+%{_includedir}/evolution
+%{_includedir}/libicalvcal
 %{_datadir}/idl/*.idl
 
 %files static
