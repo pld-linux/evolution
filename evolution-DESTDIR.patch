@@ -1,0 +1,33 @@
+--- ./doc/devel/calendar/cal-client/Makefile.am.orig	Sat Jul 14 16:23:42 2001
++++ ./doc/devel/calendar/cal-client/Makefile.am	Sat Jul 14 16:24:22 2001
+@@ -118,7 +118,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do		  \
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR); \
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR); \
+ 	done
+ 
+ dist-hook:
+--- ./doc/devel/calendar/cal-util/Makefile.am.orig	Sat Jul 14 16:24:46 2001
++++ ./doc/devel/calendar/cal-util/Makefile.am	Sat Jul 14 16:25:30 2001
+@@ -129,7 +129,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do		\
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR);		\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR);		\
+ 	done
+ 
+ dist-hook:
+--- ./doc/devel/executive-summary/Makefile.am.orig	Sat Jul 14 16:25:49 2001
++++ ./doc/devel/executive-summary/Makefile.am	Sat Jul 14 16:26:10 2001
+@@ -112,7 +112,7 @@
+ install-data-local:
+ 	$(mkinstalldirs) $(DOC_DIR)
+ 	for i in $(DOC_DIR_INSTALL_FILES); do			\
+-		$(INSTALL_DATA) $(srcdir)/$$i $(DOC_DIR);	\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(DOC_DIR);	\
+ 	done
+ 
+ dist-hook:
