@@ -169,7 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc *.gz
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/evolution/*/*/*.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
 %attr(755,root,root) %{_libdir}/*.so.*.*.*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/*
