@@ -145,9 +145,8 @@ This package contains conduits needed by gnome-pilot to synchronize
 your Palm with Evolution.
 
 %description pilot -l pl
-Ten pakiet zawira dodatki do synchronizacji danych Evolution z twoim
-Palm'em
-
+Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
+Palmem.
 
 %prep
 %setup -q
@@ -198,7 +197,7 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang %{name} --with-gnome --all-name
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
