@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	6
+%define		subver	6.2
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -17,11 +17,11 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	2
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	59bbcb9c9e90e3c2f978b94664498d73
+# Source0-md5:	b6a16cfd84808d037772840ad4cbce94
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-debugreg.patch
