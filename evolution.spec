@@ -9,7 +9,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	7
+%define		subver	8
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -17,36 +17,35 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	3
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	a553123fb726360a853f32fd1003ef3b
+# Source0-md5:	a09ca19c5d2bbe332c2bd493b1e9328b
 Patch0:		%{name}-locale-names.patch
 Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-schemas.patch
-Patch3:		%{name}-gcc34.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	GConf2-devel >= 2.6.0
-BuildRequires:	ORBit2-devel >= 1:2.10.0
+BuildRequires:	GConf2-devel >= 2.6.1
+BuildRequires:	ORBit2-devel >= 1:2.10.2
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.92
+BuildRequires:	evolution-data-server-devel >= 0.0.93
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.8
+BuildRequires:	gal-devel >= 1:2.1.9
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
-BuildRequires:	gnome-vfs2-devel >= 2.6.0
+BuildRequires:	gnome-vfs2-devel >= 2.6.1.1
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.12
+BuildRequires:	gtkhtml-devel >= 3.1.14
 BuildRequires:	intltool >= 0.30
-BuildRequires:	libglade2-devel >= 1:2.3.6
-BuildRequires:	libgnomeprintui-devel >= 2.6.0
-BuildRequires:	libgnomeui-devel >= 2.6.0
-BuildRequires:	libsoup-devel >= 2.1.9
+BuildRequires:	libglade2-devel >= 1:2.4.0
+BuildRequires:	libgnomeprintui-devel >= 2.6.1
+BuildRequires:	libgnomeui-devel >= 2.6.1.1
+BuildRequires:	libsoup-devel >= 2.1.10
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
@@ -63,12 +62,12 @@ Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	%{name}-component = %{version}-%{release}
-Requires:	GConf2 >= 2.6.0
+Requires:	GConf2 >= 2.6.1
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 0.0.92
-Requires:	gal >= 1:2.1.8
-Requires:	gtkhtml >= 3.1.12
-Requires:	libglade2 >= 1:2.3.6
+Requires:	evolution-data-server >= 0.0.93
+Requires:	gal >= 1:2.1.9
+Requires:	gtkhtml >= 3.1.14
+Requires:	libglade2 >= 1:2.4.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
 Obsoletes:	evolution2
@@ -97,13 +96,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.1.8
-Requires:	gnome-vfs2-devel >= 2.6.0
-Requires:	gtkhtml-devel >= 3.1.12
-Requires:	libglade2-devel >= 1:2.3.6
-Requires:	libgnomeprintui-devel >= 2.6.0
-Requires:	libgnomeui-devel >= 2.6.0
-Requires:	libsoup-devel >= 2.1.9
+Requires:	gal-devel >= 1:2.1.9
+Requires:	gnome-vfs2-devel >= 2.6.1.1
+Requires:	gtkhtml-devel >= 3.1.14
+Requires:	libglade2-devel >= 1:2.4.0
+Requires:	libgnomeprintui-devel >= 2.6.1
+Requires:	libgnomeui-devel >= 2.6.1.1
+Requires:	libsoup-devel >= 2.1.10
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
@@ -206,7 +205,6 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 mv po/{no,nb}.po
 
@@ -235,6 +233,8 @@ intltoolize --copy --force
 	--with-html-dir=%{_gtkdocdir} \
 	--with-kde-applnk-path=no \
 	--disable-schemas-install \
+	--enable-nss=yes \
+	--enable-smime=yes \
 	--enable-static
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
@@ -320,6 +320,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{mver}/*.xml
 %dir %{_datadir}/evolution/%{mver}/default
 %dir %{_datadir}/evolution/%{mver}/default/C
+%{_datadir}/evolution/%{mver}/errors
 %{_datadir}/evolution/%{mver}/etspec
 %{_datadir}/evolution/%{mver}/glade
 %{_datadir}/evolution/%{mver}/help
