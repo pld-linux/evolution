@@ -1,5 +1,5 @@
 %define		mver		1.4
-%define		subver	3
+%define		subver	4
 %define		_db3ver	3.1.17
 %define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db3-headers-%{_db3ver}
 
@@ -9,11 +9,11 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	2
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	4cfed9d2f6a5a7ae71caa8f68494a15a
+# Source0-md5:	5a109e2b17f2b69d36526057412e9c52
 Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
 # Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
 Patch0:		%{name}-nostaticdb3.patch
@@ -28,13 +28,13 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:1.99.8-2
+BuildRequires:	gal-devel >= 1:1.99.9
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 Buildrequires:	gtk-doc >= 0.6
-BuildRequires:	gtkhtml-devel >= 3.0.7-2
+BuildRequires:	gtkhtml-devel >= 3.0.8
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libbonoboui-devel >= 2.3.3-2
 BuildRequires:	libglade2-devel
@@ -59,8 +59,8 @@ Requires(post):		GConf2
 Requires:	GConf2
 Requires:	bonobo-activation
 Requires:	db3 = %{_db3ver}
-Requires:	gal >= 1:1.99.8-2
-Requires:	gtkhtml >= 3.0.7-2
+Requires:	gal >= 1:1.99.9
+Requires:	gtkhtml >= 3.0.8
 Requires:	libglade2
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -90,9 +90,9 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:1.99.8-2
+Requires:	gal-devel >= 1:1.99.9
 Requires:	gnome-vfs2-devel
-Requires:	gtkhtml-devel >= 3.0.7-2
+Requires:	gtkhtml-devel >= 3.0.8
 Requires:	libglade2-devel
 Requires:	libgnomeprintui-devel >= 2.2.1
 Requires:	libgnomeui-devel >= 2.3.3.1-2
