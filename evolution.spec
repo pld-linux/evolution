@@ -323,7 +323,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/*
 %dir %{_libdir}/evolution/*/components
-%dir %{_libdir}/evolution/*/conduits
 %{_libdir}/bonobo/servers/GNOME_Evolution_Shell_*.server
 %dir %{_datadir}/idl/evolution-*
 %dir %{_datadir}/evolution
@@ -413,6 +412,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with pilot}
 %files pilot
 %defattr(644,root,root,755)
+%dir %{_libdir}/evolution/*/conduits
 %attr(755,root,root) %{_libdir}/evolution/*/conduits/*
 %{_datadir}/gnome-pilot/conduits/*
 %endif
