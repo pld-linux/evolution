@@ -1,9 +1,10 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
+Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	1.0.4
-Release:	0.1
+Version:	1.0.5
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.bz2
@@ -70,6 +71,7 @@ ferramentas interessantes.
 Summary:	Header files for evolution
 Summary(pl):	Pliki nag丑wkowe i dokumentacja
 Summary(pt_BR):	Bibliotecas e arquivos de inclus鉶 para desenvolvimento
+Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
