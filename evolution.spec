@@ -41,7 +41,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:1.99.9
+BuildRequires:	gal-devel >= 1:1.99.11
 BuildRequires:	gcc-g77
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
@@ -71,7 +71,7 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	GConf2
 Requires:	bonobo-activation
-Requires:	gal >= 1:1.99.9
+Requires:	gal >= 1:1.99.11
 Requires:	gtkhtml >= 3.0.8
 Requires:	libglade2
 Requires:	psmisc
