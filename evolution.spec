@@ -12,7 +12,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	4
+%define		subver	5
 %define		snap		20031227
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
@@ -25,36 +25,36 @@ Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ad3a511525d169f9994ccbc2c00bde89
+# Source0-md5:	451dce3d4568cd208873e88281605de1
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 Patch0:		%{name}-locale-names.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.5.0
-BuildRequires:	ORBit2-devel >= 2.9.0
+BuildRequires:	ORBit2-devel >= 2.9.8
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 0.0.7-2
+BuildRequires:	evolution-data-server-devel >= 0.0.90
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.5
+BuildRequires:	gal-devel >= 1:2.1.6
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel >= 2.5.6
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.8
+BuildRequires:	gtkhtml-devel >= 3.1.9
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 2.3.0
 BuildRequires:	libgnomeprintui-devel >= 2.5.0
 BuildRequires:	libgnomeui-devel >= 2.5.0
-BuildRequires:	libsoup-devel >= 2.1.7
+BuildRequires:	libsoup-devel >= 2.1.8
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
-BuildRequires:	openssl-devel >= 0.9.7c
+#BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
@@ -65,12 +65,12 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	GConf2 >= 2.5.0
 Requires:	bonobo-activation
-Requires:	gal >= 2.1.5
-Requires:	gtkhtml >= 3.1.8
+Requires:	gal >= 2.1.6
+Requires:	gtkhtml >= 3.1.9
 Requires:	libglade2 >= 2.3.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
-Requires:	evolution-data-server >= 0.0.7-2
+Requires:	evolution-data-server >= 0.0.90
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -97,17 +97,17 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 2.1.5
+Requires:	gal-devel >= 2.1.6
 Requires:	gnome-vfs2-devel >= 2.5.6
-Requires:	gtkhtml-devel >= 3.1.8
+Requires:	gtkhtml-devel >= 3.1.9
 Requires:	libglade2-devel >= 2.3.0
 Requires:	libgnomeprintui-devel >= 2.5.0
 Requires:	libgnomeui-devel >= 2.5.0
-Requires:	libsoup-devel >= 2.1.7
+Requires:	libsoup-devel >= 2.1.8
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
-Requires:	openssl-devel >= 0.9.7c
+#Requires:	openssl-devel >= 0.9.7c
 Obsoletes:	evolution2-devel
 
 %description devel
@@ -207,7 +207,8 @@ intltoolize --copy --force
 	%{!?with_ldap:--with-openldap=no} \
 	--without-static-ldap \
 	--enable-nntp=yes \
-	--enable-file-locking=fcntl --enable-dot-locking=no \
+	--enable-file-locking=fcntl \
+	--enable-dot-locking=no \
 	--with-nspr-includes="%{_includedir}/nspr" \
 	--with-nss-includes="%{_includedir}/nss" \
 	--with-nspr-libs="%{_libdir}" \
@@ -336,11 +337,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/evolution/%{mver}/camel*
 %dir %{_libdir}/evolution/%{mver}/evolution-calendar-importers
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-mail-importers.so*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/camel/*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-mail.so
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/camel-providers/*.so
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-calendar-importers/*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_1.5.server
+%{_libdir}/bonobo/servers/GNOME_Evolution_Mail_Importers_1.5.server
 %{_libdir}/evolution/%{mver}/camel-providers/*.urls
 %{_datadir}/evolution/%{mver}/views/mail*
 %{_datadir}/evolution/%{mver}/default/C/mail
@@ -350,7 +353,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files addressbook
 %defattr(644,root,root,755)
+%dir %{_libdir}/evolution/%{mver}/evolution-addressbook-importers
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-addressbook.so
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-importers/lib*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 %{_datadir}/evolution/%{mver}/views/addressbook*
 %{_datadir}/evolution/%{mver}/ecps
