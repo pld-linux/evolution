@@ -16,7 +16,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.2.1.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.2/%{name}-%{version}.tar.bz2
@@ -38,7 +38,7 @@ BuildRequires:	gal-devel >= 1:2.4.1
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.0}
-BuildRequires:	gnome-vfs2-devel >= 2.10.0
+BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	gtkhtml-devel >= 3.6.1
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
@@ -98,7 +98,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
 Requires:	gal-devel >= 1:2.4.1
-Requires:	gnome-vfs2-devel >= 2.10.0
+Requires:	gnome-vfs2-devel >= 2.10.0-2
 Requires:	gtkhtml-devel >= 3.6.1
 Requires:	libglade2-devel >= 1:2.5.1
 Requires:	libgnomeprintui-devel >= 2.10.1
