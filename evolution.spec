@@ -12,7 +12,7 @@
 %bcond_without ldap     # build without ldap support
 
 %define		mver		1.5
-%define		subver	3
+%define		subver	4
 %define		snap		20031227
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
@@ -21,11 +21,11 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	0.1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	c8692b117b6a9e140ea989f52ebf1283
+# Source0-md5:	ad3a511525d169f9994ccbc2c00bde89
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.5.0
@@ -35,23 +35,23 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.1.4
+BuildRequires:	gal-devel >= 1:2.1.5
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
-BuildRequires:	gnome-vfs2-devel >= 2.5.0
+BuildRequires:	gnome-vfs2-devel >= 2.5.6
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.1.7
-BuildRequires:	intltool >= 0.18
+BuildRequires:	gtkhtml-devel >= 3.1.8
+BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 2.3.0
 BuildRequires:	libgnomeprintui-devel >= 2.5.0
 BuildRequires:	libgnomeui-devel >= 2.5.0
-BuildRequires:	libsoup-devel >= 2.1.5
+BuildRequires:	libsoup-devel >= 2.1.6
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	evolution-data-server-devel >= 0.0.6
+BuildRequires:	evolution-data-server-devel >= 0.0.7
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
@@ -64,12 +64,12 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
 Requires:	GConf2 >= 2.5.0
 Requires:	bonobo-activation
-Requires:	gal >= 2.1.4
-Requires:	gtkhtml >= 3.1.7
+Requires:	gal >= 2.1.5
+Requires:	gtkhtml >= 3.1.8
 Requires:	libglade2 >= 2.3.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
-Requires:	evolution-data-server >= 0.0.6
+Requires:	evolution-data-server >= 0.0.7
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -96,13 +96,13 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 2.1.4
-Requires:	gnome-vfs2-devel >= 2.5.0
-Requires:	gtkhtml-devel >= 3.1.7
+Requires:	gal-devel >= 2.1.5
+Requires:	gnome-vfs2-devel >= 2.5.6
+Requires:	gtkhtml-devel >= 3.1.8
 Requires:	libglade2-devel >= 2.3.0
 Requires:	libgnomeprintui-devel >= 2.5.0
 Requires:	libgnomeui-devel >= 2.5.0
-Requires:	libsoup-devel >= 2.1.3
+Requires:	libsoup-devel >= 2.1.6
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
@@ -203,7 +203,7 @@ intltoolize --copy --force
 	%{?with_ldap:--with-openldap=yes} \
 	%{!?with_ldap:--with-openldap=no} \
 	--without-static-ldap \
-	--enable-nntp=no \
+	--enable-nntp=yes \
 	--enable-file-locking=fcntl --enable-dot-locking=no \
 	--with-nspr-includes="%{_includedir}/nspr" \
 	--with-nss-includes="%{_includedir}/nss" \
@@ -211,7 +211,8 @@ intltoolize --copy --force
 	--with-nss-libs="%{_libdir}" \
 	--enable-ipv6=yes \
 	--with-html-dir=%{_gtkdocdir} \
-	--with-kde-applnk-path=no
+	--with-kde-applnk-path=no \
+	--disable-schemas-install
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
 # (required if you use ORBit2-devel 2.7.2)
@@ -227,7 +228,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	KDE_APPLNK_DIR=%{_applnkdir}/Network/Mail \
 	omf_dest_dir=%{_omf_dest_dir}/%{name} \
-	GTKHTML_DATADIR=%{_datadir}/idl
+	GTKHTML_DATADIR=%{_datadir}/idl \
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 # strip doesn't pass these files and they aren't necessary, so remove them
 # probably this should be done differently, but I have no idea
@@ -299,6 +301,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/evolution/%{mver}/default/C
 %{_datadir}/evolution/%{mver}/etspec
 %{_datadir}/evolution/%{mver}/glade
+%{_datadir}/evolution/%{mver}/help
 %{_datadir}/evolution/%{mver}/images
 %{_datadir}/evolution/%{mver}/ui
 %{_datadir}/mime-info/*
