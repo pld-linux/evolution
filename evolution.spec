@@ -6,7 +6,8 @@ Release:	1
 Copyright:	GPL
 Group:		Applications/Mail
 Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{version}.tar.gz
-Patch:		evolution-bonobo.patch
+Patch0:		evolution-bonobo.patch
+Patch1:		evolution-openldap.patch
 URL:		http://www.helixcode.com/aoos/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.31
@@ -66,9 +67,11 @@ Pakiet zawiera statyczne biblioteki Evolution.
 
 %prep
 %setup -q
-%patch -p0
+%patch0 -p0
+%patch1 -p1
 
 %build
+autoconf
 gettextize -c -f
 %configure
 %{__make}
