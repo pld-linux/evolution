@@ -17,6 +17,7 @@ Source0:	http://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}
 Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
 # Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
 Patch0:		%{name}-nostaticdb3.patch
+Patch1:		%{name}-nolibs.patch
 Patch2:		%{name}-configure_in.patch
 Patch3:		%{name}-desktop.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
@@ -149,8 +150,9 @@ Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
 Palmem.
 
 %prep
-%setup -q -a 1
+%setup -q -a1
 %patch0 -p1
+%patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
@@ -164,13 +166,12 @@ intltoolize --copy --force
 %{__autoconf}
 %{__automake}
 cd libical
-# workaround for libtoolize to install ltmain.sh in . not ..
-touch install-sh
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
 %{__autoconf}
-%{__automake}
+# don't use -f here
+automake -a -c --foreign
 cd ..
 %configure \
 	--enable-gtk-doc \
