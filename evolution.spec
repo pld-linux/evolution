@@ -43,7 +43,6 @@ BuildRequires:	libgnomeprintui-devel >= 2.2.1
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libsoup-devel >= 1.99.23
 BuildRequires:	libtool
-BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -97,7 +96,6 @@ Requires:	gtkhtml-devel >= 3.0.7-2
 Requires:	libglade2-devel
 Requires:	libgnomeprintui-devel >= 2.2.1
 Requires:	libgnomeui-devel >= 2.3.3.1-2
-Requires:	libunicode-devel
 Requires:	nspr-devel
 Requires:	nss-devel
 Requires:	openldap-devel
