@@ -1,3 +1,8 @@
+#
+# todo:
+# - remove or make as shared libpcs and libpas (not required or required
+#   by multisync pkg)
+#
 %define		mver		1.4
 %define		subver	4
 %define		_db3ver	3.1.17
