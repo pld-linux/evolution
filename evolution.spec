@@ -90,7 +90,7 @@ Requires:	nspr-devel
 Requires:	nss-devel
 Requires:	oaf-devel
 Requires:	openldap-devel
-Requires:	openssl-devel
+Requires:	openssl-devel >= 0.9.6m
 Requires:	%{name} = %{version}
 
 %description devel
