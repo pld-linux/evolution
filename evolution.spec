@@ -7,13 +7,14 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	ftp://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nostaticdb3.patch
 Patch1:		%{name}-am.patch
 Patch2:		%{name}-omf.patch
+Patch3:		%{name}-libpisock.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf-devel >= 1.0.7
 BuildRequires:	ORBit-devel >= 0.5.8
@@ -133,11 +134,27 @@ Pakiet zawiera statyczne biblioteki Evolution.
 Este pacote cont閙 as bibliotecas est醫icas para desenvolvimento de
 aplica珲es.
 
+%package pilot
+Summary:	Evolution conduits for gnome-pilot
+Summary(pl):	Dodatki do wymiany danych z gnome-pilot
+Group:		Development/Libraries
+Requires:	%{name} = %{version}
+
+%description pilot
+This package contains conduits needed by gnome-pilot to synchronize
+your Palm with Evolution.
+
+%description pilot -l pl
+Ten pakiet zawira dodatki do synchronizacji danych Evolution z twoim
+Palm'em
+
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 sed -e s/AM_GNOME_GETTEXT/AM_GNU_GETTEXT/ configure.in > configure.in.tmp
@@ -152,19 +169,19 @@ xml-i18n-toolize --copy --force
 cd libical
 %{__autoconf}
 cd ..
-CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0"
+CFLAGS="%{rpmcflags} -I/usr/include/orbit-1.0 -I/usr/include"
 %configure \
 	--disable-gtk-doc \
-	--enable-pilot-conduits=no \
+	--enable-pilot-conduits=yes \
 	--with-openldap=yes \
 	--without-static-ldap \
 	--enable-nntp=no \
-	--with-gnome-includes=/usr/X11R6/include/gnome-vfs-1.0/ \
+	--with-gnome-includes=%{_includedir}/gnome-vfs-1.0/ \
 	--enable-file-locking=fcntl --enable-dot-locking=no \
 	--with-nspr-includes="/usr/include/nspr" \
 	--with-nss-includes="/usr/include/nss" \
 	--with-nspr-libs="/usr/lib" \
-	--with-nss-libs="/usr/lib" 
+	--with-nss-libs="/usr/lib"
 %{__make} \
 	GTKHTML_DATADIR=%{_datadir}/idl
 
@@ -181,7 +198,7 @@ rm -rf $RPM_BUILD_ROOT
 %find_lang %{name} --with-gnome --all-name
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
@@ -225,3 +242,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/*.a
 %{_libdir}/evolution/*/*/*.a
+
+%files pilot
+%defattr(644,root,root,755)
+%{_libdir}/gnome-pilot/*
+%{_datadir}/gnome-pilot/*
