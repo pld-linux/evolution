@@ -1,5 +1,5 @@
-%define		mver		1.3
-%define		subver	92
+%define		mver		1.4
+%define		subver	0
 %define		_db3ver	3.1.17
 %define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db3-headers-%{_db3ver}
 
@@ -9,13 +9,13 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/Mail
-# Source0-md5:	c652b5873188d460e38bd73abbf1308f
 Source0:	http://ftp.gnome.org/mirror/gnome.org/sources/evolution/%{mver}/%{name}-%{version}.tar.bz2
-# Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
+# Source0-md5:	cc671769a912e315dc895f5b458e1a33
 Source1:	http://www.t17.ds.pwr.wroc.pl/~wiget/%{name}-db3-headers-%{_db3ver}.tar.bz2
+# Source1-md5:	6e5690aa2f0e5ec3e3bdfeb9106ea42a
 Patch0:		%{name}-nostaticdb3.patch
 Patch2:		%{name}-configure_in.patch
 Patch3:		%{name}-desktop.patch
@@ -27,20 +27,20 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1.99.6
+BuildRequires:	gal-devel >= 1.99.7
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-pilot-devel >= 2.0.0
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 Buildrequires:	gtk-doc >= 0.6
-BuildRequires:	gtkhtml-devel >= 3.0.4
+BuildRequires:	gtkhtml-devel >= 3.0.5
 BuildRequires:	intltool >= 0.18
 BuildRequires:	libbonoboui-devel
 BuildRequires:	libglade2-devel
 BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgnomeprintui-devel >= 2.2.1
 BuildRequires:	libgnomeui-devel
-BuildRequires:	libsoup-devel >= 1.99.22
+BuildRequires:	libsoup-devel >= 1.99.23
 BuildRequires:	libtool
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	libxml2
@@ -188,6 +188,10 @@ cd ..
 	--with-db3-includes=%{_dbdir} \
 	--with-db3-libs=/lib \
 	--with-kde-applnk-path=no
+
+# hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
+# (required if you use ORBit2-devel 2.7.2)
+find -name \*.idl -exec touch {} \;
 
 %{__make} \
 	GTKHTML_DATADIR=%{_datadir}/idl
