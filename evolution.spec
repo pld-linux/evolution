@@ -1,10 +1,15 @@
+#
+# todo:
+# - splitting mail, addressbook and calendar:
+#   - etspec?
+#   - ui?
+#   - dependencies, i.e.: mail should require addressbook?
+#
+# Conditionals:
+%bcond_without ldap     # build without ldap support
 
-%bcond_without ldap
-
-%define		mver		1.4
-%define		subver	6
-%define		_db3ver	3.1.17
-%define		_dbdir	$RPM_BUILD_DIR/%{name}-%{version}/db-%{_db3ver}
+%define		mver		1.5
+%define		subver	5
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -12,54 +17,40 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	1
+Release:	4
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	4138610c027177e6ffe92bdd565128a6
-Source1:	http://www.sleepycat.com/update/snapshot/db-%{_db3ver}.tar.gz
-# Source1-md5:	5baeb94fb934d0bf783ea42117c400be
-Patch0:		%{name}-nolibs.patch
-Patch1:		%{name}-configure_in.patch
-Patch2:		%{name}-desktop.patch
-Patch3:		%{name}-pldify.patch
-Patch4:		%{name}-iconv_flush.patch
-Patch5:		%{name}-div_by_zero.patch
-Patch6:		%{name}-ipv6.patch
-Patch7:		%{name}-ipv6_smtp.patch
-Patch8:		%{name}-timezone_offsets.patch
-Patch9:		%{name}-gethostbyaddr.patch
-Patch10:	%{name}-addrconfig.patch
-Patch11:	%{name}-libpcs_libpas.patch
-Patch12:	%{name}-no-static-in-shared.patch
-Patch13:	%{name}-attachment_require_terminal.patch
+# Source0-md5:	451dce3d4568cd208873e88281605de1
+Patch0:		%{name}-locale-names.patch
+Patch1:		%{name}-nolibs.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	GConf2-devel
-BuildRequires:	ORBit2-devel >= 2.8.0
+BuildRequires:	GConf2-devel >= 2.6.0
+BuildRequires:	ORBit2-devel >= 1:2.10.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
+BuildRequires:	evolution-data-server-devel >= 0.0.90
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:1.99.11
-BuildRequires:	gcc-g77
+BuildRequires:	gal-devel >= 1:2.1.6
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
-BuildRequires:	gnome-vfs2-devel >= 2.4.0
+BuildRequires:	gnome-vfs2-devel >= 2.6.0
 BuildRequires:	gtk-doc >= 1.1
-BuildRequires:	gtkhtml-devel >= 3.0.8
-BuildRequires:	intltool >= 0.18
-BuildRequires:	libglade2-devel
-BuildRequires:	libgnomeprintui-devel >= 2.4.0
-BuildRequires:	libgnomeui-devel >= 2.4.0
-BuildRequires:	libsoup-devel >= 1.99.26-3
+BuildRequires:	gtkhtml-devel >= 3.1.9
+BuildRequires:	intltool >= 0.30
+BuildRequires:	libglade2-devel >= 1:2.3.6
+BuildRequires:	libgnomeprintui-devel >= 2.6.0
+BuildRequires:	libgnomeui-devel >= 2.6.0
+BuildRequires:	libsoup-devel >= 2.1.8
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
-BuildRequires:	openssl-devel >= 0.9.7d
+#BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	pilot-link-devel >= 0.11.4
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
@@ -69,11 +60,12 @@ BuildRequires:	which
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post):		GConf2
-Requires:	GConf2
+Requires:	GConf2 >= 2.6.0
 Requires:	bonobo-activation
-Requires:	gal >= 1:1.99.11
-Requires:	gtkhtml >= 3.0.8
-Requires:	libglade2
+Requires:	evolution-data-server >= 0.0.90
+Requires:	gal >= 1:2.1.6
+Requires:	gtkhtml >= 3.1.9
+Requires:	libglade2 >= 1:2.3.6
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
 Obsoletes:	evolution2
@@ -99,20 +91,20 @@ Summary(pl):	Pliki nag丑wkowe i dokumentacja
 Summary(pt_BR):	Bibliotecas e arquivos de inclus鉶 para desenvolvimento
 Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:1.99.9
-Requires:	gnome-vfs2-devel >= 2.4.0
-Requires:	gtkhtml-devel >= 3.0.8
-Requires:	libglade2-devel >= 2.0.1
-Requires:	libgnomeprintui-devel >= 2.4.0
-Requires:	libgnomeui-devel >= 2.4.0
-Requires:	libsoup-devel >= 1.99.23
+Requires:	gal-devel >= 1:2.1.6
+Requires:	gnome-vfs2-devel >= 2.6.0
+Requires:	gtkhtml-devel >= 3.1.9
+Requires:	libglade2-devel >= 1:2.3.6
+Requires:	libgnomeprintui-devel >= 2.6.0
+Requires:	libgnomeui-devel >= 2.6.0
+Requires:	libsoup-devel >= 2.1.8
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
-Requires:	openssl-devel >= 0.9.7c
+#Requires:	openssl-devel >= 0.9.7c
 Obsoletes:	evolution2-devel
 
 %description devel
@@ -132,7 +124,7 @@ Summary:	Static libraries for evolution
 Summary(pl):	Biblioteki statyczne dla evolution
 Summary(pt_BR):	Bibliotecas est醫icas para desenvolvimento
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	evolution2-static
 
 %description static
@@ -145,48 +137,59 @@ Pakiet zawiera statyczne biblioteki Evolution.
 Este pacote cont閙 as bibliotecas est醫icas para desenvolvimento de
 aplica珲es.
 
+%package mail
+Summary:	Evolution mail component
+Group:		X11/Applications
+# mail composer requires addressbook component
+Requires:	%{name}-addressbook = %{version}-%{release}
+Requires(post,postun):	/sbin/ldconfig
+Requires(post):		GConf2
+
+%description mail
+Evolution mail.
+
+%package addressbook
+Summary:	Evolution addressbook component
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires(post,postun):	/sbin/ldconfig
+Requires(post):		GConf2
+
+%description addressbook
+Evolution addressbook.
+
+%package calendar
+Summary:	Evolution calendar and todo component
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires(post,postun):	/sbin/ldconfig
+Requires(post):		GConf2
+
+%description calendar
+Evolution calendar and todo component.
+
 %package pilot
 Summary:	Evolution conduits for gnome-pilot
 Summary(pl):	Dodatki do wymiany danych z gnome-pilot
-Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	evolution2-pilot
 
 %description pilot
-This package contains conduits needed by gnome-pilot to synchronize
-your Palm with Evolution.
+This package contains conduits needed by gnome-pilot to synchronize your
+Palm with Evolution.
 
 %description pilot -l pl
-Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
-Palmem.
+Ten pakiet zawiera dodatki do synchronizacji danych Evolution z Palmem.
 
 %prep
-%setup -q -a1
+%setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-#%patch4 -p0
-#%patch5 -p0
-#%patch6 -p0
-#%patch7 -p0
-#%patch8 -p0
-#%patch9 -p1
-#%patch10 -p0
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
+
+mv po/{no,nb}.po
 
 %build
-# first build db3 (only static, C interface)
-cd %{_dbdir}/build_unix
-CFLAGS="%{rpmcflags}" \
-../dist/configure \
-	--prefix=%{_prefix} \
-	--enable-static
-%{__make}
-cd $RPM_BUILD_DIR/%{name}-%{version}
-
 # build evolution
 glib-gettextize --copy --force
 intltoolize --copy --force
@@ -195,31 +198,24 @@ intltoolize --copy --force
 %{__autoheader}
 %{__autoconf}
 %{__automake}
-cd libical
-%{__libtoolize}
-%{__aclocal}
-%{__autoheader}
-%{__autoconf}
-# don't use -f here
-automake -a -c --foreign
-cd ..
 %configure \
 	--enable-gtk-doc \
 	--enable-pilot-conduits=yes \
 	%{?with_ldap:--with-openldap=yes} \
 	%{!?with_ldap:--with-openldap=no} \
 	--without-static-ldap \
-	--enable-nntp=no \
-	--enable-file-locking=fcntl --enable-dot-locking=no \
+	--enable-nntp=yes \
+	--enable-file-locking=fcntl \
+	--enable-dot-locking=no \
 	--with-nspr-includes="%{_includedir}/nspr" \
 	--with-nss-includes="%{_includedir}/nss" \
 	--with-nspr-libs="%{_libdir}" \
 	--with-nss-libs="%{_libdir}" \
 	--enable-ipv6=yes \
 	--with-html-dir=%{_gtkdocdir} \
-	--with-db3-includes=%{_dbdir}/build_unix \
-	--with-db3-libs=%{_dbdir}/build_unix \
-	--with-kde-applnk-path=no
+	--with-kde-applnk-path=no \
+	--disable-schemas-install \
+	--enable-static
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
 # (required if you use ORBit2-devel 2.7.2)
@@ -235,7 +231,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	KDE_APPLNK_DIR=%{_applnkdir}/Network/Mail \
 	omf_dest_dir=%{_omf_dest_dir}/%{name} \
-	GTKHTML_DATADIR=%{_datadir}/idl
+	GTKHTML_DATADIR=%{_datadir}/idl \
+	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 # strip doesn't pass these files and they aren't necessary, so remove them
 # probably this should be done differently, but I have no idea
@@ -243,7 +240,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/*/*.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/%{mver}/libemiscwidgets.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 
-%find_lang evolution-1.4 --with-gnome
+%find_lang %{name} --all-name --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -257,47 +254,71 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 /usr/bin/scrollkeeper-update
 
-%files -f evolution-1.4.lang
+%post mail
+/sbin/ldconfig
+%gconf_schema_install
+
+%postun mail
+/sbin/ldconfig
+
+%post addressbook
+/sbin/ldconfig
+%gconf_schema_install
+
+%postun addressbook
+/sbin/ldconfig
+
+%post calendar
+/sbin/ldconfig
+%gconf_schema_install
+
+%postun calendar
+/sbin/ldconfig
+
+%files -f evolution.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS* README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/evolution/*/*/*.so*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/*.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/camel/*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeconduit.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libemiscwidgets.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeselectnames.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeshell.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libeutil.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-importer.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-widgets-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-alarm-notify
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-ldif-importer
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-vcard-importer
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-wombat
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-clean
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-import
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/csv2vcard
 %attr(755,root,root) %{_libdir}/evolution/%{mver}/killev
-%attr(755,root,root) %{_libdir}/evolution/%{mver}/load-*
+# addressbook requires it:
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libcamel*.so.*
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{mver}
-%dir %{_libdir}/evolution/%{mver}/camel*
 %dir %{_libdir}/evolution/%{mver}/components
-%dir %{_libdir}/evolution/%{mver}/evolution-mail-importers
-%{_libdir}/bonobo/servers/*
-%{_libdir}/evolution/%{mver}/camel-providers/*.urls
+%{_libdir}/bonobo/servers/GNOME_Evolution_Shell_1.5.server
+%dir %{_datadir}/idl/evolution-%{mver}
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/%{mver}
+%dir %{_datadir}/evolution/%{mver}/views
 %{_datadir}/evolution/%{mver}/*.xml
-%{_datadir}/evolution/%{mver}/*.schema
-%{_datadir}/evolution/%{mver}/Locations
-%{_datadir}/evolution/%{mver}/default_user
-%{_datadir}/evolution/%{mver}/ecps
+%dir %{_datadir}/evolution/%{mver}/default
+%dir %{_datadir}/evolution/%{mver}/default/C
 %{_datadir}/evolution/%{mver}/etspec
 %{_datadir}/evolution/%{mver}/glade
+%{_datadir}/evolution/%{mver}/help
 %{_datadir}/evolution/%{mver}/images
 %{_datadir}/evolution/%{mver}/ui
-%{_datadir}/evolution/%{mver}/views
-%{_datadir}/evolution/%{mver}/zoneinfo
 %{_datadir}/mime-info/*
-%{_datadir}/idl/*
+%{_datadir}/idl/evolution-%{mver}/Evolution-Component.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution-ConfigControl.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution-Offline.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution-Shell.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution-Wizard.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution-common.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution.idl
+%{_datadir}/idl/evolution-%{mver}/GNOME_Evolution_Importer.idl
 %{_desktopdir}/*
 %{_pixmapsdir}/*
-%{_sysconfdir}/gconf/schemas/*
+%{_sysconfdir}/gconf/schemas/apps_evolution_shell-1.5.schemas
 %{_omf_dest_dir}/%{name}
 
 %files devel
@@ -312,7 +333,46 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/evolution/%{mver}/*.a
 
+%files mail
+%defattr(644,root,root,755)
+%dir %{_libdir}/evolution/%{mver}/camel*
+%dir %{_libdir}/evolution/%{mver}/evolution-calendar-importers
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-mail-importers.so*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/camel/*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-mail.so
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/camel-providers/*.so
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-calendar-importers/*.so
+%{_libdir}/bonobo/servers/GNOME_Evolution_Mail_1.5.server
+%{_libdir}/bonobo/servers/GNOME_Evolution_Mail_Importers_1.5.server
+%{_libdir}/evolution/%{mver}/camel-providers/*.urls
+%{_datadir}/evolution/%{mver}/views/mail*
+%{_datadir}/evolution/%{mver}/default/C/mail
+%{_datadir}/idl/evolution-%{mver}/Composer.idl
+%{_datadir}/idl/evolution-%{mver}/Evolution-Composer.idl
+%{_sysconfdir}/gconf/schemas/evolution-mail-1.5.schemas
+
+%files addressbook
+%defattr(644,root,root,755)
+%dir %{_libdir}/evolution/%{mver}/evolution-addressbook-importers
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-addressbook.so
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/evolution-addressbook-importers/lib*.so
+%{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
+%{_datadir}/evolution/%{mver}/views/addressbook*
+%{_datadir}/evolution/%{mver}/ecps
+%{_datadir}/idl/evolution-%{mver}/Evolution-Addressbook-SelectNames.idl
+%{_sysconfdir}/gconf/schemas/apps_evolution_addressbook-1.5.schemas
+
+%files calendar
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/components/libevolution-calendar.so
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/libevolution-calendar-a11y.so.*
+%{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
+%{_datadir}/evolution/%{mver}/views/calendar*
+%{_datadir}/evolution/%{mver}/views/tasks*
+%{_datadir}/idl/evolution-%{mver}/evolution-calendar.idl
+%{_sysconfdir}/gconf/schemas/apps_evolution_calendar-1.5.schemas
+
 %files pilot
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/gnome-pilot/conduits/*
+%attr(755,root,root) %{_libdir}/evolution/%{mver}/conduits/*
 %{_datadir}/gnome-pilot/conduits/*
