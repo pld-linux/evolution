@@ -6,9 +6,6 @@ Version:	1.0.2
 Release:	1
 License:	GPL
 Group:		Applications/Mail
-Group(de):	Applikationen/Post
-Group(pl):	Aplikacje/Poczta
-Group(pt):	AplicaГУes/Correio EletrТnico
 Source0:	ftp://ftp.gnome.org/pub/gnome/stable/sources/evolution/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nostaticdb3.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
@@ -74,13 +71,6 @@ Summary:	Header files for evolution
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja
 Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolvimento
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
 Requires:	gal-devel
@@ -115,13 +105,6 @@ Summary:	Static libraries for evolution
 Summary(pl):	Biblioteki statyczne dla evolution
 Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description static
