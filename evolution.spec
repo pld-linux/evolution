@@ -1,7 +1,7 @@
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Name:		evolution
-Version: 	0.6
+Version: 	0.8
 Release:	1
 Copyright:	GPL
 Group:		Applications/Mail
@@ -9,12 +9,12 @@ Source: 	ftp://ftp.gnome.org/pub/GNOME/unstable/sources/%{name}/%{name}-%{versio
 URL:		http://www.helixcode.com/aoos/evolution.php3
 BuildRequires:	libxml-devel >= 1.8.7
 BuildRequires:	bonobo-devel >= 0.20
-BuildRequires:	gtkhtml-devel >= 0.6.1
+BuildRequires:	gtkhtml-devel >= 0.8-2
 BuildRequires:	libunicode-devel >= 0.4
 BuildRequires:	oaf-devel >= 0.5.1
 BuildRequires:  gnome-vfs-devel >= 0.3.1
 BuildRequires:	gnome-print-devel >= 0.20
-BuildRequires:	gnome-libs
+BuildRequires:	gnome-libs-devel
 BuildRequires:	gdk-pixbuf-devel >= 0.8
 BuildRequires:	gtk+-devel > 1.2.0
 BuildRequires:	gal-devel >= 0.2.1
@@ -91,25 +91,24 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/evolution/camel-providers/*/*.so*
+%attr(755,root,root) %{_libdir}/*.so*
+%{_libdir}/evolution/camel-providers/*/*.urls
 %{_datadir}/evolution
 %{_datadir}/oaf/*.oafinfo
 %{_datadir}/idl/*.idl
-%{_datadir}/gnome/help/evolution
 %{_datadir}/gnome/apps/Applications/*.desktop
+%{_datadir}/gnome/html
+%{_datadir}/gnome/ui
 %{_datadir}/images/evolution
-%{_datadir}/locale/*
 %{_datadir}/pixmaps/*
 %{_datadir}/mime-info/*
-%{_bindir}/*
-%{_libdir}/evolution/camel-providers/*/*.so*
-%{_libdir}/evolution/camel-providers/*/*.urls
-%{_libdir}/*.so.*
 
 %files devel
 %defattr(644,root,root,755)
+%{_libdir}/*.la
 %{_includedir}/*
-%{_libdir}/*.so
-%{_libdir}/evolution/camel-providers/*/*.so
 
 %files static
 %defattr(644,root,root,755)
