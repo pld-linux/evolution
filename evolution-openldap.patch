@@ -1,0 +1,27 @@
+diff -urN evolution-0.8.org/configure.in evolution-0.8/configure.in
+--- evolution-0.8.org/configure.in	Thu Jan 18 08:16:31 2001
++++ evolution-0.8/configure.in	Thu Jan 18 18:08:42 2001
+@@ -147,19 +147,10 @@
+ dnl **************************************************
+ dnl * ldap related stuff.
+ dnl **************************************************
+-AC_CHECK_LIB(lber, ber_get_tag, LDAP_LIBS="-llber")
+-if test x$ac_cv_lib_lber_ber_get_tag = xyes; then
+-AC_CHECK_LIB(ldap, ldap_open, LDAP_LIBS="-lldap $LDAP_LIBS", ,-llber)
+-fi
+-if test x$ac_cv_lib_ldap_ldap_open = xyes; then
+-	AC_DEFINE(HAVE_LDAP)
+-	AC_SUBST(LDAP_LIBS)
+-	msg_ldap=Yes
+-else
+-	AC_MSG_WARN(no ldap support present)
+-	msg_ldap=No
+-fi
+-AM_CONDITIONAL(ENABLE_LDAP, test x$ac_cv_lib_ldap_ldap_open = xyes)
++LDAP_LIBS=""
++AC_SUBST(LDAP_LIBS)
++msg_ldap=No
++AM_CONDITIONAL(ENABLE_LDAP, test xno = xyes)
+ 
+ dnl **************************************************
+ dnl * Posix thread support
