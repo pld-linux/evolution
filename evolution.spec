@@ -13,6 +13,7 @@
 
 %define		mver		1.5
 %define		subver	5
+%define		snap		20031227
 
 Summary:	The GNOME2 Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
@@ -20,14 +21,15 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}
-Release:	1.2
+Release:	1.%{snap}.1
 License:	GPL
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
-# Source0-md5:	cc820ffb5c9e91ad79d94e700262c418
+Source0:	%{name}-%{version}-%{snap}.tar.bz2
+# Source0-md5:	bd57771715162ddde879c4e1ac2f2ba2
+#Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel
-BuildRequires:	ORBit2-devel >= 2.8.0
+BuildRequires:	ORBit2-devel >= 2.9.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
@@ -37,13 +39,13 @@ BuildRequires:	gal-devel >= 2.1.1
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common
 BuildRequires:	gnome-pilot-devel >= 2.0.0
-BuildRequires:	gnome-vfs2-devel >= 2.4.0
+BuildRequires:	gnome-vfs2-devel >= 2.5.0
 BuildRequires:	gtk-doc >= 1.1
 BuildRequires:	gtkhtml-devel >= 3.1.4
 BuildRequires:	intltool >= 0.18
-BuildRequires:	libglade2-devel
-BuildRequires:	libgnomeprintui-devel >= 2.4.0
-BuildRequires:	libgnomeui-devel >= 2.4.0
+BuildRequires:	libglade2-devel >= 2.3.0
+BuildRequires:	libgnomeprintui-devel >= 2.5.0
+BuildRequires:	libgnomeui-devel >= 2.5.0
 BuildRequires:	libsoup-devel >= 2.1.2
 BuildRequires:	libtool
 BuildRequires:	libxml2
@@ -71,6 +73,8 @@ Requires:	evolution-data-server >= 0.0.3
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define	no_install_post_chrpath	1
+
 %description
 Evolution is the GNOME2 mailer, calendar, contact manager and
 communications tool. The tools which make up Evolution will be tightly
@@ -95,11 +99,11 @@ Requires:	%{name} = %{version}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
 Requires:	gal-devel >= 2.1.1
-Requires:	gnome-vfs2-devel >= 2.4.0
+Requires:	gnome-vfs2-devel >= 2.5.0
 Requires:	gtkhtml-devel >= 3.1.4
-Requires:	libglade2-devel >= 2.0.1
-Requires:	libgnomeprintui-devel >= 2.4.0
-Requires:	libgnomeui-devel >= 2.4.0
+Requires:	libglade2-devel >= 2.3.0
+Requires:	libgnomeprintui-devel >= 2.5.0
+Requires:	libgnomeui-devel >= 2.5.0
 Requires:	libsoup-devel >= 2.1.2
 Requires:	nspr-devel
 Requires:	nss-devel
@@ -186,7 +190,7 @@ Ten pakiet zawiera dodatki do synchronizacji danych Evolution z Palmem.
 %setup -q
 
 %build
-
+cp %{_datadir}/automake/mkinstalldirs ./
 # build evolution
 glib-gettextize --copy --force
 intltoolize --copy --force
