@@ -1,14 +1,7 @@
-diff -uNr evolution-1.2.2.orig/acinclude.m4 evolution-1.2.2/acinclude.m4
---- evolution-1.2.2.orig/acinclude.m4	Sat Dec 20 22:27:52 2003
-+++ evolution-1.2.2/acinclude.m4	Sun Dec 21 01:22:23 2003
-@@ -163,4 +163,281 @@
- 		AC_SUBST(LDAP_LIBS)
- 	fi
- 	AM_CONDITIONAL(ENABLE_LDAP, test $with_openldap != no)
--])
-\ No newline at end of file
-+])
-+
+diff -uNr evolution-1.0.8.orig/acinclude.m4 evolution-1.0.8/acinclude.m4
+--- evolution-1.0.8.orig/acinclude.m4	Sat Dec 20 22:27:52 2003
++++ evolution-1.0.8/acinclude.m4	Sun Dec 21 01:22:23 2003
+@@ -0,0 +0,276 @@
 +AC_DEFUN(XML_I18N_TOOLS_NEWER_THAN_0_9,[ true ])
 +
 +dnl AC_PROG_XML_I18N_TOOLS([MINIMUM-VERSION [,"G2" if always using --utf8] ])
@@ -285,16 +278,15 @@ diff -uNr evolution-1.2.2.orig/acinclude.m4 evolution-1.2.2/acinclude.m4
 +  AC_SUBST(ESD_LIBS)
 +  rm -f conf.esdtest
 +])
-diff -uNr evolution-1.2.2.orig/data/evolution.desktop.in evolution-1.2.2/data/evolution.desktop.in
---- evolution-1.2.2.orig/data/evolution.desktop.in	Fri Jun 28 21:21:25 2002
-+++ evolution-1.2.2/data/evolution.desktop.in	Sun Dec 21 01:21:09 2003
-@@ -3,6 +3,8 @@
+diff -uNr evolution-1.0.8.orig/data/evolution.desktop.in evolution-1.0.8/data/evolution.desktop.in
+--- evolution-1.0.8.orig/data/evolution.desktop.in	Fri Jun 28 21:21:25 2002
++++ evolution-1.0.8/data/evolution.desktop.in	Sun Dec 21 01:21:09 2003
+@@ -3,5 +3,7 @@
  _Comment=The Evolution groupware suite
  Exec=evolution
  Icon=evolution.png
 -Terminal=0
 +Terminal=false
  Type=Application
- Categories=Application;Calendar;Office
 +Encoding=UTF-8
 +# vi: encoding=utf-8
