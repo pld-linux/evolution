@@ -21,18 +21,20 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	%{mver}.%{subver}
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/%{name}/%{mver}/%{name}-%{version}.tar.bz2
 # Source0-md5:	ad3a511525d169f9994ccbc2c00bde89
 #Source0:	%{name}-%{version}-%{snap}.tar.bz2
+Patch0:		%{name}-locale-names.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.5.0
 BuildRequires:	ORBit2-devel >= 2.9.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
+BuildRequires:	evolution-data-server-devel >= 0.0.7-2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:2.1.5
@@ -46,12 +48,11 @@ BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 2.3.0
 BuildRequires:	libgnomeprintui-devel >= 2.5.0
 BuildRequires:	libgnomeui-devel >= 2.5.0
-BuildRequires:	libsoup-devel >= 2.1.6
+BuildRequires:	libsoup-devel >= 2.1.7
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-BuildRequires:	evolution-data-server-devel >= 0.0.7
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
 BuildRequires:	openssl-devel >= 0.9.7c
 BuildRequires:	pilot-link-devel >= 0.11.4
@@ -69,7 +70,7 @@ Requires:	gtkhtml >= 3.1.8
 Requires:	libglade2 >= 2.3.0
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
-Requires:	evolution-data-server >= 0.0.7
+Requires:	evolution-data-server >= 0.0.7-2
 Obsoletes:	evolution2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -93,7 +94,7 @@ Summary(pl):	Pliki nag丑wkowe i dokumentacja
 Summary(pt_BR):	Bibliotecas e arquivos de inclus鉶 para desenvolvimento
 Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
 Requires:	gal-devel >= 2.1.5
@@ -102,7 +103,7 @@ Requires:	gtkhtml-devel >= 3.1.8
 Requires:	libglade2-devel >= 2.3.0
 Requires:	libgnomeprintui-devel >= 2.5.0
 Requires:	libgnomeui-devel >= 2.5.0
-Requires:	libsoup-devel >= 2.1.6
+Requires:	libsoup-devel >= 2.1.7
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
@@ -126,7 +127,7 @@ Summary:	Static libraries for evolution
 Summary(pl):	Biblioteki statyczne dla evolution
 Summary(pt_BR):	Bibliotecas est醫icas para desenvolvimento
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	evolution2-static
 
 %description static
@@ -143,7 +144,7 @@ aplica珲es.
 Summary:	Evolution mail component
 Group:		X11/Applications
 # mail composer requires addressbook component
-Requires:	%{name}-addressbook = %{version}
+Requires:	%{name}-addressbook = %{version}-%{release}
 Requires(post,postun):	/sbin/ldconfig
 Requires(post):		GConf2
 
@@ -153,7 +154,7 @@ Evolution mail.
 %package addressbook
 Summary:	Evolution addressbook component
 Group:		X11/Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires(post,postun):	/sbin/ldconfig
 Requires(post):		GConf2
 
@@ -163,7 +164,7 @@ Evolution addressbook.
 %package calendar
 Summary:	Evolution calendar and todo component
 Group:		X11/Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires(post,postun):	/sbin/ldconfig
 Requires(post):		GConf2
 
@@ -174,7 +175,7 @@ Evolution calendar and todo component.
 Summary:	Evolution conduits for gnome-pilot
 Summary(pl):	Dodatki do wymiany danych z gnome-pilot
 Group:		X11/Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	evolution2-pilot
 
 %description pilot
@@ -186,9 +187,11 @@ Ten pakiet zawiera dodatki do synchronizacji danych Evolution z Palmem.
 
 %prep
 %setup -q
+%patch0 -p1
+
+mv po/{no,nb}.po
 
 %build
-cp %{_datadir}/automake/mkinstalldirs ./
 # build evolution
 glib-gettextize --copy --force
 intltoolize --copy --force
