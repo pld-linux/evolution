@@ -265,7 +265,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{mver}/zoneinfo
 %{_datadir}/mime-info/*
 %{_datadir}/idl/*
-%{_datadir}/applications/*
+%{_desktopdir}/*
 %{_pixmapsdir}/*
 %{_sysconfdir}/gconf/schemas/*
 %{_omf_dest_dir}/%{name}
