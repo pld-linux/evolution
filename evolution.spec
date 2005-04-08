@@ -20,7 +20,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.2.1.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.2/%{name}-%{version}.tar.bz2
@@ -60,11 +60,12 @@ BuildRequires:	nss-devel
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
+BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	which
 Requires(post,postun):	/sbin/ldconfig
-Requires(post,postun):	/usr/bin/scrollkeeper-update
-Requires(post):		GConf2
+Requires(post,preun):		GConf2
+Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.10.0
 Requires:	bonobo-activation
@@ -212,8 +213,8 @@ Palmem.
 %patch3 -p1
 
 %build
-glib-gettextize --copy --force
-intltoolize --copy --force
+%{__glib_gettextize}
+%{__intltoolize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoheader}
@@ -269,6 +270,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
+rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
+
 ln -sf evolution-2.0 $RPM_BUILD_ROOT%{_bindir}/evolution
 
 %find_lang %{name} --all-name --with-gnome
@@ -277,32 +280,46 @@ ln -sf evolution-2.0 $RPM_BUILD_ROOT%{_bindir}/evolution
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/sbin/ldconfig
-/usr/bin/scrollkeeper-update
-%gconf_schema_install
+%gconf_schema_install apps_evolution_shell-2.2.schemas
+%ldconfig_post
+%scrollkeeper_update_post
+
+%preun
+%gconf_schema_uninstall apps_evolution_shell-2.2.schemas
 
 %postun
-/sbin/ldconfig
-/usr/bin/scrollkeeper-update
+%ldconfig_postun
+%scrollkeeper_update_postun
 
 %post mail
-/sbin/ldconfig
-%gconf_schema_install
+%gconf_schema_install evolution-mail-2.2.schemas
+%ldconfig_post
+
+%preun mail
+%gconf_schema_uninstall evolution-mail-2.2.schemas
 
 %postun mail
-/sbin/ldconfig
+%ldconfig_postun
 
 %post addressbook
-/sbin/ldconfig
-%gconf_schema_install
+%gconf_schema_install apps_evolution_addressbook-2.2.schemas
+%ldconfig_post
 
-%postun addressbook -p /sbin/ldconfig
+%preun addressbook
+%gconf_schema_uninstall apps_evolution_addressbook-2.2.schemas
+
+%postun addressbook
+%ldconfig_postun
 
 %post calendar
-/sbin/ldconfig
-%gconf_schema_install
+%gconf_schema_install apps_evolution_calendar-2.2.schemas
+%ldconfig_post
 
-%postun calendar -p /sbin/ldconfig
+%preun
+%gconf_schema_uninstall apps_evolution_calendar-2.2.schemas
+
+%postun calendar
+%ldconfig_postun
 
 %files -f evolution.lang
 %defattr(644,root,root,755)
@@ -352,7 +369,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/*/images
 %{_datadir}/evolution/*/ui
 %{_datadir}/evolution/*/weather
-%{_datadir}/mime-info/*
 %{_datadir}/idl/evolution-*/Evolution-Component.idl
 %{_datadir}/idl/evolution-*/Evolution-ConfigControl.idl
 %{_datadir}/idl/evolution-*/Evolution-Offline.idl
