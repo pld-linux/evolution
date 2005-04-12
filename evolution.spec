@@ -150,7 +150,7 @@ Summary(pl):	Modu³ pocztowy Evolution
 Group:		X11/Applications
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
-Requires(post,postun):	/sbin/ldconfig
+Requires(post):	/sbin/ldconfig
 Requires(post):		GConf2
 Provides:	%{name}-component = %{version}-%{release}
 
@@ -298,8 +298,7 @@ rm -rf $RPM_BUILD_ROOT
 %preun mail
 %gconf_schema_uninstall evolution-mail-2.2.schemas
 
-%postun mail
-/sbin/ldconfig
+%postun mail -p /sbin/ldconfig
 
 %post addressbook
 /sbin/ldconfig
@@ -308,8 +307,7 @@ rm -rf $RPM_BUILD_ROOT
 %preun addressbook
 %gconf_schema_uninstall apps_evolution_addressbook-2.2.schemas
 
-%postun addressbook
-/sbin/ldconfig
+%postun addressbook -p /sbin/ldconfig
 
 %post calendar
 /sbin/ldconfig
@@ -318,8 +316,7 @@ rm -rf $RPM_BUILD_ROOT
 %preun
 %gconf_schema_uninstall apps_evolution_calendar-2.2.schemas
 
-%postun calendar
-/sbin/ldconfig
+%postun calendar -p /sbin/ldconfig
 
 %files -f evolution.lang
 %defattr(644,root,root,755)
