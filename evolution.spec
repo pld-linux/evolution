@@ -280,46 +280,46 @@ ln -sf evolution-2.0 $RPM_BUILD_ROOT%{_bindir}/evolution
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 %gconf_schema_install apps_evolution_shell-2.2.schemas
-%ldconfig_post
 %scrollkeeper_update_post
 
 %preun
 %gconf_schema_uninstall apps_evolution_shell-2.2.schemas
 
 %postun
-%ldconfig_postun
+/sbin/ldconfig
 %scrollkeeper_update_postun
 
 %post mail
+/sbin/ldconfig
 %gconf_schema_install evolution-mail-2.2.schemas
-%ldconfig_post
 
 %preun mail
 %gconf_schema_uninstall evolution-mail-2.2.schemas
 
 %postun mail
-%ldconfig_postun
+/sbin/ldconfig
 
 %post addressbook
+/sbin/ldconfig
 %gconf_schema_install apps_evolution_addressbook-2.2.schemas
-%ldconfig_post
 
 %preun addressbook
 %gconf_schema_uninstall apps_evolution_addressbook-2.2.schemas
 
 %postun addressbook
-%ldconfig_postun
+/sbin/ldconfig
 
 %post calendar
+/sbin/ldconfig
 %gconf_schema_install apps_evolution_calendar-2.2.schemas
-%ldconfig_post
 
 %preun
 %gconf_schema_uninstall apps_evolution_calendar-2.2.schemas
 
 %postun calendar
-%ldconfig_postun
+/sbin/ldconfig
 
 %files -f evolution.lang
 %defattr(644,root,root,755)
