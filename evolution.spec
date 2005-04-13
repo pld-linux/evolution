@@ -19,12 +19,12 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN):	Evolution - GNOME2¸öÈËºÍ¹¤×÷×éÐÅÏ¢¹ÜÀí¹¤¾ß(°üÀ¨µç×ÓÓÊ¼þ£¬ÈÕÀúºÍµØÖ·±¡)
 Name:		evolution
-Version:	2.2.1.1
-Release:	3
+Version:	2.2.2
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	0d41c89ace6485da3ef9c76ece68ae9c
+# Source0-md5:	9b49942c8bdd1dc21f2d28792b12f400
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
@@ -35,28 +35,28 @@ BuildRequires:	ORBit2-devel >= 1:2.12.1
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	evolution-data-server-devel >= 1.2.1
+BuildRequires:	evolution-data-server-devel >= 1.2.2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.4.1
+BuildRequires:	gal-devel >= 1:2.4.2
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
-%{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.0}
+%{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.13}
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	gtk-doc >= 1.3
-BuildRequires:	gtkhtml-devel >= 3.6.1
+BuildRequires:	gtkhtml-devel >= 3.6.2
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
-BuildRequires:	libgnomeprintui-devel >= 2.10.1
-BuildRequires:	libgnomeui-devel >= 2.10.0
+BuildRequires:	libgnomeprintui-devel >= 2.10.2
+BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	libsoup-devel >= 2.2.3
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.0.0}
-%{?with_pilot:BuildRequires:	pilot-link-devel >= 0.11.4}
+%{?with_pilot:BuildRequires:	pilot-link-devel >= 0.11.8}
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
@@ -64,14 +64,14 @@ BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	which
 Requires(post,postun):	/sbin/ldconfig
-Requires(post,preun):		GConf2
+Requires(post,preun):	GConf2
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.10.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.2.1
-Requires:	gal >= 1:2.4.1
-Requires:	gtkhtml >= 3.6.1
+Requires:	evolution-data-server >= 1.2.2
+Requires:	gal >= 1:2.4.2
+Requires:	gtkhtml >= 3.6.2
 Requires:	libglade2 >= 1:2.5.1
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -102,12 +102,12 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	freetype-devel
-Requires:	gal-devel >= 1:2.4.1
+Requires:	gal-devel >= 1:2.4.2
 Requires:	gnome-vfs2-devel >= 2.10.0-2
-Requires:	gtkhtml-devel >= 3.6.1
+Requires:	gtkhtml-devel >= 3.6.2
 Requires:	libglade2-devel >= 1:2.5.1
-Requires:	libgnomeprintui-devel >= 2.10.1
-Requires:	libgnomeui-devel >= 2.10.0
+Requires:	libgnomeprintui-devel >= 2.10.2
+Requires:	libgnomeui-devel >= 2.10.0-2
 Requires:	libsoup-devel >= 2.2.3
 Requires:	nspr-devel
 Requires:	nss-devel
@@ -151,7 +151,7 @@ Group:		X11/Applications
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
-Requires(post):		GConf2
+Requires(post,preun):	GConf2
 Provides:	%{name}-component = %{version}-%{release}
 
 %description mail
@@ -166,7 +166,7 @@ Summary(pl):	Modu³ ksi±¿ki adresowej Evolution
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
-Requires(post):	GConf2
+Requires(post,preun):	GConf2
 Provides:	%{name}-component = %{version}-%{release}
 
 %description addressbook
@@ -181,7 +181,7 @@ Summary(pl):	Modu³ kalendarza i listy zadañ Evolution
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires(post):	/sbin/ldconfig
-Requires(post):	GConf2
+Requires(post,preun):	GConf2
 Provides:	%{name}-component = %{version}-%{release}
 
 %description calendar
@@ -313,7 +313,7 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %gconf_schema_install apps_evolution_calendar-2.2.schemas
 
-%preun
+%preun calendar
 %gconf_schema_uninstall apps_evolution_calendar-2.2.schemas
 
 %postun calendar -p /sbin/ldconfig
