@@ -20,7 +20,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.2.2
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.2/%{name}-%{version}.tar.bz2
@@ -272,7 +272,7 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
 
-ln -sf evolution-2.0 $RPM_BUILD_ROOT%{_bindir}/evolution
+ln -sf evolution-2.2 $RPM_BUILD_ROOT%{_bindir}/evolution
 
 %find_lang %{name} --all-name --with-gnome
 
