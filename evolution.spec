@@ -4,10 +4,6 @@
 #   - etspec?
 #   - ui?
 #   - dependencies, i.e.: mail should require addressbook?
-# - Patch 3 requires missing gg icons:
-#   /usr/share/icons/hicolor/16x16/apps/im-gadugadu.png
-#   /usr/share/icons/hicolor/48x48/apps/im-gadugadu.png
-#   They should be added here or to gnome-icon-theme
 #
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
@@ -19,17 +15,18 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.2.2
-Release:	3
+Version:	2.2.3
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	9b49942c8bdd1dc21f2d28792b12f400
+# Source0-md5:	1e01511c78b2dd0dcb8cf83521c167af
+Source1:	%{name}-gg16.png
+Source2:	%{name}-gg48.png
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
 Patch3:		%{name}-desktop.patch
-Patch4:		%{name}-dbus.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.10.0
 BuildRequires:	ORBit2-devel >= 1:2.12.1
@@ -39,7 +36,7 @@ BuildRequires:	bison
 BuildRequires:	evolution-data-server-devel >= 1.2.2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
-BuildRequires:	gal-devel >= 1:2.4.2
+BuildRequires:	gal-devel >= 1:2.4.3
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.13}
@@ -70,9 +67,10 @@ Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.10.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.2.2
-Requires:	gal >= 1:2.4.2
+Requires:	evolution-data-server >= 1.2.3
+Requires:	gal >= 1:2.4.3
 Requires:	gtkhtml >= 3.6.2
+Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
 Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
@@ -212,7 +210,6 @@ Palmem.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 %{__glib_gettextize}
@@ -256,6 +253,7 @@ find -name \*.idl -exec touch {} \;
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -264,6 +262,9 @@ rm -rf $RPM_BUILD_ROOT
 	GTKHTML_DATADIR=%{_datadir}/idl \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
+install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
+install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
+
 # strip doesn't pass these files and they aren't necessary, so remove them
 # probably this should be done differently, but I have no idea
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.a
@@ -271,7 +272,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/libemiscwidgets.a
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
-
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
 
 ln -sf evolution-2.2 $RPM_BUILD_ROOT%{_bindir}/evolution
@@ -357,6 +357,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/*/*.xml
 %dir %{_datadir}/evolution/*/default
 %dir %{_datadir}/evolution/*/default/C
+%lang(de) %dir %{_datadir}/evolution/*/default/de
 %lang(ja) %dir %{_datadir}/evolution/*/default/ja
 %lang(nl) %dir %{_datadir}/evolution/*/default/nl
 %lang(pt) %dir %{_datadir}/evolution/*/default/pt
@@ -378,6 +379,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-*/GNOME_Evolution_Importer.idl
 %{_desktopdir}/*
 %{_pixmapsdir}/*
+%{_iconsdir}/hicolor/*/apps/*.png
 %{_sysconfdir}/gconf/schemas/apps_evolution_shell-*.schemas
 %{_omf_dest_dir}/%{name}
 
@@ -400,6 +402,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_*.server
 %{_datadir}/evolution/*/views/mail*
 %{_datadir}/evolution/*/default/C/mail
+%lang(de) %{_datadir}/evolution/*/default/de/mail
 %lang(ja) %{_datadir}/evolution/*/default/ja/mail
 %lang(nl) %{_datadir}/evolution/*/default/nl/mail
 %lang(pt) %{_datadir}/evolution/*/default/pt/mail
