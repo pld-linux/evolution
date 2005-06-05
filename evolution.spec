@@ -263,7 +263,7 @@ install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
-install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
+install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
 
 # strip doesn't pass these files and they aren't necessary, so remove them
 # probably this should be done differently, but I have no idea
