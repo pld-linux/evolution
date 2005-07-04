@@ -378,8 +378,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-*/Evolution-ConfigControl.idl
 %{_datadir}/idl/evolution-*/Evolution-Offline.idl
 %{_datadir}/idl/evolution-*/Evolution-Shell.idl
-#%{_datadir}/idl/evolution-*/Evolution-Wizard.idl
-#%{_datadir}/idl/evolution-*/Evolution-common.idl
 %{_datadir}/idl/evolution-*/Evolution.idl
 %{_datadir}/idl/evolution-*/GNOME_Evolution_Importer.idl
 %{_desktopdir}/*
