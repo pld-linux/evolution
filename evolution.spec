@@ -44,7 +44,7 @@ BuildRequires:	gnome-common >= 2.8.0
 BuildRequires:	gnome-vfs2-devel >= 2.10.0-2
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	gtkhtml-devel >= 3.6.2
-%{?with_kerberos5:BuildRequires:	heimdal-devel}
+%{?with_kerberos5:BuildRequires:	heimdal-devel >= 0.7}
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
