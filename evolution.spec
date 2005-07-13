@@ -415,12 +415,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files addressbook
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/*/libevolution-addressbook-importers.so*
 %attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-clean
 %attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-export
 %attr(755,root,root) %{_libdir}/evolution/*/csv2vcard
 %attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-addressbook.so
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-addressbook-a11y.so.*
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-addressbook-importers.so*
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 %{_datadir}/evolution/*/views/addressbook*
 %{_datadir}/evolution/*/ecps
