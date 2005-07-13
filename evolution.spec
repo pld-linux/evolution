@@ -15,12 +15,12 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.3.4
+Version:	2.3.5.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	0f1a008691ba134b4b3379681965c83a
+# Source0-md5:	2271c695677a8bf8c3c96ec883a05d12
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Patch0:		%{name}-nolibs.patch
@@ -34,7 +34,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.3.4
+BuildRequires:	evolution-data-server-devel >= 1.3.5
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gal-devel >= 1:2.5.3
@@ -68,7 +68,7 @@ Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.10.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.3.4
+Requires:	evolution-data-server >= 1.3.5
 Requires:	gal >= 1:2.5.3
 Requires:	gtkhtml >= 3.7.3
 Requires:	hicolor-icon-theme
@@ -340,7 +340,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/*/libetimezonedialog.so.*
 %attr(755,root,root) %{_libdir}/evolution/*/libeutil.so.*
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-a11y.so.*
-%attr(755,root,root) %{_libdir}/evolution/*/libevolution-importer.so.*
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-smime.so.*
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-widgets-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/*/libfilter.so.*
@@ -379,7 +378,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-*/Evolution-Offline.idl
 %{_datadir}/idl/evolution-*/Evolution-Shell.idl
 %{_datadir}/idl/evolution-*/Evolution.idl
-%{_datadir}/idl/evolution-*/GNOME_Evolution_Importer.idl
 %{_desktopdir}/*
 %{_pixmapsdir}/*
 %{_iconsdir}/hicolor/*/apps/*.png
@@ -417,13 +415,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files addressbook
 %defattr(644,root,root,755)
-%dir %{_libdir}/evolution/*/evolution-addressbook-importers
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-addressbook-importers.so*
 %attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-clean
 %attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-export
 %attr(755,root,root) %{_libdir}/evolution/*/csv2vcard
 %attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-addressbook.so
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-addressbook-a11y.so.*
-%attr(755,root,root) %{_libdir}/evolution/*/evolution-addressbook-importers/lib*.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 %{_datadir}/evolution/*/views/addressbook*
 %{_datadir}/evolution/*/ecps
@@ -431,10 +428,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files calendar
 %defattr(644,root,root,755)
-%dir %{_libdir}/evolution/*/evolution-calendar-importers
 %attr(755,root,root) %{_libdir}/evolution/*/components/libevolution-calendar.so
 %attr(755,root,root) %{_libdir}/evolution/*/libevolution-calendar-a11y.so.*
-%attr(755,root,root) %{_libdir}/evolution/*/evolution-calendar-importers/*.so
+%attr(755,root,root) %{_libdir}/evolution/*/libevolution-calendar-importers.so*
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
 %{_datadir}/evolution/*/views/calendar*
 %{_datadir}/evolution/*/views/tasks*
