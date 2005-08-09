@@ -16,7 +16,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.3.7
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.3/%{name}-%{version}.tar.bz2
@@ -34,7 +34,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.3.7
+BuildRequires:	evolution-data-server-devel >= 1.3.7-2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
@@ -48,7 +48,7 @@ BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
-BuildRequires:	libsoup-devel >= 2.2.3
+BuildRequires:	libsoup-devel >= 2.2.5
 BuildRequires:	libtool
 BuildRequires:	libxml2
 BuildRequires:	nspr-devel
@@ -67,7 +67,7 @@ Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	GConf2 >= 2.10.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.3.7
+Requires:	evolution-data-server >= 1.3.7-2
 Requires:	gtkhtml >= 3.7.6
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
@@ -105,7 +105,7 @@ Requires:	gtkhtml-devel >= 3.6.2
 Requires:	libglade2-devel >= 1:2.5.1
 Requires:	libgnomeprintui-devel >= 2.10.2
 Requires:	libgnomeui-devel >= 2.10.0-2
-Requires:	libsoup-devel >= 2.2.3
+Requires:	libsoup-devel >= 2.2.5
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.0.0}
