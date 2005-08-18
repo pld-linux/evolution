@@ -47,7 +47,7 @@ BuildRequires:	gtkhtml-devel >= 3.7.6
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.10.2
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libgnomeui-devel >= 2.11.2-2
 BuildRequires:	libsoup-devel >= 2.2.5
 BuildRequires:	libtool
 BuildRequires:	libxml2
