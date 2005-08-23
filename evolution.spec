@@ -15,12 +15,12 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.3.7
-Release:	3
+Version:	2.3.8
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.3/%{name}-%{version}.tar.bz2
-# Source0-md5:	12d29f28f8ecf302547c63ad137e0b4b
+# Source0-md5:	d5972fbb96b36cd3420bf1390d63c551
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Patch0:		%{name}-nolibs.patch
@@ -372,7 +372,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/*/weather
 %{_datadir}/idl/evolution-*/Evolution-Component.idl
 %{_datadir}/idl/evolution-*/Evolution-ConfigControl.idl
-%{_datadir}/idl/evolution-*/Evolution-Offline.idl
+#%{_datadir}/idl/evolution-*/Evolution-Offline.idl
 %{_datadir}/idl/evolution-*/Evolution-Shell.idl
 %{_datadir}/idl/evolution-*/Evolution.idl
 %{_desktopdir}/*
