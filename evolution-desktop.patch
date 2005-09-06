@@ -1,16 +1,12 @@
-diff -urN evolution-2.0.2.orig/data/evolution.desktop.in.in evolution-2.0.2/data/evolution.desktop.in.in
---- evolution-2.0.2.orig/data/evolution.desktop.in.in	2004-11-21 15:50:42.000000000 +0100
-+++ evolution-2.0.2/data/evolution.desktop.in.in	2004-11-22 23:06:50.000000000 +0100
-@@ -6,9 +6,10 @@
+diff -aurN evolution-2.3.4.orig/data/evolution.desktop.in.in evolution-2.3.4/data/evolution.desktop.in.in
+--- evolution-2.3.4.orig/data/evolution.desktop.in.in	2005-06-23 08:12:19.000000000 +0200
++++ evolution-2.3.4/data/evolution.desktop.in.in	2005-07-04 20:04:55.596986296 +0200
+@@ -6,7 +6,7 @@
  Icon=evolution
  Terminal=false
  Type=Application
 -Categories=GNOME;Application;Office;X-Red-Hat-Base;
 +Categories=GTK;GNOME;Office;
  StartupNotify=true
- X-GNOME-Bugzilla-Bugzilla=Ximian
  X-GNOME-Bugzilla-Product=Evolution
- X-GNOME-Bugzilla-OtherBinaries=evolution-data-server-1.0;evolution-exchange-storage;evolution-alarm-notify;
--
-+Encoding=UTF-8
-+# vi: encoding=utf-8 
+ X-GNOME-Bugzilla-OtherBinaries=evolution-data-server-1.4;evolution-exchange-storage;evolution-alarm-notify;
