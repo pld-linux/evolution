@@ -17,12 +17,12 @@ Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME2个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.4.2
+Version:	2.4.2.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	5c5258ec39afa8bf27c9700477807a2c
+# Source0-md5:	cee3e0ac6ca43e5060468c3b938bea72
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Patch0:		%{name}-nolibs.patch
