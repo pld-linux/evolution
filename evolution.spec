@@ -25,10 +25,14 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.4/%{name}-%{version}
 # Source0-md5:	cee3e0ac6ca43e5060468c3b938bea72
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
+Source3:	%{name}-addressbook.desktop
+Source4:	%{name}-calendar.desktop
+Source5:	%{name}-mail.desktop
+Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
-Patch3:		%{name}-desktop.patch
+#Patch3:		%{name}-desktop.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.3
@@ -218,7 +222,7 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -273,6 +277,10 @@ install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
 install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
+install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}/
+install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}/
+install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}/
+install %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}/
 
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
@@ -363,7 +371,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Shell.idl
 
-%{_desktopdir}/*.desktop
+#%{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_pixmapsdir}/*.png
 
@@ -403,6 +411,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution-Composer.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Mail.idl
 
+%{_desktopdir}/%{name}-mail.desktop
+
 %{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %{_sysconfdir}/gconf/schemas/evolution-mail-%{basever}.schemas
 
@@ -417,6 +427,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/views/addressbook
 %{_datadir}/evolution/%{basever}/ecps
 
+%{_desktopdir}/%{name}-addressbook.desktop
+
 %{_sysconfdir}/gconf/schemas/apps_evolution_addressbook-%{basever}.schemas
 
 %files calendar
@@ -427,6 +439,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/views/calendar
 %{_datadir}/evolution/%{basever}/views/tasks
 %{_datadir}/idl/evolution-%{basever}/evolution-calendar.idl
+
+%{_desktopdir}/%{name}-calendar.desktop
+%{_desktopdir}/%{name}-tasks.desktop
 
 %{_sysconfdir}/gconf/schemas/apps_evolution_calendar-%{basever}.schemas
 
