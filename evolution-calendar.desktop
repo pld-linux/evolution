@@ -1,0 +1,15 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Evolution Calendar
+Name[pl]=Kalendarz Evolution
+Comment=The Evolution Groupware Suite
+Exec=evolution -c calendar
+Icon=stock_calendar
+Terminal=false
+Type=Application
+Categories=GTK;GNOME;Office;Calendar;
+StartupNotify=true
+MimeType=text/x-vcard
+X-GNOME-Bugzilla-Product=Evolution
+X-GNOME-Bugzilla-OtherBinaries=evolution-data-server-1.4;evolution-exchange-storage;evolution-alarm-notify;
+
