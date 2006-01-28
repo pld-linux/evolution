@@ -367,7 +367,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Shell.idl
 
-#%{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_pixmapsdir}/*.png
 
@@ -431,9 +430,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-calendar.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
+%{_libdir}/evolution/%{basever}/plugins/publish-calendar.glade
 
 %{_datadir}/evolution/%{basever}/views/calendar
+%{_datadir}/evolution/%{basever}/views/memos
 %{_datadir}/evolution/%{basever}/views/tasks
+
 %{_datadir}/idl/evolution-%{basever}/evolution-calendar.idl
 
 %{_desktopdir}/%{name}-calendar.desktop
