@@ -10,19 +10,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.4
+%define		basever	2.6
 #
-Summary:	The GNOME2 Email/Calendar/Addressbook Suite
-Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
+Summary:	The GNOME Email/Calendar/Addressbook Suite
+Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
-Summary(zh_CN):	Evolution - GNOME2¸öÈËºÍ¹¤×÷×éÐÅÏ¢¹ÜÀí¹¤¾ß(°üÀ¨µç×ÓÓÊ¼þ£¬ÈÕÀúºÍµØÖ·±¡)
+Summary(zh_CN):	Evolution - GNOME¸öÈËºÍ¹¤×÷×éÐÅÏ¢¹ÜÀí¹¤¾ß(°üÀ¨µç×ÓÓÊ¼þ£¬ÈÕÀúºÍµØÖ·±¡)
 Name:		evolution
-Version:	2.4.2.1
-Release:	2
+Version:	2.5.5
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	cee3e0ac6ca43e5060468c3b938bea72
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	05f5c28a38c20b24e9f13f945ee0bdd9
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -83,17 +83,17 @@ Obsoletes:	gnome-pim
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Evolution is the GNOME2 mailer, calendar, contact manager and
+Evolution is the GNOME mailer, calendar, contact manager and
 communications tool. The tools which make up Evolution will be tightly
 integrated with one another and act as a seamless personal
 information-management tool.
 
 %description -l pl
-Evolution to program pocztowy GNOME2, kalendarz, ksi±¿ka adresowa i
+Evolution to program pocztowy GNOME, kalendarz, ksi±¿ka adresowa i
 narzêdzie komunikacyjne.
 
 %description -l pt_BR
-Evolution é um cliente de email para o GNOME2 com calendário e outras
+Evolution é um cliente de email para o GNOME com calendário e outras
 ferramentas interessantes.
 
 %package libs
@@ -250,6 +250,7 @@ Palmem.
 	--with-html-dir=%{_gtkdocdir} \
 	--with-kde-applnk-path=no \
 	--disable-schemas-install \
+	--enable-plugins=base \
 	--enable-nss=yes \
 	--enable-smime=yes \
 	--enable-static \
@@ -275,10 +276,7 @@ install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
 install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}/
+install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
@@ -411,7 +409,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_desktopdir}/%{name}-mail.desktop
 
-%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
+#%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %{_sysconfdir}/gconf/schemas/evolution-mail-%{basever}.schemas
 
 %files addressbook
