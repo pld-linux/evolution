@@ -268,17 +268,16 @@ install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	KDE_APPLNK_DIR=%{_applnkdir}/Network/Mail \
 	omf_dest_dir=%{_omf_dest_dir}/%{name} \
 	GTKHTML_DATADIR=%{_datadir}/idl \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
 install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}/
+install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
@@ -369,7 +368,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Shell.idl
 
-#%{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_pixmapsdir}/*.png
 
