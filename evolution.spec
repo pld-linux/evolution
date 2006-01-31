@@ -17,12 +17,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.5.5
+Version:	2.5.90
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	05f5c28a38c20b24e9f13f945ee0bdd9
+# Source0-md5:	02751eb28ad9b31402290ed4816e5321
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -32,7 +32,6 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
-Patch3:		%{name}-notify.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.3
@@ -222,7 +221,6 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -307,11 +305,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun	libs -p /sbin/ldconfig
 
 %post mail
-%gconf_schema_install apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %gconf_schema_install evolution-mail-%{basever}.schemas
 
 %preun mail
-%gconf_schema_uninstall apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %gconf_schema_uninstall evolution-mail-%{basever}.schemas
 
 %post addressbook
@@ -409,8 +405,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution-Mail.idl
 
 %{_desktopdir}/%{name}-mail.desktop
-
-#%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %{_sysconfdir}/gconf/schemas/evolution-mail-%{basever}.schemas
 
 %files addressbook
