@@ -1,0 +1,11 @@
+--- evolution-2.5.5/calendar/gui/alarm-notify/alarm-queue.c~	2006-01-16 15:42:17.000000000 +0100
++++ evolution-2.5.5/calendar/gui/alarm-notify/alarm-queue.c	2006-01-31 09:08:24.151638000 +0100
+@@ -1512,7 +1512,7 @@
+ }
+ 
+ 	NotifyNotification *n = notify_notification_new (summary, body, "", NULL);
+-	notify_notification_set_icon_data_from_pixbuf (n, icon);
++	notify_notification_set_icon_from_pixbuf (n, icon);
+ 	if (!notify_notification_show(n, NULL))
+ 	    g_warning ("Could not send notification to daemon\n");	
+ 
