@@ -32,6 +32,7 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
+Patch3:		%{name}-notify.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.12.0
 BuildRequires:	ORBit2-devel >= 1:2.12.3
@@ -221,6 +222,7 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}
