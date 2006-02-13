@@ -17,12 +17,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.5.90
+Version:	2.5.91
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	02751eb28ad9b31402290ed4816e5321
+# Source0-md5:	cea13421ea95707e89c0311100714573
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -39,7 +39,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.4.1
+BuildRequires:	evolution-data-server-devel >= 1.5.5
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
@@ -72,7 +72,7 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.12.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.4.1
+Requires:	evolution-data-server >= 1.5.5
 Requires:	gtkhtml >= 3.8.1
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
