@@ -17,12 +17,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.5.92
+Version:	2.6.0
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	1dd17db843eeb66740b40ebb9024261f
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	5c98650b2ccf3581e7cf5af3927b95d1
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -39,7 +39,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.5.5
+BuildRequires:	evolution-data-server-devel >= 1.6.0
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
@@ -72,8 +72,8 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.12.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.5.5
-Requires:	gtkhtml >= 3.8.1
+Requires:	evolution-data-server >= 1.6.0
+Requires:	gtkhtml >= 3.10.0
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
 Requires:	psmisc
@@ -115,9 +115,10 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
+Requires:	evolution-data-server-devel >= 1.6.0
 Requires:	freetype-devel
 Requires:	gnome-vfs2-devel >= 2.12.1
-Requires:	gtkhtml-devel >= 3.8.1
+Requires:	gtkhtml-devel >= 3.10.0
 Requires:	libglade2-devel >= 1:2.5.1
 Requires:	libgnomeprintui-devel >= 2.12.0
 Requires:	libgnomeui-devel >= 2.12.0
@@ -283,7 +284,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
-rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution-2.6.desktop
+rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 ln -sf evolution-%{basever} $RPM_BUILD_ROOT%{_bindir}/evolution
 
@@ -397,7 +398,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/default/C/mail
 %{_datadir}/evolution/%{basever}/views/mail
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
+%lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
+%lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
 %lang(ja) %{_datadir}/evolution/%{basever}/default/ja/mail
+%lang(lt) %{_datadir}/evolution/%{basever}/default/lt/mail
+%lang(mk) %{_datadir}/evolution/%{basever}/default/mk/mail
 %lang(nl) %{_datadir}/evolution/%{basever}/default/nl/mail
 %lang(pt) %{_datadir}/evolution/%{basever}/default/pt/mail
 %lang(zh_CN) %{_datadir}/evolution/%{basever}/default/zh_CN/mail
