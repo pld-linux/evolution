@@ -1,8 +1,4 @@
 #
-# todo:
-# - splitting mail, addressbook and calendar:
-#   - etspec?
-#
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
@@ -16,7 +12,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.6.0
-Release:	1.1
+Release:	1.2
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
@@ -355,7 +351,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(zh_CN) %dir %{_datadir}/evolution/%{basever}/default/zh_CN
 
 %{_datadir}/evolution/%{basever}/errors
-%{_datadir}/evolution/%{basever}/etspec
+%dir %{_datadir}/evolution/%{basever}/etspec
 %{_datadir}/evolution/%{basever}/glade
 %{_datadir}/evolution/%{basever}/help
 %{_datadir}/evolution/%{basever}/images
@@ -413,6 +409,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/evolution/%{basever}/default/C/mail
 %{_datadir}/evolution/%{basever}/views/mail
+%{_datadir}/evolution/%{basever}/etspec/*message-list*
+%{_datadir}/evolution/%{basever}/etspec/*contact-list*
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
 %lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
 %lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
@@ -439,10 +437,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*addressbook*.so
 %{_libdir}/evolution/%{basever}/plugins/*addressbook*.eplug
-#%{_libdir}/evolution/%{basever}/plugins/*addressbook*.xml
 
 %{_datadir}/evolution/%{basever}/views/addressbook
 %{_datadir}/evolution/%{basever}/ecps
+%{_datadir}/evolution/%{basever}/etspec/*addressbook*
 
 %{_desktopdir}/%{name}-addressbook.desktop
 
@@ -467,7 +465,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/plugins/*groupwise*.eplug
 %{_libdir}/evolution/%{basever}/plugins/*hula*.eplug
 %{_libdir}/evolution/%{basever}/plugins/*calendar*.xml
-#%{_libdir}/evolution/%{basever}/plugins/*caldav*.xml
+
+%{_datadir}/evolution/%{basever}/etspec/*calendar*
+%{_datadir}/evolution/%{basever}/etspec/*cal-list*
+%{_datadir}/evolution/%{basever}/etspec/*meeting*
+%{_datadir}/evolution/%{basever}/etspec/*memo*
+%{_datadir}/evolution/%{basever}/etspec/*memo*
 
 %{_datadir}/evolution/%{basever}/views/calendar
 %{_datadir}/evolution/%{basever}/views/memos
