@@ -2,8 +2,6 @@
 # todo:
 # - splitting mail, addressbook and calendar:
 #   - etspec?
-#   - ui?
-#   - dependencies, i.e.: mail should require addressbook?
 #
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
@@ -18,7 +16,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.6.0
-Release:	1
+Release:	1.1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
@@ -335,10 +333,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution/%{basever}
 %dir %{_libdir}/evolution/%{basever}/plugins
 %dir %{_libdir}/evolution/%{basever}/components
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*sa-junk*.so
+%{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*sa-junk*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.xml
 %{_libdir}/bonobo/servers/GNOME_Evolution_Shell_*.server
-%{_libdir}/evolution/%{basever}/plugins/*.eplug
-%{_libdir}/evolution/%{basever}/plugins/*.xml
 
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/%{basever}
@@ -393,6 +393,22 @@ rm -rf $RPM_BUILD_ROOT
 %files mail
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-mail.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*mail*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*exchange*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*print-message*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*itip*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*mark-all-read*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*startup-wizard*.so
+%{_libdir}/evolution/%{basever}/plugins/*mail*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*exchange*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*print-message*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*itip*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*mark-all-read*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*startup-wizard*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*exchange*.xml
+%{_libdir}/evolution/%{basever}/plugins/*folder*.xml
+%{_libdir}/evolution/%{basever}/plugins/*print-message*.xml
+%{_libdir}/evolution/%{basever}/plugins/*compose-send*.xml
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_*.server
 
 %{_datadir}/evolution/%{basever}/default/C/mail
@@ -421,6 +437,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/evolution-addressbook-export
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*addressbook*.so
+%{_libdir}/evolution/%{basever}/plugins/*addressbook*.eplug
+#%{_libdir}/evolution/%{basever}/plugins/*addressbook*.xml
+
 %{_datadir}/evolution/%{basever}/views/addressbook
 %{_datadir}/evolution/%{basever}/ecps
 
@@ -433,6 +453,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-calendar.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
 %{_libdir}/evolution/%{basever}/plugins/publish-calendar.glade
+
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*calendar*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*default-source*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*caldav*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*gw-account*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*groupwise*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*hula*.so
+%{_libdir}/evolution/%{basever}/plugins/*calendar*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*default-source*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*caldav*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*gw-account*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*groupwise*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*hula*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*calendar*.xml
+#%{_libdir}/evolution/%{basever}/plugins/*caldav*.xml
 
 %{_datadir}/evolution/%{basever}/views/calendar
 %{_datadir}/evolution/%{basever}/views/memos
