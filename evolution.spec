@@ -11,12 +11,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.6.0
-Release:	1.2
+Version:	2.6.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	5c98650b2ccf3581e7cf5af3927b95d1
+# Source0-md5:	6ca70a86e6d8e8b3824e58f28a362065
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -249,6 +249,7 @@ Palmem.
 	--enable-nss=yes \
 	--enable-smime=yes \
 	--enable-static \
+	--with-sub-version="PLD Linux" \
 	--enable-file-chooser
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
