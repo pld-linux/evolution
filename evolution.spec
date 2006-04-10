@@ -249,7 +249,7 @@ Palmem.
 	--enable-nss=yes \
 	--enable-smime=yes \
 	--enable-static \
-	--with-sub-version="PLD Linux" \
+	--with-sub-version=" PLD Linux" \
 	--enable-file-chooser
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
