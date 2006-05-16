@@ -1,28 +1,22 @@
 #
-# todo:
-# - splitting mail, addressbook and calendar:
-#   - etspec?
-#   - ui?
-#   - dependencies, i.e.: mail should require addressbook?
-#
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.4
+%define		basever	2.6
 #
-Summary:	The GNOME2 Email/Calendar/Addressbook Suite
-Summary(pl):	Klient poczty dla GNOME2/Kalendarz/Ksi±¿ka Adresowa
+Summary:	The GNOME Email/Calendar/Addressbook Suite
+Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±¿ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calendário e catálogo de endereços
-Summary(zh_CN):	Evolution - GNOME2¸öÈËºÍ¹¤×÷×éÐÅÏ¢¹ÜÀí¹¤¾ß(°üÀ¨µç×ÓÓÊ¼þ£¬ÈÕÀúºÍµØÖ·±¡)
+Summary(zh_CN):	Evolution - GNOME¸öÈËºÍ¹¤×÷×éÐÅÏ¢¹ÜÀí¹¤¾ß(°üÀ¨µç×ÓÓÊ¼þ£¬ÈÕÀúºÍµØÖ·±¡)
 Name:		evolution
-Version:	2.4.2.1
-Release:	2
+Version:	2.6.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	cee3e0ac6ca43e5060468c3b938bea72
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
+# Source0-md5:	6ca70a86e6d8e8b3824e58f28a362065
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -33,26 +27,26 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	GConf2-devel >= 2.12.0
-BuildRequires:	ORBit2-devel >= 1:2.12.3
+BuildRequires:	GConf2-devel >= 2.14.0
+BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.4.1
+BuildRequires:	evolution-data-server-devel >= 1.6.0
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.8.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.13}
-BuildRequires:	gnome-vfs2-devel >= 2.12.0
+BuildRequires:	gnome-vfs2-devel >= 2.14.0
 BuildRequires:	gtk-doc >= 1.4
 BuildRequires:	gtkhtml-devel >= 3.8.1
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.33
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.12.0
-BuildRequires:	libgnomeui-devel >= 2.12.0
+BuildRequires:	libgnomeui-devel >= 2.14.0
 BuildRequires:	libsoup-devel >= 2.2.6.1
 BuildRequires:	libtool
 BuildRequires:	libxml2
@@ -70,10 +64,10 @@ Requires(post,preun):	GConf2
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2 >= 2.12.0
+Requires:	GConf2 >= 2.14.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.4.1
-Requires:	gtkhtml >= 3.8.1
+Requires:	evolution-data-server >= 1.6.0
+Requires:	gtkhtml >= 3.10.0
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
 Requires:	psmisc
@@ -83,17 +77,17 @@ Obsoletes:	gnome-pim
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Evolution is the GNOME2 mailer, calendar, contact manager and
+Evolution is the GNOME mailer, calendar, contact manager and
 communications tool. The tools which make up Evolution will be tightly
 integrated with one another and act as a seamless personal
 information-management tool.
 
 %description -l pl
-Evolution to program pocztowy GNOME2, kalendarz, ksi±¿ka adresowa i
+Evolution to program pocztowy GNOME, kalendarz, ksi±¿ka adresowa i
 narzêdzie komunikacyjne.
 
 %description -l pt_BR
-Evolution é um cliente de email para o GNOME2 com calendário e outras
+Evolution é um cliente de email para o GNOME com calendário e outras
 ferramentas interessantes.
 
 %package libs
@@ -115,12 +109,13 @@ Summary(zh_CN):	Evolution×é¼þ¿ª·¢¿â
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
+Requires:	evolution-data-server-devel >= 1.6.0
 Requires:	freetype-devel
-Requires:	gnome-vfs2-devel >= 2.12.1
-Requires:	gtkhtml-devel >= 3.8.1
+Requires:	gnome-vfs2-devel >= 2.14.0
+Requires:	gtkhtml-devel >= 3.10.0
 Requires:	libglade2-devel >= 1:2.5.1
 Requires:	libgnomeprintui-devel >= 2.12.0
-Requires:	libgnomeui-devel >= 2.12.0
+Requires:	libgnomeui-devel >= 2.14.0
 Requires:	libsoup-devel >= 2.2.6.1
 Requires:	nspr-devel
 Requires:	nss-devel
@@ -250,9 +245,11 @@ Palmem.
 	--with-html-dir=%{_gtkdocdir} \
 	--with-kde-applnk-path=no \
 	--disable-schemas-install \
+	--enable-plugins=base \
 	--enable-nss=yes \
 	--enable-smime=yes \
 	--enable-static \
+	--with-sub-version=" PLD Linux" \
 	--enable-file-chooser
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
@@ -268,23 +265,20 @@ install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	KDE_APPLNK_DIR=%{_applnkdir}/Network/Mail \
 	omf_dest_dir=%{_omf_dest_dir}/%{name} \
 	GTKHTML_DATADIR=%{_datadir}/idl \
 	GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
 install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
-install %{SOURCE3} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE4} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE5} $RPM_BUILD_ROOT%{_desktopdir}/
-install %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}/
+install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
+rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 ln -sf evolution-%{basever} $RPM_BUILD_ROOT%{_bindir}/evolution
 
@@ -307,11 +301,9 @@ rm -rf $RPM_BUILD_ROOT
 %postun	libs -p /sbin/ldconfig
 
 %post mail
-%gconf_schema_install apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %gconf_schema_install evolution-mail-%{basever}.schemas
 
 %preun mail
-%gconf_schema_uninstall apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %gconf_schema_uninstall evolution-mail-%{basever}.schemas
 
 %post addressbook
@@ -337,10 +329,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution/%{basever}
 %dir %{_libdir}/evolution/%{basever}/plugins
 %dir %{_libdir}/evolution/%{basever}/components
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*sa-junk*.so
+%{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*sa-junk*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.xml
 %{_libdir}/bonobo/servers/GNOME_Evolution_Shell_*.server
-%{_libdir}/evolution/%{basever}/plugins/*.eplug
-%{_libdir}/evolution/%{basever}/plugins/*.xml
 
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/%{basever}
@@ -357,7 +351,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(zh_CN) %dir %{_datadir}/evolution/%{basever}/default/zh_CN
 
 %{_datadir}/evolution/%{basever}/errors
-%{_datadir}/evolution/%{basever}/etspec
+%dir %{_datadir}/evolution/%{basever}/etspec
 %{_datadir}/evolution/%{basever}/glade
 %{_datadir}/evolution/%{basever}/help
 %{_datadir}/evolution/%{basever}/images
@@ -369,7 +363,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Shell.idl
 
-#%{_desktopdir}/*.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_pixmapsdir}/*.png
 
@@ -396,12 +389,34 @@ rm -rf $RPM_BUILD_ROOT
 %files mail
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-mail.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*mail*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*exchange*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*print-message*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*itip*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*mark-all-read*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*startup-wizard*.so
+%{_libdir}/evolution/%{basever}/plugins/*mail*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*exchange*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*print-message*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*itip*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*mark-all-read*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*startup-wizard*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*exchange*.xml
+%{_libdir}/evolution/%{basever}/plugins/*folder*.xml
+%{_libdir}/evolution/%{basever}/plugins/*print-message*.xml
+%{_libdir}/evolution/%{basever}/plugins/*compose-send*.xml
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail_*.server
 
 %{_datadir}/evolution/%{basever}/default/C/mail
 %{_datadir}/evolution/%{basever}/views/mail
+%{_datadir}/evolution/%{basever}/etspec/*message-list*
+%{_datadir}/evolution/%{basever}/etspec/*contact-list*
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
+%lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
+%lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
 %lang(ja) %{_datadir}/evolution/%{basever}/default/ja/mail
+%lang(lt) %{_datadir}/evolution/%{basever}/default/lt/mail
+%lang(mk) %{_datadir}/evolution/%{basever}/default/mk/mail
 %lang(nl) %{_datadir}/evolution/%{basever}/default/nl/mail
 %lang(pt) %{_datadir}/evolution/%{basever}/default/pt/mail
 %lang(zh_CN) %{_datadir}/evolution/%{basever}/default/zh_CN/mail
@@ -410,8 +425,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution-Mail.idl
 
 %{_desktopdir}/%{name}-mail.desktop
-
-%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault-%{basever}.schemas
 %{_sysconfdir}/gconf/schemas/evolution-mail-%{basever}.schemas
 
 %files addressbook
@@ -422,8 +435,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/evolution-addressbook-export
 %{_libdir}/bonobo/servers/GNOME_Evolution_Addressbook*
 
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*addressbook*.so
+%{_libdir}/evolution/%{basever}/plugins/*addressbook*.eplug
+
 %{_datadir}/evolution/%{basever}/views/addressbook
 %{_datadir}/evolution/%{basever}/ecps
+%{_datadir}/evolution/%{basever}/etspec/*addressbook*
 
 %{_desktopdir}/%{name}-addressbook.desktop
 
@@ -433,9 +450,32 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-calendar.so
 %{_libdir}/bonobo/servers/GNOME_Evolution_Calendar*
+%{_libdir}/evolution/%{basever}/plugins/publish-calendar.glade
+
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*calendar*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*default-source*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*caldav*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*gw-account*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*groupwise*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*hula*.so
+%{_libdir}/evolution/%{basever}/plugins/*calendar*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*default-source*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*caldav*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*gw-account*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*groupwise*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*hula*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*calendar*.xml
+
+%{_datadir}/evolution/%{basever}/etspec/*calendar*
+%{_datadir}/evolution/%{basever}/etspec/*cal-list*
+%{_datadir}/evolution/%{basever}/etspec/*meeting*
+%{_datadir}/evolution/%{basever}/etspec/*memo*
+%{_datadir}/evolution/%{basever}/etspec/*memo*
 
 %{_datadir}/evolution/%{basever}/views/calendar
+%{_datadir}/evolution/%{basever}/views/memos
 %{_datadir}/evolution/%{basever}/views/tasks
+
 %{_datadir}/idl/evolution-%{basever}/evolution-calendar.idl
 
 %{_desktopdir}/%{name}-calendar.desktop
