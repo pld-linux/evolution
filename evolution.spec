@@ -347,8 +347,13 @@ gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 
 %{_datadir}/evolution/%{basever}/*.xml
 %lang(de) %dir %{_datadir}/evolution/%{basever}/default/de
+%lang(fi) %dir %{_datadir}/evolution/%{basever}/default/fi
+%lang(fr) %dir %{_datadir}/evolution/%{basever}/default/fr
 %lang(ja) %dir %{_datadir}/evolution/%{basever}/default/ja
+%lang(lt) %dir %{_datadir}/evolution/%{basever}/default/lt
+%lang(mk) %dir %{_datadir}/evolution/%{basever}/default/mk
 %lang(nl) %dir %{_datadir}/evolution/%{basever}/default/nl
+%lang(pt) %dir %{_datadir}/evolution/%{basever}/default/pt
 %lang(pt) %dir %{_datadir}/evolution/%{basever}/default/pt
 %lang(zh_CN) %dir %{_datadir}/evolution/%{basever}/default/zh_CN
 
@@ -413,6 +418,7 @@ gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 %{_datadir}/evolution/%{basever}/views/mail
 %{_datadir}/evolution/%{basever}/etspec/*message-list*
 %{_datadir}/evolution/%{basever}/etspec/*contact-list*
+
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
 %lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
 %lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
