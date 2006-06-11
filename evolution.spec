@@ -4,19 +4,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.6
+%define		basever	2.8
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.6.2
+Version:	2.7.2.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	24b97cf70a3c1e9e34f6e328e6910ab1
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.7/%{name}-%{version}.tar.bz2
+# Source0-md5:	9a239d549094daf2ad6892f10d152d4f
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -27,26 +27,26 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-GG-IM.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
-BuildRequires:	GConf2-devel >= 2.12.0
-BuildRequires:	ORBit2-devel >= 1:2.12.3
+BuildRequires:	GConf2-devel >= 2.14.0
+BuildRequires:	ORBit2-devel >= 1:2.14.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
-BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.6.2
+BuildRequires:	dbus-glib-devel >= 0.61
+BuildRequires:	evolution-data-server-devel >= 1.7.2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-common >= 2.8.0
+BuildRequires:	gnome-common >= 2.12.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.13}
-BuildRequires:	gnome-vfs2-devel >= 2.12.2
+BuildRequires:	gnome-vfs2-devel >= 2.15.1
 BuildRequires:	gtk-doc >= 1.4
-BuildRequires:	gtkhtml-devel >= 3.10.2
+BuildRequires:	gtkhtml-devel >= 3.11.2
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
-BuildRequires:	intltool >= 0.33
+BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.5.1
 BuildRequires:	libgnomeprintui-devel >= 2.12.0
-BuildRequires:	libgnomeui-devel >= 2.14.1
+BuildRequires:	libgnomeui-devel >= 2.15.1
 BuildRequires:	libsoup-devel >= 2.2.93
 BuildRequires:	libtool
 BuildRequires:	libxml2
@@ -60,14 +60,15 @@ BuildRequires:	python
 BuildRequires:	rpmbuild(macros) >= 1.197
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	which
-Requires(post,preun):	GConf2
+Requires(post,preun):	GConf2 >= 2.14.0
+Requires(post,postun):	gtk+2 >= 2:2.9.2
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2 >= 2.12.0
+Requires:	GConf2 >= 2.14.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.6.2
-Requires:	gtkhtml >= 3.10.2
+Requires:	evolution-data-server >= 1.7.2
+Requires:	gtkhtml >= 3.11.2
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
 Requires:	psmisc
@@ -109,13 +110,13 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 1.6.2
+Requires:	evolution-data-server-devel >= 1.7.2
 Requires:	freetype-devel
-Requires:	gnome-vfs2-devel >= 2.14.2
-Requires:	gtkhtml-devel >= 3.10.2
+Requires:	gnome-vfs2-devel >= 2.15.1
+Requires:	gtkhtml-devel >= 3.11.2
 Requires:	libglade2-devel >= 1:2.5.1
 Requires:	libgnomeprintui-devel >= 2.12.0
-Requires:	libgnomeui-devel >= 2.14.1
+Requires:	libgnomeui-devel >= 2.15.1
 Requires:	libsoup-devel >= 2.2.93
 Requires:	nspr-devel
 Requires:	nss-devel
@@ -276,9 +277,8 @@ install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
-rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
+rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution-2.8.desktop
 
 ln -sf evolution-%{basever} $RPM_BUILD_ROOT%{_bindir}/evolution
 
@@ -290,12 +290,14 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %gconf_schema_install apps_evolution_shell-%{basever}.schemas
 %scrollkeeper_update_post
+gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 
 %preun
 %gconf_schema_uninstall apps_evolution_shell-%{basever}.schemas
 
 %postun
 %scrollkeeper_update_postun
+gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
