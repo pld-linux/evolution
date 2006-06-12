@@ -354,7 +354,6 @@ gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 %lang(mk) %dir %{_datadir}/evolution/%{basever}/default/mk
 %lang(nl) %dir %{_datadir}/evolution/%{basever}/default/nl
 %lang(pt) %dir %{_datadir}/evolution/%{basever}/default/pt
-%lang(pt) %dir %{_datadir}/evolution/%{basever}/default/pt
 %lang(zh_CN) %dir %{_datadir}/evolution/%{basever}/default/zh_CN
 
 %{_datadir}/evolution/%{basever}/errors
