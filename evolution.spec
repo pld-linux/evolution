@@ -327,10 +327,6 @@ gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/killev
-%dir %{_libdir}/evolution
-%dir %{_libdir}/evolution/%{basever}
-%dir %{_libdir}/evolution/%{basever}/plugins
-%dir %{_libdir}/evolution/%{basever}/components
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*sa-junk*.so
 %{_libdir}/evolution/%{basever}/plugins/*plugin-manager*.eplug
@@ -378,6 +374,10 @@ gtk-update-icon-cache -qf %{_datadir}/icons/hicolor
 
 %files libs
 %defattr(644,root,root,755)
+%dir %{_libdir}/evolution
+%dir %{_libdir}/evolution/%{basever}
+%dir %{_libdir}/evolution/%{basever}/components
+%dir %{_libdir}/evolution/%{basever}/plugins
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/lib*.so.*
 
 %files devel
