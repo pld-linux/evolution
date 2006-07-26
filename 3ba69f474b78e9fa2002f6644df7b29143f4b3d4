@@ -1,0 +1,2 @@
+- 2.7.90, use rpm macros, disable --as-needed build
+  gg-im patch included in sources
