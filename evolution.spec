@@ -12,7 +12,7 @@ Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.6.3
-Release:	1
+Release:	3
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.6/%{name}-%{version}.tar.bz2
@@ -33,7 +33,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel
-BuildRequires:	evolution-data-server-devel >= 1.6.2
+BuildRequires:	evolution-data-server-devel >= 1.6.3
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
@@ -57,7 +57,7 @@ BuildRequires:	nss-devel
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
-BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	which
 Requires(post,preun):	GConf2
@@ -66,7 +66,7 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.14.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.6.2
+Requires:	evolution-data-server >= 1.6.3
 Requires:	gtkhtml >= 3.10.2
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.5.1
@@ -290,12 +290,14 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %gconf_schema_install apps_evolution_shell-%{basever}.schemas
 %scrollkeeper_update_post
+%update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall apps_evolution_shell-%{basever}.schemas
 
 %postun
 %scrollkeeper_update_postun
+%update_icon_cache hicolor
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
