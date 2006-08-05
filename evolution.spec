@@ -76,7 +76,7 @@ Obsoletes:	evolution2
 Obsoletes:	gnome-pim
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		no_build_with_as_needed	1
+%define		filterout_ld	(-Wl,)?--as-needed
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
