@@ -25,6 +25,7 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
+Patch2:		%{name}-as_needed-fix.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.14.0
 BuildRequires:	ORBit2-devel >= 1:2.14.0
@@ -75,8 +76,6 @@ Requires:	scrollkeeper >= 0.1.4
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		filterout_ld	(-Wl,)?--as-needed
 
 %description
 Evolution is the GNOME mailer, calendar, contact manager and
@@ -217,6 +216,7 @@ Palmem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__glib_gettextize}
