@@ -11,12 +11,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.7.91
+Version:	2.7.92
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.7/%{name}-%{version}.tar.bz2
-# Source0-md5:	c7aa347eb188d53b22941129d9300fb4
+# Source0-md5:	2c8e3e26b8861365e61e7a93713a204b
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -33,15 +33,15 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.71
-BuildRequires:	evolution-data-server-devel >= 1.7.91
+BuildRequires:	evolution-data-server-devel >= 1.7.92
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.12.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.13}
-BuildRequires:	gnome-vfs2-devel >= 2.15.91
+BuildRequires:	gnome-vfs2-devel >= 2.15.92
 BuildRequires:	gtk-doc >= 1.7
-BuildRequires:	gtkhtml-devel >= 3.11.91
+BuildRequires:	gtkhtml-devel >= 3.11.92
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.6.0
@@ -61,14 +61,14 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	which
 Requires(post,preun):	GConf2 >= 2.14.0
-Requires(post,postun):	gtk+2 >= 2:2.10.1
+Requires(post,postun):	gtk+2 >= 2:2.10.2
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.14.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.7.91
-Requires:	gtkhtml >= 3.11.91
+Requires:	evolution-data-server >= 1.7.92
+Requires:	gtkhtml >= 3.11.92
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.6.0
 Requires:	psmisc
@@ -110,10 +110,10 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 1.7.91
+Requires:	evolution-data-server-devel >= 1.7.92
 Requires:	freetype-devel
-Requires:	gnome-vfs2-devel >= 2.15.91
-Requires:	gtkhtml-devel >= 3.11.91
+Requires:	gnome-vfs2-devel >= 2.15.92
+Requires:	gtkhtml-devel >= 3.11.92
 Requires:	libglade2-devel >= 1:2.6.0
 Requires:	libgnomeprintui-devel >= 2.12.1
 Requires:	libgnomeui-devel >= 2.15.91
