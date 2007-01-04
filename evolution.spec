@@ -11,12 +11,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.8.1.1
+Version:	2.8.2.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	dcf3a8cc527a7d8b5ae0ac56d66fff64
+# Source0-md5:	3c860b732d4087843da4bbf5fc8f03b6
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -28,28 +28,28 @@ Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
 URL:		http://www.ximian.com/products/ximian_evolution/
 BuildRequires:	GConf2-devel >= 2.16.0
-BuildRequires:	ORBit2-devel >= 1:2.14.3
+BuildRequires:	ORBit2-devel >= 1:2.14.4
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.71
-BuildRequires:	evolution-data-server-devel >= 1.8.1
+BuildRequires:	evolution-data-server-devel >= 1.8.2
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.0.5
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.12.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
-BuildRequires:	gnome-vfs2-devel >= 2.16.1
+BuildRequires:	gnome-vfs2-devel >= 2.16.3
 BuildRequires:	gtk-doc >= 1.7
 BuildRequires:	gtkhtml-devel >= 3.12.1
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
-BuildRequires:	intltool >= 0.35
+BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeprintui-devel >= 2.12.1
-BuildRequires:	libgnomeui-devel >= 2.16.0
-BuildRequires:	libsoup-devel >= 2.2.96
+BuildRequires:	libgnomeui-devel >= 2.16.1
+BuildRequires:	libsoup-devel >= 2.2.98
 BuildRequires:	libtool
-BuildRequires:	libxml2 >= 1:2.6.26
+BuildRequires:	libxml2 >= 1:2.6.27
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -67,7 +67,7 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.16.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.8.1
+Requires:	evolution-data-server >= 1.8.2
 Requires:	gtkhtml >= 3.12.1
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.6.0
@@ -110,14 +110,14 @@ Summary(zh_CN):	Evolution组件开发库
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 1.8.1
+Requires:	evolution-data-server-devel >= 1.8.2
 Requires:	freetype-devel
-Requires:	gnome-vfs2-devel >= 2.16.1
+Requires:	gnome-vfs2-devel >= 2.16.3
 Requires:	gtkhtml-devel >= 3.12.1
 Requires:	libglade2-devel >= 1:2.6.0
 Requires:	libgnomeprintui-devel >= 2.12.1
-Requires:	libgnomeui-devel >= 2.16.0
-Requires:	libsoup-devel >= 2.2.96
+Requires:	libgnomeui-devel >= 2.16.1
+Requires:	libsoup-devel >= 2.2.98
 Requires:	nspr-devel
 Requires:	nss-devel
 %{?with_ldap:Requires:	openldap-devel >= 2.3.0}
@@ -277,8 +277,7 @@ install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
-rm -r $RPM_BUILD_ROOT%{_datadir}/mime-info
-rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution-2.8.desktop
+rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 ln -sf evolution-%{basever} $RPM_BUILD_ROOT%{_bindir}/evolution
 
