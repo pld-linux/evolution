@@ -47,6 +47,7 @@ BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeprintui-devel >= 2.12.1
 BuildRequires:	libgnomeui-devel >= 2.16.1
+BuildRequires:	libnotify-devel >= 0.3.0
 BuildRequires:	libsoup-devel >= 2.2.98
 BuildRequires:	libtool
 BuildRequires:	libxml2 >= 1:2.6.27
