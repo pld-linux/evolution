@@ -11,12 +11,12 @@ Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi笨ka Adresowa
 Summary(pt_BR):	Cliente de email integrado com calend醨io e cat醠ogo de endere鏾s
 Summary(zh_CN):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.8.2.1
-Release:	2
+Version:	2.8.3
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	3c860b732d4087843da4bbf5fc8f03b6
+# Source0-md5:	099876b347b114ec08ce6998b4a48d8c
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -26,7 +26,7 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
-URL:		http://www.ximian.com/products/ximian_evolution/
+URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	ORBit2-devel >= 1:2.14.4
 BuildRequires:	autoconf >= 2.52
