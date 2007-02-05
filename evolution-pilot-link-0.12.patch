@@ -1,0 +1,941 @@
+Index: acinclude.m4
+===================================================================
+RCS file: /cvs/gnome/evolution/acinclude.m4,v
+retrieving revision 1.9
+diff -u -r1.9 acinclude.m4
+--- acinclude.m4	12 Jun 2006 12:52:02 -0000	1.9
++++ acinclude.m4	17 Nov 2006 07:29:48 -0000
+@@ -268,3 +268,119 @@
+   AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
+   AM_CONDITIONAL(GTK_DOC_USE_LIBTOOL, test -n "$LIBTOOL")
+ ])
++
++# PILOT_LINK_CHECK
++# Adds --with-pisock and determines the verion of the pisock
++#
++
++AC_SUBST(PISOCK_CFLAGS)
++AC_SUBST(PISOCK_LIBS)
++
++AC_DEFUN([PILOT_LINK_HOOK],[
++	AC_ARG_WITH(pisock,
++	[  --with-pisock            Specify prefix for pisock files],[
++	if test x$withval = xyes; then
++	    dnl Note that an empty true branch is not valid sh syntax.
++	    ifelse([$1], [], :, [$1])
++	else
++	    PISOCK_CFLAGS="-I$withval/include"
++	    incdir="$withval/include"
++	    PISOCK_LIBS="-L$withval/lib -lpisock -lpisync"
++	    AC_MSG_CHECKING("for existance of $withval/lib/libpisock.so")
++	    if test -r $withval/lib/libpisock.so; then
++		AC_MSG_RESULT(yes)
++	    else
++		AC_MSG_ERROR([Unable to find libpisock. Try  http://www.pilot-link.org.])
++	    fi
++	fi
++	])
++
++	if test x$PISOCK_CFLAGS = x; then
++	    AC_CHECK_HEADER(pi-version.h, [incdir="/usr/include"], [
++	    AC_CHECK_HEADER(libpisock/pi-version.h, [PISOCK_CFLAGS="-I/usr/include/libpisock"
++	                                             piversion_include="libpisock/pi-version.h"
++						     incdir="/usr/include/libpisock"
++                                                    ], [
++	    AC_CHECK_HEADER($prefix/include/pi-version.h, [PISOCK_CFLAGS="-I$prefix/include/libpisock"
++	                                                   piversion_include="$prefix/include/pi-version.h"
++						           if test x$PISOCK_LIBDIR = x; then
++							      incdir="$prefix/include"
++							      PISOCK_LIBS="-L$prefix/lib -lpisock -lpisync"
++                                                           fi							  ],
++	    AC_MSG_ERROR([Unable to find pi-version.h])) 
++	    ])
++	    ])
++	fi
++		
++	if test "x$PISOCK_LIBS" = "x"; then
++		AC_CHECK_LIB(pisock, pi_accept, [ PISOCK_LIBS="-lpisock -lpisync"], 
++			[ AC_MSG_ERROR([Unable to find libpisock. Try http://www.pilot-link.org.]) ])
++	fi
++	
++	AC_ARG_ENABLE(pilotlinktest,
++		[  --enable-pilotlinktest   Test for correct version of pilot-link],
++		[testplversion=$enableval],
++		[ testplversion=yes ]
++	)
++
++	if test x$piversion_include = x; then
++		piversion_include="pi-version.h"
++	fi
++
++	pi_major=`cat $incdir/pi-version.h|grep '#define PILOT_LINK_VERSION'|sed 's/#define PILOT_LINK_VERSION \([[0-9]]*\)/\1/'`
++	pi_minor=`cat $incdir/pi-version.h|grep '#define PILOT_LINK_MAJOR'|sed 's/#define PILOT_LINK_MAJOR \([[0-9]]*\)/\1/'`
++	pi_micro=`cat $incdir/pi-version.h|grep '#define PILOT_LINK_MINOR'|sed 's/#define PILOT_LINK_MINOR \([[0-9]]*\)/\1/'`
++	pi_patch=`cat $incdir/pi-version.h|grep '#define PILOT_LINK_PATCH'|sed 's/#define PILOT_LINK_PATCH \"\(.*\)\"/\1/'`
++
++	PILOT_LINK_MAJOR="$pi_major"
++	PILOT_LINK_MINOR="$pi_minor"
++	PILOT_LINK_MICRO="$pi_micro"
++	PILOT_LINK_PATCH="$pi_patch"
++	PILOT_LINK_VERSION="$pi_major.$pi_minor.$pi_micro$pi_patch"
++
++	if test x$testplversion = xyes; then
++		AC_MSG_CHECKING([for pilot-link version >= $1])
++		pl_ma=`echo $1|sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
++		pl_mi=`echo $1|sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
++		pl_mc=`echo $1|sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
++		CFLAGS_save="$CFLAGS"
++		CFLAGS="$CFLAGS $PISOCK_CFLAGS"
++		AC_TRY_RUN(
++			[
++			#include <$piversion_include>
++			int main(int argc,char *argv[]) {
++				if (PILOT_LINK_VERSION == $pl_ma) {
++					if (PILOT_LINK_MAJOR == $pl_mi) {
++						if (PILOT_LINK_MINOR >= $pl_mc) {
++							return 0;
++				       	  	}
++					} else if (PILOT_LINK_MAJOR > $pl_mi) {
++						return 0;
++					}
++				} else if (PILOT_LINK_VERSION > $pl_ma) {
++					return 0;
++				}
++				return 1;
++			}
++			],
++			[AC_MSG_RESULT([yes (found $PILOT_LINK_VERSION)])],
++			[AC_MSG_ERROR([pilot-link >= $1 required])],
++			[AC_MSG_WARN([No action taken for crosscompile])]
++		)
++		CFLAGS="$CFLAGS_save"
++	fi
++
++	unset piversion_include
++	unset pi_verion
++	unset pi_major
++	unset pi_minor
++	unset pi_patch
++	unset incdir
++	unset pl_mi
++	unset pl_ma
++	unset pl_ve
++])
++
++AC_DEFUN([PILOT_LINK_CHECK],[
++	PILOT_LINK_HOOK($1,[],nofailure)
++])
+Index: configure.in
+===================================================================
+RCS file: /cvs/gnome/evolution/configure.in,v
+retrieving revision 1.920
+diff -u -r1.920 configure.in
+--- configure.in	14 Nov 2006 17:45:52 -0000	1.920
++++ configure.in	17 Nov 2006 07:29:48 -0000
+@@ -606,8 +606,22 @@
+ 	fi
+ fi
+ AM_CONDITIONAL(ENABLE_PILOT_CONDUITS, test "x$enable_pilot_conduits" = "xyes")
+-if test x$enable_pilot_conduits = xyes; then
+-   msg_pilot=yes
++dnl ******************************
++dnl If pilot conduits are enabled, check version of pilot-link
++dnl ******************************
++ if test x$enable_pilot_conduits = xyes; then
++    msg_pilot=yes
++
++   PILOT_LINK_CHECK(0.11.4)
++   AC_SUBST(PILOT_LINK_MAJOR)
++   AC_SUBST(PILOT_LINK_MINOR)
++   AC_SUBST(PILOT_LINK_MICRO)
++   AC_SUBST(PILOT_LINK_PATCH)
++   AC_SUBST(PILOT_LINK_VERSION)
++
++   if test $PILOT_LINK_MINOR -ge 12; then
++      AC_DEFINE(PILOT_LINK_0_12,,[Building against pilot-link 0.12.0 or greater])
++   fi
+ else
+    msg_pilot=no
+ fi
+Index: addressbook/conduit/address-conduit.c
+===================================================================
+RCS file: /cvs/gnome/evolution/addressbook/conduit/address-conduit.c,v
+retrieving revision 1.88
+diff -u -r1.88 address-conduit.c
+--- addressbook/conduit/address-conduit.c	6 Dec 2005 08:43:37 -0000	1.88
++++ addressbook/conduit/address-conduit.c	17 Nov 2006 07:29:48 -0000
+@@ -462,6 +462,9 @@
+ {
+ 	static char buff[ 4096 ];
+ 	struct Address addr;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 
+ 	if (remote == NULL) {
+ 		sprintf (buff, "[NULL]");
+@@ -469,7 +472,21 @@
+ 	}
+ 
+ 	memset (&addr, 0, sizeof (struct Address));
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	unpack_Address (&addr, buffer, address_v1);
++	pi_buffer_free(buffer);
++#else
+ 	unpack_Address (&addr, remote->record, remote->length);
++#endif
+ 
+ 	g_snprintf (buff, 4096, "['%s' '%s' '%s']",
+ 		    addr.entry[entryLastname] ?
+@@ -792,6 +809,9 @@
+ {
+ 	GnomePilotRecord p;
+ 	static char record[0xffff];
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	
+ 	g_assert (local->addr != NULL );
+ 	
+@@ -804,9 +824,25 @@
+ 	p.secret = local->local.secret;
+ 
+ 	/* Generate pilot record structure */
++
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return p;
++	}
++
++	pack_Address (local->addr, buffer, address_v1);
++
++	p.record = g_new0(unsigned char, buffer->used);
++	p.length = buffer->used;
++	memcpy(p.record, buffer->data, buffer->used);
++
++	pi_buffer_free(buffer);
++#else
+ 	p.record = record;
+ 	p.length = pack_Address (local->addr, p.record, 0xffff);
+-
++#endif
+ 	return p;	
+ }
+ 
+@@ -834,16 +870,34 @@
+ 	 */
+ 	if (local->local.ID != 0) {
+ 		struct Address addr;
+-		char record[0xffff];
+ 		int cat = 0;
++#ifdef PILOT_LINK_0_12
++		pi_buffer_t * record;
++		record = pi_buffer_new(DLP_BUF_SIZE);
++		if(record == NULL){
++			pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++			return;
++		}
++#else
++		char record[0xffff];
++#endif
+ 		
+ 		if (dlp_ReadRecordById (ctxt->dbi->pilot_socket, 
+ 					ctxt->dbi->db_handle,
++#ifdef PILOT_LINK_0_12
++					local->local.ID, record, 
++					NULL, NULL, &cat) > 0) {
++#else
+ 					local->local.ID, &record, 
+ 					NULL, NULL, NULL, &cat) > 0) {
++#endif
+ 			local->local.category = cat;
+ 			memset (&addr, 0, sizeof (struct Address));
++#ifdef PILOT_LINK_0_12
++			unpack_Address (&addr, record, address_v1);
++#else
+ 			unpack_Address (&addr, record, 0xffff);
++#endif
+ 			for (i = 0; i < 5; i++) {
+ 				if (addr.entry[entryPhone1 + i])
+ 					local->addr->entry[entryPhone1 + i] = 
+@@ -858,6 +912,9 @@
+ 			}
+ 			free_Address (&addr);
+ 		}
++#ifdef PILOT_LINK_0_12
++		pi_buffer_free (record);
++#endif
+ 	}
+ 
+ 	local->addr->entry[entryFirstname] = e_pilot_utf8_to_pchar (e_contact_get_const (contact, E_CONTACT_GIVEN_NAME));
+@@ -1019,11 +1076,27 @@
+ 	EContactField next_mail, next_home, next_work, next_fax;
+ 	EContactField next_other, next_main, next_pager, next_mobile;
+ 	int i;
+-
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	g_return_val_if_fail(remote!=NULL,NULL);
+ 	memset (&address, 0, sizeof (struct Address));
+-	unpack_Address (&address, remote->record, remote->length);
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return NULL;
++	}
+ 
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return NULL;
++	}
++	unpack_Address (&address, buffer, address_v1);
++	pi_buffer_free(buffer);
++#else
++	unpack_Address (&address, remote->record, remote->length);
++#endif
+ 	if (in_contact == NULL)
+ 		contact = e_contact_new ();
+ 	else
+@@ -1217,6 +1290,9 @@
+ 	char *change_id;
+ 	char *auth;
+ 	gint num_records, add_records = 0, mod_records = 0, del_records = 0;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t *buffer;
++#endif
+ 
+ 	abs_conduit = GNOME_PILOT_CONDUIT_SYNC_ABS (conduit);
+ 
+@@ -1302,10 +1378,19 @@
+   	gnome_pilot_conduit_sync_abs_set_num_updated_local_records (abs_conduit, mod_records);
+   	gnome_pilot_conduit_sync_abs_set_num_deleted_local_records(abs_conduit, del_records);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		return pi_set_error(dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++	}
++	
++	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
++			      DLP_BUF_SIZE, buffer);
++#else
+ 	buf = (unsigned char*)g_malloc (0xffff);
+ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
+ 			      (unsigned char *)buf, 0xffff);
+-	
++#endif	
+ 	if (len < 0) {
+ 		WARN (_("Could not read pilot's Address application block"));
+ 		WARN ("dlp_ReadAppBlock(...) = %d", len);
+@@ -1313,9 +1398,13 @@
+ 					   _("Could not read pilot's Address application block"));
+ 		return -1;
+ 	}
++#ifdef PILOT_LINK_0_12
++	unpack_AddressAppInfo (&(ctxt->ai), buffer->data, len);
++	pi_buffer_free (buffer);
++#else
+ 	unpack_AddressAppInfo (&(ctxt->ai), buf, len);
+ 	g_free (buf);
+-
++#endif
+   	check_for_slow_setting (conduit, ctxt);
+ 	if (ctxt->cfg->sync_type == GnomePilotConduitSyncTypeCopyToPilot
+ 	    || ctxt->cfg->sync_type == GnomePilotConduitSyncTypeCopyFromPilot)
+Index: calendar/conduits/calendar/calendar-conduit.c
+===================================================================
+RCS file: /cvs/gnome/evolution/calendar/conduits/calendar/calendar-conduit.c,v
+retrieving revision 1.132
+diff -u -r1.132 calendar-conduit.c
+--- calendar/conduits/calendar/calendar-conduit.c	23 Dec 2005 04:39:34 -0000	1.132
++++ calendar/conduits/calendar/calendar-conduit.c	17 Nov 2006 07:29:48 -0000
+@@ -413,6 +413,9 @@
+ {
+ 	static char buff[ 4096 ];
+ 	struct Appointment appt;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 
+ 	if (remote == NULL) {
+ 		sprintf (buff, "[NULL]");
+@@ -420,8 +423,22 @@
+ 	}
+ 
+ 	memset (&appt, 0, sizeof (struct Appointment));
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	
++	unpack_Appointment (&appt, buffer, datebook_v1);
++	pi_buffer_free(buffer);
++#else
+ 	unpack_Appointment (&appt, remote->record, remote->length);
+-
++#endif
+ 	g_snprintf (buff, 4096, "[%ld %ld '%s' '%s']",
+ 		    mktime (&appt.begin),
+ 		    mktime (&appt.end),
+@@ -819,6 +836,9 @@
+ {
+ 	GnomePilotRecord p;
+ 	static char record[0xffff];
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 
+ 	g_assert (local->comp != NULL);
+ 	g_assert (local->appt != NULL );
+@@ -830,9 +850,23 @@
+ 	p.secret = local->local.secret;
+ 
+ 	/* Generate pilot record structure */
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return p;
++	}
++	
++	pack_Appointment (local->appt, buffer, datebook_v1);
++	p.record = g_new0(unsigned char, buffer->used);
++	p.length = buffer->used;
++	memcpy(p.record, buffer->data, buffer->used);
++	
++	pi_buffer_free(buffer); 
++#else
+ 	p.record = record;
+ 	p.length = pack_Appointment (local->appt, p.record, 0xffff);
+-
++#endif
+ 	return p;	
+ }
+ 
+@@ -867,22 +901,44 @@
+          * we don't overwrite them 
+ 	 */
+ 	if (local->local.ID != 0) {
++		int cat = 0;
++#ifdef PILOT_LINK_0_12
++		struct Appointment appt;
++		pi_buffer_t * record;
++	
++		record = pi_buffer_new(DLP_BUF_SIZE);
++		if(record == NULL){
++			pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++			return;
++		}
++#else
+ 		struct Appointment appt;		
+ 		char record[0xffff];
+-		int cat = 0;
+-		
++#endif	
+ 		if (dlp_ReadRecordById (ctxt->dbi->pilot_socket, 
+ 					ctxt->dbi->db_handle,
++#ifdef PILOT_LINK_0_12
++					local->local.ID, record, 
++					NULL, NULL, &cat) > 0) {
++#else
+ 					local->local.ID, &record, 
+ 					NULL, NULL, NULL, &cat) > 0) {
++#endif
+ 			local->local.category = cat;
+ 			memset (&appt, 0, sizeof (struct Appointment));
++#ifdef PILOT_LINK_0_12
++			unpack_Appointment (&appt, record, datebook_v1);
++#else
+ 			unpack_Appointment (&appt, record, 0xffff);
++#endif
+ 			local->appt->alarm = appt.alarm;
+ 			local->appt->advance = appt.advance;
+ 			local->appt->advanceUnits = appt.advanceUnits;
+ 			free_Appointment (&appt);
+ 		}
++#ifdef PILOT_LINK_0_12
++		pi_buffer_free (record);
++#endif
+ 	}
+ 
+ 	/* STOP: don't replace these with g_strdup, since free_Appointment
+@@ -1140,12 +1196,28 @@
+ 	GSList *edl = NULL;	
+ 	char *txt;
+ 	int pos, i;
+-	
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	g_return_val_if_fail (remote != NULL, NULL);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		return NULL;
++	}
++	
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		return NULL;
++	}
++
++	unpack_Appointment (&appt, buffer, datebook_v1);
++	pi_buffer_free(buffer);
++
++#else
+ 	memset (&appt, 0, sizeof (struct Appointment));
+ 	unpack_Appointment (&appt, remote->record, remote->length);
+-
++#endif
+ 	if (in_comp == NULL) {
+ 		comp = e_cal_component_new ();
+ 		e_cal_component_set_new_vtype (comp, E_CAL_COMPONENT_EVENT);
+@@ -1413,7 +1485,9 @@
+ 	char *filename, *change_id;
+ 	icalcomponent *icalcomp;
+ 	gint num_records, add_records = 0, mod_records = 0, del_records = 0;
+-
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	abs_conduit = GNOME_PILOT_CONDUIT_SYNC_ABS (conduit);
+ 
+ 	LOG (g_message ( "---------------------------------------------------------\n" ));
+@@ -1521,10 +1595,21 @@
+ 	gnome_pilot_conduit_sync_abs_set_num_updated_local_records (abs_conduit, mod_records);
+ 	gnome_pilot_conduit_sync_abs_set_num_deleted_local_records(abs_conduit, del_records);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return -1;
++	}
++
++ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
++				DLP_BUF_SIZE,
++				buffer);
++#else
+ 	buf = (unsigned char*)g_malloc (0xffff);
+ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
+ 			      (unsigned char *)buf, 0xffff);
+-	
++#endif
+ 	if (len < 0) {
+ 		WARN (_("Could not read pilot's Calendar application block"));
+ 		WARN ("dlp_ReadAppBlock(...) = %d", len);
+@@ -1532,6 +1617,11 @@
+ 					   _("Could not read pilot's Calendar application block"));
+ 		return -1;
+ 	}
++#ifdef PILOT_LINK_0_12
++	buf = g_new0 (unsigned char,buffer->used);
++	memcpy(buf, buffer->data, buffer->used);
++	pi_buffer_free(buffer);
++#endif
+ 	unpack_AppointmentAppInfo (&(ctxt->ai), buf, len);
+ 	g_free (buf);
+ 
+Index: calendar/conduits/todo/todo-conduit.c
+===================================================================
+RCS file: /cvs/gnome/evolution/calendar/conduits/todo/todo-conduit.c,v
+retrieving revision 1.98
+diff -u -r1.98 todo-conduit.c
+--- calendar/conduits/todo/todo-conduit.c	13 May 2006 07:58:02 -0000	1.98
++++ calendar/conduits/todo/todo-conduit.c	17 Nov 2006 07:29:48 -0000
+@@ -402,15 +402,30 @@
+ {
+ 	static char buff[ 4096 ];
+ 	struct ToDo todo;
+-
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	if (remote == NULL) {
+ 		sprintf (buff, "[NULL]");
+ 		return buff;
+ 	}
+ 
+ 	memset (&todo, 0, sizeof (struct ToDo));
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	unpack_ToDo (&todo, buffer, todo_v1);
++	pi_buffer_free(buffer);
++#else
+ 	unpack_ToDo (&todo, remote->record, remote->length);
+-
++#endif
+ 	g_snprintf (buff, 4096, "[%d %ld %d %d '%s' '%s' %d]",
+ 		    todo.indefinite,
+ 		    mktime (&todo.due),
+@@ -594,7 +609,11 @@
+ 			      EToDoConduitContext *ctxt)
+ {
+ 	GnomePilotRecord p;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#else
+ 	static char record[0xffff];
++#endif
+ 
+ 	g_assert (local->comp != NULL);
+ 	g_assert (local->todo != NULL );
+@@ -607,10 +626,24 @@
+ 	p.archived = local->local.archived;
+ 	p.secret = local->local.secret;
+ 
+-	/* Generate pilot record structure */
++	/* Generate pilot record structure */
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return p;
++	}
++
++	pack_ToDo (local->todo, buffer, todo_v1);
++	p.record = g_new0(unsigned char, buffer->used);
++	p.length = buffer->used;
++	memcpy(p.record, buffer->data, buffer->used);
++
++	pi_buffer_free(buffer); 
++#else
+ 	p.record = record;
+ 	p.length = pack_ToDo (local->todo, p.record, 0xffff);
+-
++#endif
+ 	return p;	
+ }
+ 
+@@ -696,15 +729,32 @@
+ 
+ 	/* Don't overwrite the category */
+ 	if (local->local.ID != 0) {
+-		char record[0xffff];
+ 		int cat = 0;
++#ifdef PILOT_LINK_0_12
++		pi_buffer_t * record;
++		record = pi_buffer_new(DLP_BUF_SIZE);
++		if(record == NULL){
++			pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++			return;
++		}
++#else
++		char record[0xffff];
++#endif
+ 		
+ 		if (dlp_ReadRecordById (ctxt->dbi->pilot_socket, 
+ 					ctxt->dbi->db_handle,
++#ifdef PILOT_LINK_0_12
++					local->local.ID, record, 
++					NULL, NULL, &cat) > 0) {
++#else
+ 					local->local.ID, &record, 
+ 					NULL, NULL, NULL, &cat) > 0) {
++#endif
+ 			local->local.category = cat;
+ 		}
++#ifdef PILOT_LINK_0_12
++		pi_buffer_free(record);
++#endif
+ 	}
+ 	
+ 	/*
+@@ -860,11 +910,28 @@
+ 	int priority;
+ 	char *txt;
+ 	char *category;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	
+ 	g_return_val_if_fail (remote != NULL, NULL);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		return NULL;
++	}
++
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		return NULL;
++	}
++
++	unpack_ToDo (&todo, buffer, todo_v1);
++	pi_buffer_free(buffer);
++#else
+ 	memset (&todo, 0, sizeof (struct ToDo));
+ 	unpack_ToDo (&todo, remote->record, remote->length);
++#endif
+ 
+ 	utc_zone = icaltimezone_get_utc_timezone ();
+ 	now = icaltime_from_timet_with_zone (time (NULL), FALSE, 
+@@ -1018,6 +1085,9 @@
+ 	char *filename, *change_id;
+ 	icalcomponent *icalcomp;
+ 	gint num_records, add_records = 0, mod_records = 0, del_records = 0;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 
+ 	abs_conduit = GNOME_PILOT_CONDUIT_SYNC_ABS (conduit);
+ 
+@@ -1104,10 +1174,20 @@
+ 	g_message("num_records: %d\nadd_records: %d\nmod_records: %d\ndel_records: %d\n",
+ 			num_records, add_records, mod_records, del_records);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return -1;
++	}
++ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
++				DLP_BUF_SIZE,
++				buffer);
++#else
+ 	buf = (unsigned char*)g_malloc (0xffff);
+ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
+ 			      (unsigned char *)buf, 0xffff);
+-	
++#endif	
+ 	if (len < 0) {
+ 		WARN (_("Could not read pilot's ToDo application block"));
+ 		WARN ("dlp_ReadAppBlock(...) = %d", len);
+@@ -1115,6 +1195,12 @@
+ 					   _("Could not read pilot's ToDo application block"));
+ 		return -1;
+ 	}
++
++#ifdef PILOT_LINK_0_12
++	buf = g_new0 (unsigned char,buffer->used);
++	memcpy(buf, buffer->data,buffer->used);
++	pi_buffer_free(buffer);
++#endif
+ 	unpack_ToDoAppInfo (&(ctxt->ai), buf, len);
+ 	g_free (buf);
+ 	
+Index: calendar/conduits/memo/memo-conduit.c
+===================================================================
+RCS file: /cvs/gnome/evolution/calendar/conduits/memo/memo-conduit.c,v
+retrieving revision 1.1
+diff -u -r1.1 memo-conduit.c
+--- calendar/conduits/memo/memo-conduit.c	19 Oct 2005 11:39:35 -0000	1.1
++++ calendar/conduits/memo/memo-conduit.c	17 Nov 2006 07:29:48 -0000
+@@ -331,6 +331,9 @@
+ {
+ 	static char buff[ 64 ];
+ 	struct Memo memo;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t *buffer;
++#endif
+ 
+ 	if (remote == NULL) {
+ 		sprintf (buff, "[NULL]");
+@@ -338,8 +341,22 @@
+ 	}
+ 
+ 	memset (&memo, 0, sizeof (struct Memo));
+-	unpack_Memo (&memo, remote->record, remote->length);
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		sprintf (buff, "[NULL]");
++		return buff;
++	}
++	unpack_Memo (&memo, buffer, memo_v1);
+ 
++	pi_buffer_free(buffer);
++#else
++	unpack_Memo (&memo, remote->record, remote->length);
++#endif
+ 	g_snprintf (buff, 64, "['%s']",
+ 		    memo.text ?
+ 		    memo.text : "");
+@@ -452,6 +469,9 @@
+ {
+ 	GnomePilotRecord p;
+ 	static char record[0xffff];
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 
+ 	g_assert (local->comp != NULL);
+ 	g_assert (local->memo != NULL );
+@@ -465,9 +485,23 @@
+ 	p.secret = local->local.secret;
+ 
+ 	/* Generate pilot record structure */
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return p;
++	}
++
++	pack_Memo (local->memo, buffer, memo_v1);
++	p.record = g_new0(unsigned char, buffer->used);
++	p.length = buffer->used;
++	memcpy(p.record, buffer->data, buffer->used);
++
++	pi_buffer_free(buffer);
++#else
+ 	p.record = record;
+ 	p.length = pack_Memo (local->memo, p.record, 0xffff);
+-
++#endif
+ 	return p;	
+ }
+ 
+@@ -568,16 +602,41 @@
+ 
+ 	/* Don't overwrite the category */
+ 	if (local->local.ID != 0) {
++#ifdef PILOT_LINK_0_12
++		struct Memo memo;
++		pi_buffer_t * record;
++#else
+ 		char record[0xffff];
++#endif
+ 		int cat = 0;
+ 		
++#ifdef PILOT_LINK_0_12
++		record = pi_buffer_new(DLP_BUF_SIZE);
++		if(record == NULL){
++			pi_set_error(ctxt->dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++			return;
++		}
++#endif
++
+ 		LOG(fprintf(stderr, "local_record_from_comp: calling dlp_ReadRecordById\n"));
+ 		if (dlp_ReadRecordById (ctxt->dbi->pilot_socket, 
+ 					ctxt->dbi->db_handle,
++#ifdef PILOT_LINK_0_12
++					local->local.ID, record, 
++					NULL, NULL, &cat) > 0) {
++			local->local.category = cat;
++			memset (&memo, 0, sizeof (struct Memo));
++			unpack_Memo (&memo, record, memo_v1);
++			local->memo->text = strdup (memo.text);
++			free_Memo (&memo);
++		}
++		pi_buffer_free (record);
++#else
+ 					local->local.ID, &record, 
+ 					NULL, NULL, NULL, &cat) > 0) {
+ 			local->local.category = cat;
+-		}
++		}	
++#endif
+ 		LOG(fprintf(stderr, "local_record_from_comp: done calling dlp_ReadRecordById\n"));
+ 	}
+ 	
+@@ -704,11 +763,27 @@
+ 	char *txt, *txt2, *txt3;
+ 	char *category;
+ 	int i;
+-	
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 	g_return_val_if_fail (remote != NULL, NULL);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		return NULL;
++	}
++	
++	if(pi_buffer_append(buffer, remote->record, remote->length)==NULL){
++		return NULL;
++	}
++	
++	unpack_Memo (&memo, buffer, memo_v1);
++	pi_buffer_free(buffer);
++#else
+ 	memset (&memo, 0, sizeof (struct Memo));
+ 	unpack_Memo (&memo, remote->record, remote->length);
++#endif
+ 
+ 	utc_zone = icaltimezone_get_utc_timezone ();
+ 	now = icaltime_from_timet_with_zone (time (NULL), FALSE, 
+@@ -840,6 +915,9 @@
+ 	char *filename, *change_id;
+ 	icalcomponent *icalcomp;
+ 	gint num_records, add_records = 0, mod_records = 0, del_records = 0;
++#ifdef PILOT_LINK_0_12
++	pi_buffer_t * buffer;
++#endif
+ 
+ 	abs_conduit = GNOME_PILOT_CONDUIT_SYNC_ABS (conduit);
+ 
+@@ -929,10 +1007,21 @@
+ 	g_message("num_records: %d\nadd_records: %d\nmod_records: %d\ndel_records: %d\n",
+ 		num_records, add_records, mod_records, del_records);
+ 
++#ifdef PILOT_LINK_0_12
++	buffer = pi_buffer_new(DLP_BUF_SIZE);
++	if(buffer == NULL){
++		pi_set_error(dbi->pilot_socket, PI_ERR_GENERIC_MEMORY);
++		return -1;
++	}
++
++ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
++				DLP_BUF_SIZE,
++				buffer);
++#else
+ 	buf = (unsigned char*)g_malloc (0xffff);
+ 	len = dlp_ReadAppBlock (dbi->pilot_socket, dbi->db_handle, 0,
+ 			      (unsigned char *)buf, 0xffff);
+-	
++#endif
+ 	if (len < 0) {
+ 		WARN (_("Could not read pilot's Memo application block"));
+ 		WARN ("dlp_ReadAppBlock(...) = %d", len);
+@@ -940,7 +1029,15 @@
+ 					   _("Could not read pilot's Memo application block"));
+ 		return -1;
+ 	}
++#ifdef PILOT_LINK_0_12
++	buf = g_new0 (unsigned char,buffer->used);
++	memcpy(buf, buffer->data, buffer->used);
++ 	unpack_MemoAppInfo (&(ctxt->ai), buf, len);
++	pi_buffer_free(buffer);
++#else
+ 	unpack_MemoAppInfo (&(ctxt->ai), buf, len);
++#endif
++
+ 	g_free (buf);
+ 	
+ 	lastDesktopUniqueID = 128;
