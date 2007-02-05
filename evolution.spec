@@ -26,6 +26,7 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
+Patch3:		%{name}-pilot-link-0.12.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	ORBit2-devel >= 1:2.14.4
@@ -61,9 +62,9 @@ BuildRequires:	python
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	which
-Requires(post,preun):	GConf2 >= 2.16.0
 Requires(post,postun):	gtk+2 >= 2:2.10.6
 Requires(post,postun):	scrollkeeper
+Requires(post,preun):	GConf2 >= 2.16.0
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.16.0
@@ -159,8 +160,8 @@ Summary:	Evolution mail component
 Summary(pl):	Modu³ pocztowy Evolution
 Group:		X11/Applications
 # mail composer requires addressbook component
-Requires:	%{name}-addressbook = %{version}-%{release}
 Requires(post,preun):	GConf2
+Requires:	%{name}-addressbook = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 
 %description mail
@@ -173,8 +174,8 @@ Modu³ pocztowy Evolution.
 Summary:	Evolution addressbook component
 Summary(pl):	Modu³ ksi±¿ki adresowej Evolution
 Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
 Requires(post,preun):	GConf2
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 
 %description addressbook
@@ -187,8 +188,8 @@ Ksi±¿ka adresowa Evolution.
 Summary:	Evolution calendar and todo component
 Summary(pl):	Modu³ kalendarza i listy zadañ Evolution
 Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
 Requires(post,preun):	GConf2
+Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 
 %description calendar
@@ -218,6 +219,7 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p0
 
 %build
 %{__glib_gettextize}
@@ -278,6 +280,7 @@ install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
 rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
+rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 ln -sf evolution-%{basever} $RPM_BUILD_ROOT%{_bindir}/evolution
