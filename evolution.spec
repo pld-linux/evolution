@@ -7,9 +7,9 @@
 %define		basever	2.8
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
-Summary(pl):	Klient poczty dla GNOME/Kalendarz/Ksi±øka Adresowa
-Summary(pt_BR):	Cliente de email integrado com calend·rio e cat·logo de endereÁos
-Summary(zh_CN):	Evolution - GNOME∏ˆ»À∫Õπ§◊˜◊È–≈œ¢π‹¿Ìπ§æﬂ(∞¸¿®µÁ◊”” º˛£¨»’¿˙∫Õµÿ÷∑±°)
+Summary(pl.UTF-8):   Klient poczty dla GNOME/Kalendarz/KsiƒÖ≈ºka Adresowa
+Summary(pt_BR.UTF-8):   Cliente de email integrado com calend√°rio e cat√°logo de endere√ßos
+Summary(zh_CN.UTF-8):   Evolution - GNOME‰∏™‰∫∫ÂíåÂ∑•‰ΩúÁªÑ‰ø°ÊÅØÁÆ°ÁêÜÂ∑•ÂÖ∑(ÂåÖÊã¨ÁîµÂ≠êÈÇÆ‰ª∂ÔºåÊó•ÂéÜÂíåÂú∞ÂùÄËñÑ)
 Name:		evolution
 Version:	2.8.3
 Release:	1
@@ -85,30 +85,30 @@ communications tool. The tools which make up Evolution will be tightly
 integrated with one another and act as a seamless personal
 information-management tool.
 
-%description -l pl
-Evolution to program pocztowy GNOME, kalendarz, ksi±øka adresowa i
-narzÍdzie komunikacyjne.
+%description -l pl.UTF-8
+Evolution to program pocztowy GNOME, kalendarz, ksiƒÖ≈ºka adresowa i
+narzƒôdzie komunikacyjne.
 
-%description -l pt_BR
-Evolution È um cliente de email para o GNOME com calend·rio e outras
+%description -l pt_BR.UTF-8
+Evolution √© um cliente de email para o GNOME com calend√°rio e outras
 ferramentas interessantes.
 
 %package libs
 Summary:	Evolution libraries
-Summary(pl):	Biblioteki Evolution
+Summary(pl.UTF-8):   Biblioteki Evolution
 Group:		Development/Libraries
 
 %description libs
 This package contains Evolution libraries.
 
-%description libs -l pl
+%description libs -l pl.UTF-8
 Pakiet zawiera biblioteki Evolution.
 
 %package devel
 Summary:	Header files for evolution
-Summary(pl):	Pliki nag≥Ûwkowe i dokumentacja
-Summary(pt_BR):	Bibliotecas e arquivos de inclus„o para desenvolvimento
-Summary(zh_CN):	Evolution◊Èº˛ø™∑¢ø‚
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe i dokumentacja
+Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclus√£o para desenvolvimento
+Summary(zh_CN.UTF-8):   EvolutionÁªÑ‰ª∂ÂºÄÂèëÂ∫ì
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
@@ -129,18 +129,18 @@ Obsoletes:	evolution2-devel
 This package contains the files necessary to develop applications
 using Evolution's libraries.
 
-%description devel -l pl
-Pakiet zawiera pliki potrzebne do rozwoju aplikacji uøywaj±cych
+%description devel -l pl.UTF-8
+Pakiet zawiera pliki potrzebne do rozwoju aplikacji u≈ºywajƒÖcych
 bibliotek programu Evolution.
 
-%description devel -l pt_BR
-Este pacote contÈm os arquivos necess·rios para desenvolvimento de
-aplicaÁıes utilizando as bibliotecas do Evolution.
+%description devel -l pt_BR.UTF-8
+Este pacote cont√©m os arquivos necess√°rios para desenvolvimento de
+aplica√ß√µes utilizando as bibliotecas do Evolution.
 
 %package static
 Summary:	Static libraries for evolution
-Summary(pl):	Biblioteki statyczne dla evolution
-Summary(pt_BR):	Bibliotecas est·ticas para desenvolvimento
+Summary(pl.UTF-8):   Biblioteki statyczne dla evolution
+Summary(pt_BR.UTF-8):   Bibliotecas est√°ticas para desenvolvimento
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	evolution2-static
@@ -148,16 +148,16 @@ Obsoletes:	evolution2-static
 %description static
 This package contains static libraries for Evolution.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Pakiet zawiera statyczne biblioteki Evolution.
 
-%description static -l pt_BR
-Este pacote contÈm as bibliotecas est·ticas para desenvolvimento de
-aplicaÁıes.
+%description static -l pt_BR.UTF-8
+Este pacote cont√©m as bibliotecas est√°ticas para desenvolvimento de
+aplica√ß√µes.
 
 %package mail
 Summary:	Evolution mail component
-Summary(pl):	Modu≥ pocztowy Evolution
+Summary(pl.UTF-8):   Modu≈Ç pocztowy Evolution
 Group:		X11/Applications
 # mail composer requires addressbook component
 Requires(post,preun):	GConf2
@@ -167,12 +167,12 @@ Provides:	%{name}-component = %{version}-%{release}
 %description mail
 Evolution mail.
 
-%description mail -l pl
-Modu≥ pocztowy Evolution.
+%description mail -l pl.UTF-8
+Modu≈Ç pocztowy Evolution.
 
 %package addressbook
 Summary:	Evolution addressbook component
-Summary(pl):	Modu≥ ksi±øki adresowej Evolution
+Summary(pl.UTF-8):   Modu≈Ç ksiƒÖ≈ºki adresowej Evolution
 Group:		X11/Applications
 Requires(post,preun):	GConf2
 Requires:	%{name} = %{version}-%{release}
@@ -181,12 +181,12 @@ Provides:	%{name}-component = %{version}-%{release}
 %description addressbook
 Evolution addressbook.
 
-%description addressbook -l pl
-Ksi±øka adresowa Evolution.
+%description addressbook -l pl.UTF-8
+KsiƒÖ≈ºka adresowa Evolution.
 
 %package calendar
 Summary:	Evolution calendar and todo component
-Summary(pl):	Modu≥ kalendarza i listy zadaÒ Evolution
+Summary(pl.UTF-8):   Modu≈Ç kalendarza i listy zada≈Ñ Evolution
 Group:		X11/Applications
 Requires(post,preun):	GConf2
 Requires:	%{name} = %{version}-%{release}
@@ -195,12 +195,12 @@ Provides:	%{name}-component = %{version}-%{release}
 %description calendar
 Evolution calendar and todo component.
 
-%description calendar -l pl
-Kalendarz i lista zadaÒ Evolution.
+%description calendar -l pl.UTF-8
+Kalendarz i lista zada≈Ñ Evolution.
 
 %package pilot
 Summary:	Evolution conduits for gnome-pilot
-Summary(pl):	Dodatki do wymiany danych z gnome-pilot
+Summary(pl.UTF-8):   Dodatki do wymiany danych z gnome-pilot
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	gnome-pilot
@@ -210,7 +210,7 @@ Obsoletes:	evolution2-pilot
 This package contains conduits needed by gnome-pilot to synchronize
 your Palm with Evolution.
 
-%description pilot -l pl
+%description pilot -l pl.UTF-8
 Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
 Palmem.
 
