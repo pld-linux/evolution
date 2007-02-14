@@ -1,0 +1,10 @@
+--- evolution-2.8.3/plugins/groupwise-features/junk-settings.c~	2007-01-29 10:59:51.000000000 +0100
++++ evolution-2.8.3/plugins/groupwise-features/junk-settings.c	2007-02-14 01:01:43.000000000 +0100
+@@ -24,6 +24,7 @@
+ #endif
+ #include <glade/glade.h>
+ #include "junk-settings.h"
++#include <glib/gi18n-lib.h>
+ #include <glib/gmain.h>
+ #include <gtk/gtktreemodel.h>
+ #include <gtk/gtkliststore.h>
