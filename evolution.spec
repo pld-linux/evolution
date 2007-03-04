@@ -4,19 +4,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.8
+%define		basever	2.10
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.8.3
-Release:	2
+Version:	2.9.92
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
-Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	099876b347b114ec08ce6998b4a48d8c
+Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.9/%{name}-%{version}.tar.bz2
+# Source0-md5:	9f7af45a4f37d05a151d4573133bfd55
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -26,7 +26,7 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
-Patch3:		%{name}-pilot-link-0.12.patch
+#Patch3:		%{name}-pilot-link-0.12.patch
 Patch4:		%{name}-groupwise-features-link.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -220,7 +220,7 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p0
+#%%patch3 -p0
 %patch4 -p1
 
 %build
@@ -370,8 +370,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Shell.idl
 
-%{_iconsdir}/hicolor/*/apps/*.png
-%{_pixmapsdir}/*.png
+%{_iconsdir}/hicolor/*/apps/*
 
 %{_omf_dest_dir}/%{name}
 
@@ -401,12 +400,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-mail.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*mail*.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*imap*.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*exchange*.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*print-message*.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*itip*.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*mark-all-read*.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/plugins/*startup-wizard*.so
 %{_libdir}/evolution/%{basever}/plugins/*mail*.eplug
+%{_libdir}/evolution/%{basever}/plugins/*imap*.eplug
 %{_libdir}/evolution/%{basever}/plugins/*exchange*.eplug
 %{_libdir}/evolution/%{basever}/plugins/*print-message*.eplug
 %{_libdir}/evolution/%{basever}/plugins/*itip*.eplug
@@ -424,6 +425,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/etspec/*contact-list*
 
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
+%lang(es) %{_datadir}/evolution/%{basever}/default/es/mail
 %lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
 %lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
 %lang(ja) %{_datadir}/evolution/%{basever}/default/ja/mail
