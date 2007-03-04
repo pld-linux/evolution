@@ -346,6 +346,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_datadir}/evolution/%{basever}/*.xml
 %lang(de) %dir %{_datadir}/evolution/%{basever}/default/de
+%lang(es) %dir %{_datadir}/evolution/%{basever}/default/es
 %lang(fi) %dir %{_datadir}/evolution/%{basever}/default/fi
 %lang(fr) %dir %{_datadir}/evolution/%{basever}/default/fr
 %lang(ja) %dir %{_datadir}/evolution/%{basever}/default/ja
