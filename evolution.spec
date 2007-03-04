@@ -26,7 +26,6 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
-#Patch3:		%{name}-pilot-link-0.12.patch
 Patch4:		%{name}-groupwise-features-link.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -220,7 +219,6 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%%patch3 -p0
 %patch4 -p1
 
 %build
