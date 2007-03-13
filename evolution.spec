@@ -179,6 +179,7 @@ Moduł pocztowy Evolution.
 Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires(post,preun):	GConf2
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
@@ -318,10 +319,14 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall evolution-mail-%{basever}.schemas
 
 %post addressbook
+%update_desktop_database_post
 %gconf_schema_install apps_evolution_addressbook-%{basever}.schemas
 
 %preun addressbook
 %gconf_schema_uninstall apps_evolution_addressbook-%{basever}.schemas
+
+%postun addressbook
+%update_desktop_database_postun
 
 %post calendar
 %gconf_schema_install apps_evolution_calendar-%{basever}.schemas
