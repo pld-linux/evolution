@@ -27,6 +27,7 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
 Patch4:		%{name}-groupwise-features-link.patch
+Patch5:		%{name}-composer_includes.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.18.0.1
 BuildRequires:	ORBit2-devel >= 1:2.14.7
@@ -226,6 +227,7 @@ Palmem.
 %patch1 -p1
 %patch2 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__glib_gettextize}
