@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.10.0
-Release:	2
+Version:	2.10.2
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/gnome/sources/evolution/2.10/%{name}-%{version}.tar.bz2
-# Source0-md5:	68d32e518f235bea9d768ae55e91bffc
+# Source0-md5:	4b495be7f5e146ce7b5807134586336e
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -25,9 +25,8 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-Patch2:		%{name}-as_needed-fix.patch
-Patch4:		%{name}-groupwise-features-link.patch
-Patch5:		%{name}-composer_includes.patch
+Patch2:		%{name}-groupwise-features-link.patch
+Patch3:		%{name}-composer_includes.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.18.0.1
 BuildRequires:	ORBit2-devel >= 1:2.14.7
@@ -36,27 +35,27 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.73
-BuildRequires:	evolution-data-server-devel >= 1.10.0
+BuildRequires:	evolution-data-server-devel >= 1.10.2
 BuildRequires:	flex
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-common >= 2.12.0
-BuildRequires:	gnome-doc-utils >= 0.10.1
+BuildRequires:	gnome-common >= 2.18.0
+BuildRequires:	gnome-doc-utils >= 0.10.3
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
 BuildRequires:	gnome-vfs2-devel >= 2.18.0.1
 BuildRequires:	gtk-doc >= 1.8
 BuildRequires:	gtk+2-devel >= 2:2.10.10
-BuildRequires:	gtkhtml-devel >= 3.14.0
+BuildRequires:	gtkhtml-devel >= 3.14.2
 BuildRequires:	hal-devel >= 0.5.7.1
 %{?with_kerberos5:BuildRequires:	krb5-devel}
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libbonoboui-devel >= 2.18.0
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeprintui-devel >= 2.18.0
-BuildRequires:	libgnomeui-devel >= 2.18.0
+BuildRequires:	libgnomeui-devel >= 2.18.1
 BuildRequires:	libnotify-devel >= 0.3.0
 BuildRequires:	libsoup-devel >= 2.2.100
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.27
+BuildRequires:	libxml2-devel >= 1:2.6.28
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
@@ -75,8 +74,8 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.18.0.1
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 1.10.0
-Requires:	gtkhtml >= 3.14.0
+Requires:	evolution-data-server >= 1.10.2
+Requires:	gtkhtml >= 3.14.2
 Requires:	hicolor-icon-theme
 Requires:	libglade2 >= 1:2.6.0
 Requires:	psmisc
@@ -121,10 +120,10 @@ Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= 1.10.0
 Requires:	freetype-devel
 Requires:	gnome-vfs2-devel >= 2.18.0.1
-Requires:	gtkhtml-devel >= 3.14.0
+Requires:	gtkhtml-devel >= 3.14.2
 Requires:	libglade2-devel >= 1:2.6.0
 Requires:	libgnomeprintui-devel >= 2.18.0
-Requires:	libgnomeui-devel >= 2.18.0
+Requires:	libgnomeui-devel >= 2.18.1
 Requires:	libsoup-devel >= 2.2.100
 Requires:	nspr-devel
 Requires:	nss-devel
@@ -226,8 +225,7 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch4 -p1
-%patch5 -p1
+%patch3 -p1
 
 %build
 %{__glib_gettextize}
