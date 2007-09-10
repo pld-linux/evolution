@@ -293,8 +293,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
-ln -sf evolution-%{basever} $RPM_BUILD_ROOT%{_bindir}/evolution
-
 %find_lang %{name} --all-name --with-gnome
 
 %clean
