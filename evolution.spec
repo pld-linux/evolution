@@ -59,7 +59,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.30
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
-%{?with_ldap:BuildRequires:	openldap-devel >= 2.3.0}
+%{?with_ldap:BuildRequires:	openldap-devel >= 2.4.6}
 %{?with_pilot:BuildRequires:	pilot-link-devel >= 0.11.8}
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
@@ -128,7 +128,7 @@ Requires:	libgnomeui-devel >= 2.20.0
 Requires:	libsoup-devel >= 2.2.100
 Requires:	nspr-devel
 Requires:	nss-devel
-%{?with_ldap:Requires:	openldap-devel >= 2.3.0}
+%{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
 
 %description devel
