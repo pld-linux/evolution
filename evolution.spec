@@ -12,7 +12,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.12.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.12/%{name}-%{version}.tar.bz2
@@ -83,6 +83,8 @@ Requires:	psmisc
 Requires:	scrollkeeper >= 0.1.4
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
+# sr@Latn vs. sr@latin
+Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -292,6 +294,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
+[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
+	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name} --all-name --with-gnome
 
 %clean
