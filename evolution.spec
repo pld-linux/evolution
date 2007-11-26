@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.12.1
-Release:	3
+Version:	2.12.2
+Release:	1
 License:	GPL v2
 Group:		Applications/Mail
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.12/%{name}-%{version}.tar.bz2
-# Source0-md5:	392623efa9b79ede17ce90512f2c3c0a
+# Source0-md5:	085d4c3a4360ca8024e6c00a25dc38cf
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -64,8 +64,11 @@ BuildRequires:	nss-devel
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
+# support for --with-omf in find-lang.sh
+BuildRequires:	rpm-build >= 4.4.9-10
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
+BuildRequires:	sed >= 4.0
 BuildRequires:	which
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
@@ -231,6 +234,9 @@ Palmem.
 %patch3 -p1
 %patch4 -p1
 
+sed -i -e s#sr\@Latn#sr\@latin# po/LINGUAS
+mv po/sr\@{Latn,latin}.po
+
 %build
 %{__glib_gettextize}
 %{__intltoolize}
@@ -294,9 +300,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
-%find_lang %{name} --all-name --with-gnome
+%find_lang %{name} --all-name --with-omf --with-gnome
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -389,8 +393,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/idl/evolution-%{basever}/Evolution-Shell.idl
 
 %{_iconsdir}/hicolor/*/apps/*
-
-%{_omf_dest_dir}/%{name}
 
 %{_sysconfdir}/gconf/schemas/apps_evolution_shell.schemas
 
