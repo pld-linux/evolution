@@ -64,8 +64,7 @@ BuildRequires:	nss-devel
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
-# support for --with-omf in find-lang.sh
-BuildRequires:	rpm-build >= 4.4.9-10
+BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	sed >= 4.0
@@ -234,7 +233,7 @@ Palmem.
 %patch3 -p1
 %patch4 -p1
 
-sed -i -e s#sr\@Latn#sr\@latin# po/LINGUAS
+sed -i -e 's#sr\@Latn#sr\@latin#' po/LINGUAS
 mv po/sr\@{Latn,latin}.po
 
 %build
