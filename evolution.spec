@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.21.90
+Version:	2.21.91
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.21/%{name}-%{version}.tar.bz2
-# Source0-md5:	537097b6b70cff8e0c246f513f2adb33
+# Source0-md5:	52a892cb2d0566c579350adad46a2222
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -37,23 +37,23 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.21.90
+BuildRequires:	evolution-data-server-devel >= 2.21.91
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.15.4
+BuildRequires:	glib2-devel >= 1:2.15.5
 BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gnome-doc-utils >= 0.12.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
-BuildRequires:	gnome-vfs2-devel >= 2.20.1
+BuildRequires:	gnome-vfs2-devel >= 2.21.90
 BuildRequires:	gtk+2-devel >= 2:2.12.5
-BuildRequires:	gtkhtml-devel >= 3.17.90.1
+BuildRequires:	gtkhtml-devel >= 3.17.91
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.37.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
 BuildRequires:	libbonoboui-devel >= 2.20.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.21.90
+BuildRequires:	libgnomeui-devel >= 2.21.91
 BuildRequires:	libnotify-devel >= 0.4.0
-BuildRequires:	libsoup-devel >= 2.3.0.1
+BuildRequires:	libsoup-devel >= 2.3.2
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.31
 BuildRequires:	nspr-devel
@@ -76,8 +76,8 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.21.90
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.21.90
-Requires:	gtkhtml >= 3.17.90.1
+Requires:	evolution-data-server >= 2.21.91
+Requires:	gtkhtml >= 3.17.91
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
@@ -105,7 +105,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
-Requires:	glib2 >= 1:2.15.4
+Requires:	glib2 >= 1:2.15.5
 
 %description libs
 This package contains Evolution libraries.
@@ -123,12 +123,12 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.21.90
 Requires:	ORBit2-devel >= 1:2.14.8
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.21.90
-Requires:	glib2-devel >= 1:2.15.4
+Requires:	evolution-data-server-devel >= 2.21.91
+Requires:	glib2-devel >= 1:2.15.5
 Requires:	gtk+2-devel >= 2:2.12.5
-Requires:	gtkhtml-devel >= 3.17.90.1
+Requires:	gtkhtml-devel >= 3.17.91
 Requires:	libglade2-devel >= 1:2.6.2
-Requires:	libgnomeui-devel >= 2.21.90
+Requires:	libgnomeui-devel >= 2.21.91
 Requires:	libxml2-devel >= 1:2.6.31
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 %{?with_pilot:Requires:	pilot-link-devel >= 0.11.8}
