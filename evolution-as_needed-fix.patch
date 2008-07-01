@@ -70,3 +70,14 @@ diff -urN evolution-2.12.0/configure.in evolution-2.12.0.new/configure.in
  	if test "$ac_cv_lib_kerberos4" != "no"; then
  		AC_DEFINE(HAVE_KRB4,1,[Define if you have Krb4])
  		msg_krb4="yes"
+diff -urN evolution-2.22.3.1/plugins/exchange-operations/Makefile.am evolution-2.22.3.1.new/plugins/exchange-operations/Makefile.am
+--- evolution-2.22.3.1/plugins/exchange-operations/Makefile.am	2008-04-04 11:11:25.000000000 +0200
++++ evolution-2.22.3.1.new/plugins/exchange-operations/Makefile.am	2008-07-01 11:00:03.105224585 +0200
+@@ -54,6 +54,7 @@
+ 	$(top_builddir)/calendar/gui/libevolution-calendar.la 	\
+ 	$(top_builddir)/mail/libevolution-mail.la 		\
+ 	$(top_builddir)/addressbook/gui/component/libevolution-addressbook.la \
++	$(top_builddir)/addressbook/gui/merging/libeabbookmerging.la \
+ 	$(CAMEL_EXCHANGE_LIBS)
+ 
+ liborg_gnome_exchange_operations_la_LDFLAGS = -module -avoid-version $(NO_UNDEFINED)
