@@ -4,19 +4,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.22
+%define		basever	2.23
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.22.2
+Version:	2.23.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	9f93cad065a96e2daae618e16de893a4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.23/%{name}-%{version}.tar.bz2
+# Source0-md5:	5a6ceba4a7cdb33fb02fe32e1c58cb40
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -37,7 +37,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.22.1.1
+BuildRequires:	evolution-data-server-devel >= 2.23.4
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.1
 BuildRequires:	gnome-common >= 2.20.0
@@ -45,7 +45,7 @@ BuildRequires:	gnome-doc-utils >= 0.12.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
 BuildRequires:	gnome-vfs2-devel >= 2.22.0
 BuildRequires:	gtk+2-devel >= 2:2.12.8
-BuildRequires:	gtkhtml-devel >= 3.18.0
+BuildRequires:	gtkhtml-devel >= 3.19.0
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.37.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
@@ -228,7 +228,7 @@ Palmem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 
