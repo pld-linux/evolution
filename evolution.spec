@@ -43,6 +43,7 @@ BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gnome-doc-utils >= 0.12.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
 BuildRequires:	gnome-vfs2-devel >= 2.22.0
+BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.12.8
 BuildRequires:	gtkhtml-devel >= 3.19.0
 BuildRequires:	hal-devel >= 0.5.10
