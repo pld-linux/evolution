@@ -28,7 +28,7 @@ Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-composer_includes.patch
 Patch3:		%{name}-as_needed-fix.patch
 URL:		http://www.gnome.org/projects/evolution/
-BuildRequires:	GConf2-devel >= 2.22.0
+BuildRequires:	GConf2-devel >= 2.23.0
 BuildRequires:	NetworkManager-devel
 BuildRequires:	ORBit2-devel >= 1:2.14.8
 BuildRequires:	atk-devel >= 1:1.22.0
@@ -49,9 +49,9 @@ BuildRequires:	gtkhtml-devel >= 3.19.0
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.37.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
-BuildRequires:	libbonoboui-devel >= 2.22.0
+BuildRequires:	libbonoboui-devel >= 2.23.4
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.22.0
+BuildRequires:	libgnomeui-devel >= 2.23.4
 BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
@@ -76,7 +76,7 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.22.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.22.0
+Requires:	evolution-data-server >= 2.23.4
 Requires:	gtkhtml >= 3.18.0
 Requires:	psmisc
 Obsoletes:	evolution2
