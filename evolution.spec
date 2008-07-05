@@ -25,9 +25,8 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-Patch2:		%{name}-groupwise-features-link.patch
-Patch3:		%{name}-composer_includes.patch
-Patch4:		%{name}-as_needed-fix.patch
+Patch2:		%{name}-composer_includes.patch
+Patch3:		%{name}-as_needed-fix.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.22.0
 BuildRequires:	NetworkManager-devel
@@ -228,9 +227,8 @@ Palmem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#%patch2 -p1
+%patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
 mv po/sr@{Latn,latin}.po
