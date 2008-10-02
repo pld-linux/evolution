@@ -4,19 +4,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.22
+%define		basever	2.24
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.22.3.1
-Release:	4
+Version:	2.24.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	5be2cb0584344cfe7bb4944c2fe468be
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	50784255d9da0987032c806fc0226b10
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -25,35 +25,32 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-Patch2:		%{name}-groupwise-features-link.patch
-Patch3:		%{name}-composer_includes.patch
-Patch4:		%{name}-as_needed-fix.patch
-Patch5:		%{name}-gtk_headers_fix.patch
+Patch2:		%{name}-as_needed-fix.patch
 URL:		http://www.gnome.org/projects/evolution/
-BuildRequires:	GConf2-devel >= 2.22.0
+BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	NetworkManager-devel
 BuildRequires:	ORBit2-devel >= 1:2.14.8
-BuildRequires:	atk-devel >= 1:1.22.0
+BuildRequires:	atk-devel >= 1:1.24.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.22.1.1
+BuildRequires:	evolution-data-server-devel >= 2.24.0
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.16.1
-BuildRequires:	gnome-common >= 2.20.0
-BuildRequires:	gnome-doc-utils >= 0.12.0
+BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	gnome-common >= 2.24.0
+BuildRequires:	gnome-doc-utils >= 0.14.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
-BuildRequires:	gnome-vfs2-devel >= 2.22.0
+BuildRequires:	gnome-vfs2-devel >= 2.24.0
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+2-devel >= 2:2.12.8
-BuildRequires:	gtkhtml-devel >= 3.18.0
+BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	gtkhtml-devel >= 3.24.0
 BuildRequires:	hal-devel >= 0.5.10
-BuildRequires:	intltool >= 0.37.0
+BuildRequires:	intltool >= 0.40.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
-BuildRequires:	libbonoboui-devel >= 2.22.0
+BuildRequires:	libbonoboui-devel >= 2.24.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.22.0
+BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
@@ -68,7 +65,6 @@ BuildRequires:	python
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
-BuildRequires:	sed >= 4.0
 BuildRequires:	which
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
@@ -76,10 +72,10 @@ Requires(post,postun):	scrollkeeper
 Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2 >= 2.22.0
+Requires:	GConf2 >= 2.24.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.22.0
-Requires:	gtkhtml >= 3.18.0
+Requires:	evolution-data-server >= 2.24.0
+Requires:	gtkhtml >= 3.24.0
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
@@ -107,7 +103,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
-Requires:	glib2 >= 1:2.16.1
+Requires:	glib2 >= 1:2.18.0
 
 %description libs
 This package contains Evolution libraries.
@@ -122,15 +118,15 @@ Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento
 Summary(zh_CN.UTF-8):	Evolution组件开发库
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2-devel >= 2.22.0
+Requires:	GConf2-devel >= 2.24.0
 Requires:	ORBit2-devel >= 1:2.14.8
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.22.0
-Requires:	glib2-devel >= 1:2.16.1
-Requires:	gtk+2-devel >= 2:2.12.8
-Requires:	gtkhtml-devel >= 3.18.0
+Requires:	evolution-data-server-devel >= 2.24.0
+Requires:	glib2-devel >= 1:2.18.0
+Requires:	gtk+2-devel >= 2:2.14.0
+Requires:	gtkhtml-devel >= 3.24.0
 Requires:	libglade2-devel >= 1:2.6.2
-Requires:	libgnomeui-devel >= 2.22.0
+Requires:	libgnomeui-devel >= 2.24.0
 Requires:	libxml2-devel >= 1:2.6.31
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 %{?with_pilot:Requires:	pilot-link-devel >= 0.11.8}
@@ -231,12 +227,6 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
 
 %build
 %{__glib_gettextize}
@@ -326,6 +316,8 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install apps-evolution-attachment-reminder.schemas
 %gconf_schema_install apps-evolution-mail-prompts-checkdefault.schemas
 %gconf_schema_install apps-evolution-mail-notification.schemas
+%gconf_schema_install apps-evolution-template-placeholders.schemas
+%gconf_schema_install apps_evolution_email_custom_header.schemas
 %gconf_schema_install bogo-junk-plugin.schemas
 %gconf_schema_install evolution-mail.schemas
 
@@ -333,6 +325,8 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall apps-evolution-attachment-reminder.schemas
 %gconf_schema_uninstall apps-evolution-mail-prompts-checkdefault.schemas
 %gconf_schema_uninstall apps-evolution-mail-notification.schemas
+%gconf_schema_uninstall apps-evolution-template-placeholders.schemas
+%gconf_schema_uninstall apps_evolution_email_custom_header.schemas
 %gconf_schema_uninstall bogo-junk-plugin.schemas
 %gconf_schema_uninstall evolution-mail.schemas
 
@@ -383,10 +377,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/evolution/%{basever}/etspec
 %dir %{_datadir}/evolution/%{basever}/views
 
+%lang(cs) %dir %{_datadir}/evolution/%{basever}/default/cs
 %lang(de) %dir %{_datadir}/evolution/%{basever}/default/de
 %lang(es) %dir %{_datadir}/evolution/%{basever}/default/es
 %lang(fi) %dir %{_datadir}/evolution/%{basever}/default/fi
 %lang(fr) %dir %{_datadir}/evolution/%{basever}/default/fr
+%lang(hu) %dir %{_datadir}/evolution/%{basever}/default/hu
 %lang(ja) %dir %{_datadir}/evolution/%{basever}/default/ja
 %lang(ko) %dir %{_datadir}/evolution/%{basever}/default/ko
 %lang(lt) %dir %{_datadir}/evolution/%{basever}/default/lt
@@ -395,6 +391,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %dir %{_datadir}/evolution/%{basever}/default/pl
 %lang(pt) %dir %{_datadir}/evolution/%{basever}/default/pt
 %lang(sv) %dir %{_datadir}/evolution/%{basever}/default/sv
+%lang(sr) %dir %{_datadir}/evolution/%{basever}/default/sr
+%lang(sr@latin) %dir %{_datadir}/evolution/%{basever}/default/sr@latin
 %lang(zh_CN) %dir %{_datadir}/evolution/%{basever}/default/zh_CN
 
 %dir %{_datadir}/evolution/%{basever}/errors
@@ -575,10 +573,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/default/C/mail
 %{_datadir}/evolution/%{basever}/views/mail
 
+%lang(cs) %{_datadir}/evolution/%{basever}/default/cs/mail
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
 %lang(es) %{_datadir}/evolution/%{basever}/default/es/mail
 %lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
 %lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
+%lang(hu) %{_datadir}/evolution/%{basever}/default/hu/mail
 %lang(ja) %{_datadir}/evolution/%{basever}/default/ja/mail
 %lang(ko) %{_datadir}/evolution/%{basever}/default/ko/mail
 %lang(lt) %{_datadir}/evolution/%{basever}/default/lt/mail
@@ -586,11 +586,11 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_datadir}/evolution/%{basever}/default/nl/mail
 %lang(pl) %{_datadir}/evolution/%{basever}/default/pl/mail
 %lang(pt) %{_datadir}/evolution/%{basever}/default/pt/mail
+%lang(sr) %{_datadir}/evolution/%{basever}/default/sr/mail
+%lang(sr@latin) %{_datadir}/evolution/%{basever}/default/sr@latin/mail
 %lang(sv) %{_datadir}/evolution/%{basever}/default/sv/mail
 %lang(zh_CN) %{_datadir}/evolution/%{basever}/default/zh_CN/mail
 
-%{_datadir}/idl/evolution-%{basever}/Composer.idl
-%{_datadir}/idl/evolution-%{basever}/Evolution-Composer.idl
 %{_datadir}/idl/evolution-%{basever}/Evolution-Mail.idl
 %{_libdir}/bonobo/servers/GNOME_Evolution_Mail.server
 
@@ -628,6 +628,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/errors/org-gnome-default-mailer.error
 %{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 
+# email-custom-header
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-email-custom-header.so
+%{evo_plugins_dir}/org-gnome-email-custom-header.eplug
+%{_datadir}/evolution/%{basever}/glade/email-custom-header.glade
+%{_datadir}/evolution/%{basever}/glade/org-gnome-email-custom-header.glade
+%{_sysconfdir}/gconf/schemas/apps_evolution_email_custom_header.schemas
+
 # exchange-operations
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-exchange-operations.so
 %{evo_plugins_dir}/org-gnome-exchange-operations.eplug
@@ -648,7 +655,6 @@ rm -rf $RPM_BUILD_ROOT
 
 # face
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-face.so
-%{evo_plugins_dir}/org-gnome-face-ui.xml
 %{evo_plugins_dir}/org-gnome-face.eplug
 %{_datadir}/evolution/%{basever}/errors/org-gnome-face.errors.xml
 
@@ -708,11 +714,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mark-all-read.so
 %{evo_plugins_dir}/org-gnome-mark-all-read.eplug
 
-# print-message
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-print-message.so
-%{evo_plugins_dir}/org-gnome-print-message.eplug
-%{evo_plugins_dir}/org-gnome-print-message.xml
-
 # sa-junk-plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-sa-junk-plugin.so
 %{evo_plugins_dir}/org-gnome-sa-junk-plugin.eplug
@@ -724,6 +725,12 @@ rm -rf $RPM_BUILD_ROOT
 # subject-thread
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-subject-thread.so
 %{evo_plugins_dir}/org-gnome-subject-thread.eplug
+
+# templates
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-templates.so
+%{evo_plugins_dir}/org-gnome-templates.eplug
+%{evo_plugins_dir}/templates.glade
+%{_sysconfdir}/gconf/schemas/apps-evolution-template-placeholders.schemas
 
 %files addressbook
 %defattr(644,root,root,755)
@@ -753,6 +760,10 @@ rm -rf $RPM_BUILD_ROOT
 # PLUGINS
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-addressbook-file.so
 %{evo_plugins_dir}/org-gnome-addressbook-file.eplug
+
+# webdav-accounts-setup
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-webdav.so
+%{evo_plugins_dir}/org-gnome-evolution-webdav.eplug
 
 %files calendar
 %defattr(644,root,root,755)
@@ -811,10 +822,6 @@ rm -rf $RPM_BUILD_ROOT
 # google-account-setup
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-google.so
 %{evo_plugins_dir}/org-gnome-evolution-google.eplug
-
-# hula-account-setup
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-hula-account-setup.so
-%{evo_plugins_dir}/org-gnome-evolution-hula-account-setup.eplug
 
 # mark-calendar-offline
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mark-calendar-offline.so
