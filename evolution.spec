@@ -28,6 +28,9 @@ Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
 Patch3:		%{name}-print-crash.patch
 URL:		http://www.gnome.org/projects/evolution/
+# http://mail.gnome.org/archives/release-team/2009-March/msg00096.html
+# Should be fixed in 2.26.0:
+BuildRequires:	security(CVE-2009-0582)
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	NetworkManager-devel
 BuildRequires:	ORBit2-devel >= 1:2.14.8
