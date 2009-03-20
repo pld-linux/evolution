@@ -4,19 +4,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.24
+%define		basever	2.26
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.24.4
-Release:	2
+Version:	2.26.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	2d4cb1a65223b141e974b51452feae03
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.26/%{name}-%{version}.tar.bz2
+# Source0-md5:	97234b1ecded0232a1b68d2fc03b0252
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -26,11 +26,9 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
-Patch3:		%{name}-print-crash.patch
 URL:		http://www.gnome.org/projects/evolution/
 # http://mail.gnome.org/archives/release-team/2009-March/msg00096.html
 # Should be fixed in 2.26.0:
-BuildRequires:	security(CVE-2009-0582)
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	NetworkManager-devel
 BuildRequires:	ORBit2-devel >= 1:2.14.8
@@ -39,16 +37,16 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.24.3
+BuildRequires:	evolution-data-server-devel >= 2.26.0
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
-BuildRequires:	gnome-common >= 2.24.0
+BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
 BuildRequires:	gnome-vfs2-devel >= 2.24.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.14.0
-BuildRequires:	gtkhtml-devel >= 3.24.0
+BuildRequires:	gtkhtml-devel >= 3.26.0
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.40.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
@@ -77,10 +75,10 @@ Requires(post,postun):	scrollkeeper
 Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2 >= 2.24.0
+Requires:	GConf2 >= 2.26.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.24.3
-Requires:	gtkhtml >= 3.24.0
+Requires:	evolution-data-server >= 2.26.0
+Requires:	gtkhtml >= 3.26.0
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
@@ -232,7 +230,6 @@ Palmem.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 %{__glib_gettextize}
@@ -383,6 +380,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/evolution/%{basever}/etspec
 %dir %{_datadir}/evolution/%{basever}/views
 
+%lang(ca) %dir %{_datadir}/evolution/%{basever}/default/ca
 %lang(cs) %dir %{_datadir}/evolution/%{basever}/default/cs
 %lang(de) %dir %{_datadir}/evolution/%{basever}/default/de
 %lang(es) %dir %{_datadir}/evolution/%{basever}/default/es
@@ -414,6 +412,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/evolution/%{basever}/help/quickref/C
 
 %{_datadir}/evolution/%{basever}/help/quickref/C/quickref.pdf
+%lang(ca) %dir %{_datadir}/evolution/%{basever}/help/quickref/ca
+%lang(ca) %{_datadir}/evolution/%{basever}/help/quickref/ca/quickref.pdf
 %lang(cs) %dir %{_datadir}/evolution/%{basever}/help/quickref/cs
 %lang(cs) %{_datadir}/evolution/%{basever}/help/quickref/cs/quickref.pdf
 %lang(de) %dir %{_datadir}/evolution/%{basever}/help/quickref/de
@@ -582,6 +582,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/default/C/mail
 %{_datadir}/evolution/%{basever}/views/mail
 
+%lang(ca) %{_datadir}/evolution/%{basever}/default/ca/mail
 %lang(cs) %{_datadir}/evolution/%{basever}/default/cs/mail
 %lang(de) %{_datadir}/evolution/%{basever}/default/de/mail
 %lang(es) %{_datadir}/evolution/%{basever}/default/es/mail
@@ -833,9 +834,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-google.so
 %{evo_plugins_dir}/org-gnome-evolution-google.eplug
 
-# mark-calendar-offline
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mark-calendar-offline.so
-%{evo_plugins_dir}/org-gnome-mark-calendar-offline.eplug
+## mark-calendar-offline
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mark-calendar-offline.so
+#%{evo_plugins_dir}/org-gnome-mark-calendar-offline.eplug
 
 # publish-calendar
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-publish-calendar.so
