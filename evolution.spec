@@ -53,7 +53,7 @@ BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libbonoboui-devel >= 2.24.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libgnomeui-devel >= 2.24.0
-BuildRequires:	libgweather >= 2.26.0
+BuildRequires:	libgweather-devel >= 2.26.0
 BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
