@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.26.0
-Release:	2
+Version:	2.26.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.26/%{name}-%{version}.tar.bz2
-# Source0-md5:	97234b1ecded0232a1b68d2fc03b0252
+# Source0-md5:	7089171fe7e127f061f6722b33bf3107
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -27,31 +27,28 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		%{name}-as_needed-fix.patch
 URL:		http://www.gnome.org/projects/evolution/
-# http://mail.gnome.org/archives/release-team/2009-March/msg00096.html
-# Should be fixed in 2.26.0:
-BuildRequires:	GConf2-devel >= 2.24.0
+BuildRequires:	GConf2-devel >= 2.26.0
 BuildRequires:	NetworkManager-devel
 BuildRequires:	ORBit2-devel >= 1:2.14.8
-BuildRequires:	atk-devel >= 1:1.24.0
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.26.0
+BuildRequires:	evolution-data-server-devel >= 2.26.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
-BuildRequires:	gnome-vfs2-devel >= 2.24.0
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	gtk+2-devel >= 2:2.16.0
 BuildRequires:	gtkhtml-devel >= 3.26.0
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.40.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
 BuildRequires:	libbonoboui-devel >= 2.24.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
+BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libgweather-devel >= 2.26.0
 BuildRequires:	libnotify-devel >= 0.4.0
@@ -78,7 +75,7 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.26.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.26.0
+Requires:	evolution-data-server >= 2.26.1
 Requires:	gtkhtml >= 3.26.0
 Requires:	psmisc
 Obsoletes:	evolution2
@@ -122,13 +119,13 @@ Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento
 Summary(zh_CN.UTF-8):	Evolution组件开发库
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2-devel >= 2.24.0
+Requires:	GConf2-devel >= 2.26.0
 Requires:	ORBit2-devel >= 1:2.14.8
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.24.3
+Requires:	evolution-data-server-devel >= 2.26.1
 Requires:	glib2-devel >= 1:2.18.0
-Requires:	gtk+2-devel >= 2:2.14.0
-Requires:	gtkhtml-devel >= 3.24.0
+Requires:	gtk+2-devel >= 2:2.16.0
+Requires:	gtkhtml-devel >= 3.26.0
 Requires:	libglade2-devel >= 1:2.6.2
 Requires:	libgnomeui-devel >= 2.24.0
 Requires:	libxml2-devel >= 1:2.6.31
@@ -250,21 +247,17 @@ Palmem.
 	%{!?with_kerberos5:--with-krb5=no} \
 	--without-static-ldap \
 	--enable-nntp=yes \
-	--enable-file-locking=fcntl \
-	--enable-dot-locking=no \
 	--with-nspr-includes="%{_includedir}/nspr" \
 	--with-nss-includes="%{_includedir}/nss" \
 	--with-nspr-libs="%{_libdir}" \
 	--with-nss-libs="%{_libdir}" \
-	--enable-ipv6=yes \
 	--with-kde-applnk-path=no \
 	--disable-schemas-install \
 	--enable-plugins=all \
 	--enable-nss=yes \
 	--enable-smime=yes \
 	--enable-static \
-	--with-sub-version=" PLD Linux" \
-	--enable-file-chooser
+	--with-sub-version=" PLD Linux"
 
 # hack to rebuild *.c and *.h from *.idl (check if needed with new versions)
 # (required if you use ORBit2-devel 2.7.2)
