@@ -1,6 +1,6 @@
-diff -urN evolution-2.11.92/configure.in evolution-2.11.92.new/configure.in
---- evolution-2.11.92/configure.in	2007-09-03 08:49:02.000000000 +0200
-+++ evolution-2.11.92.new/configure.in	2007-09-08 22:03:17.000000000 +0200
+diff -urN evolution-2.11.92/configure.ac evolution-2.11.92.new/configure.ac
+--- evolution-2.11.92/configure.ac	2007-09-03 08:49:02.000000000 +0200
++++ evolution-2.11.92.new/configure.ac	2007-09-08 22:03:17.000000000 +0200
 @@ -465,7 +465,6 @@
  dnl **************************************************
  dnl * Gnome Icon Theme
