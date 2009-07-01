@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.26.2
+Version:	2.26.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.26/%{name}-%{version}.tar.bz2
-# Source0-md5:	f93b02141a8e67588ed258d0dc310a0f
+# Source0-md5:	fcc487503ab91b9e25fd529abc87fdae
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -34,7 +34,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.26.2
+BuildRequires:	evolution-data-server-devel >= 2.26.3
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	gnome-common >= 2.26.0
@@ -42,7 +42,7 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtkhtml-devel >= 3.26.2
+BuildRequires:	gtkhtml-devel >= 3.26.3
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.40.0
 %{?with_kerberos5:BuildRequires:	krb5-devel}
@@ -75,8 +75,8 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.26.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.26.2
-Requires:	gtkhtml >= 3.26.2
+Requires:	evolution-data-server >= 2.26.3
+Requires:	gtkhtml >= 3.26.3
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
@@ -122,10 +122,10 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.26.0
 Requires:	ORBit2-devel >= 1:2.14.8
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.26.2
+Requires:	evolution-data-server-devel >= 2.26.3
 Requires:	glib2-devel >= 1:2.18.0
 Requires:	gtk+2-devel >= 2:2.16.0
-Requires:	gtkhtml-devel >= 3.26.2
+Requires:	gtkhtml-devel >= 3.26.3
 Requires:	libglade2-devel >= 1:2.6.2
 Requires:	libgnomeui-devel >= 2.24.0
 Requires:	libxml2-devel >= 1:2.6.31
