@@ -4,19 +4,19 @@
 %bcond_without	kerberos5	# build without kerberos5 support
 %bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.26
+%define		basever	2.28
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.26.3
-Release:	2
+Version:	2.28.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.26/%{name}-%{version}.tar.bz2
-# Source0-md5:	fcc487503ab91b9e25fd529abc87fdae
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.28/%{name}-%{version}.tar.bz2
+# Source0-md5:	1a8ce4d794b3dea0d086d9809b6ddf0c
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -25,24 +25,24 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-Patch2:		%{name}-as_needed-fix.patch
 URL:		http://www.gnome.org/projects/evolution/
-BuildRequires:	GConf2-devel >= 2.26.0
-BuildRequires:	NetworkManager-devel
+BuildRequires:	GConf2-devel >= 2.28.0
+BuildRequires:	NetworkManager-devel >= 0.7
 BuildRequires:	ORBit2-devel >= 1:2.14.8
-BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.58
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
-BuildRequires:	evolution-data-server-devel >= 2.26.3
+BuildRequires:	evolution-data-server-devel >= 2.28.0
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	glib2-devel >= 1:2.20.0
 BuildRequires:	gnome-common >= 2.26.0
+BuildRequires:	gnome-desktop-devel >= 2.28.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
-%{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.14}
+%{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.15}
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtkhtml-devel >= 3.26.3
+BuildRequires:	gtkhtml-devel >= 3.28.0
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.40.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
@@ -54,7 +54,7 @@ BuildRequires:	libgweather-devel >= 2.26.0
 BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.31
+BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.4.6}
@@ -119,13 +119,13 @@ Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimento
 Summary(zh_CN.UTF-8):	Evolution组件开发库
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	GConf2-devel >= 2.26.0
+Requires:	GConf2-devel >= 2.28.0
 Requires:	ORBit2-devel >= 1:2.14.8
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.26.3
-Requires:	glib2-devel >= 1:2.18.0
+Requires:	evolution-data-server-devel >= 2.28.0
+Requires:	glib2-devel >= 1:2.20.0
 Requires:	gtk+2-devel >= 2:2.16.0
-Requires:	gtkhtml-devel >= 3.26.3
+Requires:	gtkhtml-devel >= 3.28.0
 Requires:	libglade2-devel >= 1:2.6.2
 Requires:	libgnomeui-devel >= 2.24.0
 Requires:	libxml2-devel >= 1:2.6.31
@@ -227,13 +227,12 @@ Palmem.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__glib_gettextize}
 %{__intltoolize}
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoheader}
 %{__autoconf}
 %{__automake}
@@ -354,13 +353,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/apps_evolution_shell.schemas
 
 %{_datadir}/evolution/%{basever}/glade/e-active-connection-dialog.glade
-%{_datadir}/evolution/%{basever}/glade/e-attachment.glade
 %{_datadir}/evolution/%{basever}/glade/e-send-options.glade
 %{_datadir}/evolution/%{basever}/glade/e-table-config.glade
 %{_datadir}/evolution/%{basever}/glade/e-table-field-chooser.glade
 %{_datadir}/evolution/%{basever}/glade/e-timezone-dialog.glade
 %{_datadir}/evolution/%{basever}/glade/filter.glade
-%{_datadir}/evolution/%{basever}/glade/gal-categories.glade
 %{_datadir}/evolution/%{basever}/glade/gal-define-views.glade
 %{_datadir}/evolution/%{basever}/glade/gal-view-instance-save-as-dialog.glade
 %{_datadir}/evolution/%{basever}/glade/gal-view-new-dialog.glade
@@ -480,9 +477,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-addressbook-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-cal-shared.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-importers.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-shared.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-smime.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-widgets-a11y.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so.*
@@ -505,9 +504,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-a11y.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-addressbook-a11y.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-cal-shared.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar-a11y.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-importers.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-shared.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-smime.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-widgets-a11y.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so
@@ -527,9 +528,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libevolution-a11y.la
 %{_libdir}/evolution/%{basever}/libevolution-addressbook-a11y.la
 %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.la
+%{_libdir}/evolution/%{basever}/libevolution-cal-shared.la
 %{_libdir}/evolution/%{basever}/libevolution-calendar-a11y.la
 %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.la
 %{_libdir}/evolution/%{basever}/libevolution-mail-importers.la
+%{_libdir}/evolution/%{basever}/libevolution-mail-shared.la
 %{_libdir}/evolution/%{basever}/libevolution-smime.la
 %{_libdir}/evolution/%{basever}/libevolution-widgets-a11y.la
 %{_libdir}/evolution/%{basever}/libfilter.la
@@ -555,9 +558,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libevolution-a11y.a
 %{_libdir}/evolution/%{basever}/libevolution-addressbook-a11y.a
 %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.a
+%{_libdir}/evolution/%{basever}/libevolution-cal-shared.a
 %{_libdir}/evolution/%{basever}/libevolution-calendar-a11y.a
 %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.a
 %{_libdir}/evolution/%{basever}/libevolution-mail-importers.a
+%{_libdir}/evolution/%{basever}/libevolution-mail-shared.a
 %{_libdir}/evolution/%{basever}/libevolution-smime.a
 %{_libdir}/evolution/%{basever}/libevolution-widgets-a11y.a
 %{_libdir}/evolution/%{basever}/libfilter.a
@@ -658,11 +663,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/glade/exchange-permissions-dialog.glade
 %{_datadir}/evolution/%{basever}/glade/exchange-send-options.glade
 
-# face
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-face.so
-%{evo_plugins_dir}/org-gnome-face.eplug
-%{_datadir}/evolution/%{basever}/errors/org-gnome-face.errors.xml
-
 # groupwise-account-setup
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-gw-account-setup.so
 %{evo_plugins_dir}/org-gnome-gw-account-setup.eplug
@@ -671,10 +671,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-groupwise-features.so
 %{evo_plugins_dir}/org-gnome-groupwise-features.eplug
 %{evo_plugins_dir}/org-gnome-compose-send-options.xml
-%{_datadir}/evolution/%{basever}/errors/org-gnome-mail-retract-errors.xml
-%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy-errors.xml
-%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy-login-errors.xml
-%{_datadir}/evolution/%{basever}/errors/org-gnome-shared-folder.errors.xml
+%{_datadir}/evolution/%{basever}/errors/org-gnome-mail-retract.error
+%{_datadir}/evolution/%{basever}/errors/org-gnome-process-meeting.error
+%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy-login.error
+%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy.error
+%{_datadir}/evolution/%{basever}/errors/org-gnome-shared-folder.error
 %{_datadir}/evolution/%{basever}/glade/properties.glade
 %{_datadir}/evolution/%{basever}/glade/junk-settings.glade
 %{_datadir}/evolution/%{basever}/glade/proxy-add-dialog.glade
@@ -685,10 +686,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-imap-features.so
 %{evo_plugins_dir}/org-gnome-imap-features.eplug
 %{_datadir}/evolution/%{basever}/glade/imap-headers.glade
-
-# import-ics-attachments
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-mail-attachments-import-ics.so
-%{evo_plugins_dir}/org-gnome-evolution-mail-attachments-import-ics.eplug
 
 # itip-formatter
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-itip-formatter.so
@@ -737,6 +734,10 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/templates.glade
 %{_sysconfdir}/gconf/schemas/apps-evolution-template-placeholders.schemas
 
+# vcard-inline
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-vcard-inline.so
+%{evo_plugins_dir}/org-gnome-vcard-inline.eplug
+
 %files addressbook
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/components/libevolution-addressbook.so
@@ -747,10 +748,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/errors/addressbook.error
 %{_datadir}/evolution/%{basever}/etspec/e-addressbook-view.etspec
 %{_datadir}/evolution/%{basever}/glade/ldap-config.glade
-%{_datadir}/evolution/%{basever}/glade/im.glade
 %{_datadir}/evolution/%{basever}/glade/contact-editor.glade
-%{_datadir}/evolution/%{basever}/glade/e-contact-print.glade
-%{_datadir}/evolution/%{basever}/glade/fulladdr.glade
 %{_datadir}/evolution/%{basever}/glade/fullname.glade
 %{_datadir}/evolution/%{basever}/glade/contact-list-editor.glade
 %{_datadir}/evolution/%{basever}/glade/eab-contact-commit-duplicate-detected.glade
@@ -786,7 +784,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/glade/e-itip-control.glade
 %{_datadir}/evolution/%{basever}/glade/event-page.glade
 %{_datadir}/evolution/%{basever}/glade/goto-dialog.glade
-%{_datadir}/evolution/%{basever}/glade/meeting-page.glade
 %{_datadir}/evolution/%{basever}/glade/memo-page.glade
 %{_datadir}/evolution/%{basever}/glade/recurrence-page.glade
 %{_datadir}/evolution/%{basever}/glade/schedule-page.glade
