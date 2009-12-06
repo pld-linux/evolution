@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.28.0
-Release:	2
+Version:	2.28.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	1a8ce4d794b3dea0d086d9809b6ddf0c
+# Source0-md5:	15043e64f22000f6f0bf57e0373c7169
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -34,7 +34,7 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	bison
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 2.28.0
+BuildRequires:	evolution-data-server-devel >= 2.28.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.20.0
 BuildRequires:	gnome-common >= 2.26.0
@@ -43,7 +43,7 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 %{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.15}
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.16.0
-BuildRequires:	gtkhtml-devel >= 3.28.0
+BuildRequires:	gtkhtml-devel >= 3.28.1
 BuildRequires:	hal-devel >= 0.5.10
 BuildRequires:	intltool >= 0.40.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
@@ -76,8 +76,8 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.26.0
 Requires:	bonobo-activation
-Requires:	evolution-data-server >= 2.26.3
-Requires:	gtkhtml >= 3.26.3
+Requires:	evolution-data-server >= 2.28.1
+Requires:	gtkhtml >= 3.28.1
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
@@ -123,10 +123,10 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.28.0
 Requires:	ORBit2-devel >= 1:2.14.8
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.28.0
+Requires:	evolution-data-server-devel >= 2.28.1
 Requires:	glib2-devel >= 1:2.20.0
 Requires:	gtk+2-devel >= 2:2.16.0
-Requires:	gtkhtml-devel >= 3.28.0
+Requires:	gtkhtml-devel >= 3.28.1
 Requires:	libglade2-devel >= 1:2.6.2
 Requires:	libgnomeui-devel >= 2.24.0
 Requires:	libxml2-devel >= 1:2.6.31
@@ -597,6 +597,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nl) %{_datadir}/evolution/%{basever}/default/nl/mail
 %lang(pl) %{_datadir}/evolution/%{basever}/default/pl/mail
 %lang(pt) %{_datadir}/evolution/%{basever}/default/pt/mail
+%lang(ro) %{_datadir}/evolution/%{basever}/default/ro/mail
 %lang(sr) %{_datadir}/evolution/%{basever}/default/sr/mail
 %lang(sr@latin) %{_datadir}/evolution/%{basever}/default/sr@latin/mail
 %lang(sv) %{_datadir}/evolution/%{basever}/default/sv/mail
