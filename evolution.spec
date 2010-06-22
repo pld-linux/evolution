@@ -11,12 +11,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.30.1.2
-Release:	4
+Version:	2.30.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.30/%{name}-%{version}.tar.bz2
-# Source0-md5:	833d2ccff2a34e595e09fc9d499de231
+# Source0-md5:	ff2f1843d9f61e151a6bccf89eeff088
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -34,7 +34,7 @@ BuildRequires:	bison
 BuildRequires:	clutter-gtk-devel >= 0.10.0
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 2.30.1
+BuildRequires:	evolution-data-server-devel >= 2.30.2.1
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.22.0
@@ -45,7 +45,7 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.18.0
 BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	gtkhtml-devel >= 3.30.1
+BuildRequires:	gtkhtml-devel >= 3.30.2
 BuildRequires:	gtkimageview-devel >= 1.6
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
@@ -77,8 +77,8 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 2.30.1
-Requires:	gtkhtml >= 3.30.1
+Requires:	evolution-data-server >= 2.30.2.1
+Requires:	gtkhtml >= 3.30.2
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
@@ -123,11 +123,11 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.30.1
+Requires:	evolution-data-server-devel >= 2.30.2.1
 Requires:	glib2-devel >= 1:2.22.0
 Requires:	gnome-desktop-devel >= 2.28.0
 Requires:	gtk+2-devel >= 2:2.18.0
-Requires:	gtkhtml-devel >= 3.30.1
+Requires:	gtkhtml-devel >= 3.30.2
 Requires:	libgnomecanvas-devel
 Requires:	libunique-devel >= 1.1.2
 Requires:	libxml2-devel >= 1:2.7.3
@@ -359,7 +359,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS* README
 %attr(755,root,root) %{_bindir}/evolution
-%attr(755,root,root) %{_bindir}/evolution-alarm-notify
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/killev
 %dir %{_libdir}/evolution/%{basever}/modules
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-network-manager.so
