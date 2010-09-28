@@ -2,21 +2,20 @@
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
-%bcond_without	pilot		# build without pilot support
 #
-%define		basever	2.30
+%define		basever	2.32
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.30.2
-Release:	4
+Version:	2.32.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.30/%{name}-%{version}.tar.bz2
-# Source0-md5:	ff2f1843d9f61e151a6bccf89eeff088
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.32/%{name}-%{version}.tar.bz2
+# Source0-md5:	c74fdd472efed42d9876aa905961b53d
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -29,31 +28,27 @@ URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
 BuildRequires:	autoconf >= 2.58
-BuildRequires:	automake >= 1:1.9
+BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
-BuildRequires:	clutter-gtk-devel >= 0.10.0
-BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 2.30.2.1
+BuildRequires:	evolution-data-server-devel >= 2.32.0
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.22.0
+BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 2.28.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
-%{?with_pilot:BuildRequires:	gnome-pilot-devel >= 2.0.16}
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+2-devel >= 2:2.18.0
+BuildRequires:	gtk+2-devel >= 2:2.20.0
 BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	gtkhtml-devel >= 3.30.2
+BuildRequires:	gtkhtml-devel >= 3.32.0
 BuildRequires:	gtkimageview-devel >= 1.6
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-gtk-devel
-BuildRequires:	libgnomecanvas-devel
 BuildRequires:	libgweather-devel >= 2.28.0
 BuildRequires:	libnotify-devel >= 0.4.0
-BuildRequires:	libpst-devel
+BuildRequires:	libpst-devel >= 0.6.41
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
 BuildRequires:	libunique-devel >= 1.1.2
@@ -61,7 +56,6 @@ BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.4.6}
-%{?with_pilot:BuildRequires:	pilot-link-devel >= 0.11.8}
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
@@ -77,10 +71,11 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 2.30.2.1
-Requires:	gtkhtml >= 3.30.2
+Requires:	evolution-data-server >= 2.32.0
+Requires:	gtkhtml >= 3.32.0
 Requires:	psmisc
 Obsoletes:	evolution2
+Obsoletes:	evolution-pilot
 Obsoletes:	gnome-pim
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -106,7 +101,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
-Requires:	glib2 >= 1:2.22.0
+Requires:	glib2 >= 1:2.26.0
 
 %description libs
 This package contains Evolution libraries.
@@ -123,17 +118,14 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.30.2.1
+Requires:	evolution-data-server-devel >= 2.32.0
 Requires:	glib2-devel >= 1:2.22.0
 Requires:	gnome-desktop-devel >= 2.28.0
-%{?with_pilot:Requires:	gnome-pilot-devel >= 2.0.16}
-Requires:	gtk+2-devel >= 2:2.18.0
-Requires:	gtkhtml-devel >= 3.30.2
-Requires:	libgnomecanvas-devel
+Requires:	gtk+2-devel >= 2:2.20.0
+Requires:	gtkhtml-devel >= 3.32.0
 Requires:	libunique-devel >= 1.1.2
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
-%{?with_pilot:Requires:	pilot-link-devel >= 0.11.8}
 Obsoletes:	evolution2-devel
 
 %description devel
@@ -210,22 +202,6 @@ Evolution calendar and todo component.
 %description calendar -l pl.UTF-8
 Kalendarz i lista zadań Evolution.
 
-%package pilot
-Summary:	Evolution conduits for gnome-pilot
-Summary(pl.UTF-8):	Dodatki do wymiany danych z gnome-pilot
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-Requires:	gnome-pilot
-Obsoletes:	evolution2-pilot
-
-%description pilot
-This package contains conduits needed by gnome-pilot to synchronize
-your Palm with Evolution.
-
-%description pilot -l pl.UTF-8
-Ten pakiet zawiera dodatki do synchronizacji danych Evolution z
-Palmem.
-
 %package apidocs
 Summary:	Evolution API documentation
 Summary(pl.UTF-8):	Dokumentacja API Evolution
@@ -256,8 +232,6 @@ Dokumentacja API Evolution.
 %{__automake}
 %configure \
 	--disable-scrollkeeper \
-	%{?with_pilot:--enable-pilot-conduits=yes} \
-	%{!?with_pilot:--enable-pilot-conduits=no} \
 	%{?with_ldap:--with-openldap=yes} \
 	%{!?with_ldap:--with-openldap=no} \
 	%{?with_kerberos5:--with-krb5=%{_prefix}} \
@@ -295,7 +269,6 @@ install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir
 
 # remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-pilot/*/*.{a,la}
 rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
 rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
@@ -363,6 +336,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/killev
 %dir %{_libdir}/evolution/%{basever}/modules
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-composer-autosave.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-network-manager.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-lib.so
 
@@ -382,6 +356,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fi) %dir %{_datadir}/evolution/%{basever}/default/fi
 %lang(fr) %dir %{_datadir}/evolution/%{basever}/default/fr
 %lang(hu) %dir %{_datadir}/evolution/%{basever}/default/hu
+%lang(id) %dir %{_datadir}/evolution/%{basever}/default/id
 %lang(it) %dir %{_datadir}/evolution/%{basever}/default/it
 %lang(ja) %dir %{_datadir}/evolution/%{basever}/default/ja
 %lang(ko) %dir %{_datadir}/evolution/%{basever}/default/ko
@@ -433,6 +408,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/icons
 %{_datadir}/evolution/%{basever}/images
 %{_datadir}/evolution/%{basever}/sounds
+%{_datadir}/evolution/%{basever}/theme
 %{_datadir}/evolution/%{basever}/ui
 
 %{_iconsdir}/hicolor/*/apps/*
@@ -458,9 +434,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{basever}
 %dir %{evo_plugins_dir}
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so.*
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libeconduit.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontactlisteditor.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libemformat.so.*
@@ -480,13 +456,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-settings.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-smime.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so.*
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libgnomecanvas.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libmenus.so.*
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libeconduit.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontactlisteditor.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libemformat.so
@@ -506,10 +483,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-settings.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-smime.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libgnomecanvas.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libmenus.so
+%{_libdir}/evolution/%{basever}/libart_lgpl.la
 %{_libdir}/evolution/%{basever}/libcomposer.la
 %{_libdir}/evolution/%{basever}/libeabutil.la
-%{_libdir}/evolution/%{basever}/libeconduit.la
 %{_libdir}/evolution/%{basever}/libecontacteditor.la
 %{_libdir}/evolution/%{basever}/libecontactlisteditor.la
 %{_libdir}/evolution/%{basever}/libemformat.la
@@ -529,6 +507,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libevolution-mail-settings.la
 %{_libdir}/evolution/%{basever}/libevolution-smime.la
 %{_libdir}/evolution/%{basever}/libfilter.la
+%{_libdir}/evolution/%{basever}/libgnomecanvas.la
 %{_libdir}/evolution/%{basever}/libmenus.la
 %{_includedir}/%{name}-%{basever}
 %{_pkgconfigdir}/evolution-calendar.pc
@@ -538,9 +517,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
+%{_libdir}/evolution/%{basever}/libart_lgpl.a
 %{_libdir}/evolution/%{basever}/libcomposer.a
 %{_libdir}/evolution/%{basever}/libeabutil.a
-%{_libdir}/evolution/%{basever}/libeconduit.a
 %{_libdir}/evolution/%{basever}/libecontacteditor.a
 %{_libdir}/evolution/%{basever}/libecontactlisteditor.a
 %{_libdir}/evolution/%{basever}/libemformat.a
@@ -560,12 +539,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libevolution-mail-settings.a
 %{_libdir}/evolution/%{basever}/libevolution-smime.a
 %{_libdir}/evolution/%{basever}/libfilter.a
+%{_libdir}/evolution/%{basever}/libgnomecanvas.a
 %{_libdir}/evolution/%{basever}/libmenus.a
 
 %files mail
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/evolution-settings
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-mail.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-mailto-handler.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-startup-wizard.so
+%{_datadir}/evolution/%{basever}/mail-autoconfig
 %{_datadir}/evolution/%{basever}/etspec/message-list.etspec
 %{_datadir}/evolution/%{basever}/errors/mail.error
 %{_datadir}/evolution/%{basever}/filtertypes.xml
@@ -581,6 +564,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(fi) %{_datadir}/evolution/%{basever}/default/fi/mail
 %lang(fr) %{_datadir}/evolution/%{basever}/default/fr/mail
 %lang(hu) %{_datadir}/evolution/%{basever}/default/hu/mail
+%lang(id) %{_datadir}/evolution/%{basever}/default/id/mail
 %lang(it) %{_datadir}/evolution/%{basever}/default/it/mail
 %lang(ja) %{_datadir}/evolution/%{basever}/default/ja/mail
 %lang(ko) %{_datadir}/evolution/%{basever}/default/ko/mail
@@ -598,6 +582,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/evolution-mail.desktop
 %{_desktopdir}/evolution-settings.desktop
 %{_sysconfdir}/gconf/schemas/evolution-mail.schemas
+%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
 
 # PLUGINS
 # attachment-reminder
@@ -619,11 +604,9 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/org-gnome-bogo-junk-plugin.eplug
 %{_sysconfdir}/gconf/schemas/bogo-junk-plugin.schemas
 
-# default-mailer
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-default-mailer.so
-%{evo_plugins_dir}/org-gnome-default-mailer.eplug
-%{_datadir}/evolution/%{basever}/errors/org-gnome-default-mailer.error
-%{_sysconfdir}/gconf/schemas/apps-evolution-mail-prompts-checkdefault.schemas
+# dbx-import
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-dbx-import.so
+%{evo_plugins_dir}/org-gnome-dbx-import.eplug
 
 # email-custom-header
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-email-custom-header.so
@@ -678,10 +661,6 @@ rm -rf $RPM_BUILD_ROOT
 # sa-junk-plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-sa-junk-plugin.so
 %{evo_plugins_dir}/org-gnome-sa-junk-plugin.eplug
-
-# startup-wizard
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-startup-wizard.so
-%{evo_plugins_dir}/org-gnome-evolution-startup-wizard.eplug
 
 # subject-thread
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-subject-thread.so
@@ -766,21 +745,6 @@ rm -rf $RPM_BUILD_ROOT
 # save-calendar
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-save-calendar.so
 %{evo_plugins_dir}/org-gnome-save-calendar.eplug
-
-%if %{with pilot}
-%files pilot
-%defattr(644,root,root,755)
-%dir %{_libdir}/evolution/%{basever}/conduits
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/conduits/libeaddress_conduit.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/conduits/libecalendar_common_conduit.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/conduits/libecalendar_conduit.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/conduits/libememo_conduit.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/conduits/libetodo_conduit.so
-%{_datadir}/gnome-pilot/conduits/e-address.conduit
-%{_datadir}/gnome-pilot/conduits/e-calendar.conduit
-%{_datadir}/gnome-pilot/conduits/e-memo.conduit
-%{_datadir}/gnome-pilot/conduits/e-todo.conduit
-%endif
 
 %files apidocs
 %defattr(644,root,root,755)
