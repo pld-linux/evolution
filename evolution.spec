@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.32.0
-Release:	2
+Version:	2.32.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.32/%{name}-%{version}.tar.bz2
-# Source0-md5:	c74fdd472efed42d9876aa905961b53d
+# Source0-md5:	47c1d45366aaa69e79a320f351ef065d
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -24,7 +24,6 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-Patch2:		%{name}-message-send-crash.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
@@ -32,7 +31,7 @@ BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 2.32.0
+BuildRequires:	evolution-data-server-devel >= 2.32.1
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -42,7 +41,7 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.20.0
 BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	gtkhtml-devel >= 3.32.0
+BuildRequires:	gtkhtml-devel >= 3.32.1
 BuildRequires:	gtkimageview-devel >= 1.6
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
@@ -72,8 +71,8 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 2.32.0
-Requires:	gtkhtml >= 3.32.0
+Requires:	evolution-data-server >= 2.32.1
+Requires:	gtkhtml >= 3.32.1
 Requires:	psmisc
 Obsoletes:	evolution2
 Obsoletes:	evolution-pilot
@@ -119,11 +118,11 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.32.0
+Requires:	evolution-data-server-devel >= 2.32.1
 Requires:	glib2-devel >= 1:2.22.0
 Requires:	gnome-desktop-devel >= 2.28.0
 Requires:	gtk+2-devel >= 2:2.20.0
-Requires:	gtkhtml-devel >= 3.32.0
+Requires:	gtkhtml-devel >= 3.32.1
 Requires:	libunique-devel >= 1.1.2
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
@@ -219,7 +218,6 @@ Dokumentacja API Evolution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %{__sed} -i -e 's/^en@shaw//' po/LINGUAS
 %{__rm} -f po/en@shaw.po
