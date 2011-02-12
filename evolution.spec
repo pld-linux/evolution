@@ -24,6 +24,7 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
+Patch2:		gtk224.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
@@ -219,6 +220,7 @@ Dokumentacja API Evolution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %{__sed} -i -e 's/^en@shaw//' po/LINGUAS
 %{__rm} -f po/en@shaw.po
