@@ -3,19 +3,19 @@
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
 #
-%define		basever	2.32
+%define		basever	2.92
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.32.0
-Release:	2
+Version:	2.91.6.2
+Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.32/%{name}-%{version}.tar.bz2
-# Source0-md5:	c74fdd472efed42d9876aa905961b53d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.91/%{name}-%{version}.tar.bz2
+# Source0-md5:	98ffbc6e1297f2fee914132f71ed6b8e
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -24,7 +24,7 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-Patch2:		%{name}-message-send-crash.patch
+#Patch2:		%{name}-message-send-crash.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
@@ -42,8 +42,8 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+2-devel >= 2:2.20.0
 BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	gtkhtml-devel >= 3.32.0
-BuildRequires:	gtkimageview-devel >= 1.6
+BuildRequires:	gtkhtml-devel >= 3.91.6
+#BuildRequires:	gtkimageview-devel >= 1.6
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-gtk-devel
@@ -52,7 +52,7 @@ BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libpst-devel >= 0.6.41
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
-BuildRequires:	libunique-devel >= 1.1.2
+BuildRequires:	libunique-devel >= 2.90.1
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -219,13 +219,13 @@ Dokumentacja API Evolution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#patch2 -p1
 
 %{__sed} -i -e 's/^en@shaw//' po/LINGUAS
 %{__rm} -f po/en@shaw.po
 
 %build
-%{__glib_gettextize}
+%{__gettextize}
 %{__intltoolize}
 %{__libtoolize}
 %{__aclocal} -I m4
@@ -234,6 +234,13 @@ Dokumentacja API Evolution.
 %{__automake}
 %configure \
 	--disable-scrollkeeper \
+	--enable-gtk3 \
+	--enable-canberra \
+	--enable-pst-import \
+	--disable-image-inline \
+	--enable-contacts-map \
+	--enable-weather \
+	--enable-audio-inline \
 	%{?with_ldap:--with-openldap=yes} \
 	%{!?with_ldap:--with-openldap=no} \
 	%{?with_kerberos5:--with-krb5=%{_prefix}} \
@@ -341,6 +348,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-composer-autosave.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-network-manager.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-lib.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-offline-alert.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-manager.so
+
 
 %{_sysconfdir}/gconf/schemas/apps_evolution_shell.schemas
 
@@ -378,6 +388,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/%{basever}/errors/filter.error
 %{_datadir}/evolution/%{basever}/errors/mail-composer.error
 %{_datadir}/evolution/%{basever}/errors/shell.error
+%{_datadir}/evolution/%{basever}/errors/evolution-offline-alert.error
 
 %dir %{_datadir}/evolution/%{basever}/help
 %dir %{_datadir}/evolution/%{basever}/help/quickref
@@ -428,15 +439,19 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/org-gnome-default-source.eplug
 
 # plugin-manager
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-plugin-manager.so
-%{evo_plugins_dir}/org-gnome-plugin-manager.eplug
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-plugin-manager.so
+#%{evo_plugins_dir}/org-gnome-plugin-manager.eplug
+
+# prefer-plain
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-prefer-plain.so
+%{evo_plugins_dir}/org-gnome-prefer-plain.eplug
 
 %files libs
 %defattr(644,root,root,755)
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{basever}
 %dir %{evo_plugins_dir}
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so.*
+#%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so.*
@@ -463,7 +478,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so
+#%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so
@@ -487,7 +502,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libgnomecanvas.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libmenus.so
-%{_libdir}/evolution/%{basever}/libart_lgpl.la
+#%{_libdir}/evolution/%{basever}/libart_lgpl.la
 %{_libdir}/evolution/%{basever}/libcomposer.la
 %{_libdir}/evolution/%{basever}/libeabutil.la
 %{_libdir}/evolution/%{basever}/libecontacteditor.la
@@ -512,14 +527,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libgnomecanvas.la
 %{_libdir}/evolution/%{basever}/libmenus.la
 %{_includedir}/%{name}-%{basever}
-%{_pkgconfigdir}/evolution-calendar.pc
-%{_pkgconfigdir}/evolution-mail.pc
-%{_pkgconfigdir}/evolution-plugin.pc
-%{_pkgconfigdir}/evolution-shell.pc
+%{_pkgconfigdir}/evolution-calendar-3.0.pc
+%{_pkgconfigdir}/evolution-mail-3.0.pc
+%{_pkgconfigdir}/evolution-plugin-3.0.pc
+%{_pkgconfigdir}/evolution-shell-3.0.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/evolution/%{basever}/libart_lgpl.a
+#%{_libdir}/evolution/%{basever}/libart_lgpl.a
 %{_libdir}/evolution/%{basever}/libcomposer.a
 %{_libdir}/evolution/%{basever}/libeabutil.a
 %{_libdir}/evolution/%{basever}/libecontacteditor.a
@@ -616,8 +631,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_sysconfdir}/gconf/schemas/apps_evolution_email_custom_header.schemas
 
 # image-inline
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-image-inline.so
-%{evo_plugins_dir}/org-gnome-image-inline.eplug
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-image-inline.so
+#%{evo_plugins_dir}/org-gnome-image-inline.eplug
 
 # groupwise-features
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-groupwise-features.so
@@ -665,8 +680,8 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/org-gnome-sa-junk-plugin.eplug
 
 # subject-thread
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-subject-thread.so
-%{evo_plugins_dir}/org-gnome-subject-thread.eplug
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-subject-thread.so
+#%{evo_plugins_dir}/org-gnome-subject-thread.eplug
 
 # templates
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-templates.so
