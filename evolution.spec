@@ -3,19 +3,19 @@
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
 #
-%define		basever	2.92
+%define		basever	3.0
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	2.91.6.2
+Version:	2.91.91
 Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	98ffbc6e1297f2fee914132f71ed6b8e
+# Source0-md5:	b7fbbd81be9190749481c0b5eacc8755
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -32,27 +32,27 @@ BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 2.32.0
+BuildRequires:	evolution-data-server-devel >= 2.91.91
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-common >= 2.26.0
-BuildRequires:	gnome-desktop-devel >= 2.28.0
+BuildRequires:	gnome-desktop3-devel >= 2.91.3
 BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+2-devel >= 2:2.20.0
+BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	gtkhtml-devel >= 3.91.6
 #BuildRequires:	gtkimageview-devel >= 1.6
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
-BuildRequires:	libcanberra-gtk-devel
+BuildRequires:	libcanberra-gtk3-devel
 BuildRequires:	libgweather-devel >= 2.28.0
 BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libpst-devel >= 0.6.41
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
-BuildRequires:	libunique-devel >= 2.90.1
+BuildRequires:	libunique-devel >= 2.90.4
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -65,7 +65,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	shared-mime-info >= 0.22
 BuildRequires:	which
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk+3
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	scrollkeeper
 Requires(post,preun):	GConf2
@@ -121,10 +121,10 @@ Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= 2.32.0
 Requires:	glib2-devel >= 1:2.22.0
-Requires:	gnome-desktop-devel >= 2.28.0
-Requires:	gtk+2-devel >= 2:2.20.0
+Requires:	gnome-desktop-devel >= 2.91.3
+Requires:	gtk+3-devel >= 3.0
 Requires:	gtkhtml-devel >= 3.32.0
-Requires:	libunique-devel >= 1.1.2
+Requires:	libunique-devel >= 2.90.4
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
@@ -277,12 +277,9 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.pn
 install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
-rm -rf $RPM_BUILD_ROOT%{_datadir}/mime-info
-rm -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
-
-# test plugins
-rm -f $RPM_BUILD_ROOT%{evo_plugins_dir}/*org-gnome-prefer-plain.{so,eplug}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/mime-info
+%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 %find_lang %{name} --all-name --with-omf --with-gnome
 
