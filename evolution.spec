@@ -11,7 +11,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.91.91
-Release:	0.1
+Release:	0.2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.91/%{name}-%{version}.tar.bz2
@@ -288,11 +288,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install apps_evolution_shell.schemas
+%gconf_schema_install apps_evolution_eplugin_face.schemas
 %scrollkeeper_update_post
 %update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall apps_evolution_shell.schemas
+%gconf_schema_uninstall apps_evolution_eplugin_face.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -442,6 +444,12 @@ rm -rf $RPM_BUILD_ROOT
 # prefer-plain
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-prefer-plain.so
 %{evo_plugins_dir}/org-gnome-prefer-plain.eplug
+
+# face plugin
+%{_sysconfdir}/gconf/schemas/apps_evolution_eplugin_face.schemas
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-face.so
+%{evo_plugins_dir}/org-gnome-face.eplug
+%{_datadir}/evolution/%{basever}/errors/org-gnome-face.error
 
 %files libs
 %defattr(644,root,root,755)
