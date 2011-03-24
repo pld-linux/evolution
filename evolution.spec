@@ -124,7 +124,7 @@ Requires:	glib2-devel >= 1:2.22.0
 Requires:	gnome-desktop-devel >= 2.91.3
 Requires:	gtk+3-devel >= 3.0
 Requires:	gtkhtml-devel >= 3.32.0
-Requires:	libunique-devel >= 2.90.4
+Requires:	libunique3-devel >= 2.90.4
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
