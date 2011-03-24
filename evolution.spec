@@ -52,7 +52,7 @@ BuildRequires:	libnotify-devel >= 0.4.0
 BuildRequires:	libpst-devel >= 0.6.41
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libtool
-BuildRequires:	libunique-devel >= 2.90.4
+BuildRequires:	libunique3-devel >= 2.90.4
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
