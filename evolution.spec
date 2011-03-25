@@ -32,7 +32,7 @@ BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 2.91.91
+BuildRequires:	evolution-data-server-devel >= 2.91.92
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -72,7 +72,7 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 2.32.0
+Requires:	evolution-data-server >= 2.91.92
 Requires:	gtkhtml >= 3.32.0
 Requires:	psmisc
 Obsoletes:	evolution2
@@ -119,9 +119,9 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 2.32.0
+Requires:	evolution-data-server-devel >= 2.91.92
 Requires:	glib2-devel >= 1:2.22.0
-Requires:	gnome-desktop-devel >= 2.91.3
+Requires:	gnome-desktop3-devel >= 2.91.3
 Requires:	gtk+3-devel >= 3.0
 Requires:	gtkhtml-devel >= 3.32.0
 Requires:	libunique3-devel >= 2.90.4
