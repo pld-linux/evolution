@@ -121,7 +121,7 @@ Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= 2.91.92
 Requires:	glib2-devel >= 1:2.22.0
-Requires:	gnome-desktop3-devel >= 2.91.3
+Requires:	gnome-desktop-devel >= 2.91.3
 Requires:	gtk+3-devel >= 3.0
 Requires:	gtkhtml-devel >= 3.32.0
 Requires:	libunique3-devel >= 2.90.4
