@@ -11,7 +11,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	2.91.92
-Release:	0.2
+Release:	0.3
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/2.91/%{name}-%{version}.tar.bz2
@@ -279,7 +279,8 @@ install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir
 # remove useless files
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/mime-info
-%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
+%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/%{basever}/*.la
 
 %find_lang %{name} --all-name --with-omf --with-gnome
 
@@ -456,7 +457,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{basever}
 %dir %{evo_plugins_dir}
-#%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so.*
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so.*
@@ -483,7 +483,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_libdir}/evolution/%{basever}/libart_lgpl.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so
@@ -507,30 +506,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libgnomecanvas.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libmenus.so
-#%{_libdir}/evolution/%{basever}/libart_lgpl.la
-%{_libdir}/evolution/%{basever}/libcomposer.la
-%{_libdir}/evolution/%{basever}/libeabutil.la
-%{_libdir}/evolution/%{basever}/libecontacteditor.la
-%{_libdir}/evolution/%{basever}/libecontactlisteditor.la
-%{_libdir}/evolution/%{basever}/libemformat.la
-%{_libdir}/evolution/%{basever}/libemiscwidgets.la
-%{_libdir}/evolution/%{basever}/libeshell.la
-%{_libdir}/evolution/%{basever}/libessmime.la
-%{_libdir}/evolution/%{basever}/libetable.la
-%{_libdir}/evolution/%{basever}/libetext.la
-%{_libdir}/evolution/%{basever}/libetimezonedialog.la
-%{_libdir}/evolution/%{basever}/libeutil.la
-%{_libdir}/evolution/%{basever}/libevolution-a11y.la
-%{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.la
-%{_libdir}/evolution/%{basever}/libevolution-calendar.la
-%{_libdir}/evolution/%{basever}/libevolution-calendar-importers.la
-%{_libdir}/evolution/%{basever}/libevolution-mail-importers.la
-%{_libdir}/evolution/%{basever}/libevolution-mail.la
-%{_libdir}/evolution/%{basever}/libevolution-mail-settings.la
-%{_libdir}/evolution/%{basever}/libevolution-smime.la
-%{_libdir}/evolution/%{basever}/libfilter.la
-%{_libdir}/evolution/%{basever}/libgnomecanvas.la
-%{_libdir}/evolution/%{basever}/libmenus.la
 %{_includedir}/%{name}-%{basever}
 %{_pkgconfigdir}/evolution-calendar-3.0.pc
 %{_pkgconfigdir}/evolution-mail-3.0.pc
