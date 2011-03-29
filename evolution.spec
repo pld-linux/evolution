@@ -37,7 +37,7 @@ BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-common >= 2.26.0
-BuildRequires:	gnome-desktop3-devel >= 2.91.3
+BuildRequires:	gnome-desktop-devel >= 2.91.3
 BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.0
@@ -75,8 +75,8 @@ Requires:	GConf2 >= 2.28.0
 Requires:	evolution-data-server >= 2.91.92
 Requires:	gtkhtml >= 3.32.0
 Requires:	psmisc
-Obsoletes:	evolution2
 Obsoletes:	evolution-pilot
+Obsoletes:	evolution2
 Obsoletes:	gnome-pim
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
