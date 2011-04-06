@@ -24,7 +24,6 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
-#Patch2:		%{name}-message-send-crash.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
@@ -65,7 +64,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	shared-mime-info >= 0.22
 BuildRequires:	which
-Requires(post,postun):	gtk+3
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	scrollkeeper
 Requires(post,preun):	GConf2
@@ -73,6 +72,7 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
 Requires:	evolution-data-server >= 3.0.0
+Requires:	gnome-icon-theme >= 3.0.0
 Requires:	gtkhtml >= 4.0.0
 Requires:	libical >= 0.46
 Requires:	psmisc
@@ -220,10 +220,6 @@ Dokumentacja API Evolution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-#patch2 -p1
-
-%{__sed} -i -e 's/^en@shaw//' po/LINGUAS
-%{__rm} -f po/en@shaw.po
 
 %build
 %{__gettextize}
@@ -235,7 +231,6 @@ Dokumentacja API Evolution.
 %{__automake}
 %configure \
 	--disable-scrollkeeper \
-	--enable-gtk3 \
 	--enable-canberra \
 	--enable-pst-import \
 	--disable-image-inline \
