@@ -11,7 +11,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.0.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.0/%{name}-%{version}.tar.bz2
@@ -164,6 +164,7 @@ aplicações.
 Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
+Requires(post,postun):	desktop-file-utils
 Requires(post,preun):	GConf2
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
@@ -194,6 +195,7 @@ Książka adresowa Evolution.
 Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires(post,preun):	GConf2
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
@@ -308,6 +310,7 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install apps_evolution_email_custom_header.schemas
 %gconf_schema_install bogo-junk-plugin.schemas
 %gconf_schema_install evolution-mail.schemas
+%update_desktop_database_post
 
 %preun mail
 %gconf_schema_uninstall apps-evolution-attachment-reminder.schemas
@@ -317,6 +320,9 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall apps_evolution_email_custom_header.schemas
 %gconf_schema_uninstall bogo-junk-plugin.schemas
 %gconf_schema_uninstall evolution-mail.schemas
+
+%postun main
+%update_desktop_database_postun
 
 %post addressbook
 %update_desktop_database_post
@@ -330,9 +336,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post calendar
 %gconf_schema_install apps_evolution_calendar.schemas
+%update_desktop_database_post
 
 %preun calendar
 %gconf_schema_uninstall apps_evolution_calendar.schemas
+
+%postun calendar
+%update_desktop_database_postun
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)

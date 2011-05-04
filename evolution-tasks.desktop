@@ -57,5 +57,4 @@ StartupNotify=true
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=Evolution
 X-GNOME-Bugzilla-Component=BugBuddyBugs
-X-GNOME-Bugzilla-Version=2.28.x
-X-GNOME-Bugzilla-OtherBinaries=evolution-data-server-2.28;evolution-exchange-storage;evolution-alarm-notify;
+X-GNOME-Bugzilla-Version=3.0.x
