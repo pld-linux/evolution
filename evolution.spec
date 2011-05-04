@@ -321,7 +321,7 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall bogo-junk-plugin.schemas
 %gconf_schema_uninstall evolution-mail.schemas
 
-%postun main
+%postun mail
 %update_desktop_database_postun
 
 %post addressbook
