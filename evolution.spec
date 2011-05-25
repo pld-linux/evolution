@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.0.1
-Release:	2
+Version:	3.0.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	23e12e4c29325610dfc04b2d10464b72
+# Source0-md5:	87f014736a6416e833e88de69df751ce
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -31,7 +31,7 @@ BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 3.0.1
+BuildRequires:	evolution-data-server-devel >= 3.0.2
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -71,7 +71,7 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 3.0.1
+Requires:	evolution-data-server >= 3.0.2
 Requires:	gnome-icon-theme >= 3.0.0
 Requires:	gtkhtml >= 4.0.1
 Requires:	libical >= 0.46
@@ -120,7 +120,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2-devel >= 2.28.0
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= 3.0.1
+Requires:	evolution-data-server-devel >= 3.0.2
 Requires:	glib2-devel >= 1:2.22.0
 Requires:	gnome-desktop-devel >= 3.0.0
 Requires:	gtk+3-devel >= 3.0
