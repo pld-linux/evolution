@@ -11,11 +11,11 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.0.3
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	49f2617445dc552a1527e5a33a7ad8b9
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.0/%{name}-%{version}.tar.xz
+# Source0-md5:	3d0fd6ee9d20d53ad810625c385af2d5
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -31,7 +31,7 @@ BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 3.0.2
+BuildRequires:	evolution-data-server-devel >= 3.0.3
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
@@ -63,7 +63,9 @@ BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	shared-mime-info >= 0.22
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
+BuildRequires:	xz
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	scrollkeeper
@@ -71,7 +73,7 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 3.0.2
+Requires:	evolution-data-server >= 3.0.3
 Requires:	gnome-icon-theme >= 3.0.0
 Requires:	gtkhtml >= 4.0.1
 Requires:	libical >= 0.46
