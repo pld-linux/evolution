@@ -3,19 +3,19 @@
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
 #
-%define		basever	3.0
+%define		basever	3.2
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.0.3
-Release:	3
+Version:	3.1.91
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.0/%{name}-%{version}.tar.xz
-# Source0-md5:	3d0fd6ee9d20d53ad810625c385af2d5
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.1/%{name}-%{version}.tar.xz
+# Source0-md5:	e1a5da45f18a4c5bc2f6a5f6e2eb443a
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -41,7 +41,7 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk-doc >= 1.9
-BuildRequires:	gtkhtml-devel >= 4.0.1
+BuildRequires:	gtkhtml-devel >= 4.1.2
 #BuildRequires:	gtkimageview-devel >= 1.6
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
@@ -310,7 +310,8 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_install apps-evolution-mail-notification.schemas
 %gconf_schema_install apps-evolution-template-placeholders.schemas
 %gconf_schema_install apps_evolution_email_custom_header.schemas
-%gconf_schema_install bogo-junk-plugin.schemas
+%gconf_schema_install evolution-bogofilter.schemas
+%gconf_schema_install evolution-spamassassin.schemas
 %gconf_schema_install evolution-mail.schemas
 %update_desktop_database_post
 
@@ -320,7 +321,8 @@ rm -rf $RPM_BUILD_ROOT
 %gconf_schema_uninstall apps-evolution-mail-notification.schemas
 %gconf_schema_uninstall apps-evolution-template-placeholders.schemas
 %gconf_schema_uninstall apps_evolution_email_custom_header.schemas
-%gconf_schema_uninstall bogo-junk-plugin.schemas
+%gconf_schema_uninstall evolution-bogofilter.schemas
+%gconf_schema_uninstall evolution-spamassassin.schemas
 %gconf_schema_uninstall evolution-mail.schemas
 
 %postun mail
@@ -358,6 +360,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-lib.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-offline-alert.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-manager.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-online-accounts.so
 
 
 %{_sysconfdir}/gconf/schemas/apps_evolution_shell.schemas
@@ -390,6 +393,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sr) %dir %{_datadir}/evolution/%{basever}/default/sr
 %lang(sr@latin) %dir %{_datadir}/evolution/%{basever}/default/sr@latin
 %lang(zh_CN) %dir %{_datadir}/evolution/%{basever}/default/zh_CN
+
+%{_datadir}/evolution/%{basever}/address_formats.dat
+%{_datadir}/evolution/%{basever}/countrytransl.map
 
 %dir %{_datadir}/evolution/%{basever}/errors
 %{_datadir}/evolution/%{basever}/errors/e-system.error
@@ -605,9 +611,10 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/org-gnome-evolution-bbdb.eplug
 
 # bogo-junk-plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-bogo-junk-plugin.so
-%{evo_plugins_dir}/org-gnome-bogo-junk-plugin.eplug
-%{_sysconfdir}/gconf/schemas/bogo-junk-plugin.schemas
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-bogo-junk-plugin.so
+#%{evo_plugins_dir}/org-gnome-bogo-junk-plugin.eplug
+%{_sysconfdir}/gconf/schemas/evolution-bogofilter.schemas
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-bogofilter.so
 
 # dbx-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-dbx-import.so
@@ -623,14 +630,14 @@ rm -rf $RPM_BUILD_ROOT
 #%{evo_plugins_dir}/org-gnome-image-inline.eplug
 
 # groupwise-features
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-groupwise-features.so
-%{evo_plugins_dir}/org-gnome-groupwise-features.eplug
-%{evo_plugins_dir}/org-gnome-compose-send-options.xml
-%{_datadir}/evolution/%{basever}/errors/org-gnome-mail-retract.error
-%{_datadir}/evolution/%{basever}/errors/org-gnome-process-meeting.error
-%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy-login.error
-%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy.error
-%{_datadir}/evolution/%{basever}/errors/org-gnome-shared-folder.error
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-groupwise-features.so
+#%{evo_plugins_dir}/org-gnome-groupwise-features.eplug
+#%{evo_plugins_dir}/org-gnome-compose-send-options.xml
+#%{_datadir}/evolution/%{basever}/errors/org-gnome-mail-retract.error
+#%{_datadir}/evolution/%{basever}/errors/org-gnome-process-meeting.error
+#%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy-login.error
+#%{_datadir}/evolution/%{basever}/errors/org-gnome-proxy.error
+#%{_datadir}/evolution/%{basever}/errors/org-gnome-shared-folder.error
 
 # imap-features
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-imap-features.so
@@ -664,8 +671,10 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/org-gnome-pst-import.eplug
 
 # sa-junk-plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-sa-junk-plugin.so
-%{evo_plugins_dir}/org-gnome-sa-junk-plugin.eplug
+#%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-sa-junk-plugin.so
+#%{evo_plugins_dir}/org-gnome-sa-junk-plugin.eplug
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-spamassassin.so
+%{_sysconfdir}/gconf/schemas/evolution-spamassassin.schemas
 
 # subject-thread
 #%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-subject-thread.so
