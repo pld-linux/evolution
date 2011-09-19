@@ -1,4 +1,6 @@
 #
+# TODO: clutter, contact-maps, python, mono, ./configure options
+#
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
@@ -10,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.1.91
-Release:	1
+Version:	3.1.92
+Release:	0.1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.1/%{name}-%{version}.tar.xz
-# Source0-md5:	e1a5da45f18a4c5bc2f6a5f6e2eb443a
+# Source0-md5:	d4ce49224821c4f75805820df25d5382
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -27,44 +29,60 @@ Patch1:		%{name}-gnome-icon-theme.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
+BuildRequires:	atk-devel
 BuildRequires:	autoconf >= 2.58
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
+BuildRequires:	cairo-gobject-devel
+BuildRequires:	clutter-devel >= 1.0.0
+BuildRequires:	clutter-gtk-devel >= 0.90
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 3.0.3
+BuildRequires:	evolution-data-server-devel >= 3.1.92
 BuildRequires:	geoclue-devel >= 0.11.1
-BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	gettext-devel >= 0.18.1
+BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.0.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
+BuildRequires:	gnome-icon-theme >= 2.30.2.1
+BuildRequires:	gnome-online-accounts-devel >= 3.1.1
+BuildRequires:	gsettings-desktop-schemas-devel >= 3.0.0
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gtk+3-devel >= 3.0.2
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	gtkhtml-devel >= 4.1.2
-#BuildRequires:	gtkimageview-devel >= 1.6
+#BuildRequires:	gtkimageview-devel >= 2.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
-BuildRequires:	libcanberra-gtk3-devel
-BuildRequires:	libgweather-devel >= 2.28.0
-BuildRequires:	libnotify-devel >= 0.4.0
+BuildRequires:	libcanberra-gtk3-devel >= 0.25
+BuildRequires:	libchamplain-devel >= 0.10
+BuildRequires:	libgdata-devel >= 0.9
+BuildRequires:	libgweather-devel >= 2.90.0
+BuildRequires:	libical-devel
+BuildRequires:	libnotify-devel >= 0.5.1
 BuildRequires:	libpst-devel >= 0.6.41
-BuildRequires:	libsoup-devel >= 2.4.0
-BuildRequires:	libtool
-BuildRequires:	libunique3-devel >= 3.0.0
+BuildRequires:	libsoup-gnome-devel >= 2.31.2
+BuildRequires:	libtool >= 2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
+BuildRequires:	libytnef-devel
+#BuildRequires:	mono-devel
+BuildRequires:	mx-devel
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.4.6}
+BuildRequires:	perl
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
+#BuildRequires:	python-devel
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	shared-mime-info >= 0.22
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
+BuildRequires:	xorg-lib-libICE-devel
+BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xz
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
@@ -73,7 +91,7 @@ Requires(post,preun):	GConf2
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	GConf2 >= 2.28.0
-Requires:	evolution-data-server >= 3.0.3
+Requires:	evolution-data-server >= 3.1.92
 Requires:	gnome-icon-theme >= 3.0.0
 Requires:	gtkhtml >= 4.0.1
 Requires:	libical >= 0.46
@@ -238,7 +256,6 @@ Dokumentacja API Evolution.
 	--enable-canberra \
 	--enable-pst-import \
 	--disable-image-inline \
-	--enable-contacts-map \
 	--enable-weather \
 	--enable-audio-inline \
 	%{?with_ldap:--with-openldap=yes} \
