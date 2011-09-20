@@ -1,6 +1,4 @@
 #
-# TODO: clutter, contact-maps, python, mono, ./configure options
-#
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
@@ -65,7 +63,7 @@ BuildRequires:	libsoup-gnome-devel >= 2.31.2
 BuildRequires:	libtool >= 2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	libytnef-devel
-#BuildRequires:	mono-devel
+BuildRequires:	mono-devel
 BuildRequires:	mx-devel
 BuildRequires:	nspr-devel
 BuildRequires:	nss-devel
@@ -74,9 +72,9 @@ BuildRequires:	perl
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
-#BuildRequires:	python-devel
+BuildRequires:	python-devel
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	shared-mime-info >= 0.22
 BuildRequires:	tar >= 1:1.22
