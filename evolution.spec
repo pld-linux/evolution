@@ -13,7 +13,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.1.92
-Release:	0.1
+Release:	0.2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.1/%{name}-%{version}.tar.xz
@@ -226,6 +226,22 @@ Evolution calendar and todo component.
 %description calendar -l pl.UTF-8
 Kalendarz i lista zadań Evolution.
 
+%package python
+Summary:	Python embedding hooks for Evolution
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description python
+Python embedding hooks for Evolution.
+
+%package mono
+Summary:	Mono embedding hooks for Evolution
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description mono
+Mono embedding hooks for Evolution.
+
 %package apidocs
 Summary:	Evolution API documentation
 Summary(pl.UTF-8):	Dokumentacja API Evolution
@@ -253,30 +269,33 @@ Dokumentacja API Evolution.
 %{__automake}
 %configure \
 	--disable-scrollkeeper \
+	--disable-schemas-install \
+	--disable-silent-rules \
+	--enable-static \
 	--enable-canberra \
 	--enable-pst-import \
 	--disable-image-inline \
 	--enable-weather \
 	--enable-audio-inline \
-	%{?with_ldap:--with-openldap=yes} \
-	%{!?with_ldap:--with-openldap=no} \
-	%{?with_kerberos5:--with-krb5=%{_prefix}} \
-	%{!?with_kerberos5:--with-krb5=no} \
+	--enable-goa \
+	--with-clutter \
+	--enable-contact-maps \
+	%{__with_without ldap openldap} \
+	%{__with_without kerberos5 krb5 %{_prefix}} \
 	--without-static-ldap \
 	--with-nspr-includes="%{_includedir}/nspr" \
 	--with-nss-includes="%{_includedir}/nss" \
 	--with-nspr-libs="%{_libdir}" \
 	--with-nss-libs="%{_libdir}" \
 	--with-kde-applnk-path=no \
-	--disable-schemas-install \
 	--enable-plugins=all \
 	--enable-nss=yes \
 	--enable-smime=yes \
-	--enable-static \
 	--with-sub-version=" PLD Linux" \
 	--enable-gtk-doc \
 	--with-html-dir=%{_gtkdocdir} \
-	--disable-silent-rules
+	--enable-python \
+	--enable-mono
 
 %{__make}
 
@@ -776,6 +795,14 @@ rm -rf $RPM_BUILD_ROOT
 # save-calendar
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-save-calendar.so
 %{evo_plugins_dir}/org-gnome-save-calendar.eplug
+
+%files python
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-python.so
+
+%files mono
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/libevolution-module-plugin-mono.so
 
 %files apidocs
 %defattr(644,root,root,755)
