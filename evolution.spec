@@ -54,7 +54,7 @@ BuildRequires:	gtkhtml-devel >= 4.1.2
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
-BuildRequires:	libchamplain-devel >= 0.10
+BuildRequires:	libchamplain-devel >= 0.12
 BuildRequires:	libgdata-devel >= 0.9
 BuildRequires:	libgweather-devel >= 2.90.0
 BuildRequires:	libical-devel
