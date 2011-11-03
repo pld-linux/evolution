@@ -1,0 +1,15 @@
+diff -ur evolution-2.32.2.orig//configure.ac evolution-2.32.2/configure.ac
+--- evolution-2.32.2.orig//configure.ac	2011-11-03 19:44:56.000000000 +0000
++++ evolution-2.32.2/configure.ac	2011-11-03 19:58:21.388085734 +0000
+@@ -143,10 +143,7 @@
+ dnl GDK_DISABLE_DEPRECATED is excluded until
+ dnl we can port the GDK drawing code to cairo.
+ AS_COMPILER_FLAGS(WARNING_FLAGS,
+-	"-DG_DISABLE_DEPRECATED
+-	-DPANGO_DISABLE_DEPRECATED
+-	-DGDK_PIXBUF_DISABLE_DEPRECATED
+-	-DEDS_DISABLE_DEPRECATED
++	"-DEDS_DISABLE_DEPRECATED
+ 	-DG_DISABLE_SINGLE_INCLUDES
+ 	-DGTK_DISABLE_SINGLE_INCLUDES
+ 	-Wall -Wextra
