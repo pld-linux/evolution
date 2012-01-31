@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.2.2
+Version:	3.2.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.2/%{name}-%{version}.tar.xz
-# Source0-md5:	1c661fb7a982ba6b3624becaa3079eb8
+# Source0-md5:	27b2e4ec00c7b9af03f9f034a3ad5dcd
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -25,6 +25,7 @@ Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 Patch2:		champlain-0.12.patch
+Patch3:		pst-importer.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	GConf2-devel >= 2.28.0
 BuildRequires:	NetworkManager-devel >= 0.7
@@ -36,7 +37,7 @@ BuildRequires:	cairo-gobject-devel
 BuildRequires:	clutter-devel >= 1.0.0
 BuildRequires:	clutter-gtk-devel >= 0.90
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	evolution-data-server-devel >= 3.2.0
+BuildRequires:	evolution-data-server-devel >= 3.2.3
 BuildRequires:	geoclue-devel >= 0.11.1
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	glib2-devel >= 1:2.28.0
@@ -59,7 +60,7 @@ BuildRequires:	libgdata-devel >= 0.9
 BuildRequires:	libgweather-devel >= 3.0.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.5.1
-BuildRequires:	libpst-devel >= 0.6.41
+BuildRequires:	libpst-devel >= 0.6.54
 BuildRequires:	libsoup-gnome-devel >= 2.31.2
 BuildRequires:	libtool >= 2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
@@ -259,6 +260,7 @@ Dokumentacja API Evolution.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__gettextize}
