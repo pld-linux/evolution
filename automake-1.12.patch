@@ -1,0 +1,20 @@
+diff -uNr evolution-3.4.3.orig/configure.ac evolution-3.4.3/configure.ac
+--- evolution-3.4.3.orig/configure.ac	2012-06-23 12:23:51.000000000 +0200
++++ evolution-3.4.3/configure.ac	2012-06-23 12:32:46.082934664 +0200
+@@ -23,11 +23,15 @@
+ dnl Autoconf / Automake Initialization
+ AC_PREREQ(2.58)
+ AC_INIT([evolution],[evo_version],[http://bugzilla.gnome.org/enter_bug.cgi?product=Evolution])
+-AM_INIT_AUTOMAKE([1.10 dist-xz no-dist-gzip -Wall -Werror foreign])
++AM_INIT_AUTOMAKE([1.10 dist-xz no-dist-gzip -Wall foreign])
+ AC_CONFIG_MACRO_DIR([m4])
+ AC_CONFIG_HEADERS(config.h)
+ AC_CONFIG_SRCDIR(README)
+ 
++# automake 1.12 seems to require this, but automake 1.11 doesn't recognize it
++m4_pattern_allow([AM_PROG_AR])
++AM_PROG_AR
++
+ dnl This is for the autoconf tests only - it set's the language we use
+ AC_LANG(C)
+ 
