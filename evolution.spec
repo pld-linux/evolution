@@ -11,7 +11,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.6.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.6/%{name}-%{version}.tar.xz
@@ -86,7 +86,9 @@ Requires:	gtkhtml >= 4.5.2
 Requires:	hicolor-icon-theme
 Requires:	libical >= 0.46
 Requires:	psmisc
+Obsoletes:	evolution-mono
 Obsoletes:	evolution-pilot
+Obsoletes:	evolution-python
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
 # sr@Latn vs. sr@latin
