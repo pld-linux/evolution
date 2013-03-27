@@ -3,19 +3,19 @@
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
 #
-%define		basever	3.6
+%define		basever	3.8
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.6.4
+Version:	3.8.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.6/%{name}-%{version}.tar.xz
-# Source0-md5:	699c29a0179df3866ecc2f972bc626a4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.8/%{name}-%{version}.tar.xz
+# Source0-md5:	73391003d81db656a9e91814cbd08fe4
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -26,7 +26,7 @@ Patch0:		%{name}-nolibs.patch
 Patch1:		%{name}-gnome-icon-theme.patch
 URL:		http://www.gnome.org/projects/evolution/
 BuildRequires:	atk-devel
-BuildRequires:	autoconf >= 2.62
+BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	cairo-gobject-devel
@@ -34,8 +34,9 @@ BuildRequires:	clutter-gtk-devel >= 0.90
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	evolution-data-server-devel >= %{version}
 BuildRequires:	geoclue-devel >= 0.12.0
+BuildRequires:	geocode-glib-devel
 BuildRequires:	gettext-devel >= 0.18.1
-BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gnome-icon-theme >= 3.2.0
@@ -44,7 +45,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit3-devel >= 1.8.0
+BuildRequires:	gtk-webkit3-devel >= 1.10.0
 BuildRequires:	gtkhtml-devel >= 4.5.2
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
@@ -55,7 +56,7 @@ BuildRequires:	libgweather-devel >= 3.5.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
-BuildRequires:	libsoup-gnome-devel >= 2.38.1
+BuildRequires:	libsoup-gnome-devel >= 2.40.3
 BuildRequires:	libtool >= 2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	libytnef-devel
@@ -115,7 +116,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
-Requires:	glib2 >= 1:2.32.0
+Requires:	glib2 >= 1:2.34.0
 
 %description libs
 This package contains Evolution libraries.
@@ -132,7 +133,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{version}
-Requires:	glib2-devel >= 1:2.32.0
+Requires:	glib2-devel >= 1:2.34.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.4.0
 Requires:	gtkhtml-devel >= 4.5.3
@@ -175,7 +176,7 @@ Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.34.0
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
@@ -191,7 +192,7 @@ Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.34.0
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 
@@ -206,7 +207,7 @@ Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.34.0
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 Obsoletes:	evolution-caldav
@@ -243,6 +244,11 @@ Dokumentacja API Evolution.
 %{__autoconf}
 %{__automake}
 %configure \
+	BOGOFILTER="/usr/bin/bogofilter" \
+	SPAMASSASSIN="/usr/bin/spamassassin" \
+	SA_LEARN="/usr/bin/sa-learn" \
+	SPAMC="/usr/bin/spamc" \
+	SPAMD="/usr/bin/spamd" \
 	--disable-silent-rules \
 	--enable-static \
 	--enable-canberra \
@@ -259,7 +265,6 @@ Dokumentacja API Evolution.
 	--with-nss-includes="%{_includedir}/nss" \
 	--with-nspr-libs="%{_libdir}" \
 	--with-nss-libs="%{_libdir}" \
-	--with-kde-applnk-path=no \
 	--enable-plugins=all \
 	--enable-nss=yes \
 	--enable-smime=yes \
@@ -337,6 +342,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-online-accounts.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-plugin-lib.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-plugin-manager.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-settings.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-web-inspector.so
 
 %{_datadir}/GConf/gsettings/evolution.convert
@@ -454,33 +460,22 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontactlisteditor.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libemail-engine.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libemail-utils.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libemformat.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libemiscwidgets.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeshell.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libessmime.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libetable.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libetext.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libetimezonedialog.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeutil.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-a11y.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-importers.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-smime.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-utils.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libfilter.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libgnomecanvas.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libmenus.so
 
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/%{name}-%{basever}
 %{_pkgconfigdir}/libemail-engine.pc
-%{_pkgconfigdir}/libemail-utils.pc
-%{_pkgconfigdir}/libevolution-utils.pc
 %{_pkgconfigdir}/evolution-calendar-3.0.pc
 %{_pkgconfigdir}/evolution-mail-3.0.pc
 %{_pkgconfigdir}/evolution-plugin-3.0.pc
@@ -493,26 +488,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libecontacteditor.a
 %{_libdir}/evolution/%{basever}/libecontactlisteditor.a
 %{_libdir}/evolution/%{basever}/libemail-engine.a
-%{_libdir}/evolution/%{basever}/libemail-utils.a
 %{_libdir}/evolution/%{basever}/libemformat.a
-%{_libdir}/evolution/%{basever}/libemiscwidgets.a
 %{_libdir}/evolution/%{basever}/libeshell.a
 %{_libdir}/evolution/%{basever}/libessmime.a
-%{_libdir}/evolution/%{basever}/libetable.a
-%{_libdir}/evolution/%{basever}/libetext.a
-%{_libdir}/evolution/%{basever}/libetimezonedialog.a
 %{_libdir}/evolution/%{basever}/libeutil.a
-%{_libdir}/evolution/%{basever}/libevolution-a11y.a
 %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.a
 %{_libdir}/evolution/%{basever}/libevolution-calendar.a
 %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.a
 %{_libdir}/evolution/%{basever}/libevolution-mail-importers.a
 %{_libdir}/evolution/%{basever}/libevolution-mail.a
 %{_libdir}/evolution/%{basever}/libevolution-smime.a
-%{_libdir}/evolution/%{basever}/libevolution-utils.a
-%{_libdir}/evolution/%{basever}/libfilter.a
 %{_libdir}/evolution/%{basever}/libgnomecanvas.a
-%{_libdir}/evolution/%{basever}/libmenus.a
 
 %files mail
 %defattr(644,root,root,755)
@@ -583,9 +569,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-email-custom-header.so
 %{evo_plugins_dir}/org-gnome-email-custom-header.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.email-custom-header.gschema.xml
-
-# imap-features
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-imap-features.so
 
 # itip-formatter
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-itip-formatter.so
@@ -710,4 +693,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/eshell
+%{_gtkdocdir}/libeshell
+%{_gtkdocdir}/libeutil
