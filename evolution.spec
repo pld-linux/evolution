@@ -3,19 +3,19 @@
 %bcond_without	ldap		# build without ldap support
 %bcond_without	kerberos5	# build without kerberos5 support
 #
-%define		basever	3.8
+%define		basever	3.10
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.8.4
+Version:	3.10.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	a2fa3270da291fbc54573d3778b74e93
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	01c3f4f73bc236b95f74afedf9f463ca
 Source1:	%{name}-gg16.png
 Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
@@ -40,7 +40,6 @@ BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gnome-icon-theme >= 3.2.0
-BuildRequires:	gnome-online-accounts-devel >= 3.2.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.4.0
@@ -257,8 +256,7 @@ Dokumentacja API Evolution.
 	--disable-image-inline \
 	--enable-weather \
 	--enable-audio-inline \
-	--enable-goa \
-	--enable-contact-maps \
+	--disable-contact-maps \
 	%{__with_without ldap openldap} \
 	%{__with_without kerberos5 krb5 %{_prefix}} \
 	--without-static-ldap \
@@ -339,8 +337,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/killev
 %dir %{_libdir}/evolution/%{basever}/modules
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-composer-autosave.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-contact-photos.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-gravatar.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-offline-alert.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-online-accounts.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-plugin-lib.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-plugin-manager.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-settings.so
@@ -350,6 +349,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.importer.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.shell.gschema.xml
+
+%{_datadir}/appdata/evolution.appdata.xml
 
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/%{basever}
@@ -456,21 +457,21 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{_libdir}/evolution/%{basever}
 %dir %{evo_plugins_dir}
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libcomposer.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libeabutil.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontacteditor.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libecontactlisteditor.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libemail-engine.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libemformat.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libeshell.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libessmime.so
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/libeutil.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-formatter.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-composer.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail-importers.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-mail.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-shell.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-smime.so
+%attr(755,root,root) %{_libdir}/evolution/%{basever}/libevolution-util.so
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/libgnomecanvas.so
 
 %files devel
@@ -484,21 +485,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/evolution/%{basever}/libcomposer.a
 %{_libdir}/evolution/%{basever}/libeabutil.a
 %{_libdir}/evolution/%{basever}/libecontacteditor.a
 %{_libdir}/evolution/%{basever}/libecontactlisteditor.a
 %{_libdir}/evolution/%{basever}/libemail-engine.a
-%{_libdir}/evolution/%{basever}/libemformat.a
-%{_libdir}/evolution/%{basever}/libeshell.a
 %{_libdir}/evolution/%{basever}/libessmime.a
-%{_libdir}/evolution/%{basever}/libeutil.a
 %{_libdir}/evolution/%{basever}/libevolution-addressbook-importers.a
 %{_libdir}/evolution/%{basever}/libevolution-calendar.a
 %{_libdir}/evolution/%{basever}/libevolution-calendar-importers.a
+%{_libdir}/evolution/%{basever}/libevolution-mail-composer.a
+%{_libdir}/evolution/%{basever}/libevolution-mail-formatter.a
 %{_libdir}/evolution/%{basever}/libevolution-mail-importers.a
 %{_libdir}/evolution/%{basever}/libevolution-mail.a
+%{_libdir}/evolution/%{basever}/libevolution-shell.a
 %{_libdir}/evolution/%{basever}/libevolution-smime.a
+%{_libdir}/evolution/%{basever}/libevolution-util.a
 %{_libdir}/evolution/%{basever}/libgnomecanvas.a
 
 %files mail
@@ -591,10 +592,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mailing-list-actions.so
 %{evo_plugins_dir}/org-gnome-mailing-list-actions.eplug
 %{_datadir}/evolution/%{basever}/errors/org-gnome-mailing-list-actions.error
-
-# mark-all-read
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mark-all-read.so
-%{evo_plugins_dir}/org-gnome-mark-all-read.eplug
 
 # pst-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-pst-import.so
@@ -694,5 +691,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files apidocs
 %defattr(644,root,root,755)
-%{_gtkdocdir}/libeshell
-%{_gtkdocdir}/libeutil
+%{_gtkdocdir}/evolution-mail-composer
+%{_gtkdocdir}/evolution-mail-formatter
+%{_gtkdocdir}/evolution-shell
+%{_gtkdocdir}/evolution-util
