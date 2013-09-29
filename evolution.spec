@@ -11,13 +11,11 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.10.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.10/%{name}-%{version}.tar.xz
 # Source0-md5:	01c3f4f73bc236b95f74afedf9f463ca
-Source1:	%{name}-gg16.png
-Source2:	%{name}-gg48.png
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -275,13 +273,10 @@ Dokumentacja API Evolution.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,48x48}/apps
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps/im-gadugadu.png
-install %{SOURCE2} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps/im-gadugadu.png
 install %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
