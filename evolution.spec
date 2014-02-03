@@ -10,12 +10,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.10.1
+Version:	3.10.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	53199a7863b23d177774362d33993774
+# Source0-md5:	bfff8537795bcfa3a67a8b0860447102
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -32,7 +32,7 @@ BuildRequires:	clutter-gtk-devel >= 0.90
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	evolution-data-server-devel >= %{version}
 BuildRequires:	geoclue-devel >= 0.12.0
-BuildRequires:	geocode-glib-devel
+BuildRequires:	geocode-glib-devel >= 3.10.0
 BuildRequires:	gettext-devel >= 0.18.1
 BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	gnome-common >= 2.26.0
@@ -42,14 +42,14 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.4.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit3-devel >= 1.10.0
+BuildRequires:	gtk-webkit3-devel >= 2.0.1
 BuildRequires:	gtkhtml-devel >= 4.5.2
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 BuildRequires:	libchamplain-devel >= 0.12
 BuildRequires:	libgdata-devel >= 0.10
-BuildRequires:	libgweather-devel >= 3.5.0
+BuildRequires:	libgweather-devel >= 3.8.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
