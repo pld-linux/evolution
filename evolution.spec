@@ -1,21 +1,20 @@
 #
 # Conditional build:
 %bcond_without	ldap		# build without ldap support
-%bcond_without	kerberos5	# build without kerberos5 support
 #
-%define		basever	3.10
+%define		basever	3.12
 #
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.10.4
+Version:	3.12.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.10/%{name}-%{version}.tar.xz
-# Source0-md5:	f19aea3477f72c5afa51f4b3e4a8adf5
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.12/%{name}-%{version}.tar.xz
+# Source0-md5:	5ec7a2828eef2dac3da2a1de18d1188c
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -31,6 +30,7 @@ BuildRequires:	cairo-gobject-devel
 BuildRequires:	clutter-gtk-devel >= 0.90
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	evolution-data-server-devel >= %{version}
+BuildRequires:	gcr-devel >= 3.4
 BuildRequires:	geoclue-devel >= 0.12.0
 BuildRequires:	geocode-glib-devel >= 3.10.0
 BuildRequires:	gettext-devel >= 0.18.1
@@ -40,11 +40,11 @@ BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gnome-icon-theme >= 3.2.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+3-devel >= 3.4.0
+BuildRequires:	gtk+3-devel >= 3.8.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit3-devel >= 2.0.1
 BuildRequires:	gtkhtml-devel >= 4.5.2
-%{?with_kerberos5:BuildRequires:	heimdal-devel}
+BuildRequires:	gtkspell3-devel
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 BuildRequires:	libchamplain-devel >= 0.12
@@ -53,7 +53,7 @@ BuildRequires:	libgweather-devel >= 3.8.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
-BuildRequires:	libsoup-gnome-devel >= 2.40.3
+BuildRequires:	libsoup-devel >= 2.42.0
 BuildRequires:	libtool >= 2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	libytnef-devel
@@ -73,7 +73,7 @@ BuildRequires:	xorg-lib-libICE-devel
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xz
 BuildRequires:	yelp-tools
-Requires(post,postun):	glib2 >= 1:2.32.0
+Requires(post,postun):	glib2 >= 1:2.36.0
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
@@ -113,7 +113,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
-Requires:	glib2 >= 1:2.34.0
+Requires:	glib2 >= 1:2.36.0
 
 %description libs
 This package contains Evolution libraries.
@@ -130,9 +130,9 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{version}
-Requires:	glib2-devel >= 1:2.34.0
+Requires:	glib2-devel >= 1:2.36.0
 Requires:	gnome-desktop-devel >= 3.2.0
-Requires:	gtk+3-devel >= 3.4.0
+Requires:	gtk+3-devel >= 3.8.0
 Requires:	gtkhtml-devel >= 4.5.3
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
@@ -173,7 +173,7 @@ Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.34.0
+Requires(post,postun):	glib2 >= 1:2.36.0
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
@@ -189,7 +189,7 @@ Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.34.0
+Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 
@@ -204,7 +204,7 @@ Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.34.0
+Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	%{name} = %{version}-%{release}
 Provides:	%{name}-component = %{version}-%{release}
 Obsoletes:	evolution-caldav
@@ -253,10 +253,8 @@ Dokumentacja API Evolution.
 	--enable-pst-import \
 	--disable-image-inline \
 	--enable-weather \
-	--enable-audio-inline \
 	--disable-contact-maps \
 	%{__with_without ldap openldap} \
-	%{__with_without kerberos5 krb5 %{_prefix}} \
 	--without-static-ldap \
 	--with-nspr-includes="%{_includedir}/nspr" \
 	--with-nss-includes="%{_includedir}/nss" \
@@ -475,7 +473,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/libemail-engine.pc
 %{_pkgconfigdir}/evolution-calendar-3.0.pc
 %{_pkgconfigdir}/evolution-mail-3.0.pc
-%{_pkgconfigdir}/evolution-plugin-3.0.pc
 %{_pkgconfigdir}/evolution-shell-3.0.pc
 
 %files static
@@ -545,9 +542,6 @@ rm -rf $RPM_BUILD_ROOT
 %{evo_plugins_dir}/org-gnome-evolution-attachment-reminder.eplug
 %{_datadir}/evolution/%{basever}/errors/org-gnome-attachment-reminder.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.attachment-reminder.gschema.xml
-
-# audio-inline
-%attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-audio-inline.so
 
 # bbdb
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-bbdb.so
@@ -687,6 +681,7 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/evolution-mail-composer
+%{_gtkdocdir}/evolution-mail-engine
 %{_gtkdocdir}/evolution-mail-formatter
 %{_gtkdocdir}/evolution-shell
 %{_gtkdocdir}/evolution-util
