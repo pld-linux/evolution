@@ -8,12 +8,12 @@ Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.12.4
+Version:	3.12.6
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	b94b63bd8a32527aa45b152878c0a354
+# Source0-md5:	2f98353ba8d8a9a45d0ff5d0a22d27c1
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
