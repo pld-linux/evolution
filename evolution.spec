@@ -83,6 +83,7 @@ Requires:	gtkhtml >= 4.5.2
 Requires:	hicolor-icon-theme
 Requires:	libical >= 0.46
 Requires:	psmisc
+Suggests:	adwaita-icon-theme
 Obsoletes:	evolution-mono
 Obsoletes:	evolution-pilot
 Obsoletes:	evolution-python
