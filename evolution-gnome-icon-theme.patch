@@ -1,13 +1,26 @@
-diff -urN evolution-2.29.92.1/configure.ac evolution-2.29.92.1.new//configure.ac
---- evolution-2.29.92.1/configure.ac	2010-03-10 14:49:07.000000000 +0100
-+++ evolution-2.29.92.1.new//configure.ac	2010-03-13 23:02:43.212014431 +0100
-@@ -537,11 +537,6 @@
- AC_CHECK_FUNCS(statfs)
+--- evolution-3.12.6/configure.ac~	2014-08-11 10:01:25.000000000 +0200
++++ evolution-3.12.6/configure.ac	2014-10-11 19:26:18.574504603 +0200
+@@ -505,25 +505,6 @@
+ AC_CHECK_FUNCS(mkdtemp)
  
  dnl **************************************************
 -dnl Gnome Icon Theme
 -dnl **************************************************
--PKG_CHECK_MODULES([GIT], [gnome-icon-theme >= gnome_icon_theme_minimum_version])
+-AC_MSG_CHECKING(for icon theme)
+-PKG_CHECK_EXISTS([gnome-icon-theme >= gnome_icon_theme_minimum_version],
+-		 have_icon_theme=yes, have_icon_theme=no)
+-if test "x$have_icon_theme" != "xyes"; then
+-	PKG_CHECK_EXISTS([adwaita-icon-theme],
+-		 have_icon_theme=yes, have_icon_theme=no)
+-fi
+-
+-if test "x$have_icon_theme" != "xyes"; then
+-   AC_MSG_RESULT(no)
+-   AC_MSG_FAILURE([You need to have gnome-icon-theme or adwaita-icon-theme installed.])
+-else
+-   AC_MSG_RESULT(yes)
+-fi
+-
 -
 -dnl **************************************************
  dnl Accessibility support
