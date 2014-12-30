@@ -1,19 +1,22 @@
+# TODO: image-inline (requires gtk+3 based gtkimageview, not released yet)
 #
 # Conditional build:
-%bcond_without	ldap		# build without ldap support
+%bcond_without	ldap		# LDAP support
+%bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
+%bcond_without	glade		# Glade catalog
 
 %define		basever	3.12
 Summary:	The GNOME Email/Calendar/Addressbook Suite
-Summary(pl.UTF-8):	Klient poczty dla GNOME/Kalendarz/Książka Adresowa
+Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.12.8
+Version:	3.12.9
 Release:	1
 License:	GPL v2+
-Group:		X11/Applications
+Group:		X11/Applications/Mail
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	2861ecacd698c9dc8ba2bee491fa9569
+# Source0-md5:	2c0830d13ade4562608c4fe5985b8dc7
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -26,14 +29,16 @@ BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	cairo-gobject-devel
-BuildRequires:	clutter-gtk-devel >= 0.90
+%{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	evolution-data-server-devel >= %{version}
 BuildRequires:	gcr-devel >= 3.4
 BuildRequires:	geoclue-devel >= 0.12.0
-BuildRequires:	geocode-glib-devel >= 3.10.0
+%{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
 BuildRequires:	gettext-tools >= 0.18.1
-BuildRequires:	glib2-devel >= 1:2.34.0
+BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
+%{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
+BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gnome-icon-theme >= 3.2.0
@@ -43,23 +48,23 @@ BuildRequires:	gtk+3-devel >= 3.8.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit3-devel >= 2.0.1
 BuildRequires:	gtkhtml-devel >= 4.5.2
-BuildRequires:	gtkspell3-devel
+BuildRequires:	gtkspell3-devel >= 3.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
-BuildRequires:	libchamplain-devel >= 0.12
+%{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
 BuildRequires:	libgdata-devel >= 0.10
 BuildRequires:	libgweather-devel >= 3.8.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
 BuildRequires:	libsoup-devel >= 2.42.0
-BuildRequires:	libtool >= 2.2
+BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	libytnef-devel
-BuildRequires:	nspr-devel
-BuildRequires:	nss-devel
+BuildRequires:	nspr-devel >= 4
+BuildRequires:	nss-devel >= 3
 %{?with_ldap:BuildRequires:	openldap-devel >= 2.4.6}
-BuildRequires:	perl
+BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
 BuildRequires:	python
@@ -70,6 +75,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xorg-lib-libICE-devel
 BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.36.0
@@ -79,10 +85,12 @@ Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	evolution-data-server >= %{version}
 Requires:	gnome-icon-theme >= 3.2.0
-Requires:	gtkhtml >= 4.5.2
+Requires:	gsettings-desktop-schemas >= 3.2.0
 Requires:	hicolor-icon-theme
 Requires:	libical >= 0.46
+Requires:	libnotify-devel >= 0.7
 Requires:	psmisc
+Requires:	shared-mime-info >= 0.22
 Suggests:	adwaita-icon-theme
 Obsoletes:	evolution-mono
 Obsoletes:	evolution-pilot
@@ -102,8 +110,8 @@ integrated with one another and act as a seamless personal
 information-management tool.
 
 %description -l pl.UTF-8
-Evolution to program pocztowy GNOME, kalendarz, książka adresowa i
-narzędzie komunikacyjne.
+Evolution to program pocztowy, kalendarz, książka adresowa i narzędzie
+komunikacyjne dla GNOME.
 
 %description -l pt_BR.UTF-8
 Evolution é um cliente de email para o GNOME com calendário e outras
@@ -113,7 +121,15 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
+Requires:	gcr >= 3.4
+Requires:	gdk-pixbuf2 >= 2.24.0
 Requires:	glib2 >= 1:2.36.0
+Requires:	gtk+3 >= 3.8.0
+Requires:	gtk-webkit3 >= 2.0.1
+Requires:	gtkhtml >= 4.5.2
+Requires:	libcanberra-gtk3 >= 0.25
+Requires:	libsoup >= 2.42.0
+Requires:	libxml2 >= 1:2.7.3
 
 %description libs
 This package contains Evolution libraries.
@@ -133,6 +149,7 @@ Requires:	evolution-data-server-devel >= %{version}
 Requires:	glib2-devel >= 1:2.36.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.8.0
+Requires:	gtk-webkit3-devel >= 2.0.1
 Requires:	gtkhtml-devel >= 4.5.3
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
@@ -168,6 +185,19 @@ Pakiet zawiera statyczne biblioteki Evolution.
 Este pacote contém as bibliotecas estáticas para desenvolvimento de
 aplicações.
 
+%package glade
+Summary:	Evolution catalog file for Glade
+Summary(pl.UTF-8):	Plik katalogu Evolution dla Glade
+Group:		X11/Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	glade >= 3.10.0
+
+%description glade
+Evolution catalog file for Glade.
+
+%description glade -l pl.UTF-8
+Plik katalogu Evolution dla Glade.
+
 %package mail
 Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
@@ -176,6 +206,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.36.0
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
+Requires:	libpst >= 0.6.54
 Provides:	%{name}-component = %{version}-%{release}
 
 %description mail
@@ -187,10 +218,13 @@ Moduł pocztowy Evolution.
 %package addressbook
 Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
-Group:		X11/Applications
+Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	%{name} = %{version}-%{release}
+%{?with_contact_maps:Requires:	clutter-gtk >= 0.90}
+%{?with_contact_maps:Requires:	geocode-glib >= 3.10.0}
+%{?with_contact_maps:Requires:	libchamplain >= 0.12}
 Provides:	%{name}-component = %{version}-%{release}
 
 %description addressbook
@@ -206,6 +240,8 @@ Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.36.0
 Requires:	%{name} = %{version}-%{release}
+Requires:	libgdata >= 0.10
+Requires:	libgweather >= 3.8.0
 Provides:	%{name}-component = %{version}-%{release}
 Obsoletes:	evolution-caldav
 Obsoletes:	evolution-webcal
@@ -243,6 +279,7 @@ Dokumentacja API Evolution.
 %{__autoheader}
 %{__autoconf}
 %{__automake}
+# ac_cv_libiconv=no to look iconv in libc (configure has inverted logic)
 %configure \
 	BOGOFILTER="/usr/bin/bogofilter" \
 	HIGHLIGHT="/usr/bin/highlight" \
@@ -250,25 +287,27 @@ Dokumentacja API Evolution.
 	SA_LEARN="/usr/bin/sa-learn" \
 	SPAMC="/usr/bin/spamc" \
 	SPAMD="/usr/bin/spamd" \
-	--disable-silent-rules \
-	--enable-static \
+	ac_cv_libiconv=no \
 	--enable-canberra \
-	--enable-pst-import \
-	--disable-image-inline \
-	--enable-weather \
-	--disable-contact-maps \
-	%{__with_without ldap openldap} \
-	--without-static-ldap \
-	--with-nspr-includes="%{_includedir}/nspr" \
-	--with-nss-includes="%{_includedir}/nss" \
-	--with-nspr-libs="%{_libdir}" \
-	--with-nss-libs="%{_libdir}" \
-	--enable-plugins=all \
-	--enable-nss=yes \
-	--enable-smime=yes \
-	--with-sub-version=" PLD Linux" \
+	%{?with_contact_maps:--enable-contact-maps} \
 	--enable-gtk-doc \
-	--with-html-dir=%{_gtkdocdir}
+	--disable-image-inline \
+	--enable-nss \
+	%{__with_without ldap openldap} \
+	--enable-plugins=all \
+	--enable-pst-import \
+	--disable-silent-rules \
+	--enable-smime \
+	--enable-static \
+	--enable-weather \
+	%{?with_glade:--with-glade-catalog} \
+	--with-html-dir=%{_gtkdocdir} \
+	--with-nspr-includes="%{_includedir}/nspr" \
+	--with-nspr-libs="%{_libdir}" \
+	--with-nss-includes="%{_includedir}/nss" \
+	--with-nss-libs="%{_libdir}" \
+	--without-static-ldap \
+	--with-sub-version=" PLD Linux"
 
 %{__make}
 
@@ -281,9 +320,12 @@ rm -rf $RPM_BUILD_ROOT
 cp -p %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/*/*/*.{a,la}
-%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/%{basever}/{modules,plugins}/*.{a,la}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/%{basever}/*.la
+%if %{with glade}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/glade/modules/libgladeevolution.{la,a}
+%endif
+%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 %find_lang %{name} --all-name --with-gnome
 
@@ -327,7 +369,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS* README
+%doc AUTHORS ChangeLog MAINTAINERS NEWS* README
 %attr(755,root,root) %{_bindir}/evolution
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/killev
@@ -497,6 +539,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/evolution/%{basever}/libevolution-util.a
 %{_libdir}/evolution/%{basever}/libgnomecanvas.a
 
+%if %{with glade}
+%files glade
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/glade/modules/libgladeevolution.so
+%{_datadir}/glade/catalogs/evolution.xml
+%endif
+
 %files mail
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-mail.so
@@ -552,8 +601,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.autocontacts.gschema.xml
 
 # bogofilter
-%{_datadir}/glib-2.0/schemas/org.gnome.evolution.bogofilter.gschema.xml
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-bogofilter.so
+%{_datadir}/appdata/evolution-bogofilter.metainfo.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.bogofilter.gschema.xml
 
 # dbx-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-dbx-import.so
@@ -591,6 +641,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # spamassassin
 %attr(755,root,root) %{_libdir}/evolution/%{basever}/modules/module-spamassassin.so
+%{_datadir}/appdata/evolution-spamassassin.metainfo.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.spamassassin.gschema.xml
 
 # templates
