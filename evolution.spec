@@ -12,7 +12,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.12.11
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Mail
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.12/%{name}-%{version}.tar.xz
@@ -88,7 +88,7 @@ Requires:	gnome-icon-theme >= 3.2.0
 Requires:	gsettings-desktop-schemas >= 3.2.0
 Requires:	hicolor-icon-theme
 Requires:	libical >= 0.46
-Requires:	libnotify-devel >= 0.7
+Requires:	libnotify >= 0.7
 Requires:	psmisc
 Requires:	shared-mime-info >= 0.22
 Suggests:	adwaita-icon-theme
