@@ -1,3 +1,5 @@
+# TODO: gnome-autoar
+#
 # Conditional build:
 %bcond_without	ldap		# LDAP support
 %bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
@@ -27,6 +29,7 @@ BuildRequires:	bison
 BuildRequires:	cairo-gobject-devel
 %{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
 BuildRequires:	docbook-dtd412-xml
+BuildRequires:	enchant-devel >= 1.1.7
 BuildRequires:	evolution-data-server-devel >= %{version}
 BuildRequires:	gcr-devel >= 3.4
 BuildRequires:	geoclue-devel >= 0.12.0
@@ -45,6 +48,7 @@ BuildRequires:	gtk-webkit3-devel >= 2.2.0
 BuildRequires:	gtkhtml-devel >= 4.5.2
 BuildRequires:	gtkspell3-devel >= 3.0
 BuildRequires:	intltool >= 0.40.0
+BuildRequires:	iso-codes >= 0.49
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 %{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
 BuildRequires:	libcryptui-devel
@@ -83,6 +87,7 @@ Requires:	evolution-data-server >= %{version}
 Requires:	gnome-icon-theme >= 3.2.0
 Requires:	gsettings-desktop-schemas >= 3.2.0
 Requires:	hicolor-icon-theme
+Requires:	iso-codes >= 0.49
 Requires:	libical >= 0.46
 Requires:	libnotify >= 0.7
 Requires:	psmisc
@@ -117,6 +122,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
+Requires:	enchant >= 1.1.7
 Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
 Requires:	glib2 >= 1:2.40.0
