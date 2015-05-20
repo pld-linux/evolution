@@ -5,17 +5,19 @@
 %bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
 %bcond_without	glade		# Glade catalog
 
+%define		eds_ver		3.16.2
+
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.16.1
+Version:	3.16.2.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	aaafbc54e91b581d6fcc32edc68b371d
+# Source0-md5:	8a81e82a9cb8a30c64ffd9997c516807
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -30,7 +32,7 @@ BuildRequires:	cairo-gobject-devel
 %{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.1.7
-BuildRequires:	evolution-data-server-devel >= %{version}
+BuildRequires:	evolution-data-server-devel >= %{eds_ver}
 BuildRequires:	gcr-devel >= 3.4
 BuildRequires:	geoclue-devel >= 0.12.0
 %{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
@@ -83,7 +85,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
-Requires:	evolution-data-server >= %{version}
+Requires:	evolution-data-server >= %{eds_ver}
 Requires:	gnome-icon-theme >= 3.2.0
 Requires:	gsettings-desktop-schemas >= 3.2.0
 Requires:	hicolor-icon-theme
@@ -147,7 +149,7 @@ Summary(zh_CN.UTF-8):	Evolution组件开发库
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
-Requires:	evolution-data-server-devel >= %{version}
+Requires:	evolution-data-server-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.40.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.10.0
