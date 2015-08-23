@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.16.4
+Version:	3.16.5
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	5c1fe296b7c66cba711891d28a14a441
+# Source0-md5:	f9182138883391727e78a6ac7f7b80d7
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -34,10 +34,10 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.1.7
 BuildRequires:	evolution-data-server-devel >= %{eds_ver}
 BuildRequires:	gcr-devel >= 3.4
+BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
 BuildRequires:	geoclue-devel >= 0.12.0
 %{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
 BuildRequires:	gettext-tools >= 0.18.1
-BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
 BuildRequires:	glib2-devel >= 1:2.40.0
 BuildRequires:	gnome-common >= 2.26.0
