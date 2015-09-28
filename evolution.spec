@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.16.5
+Version:	3.18.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.16/%{name}-%{version}.tar.xz
-# Source0-md5:	f9182138883391727e78a6ac7f7b80d7
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.18/%{name}-%{version}.tar.xz
+# Source0-md5:	2bc21e57d9a86fc01bc542e350bebcc2
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -54,8 +54,7 @@ BuildRequires:	iso-codes >= 0.49
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 %{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
 BuildRequires:	libcryptui-devel
-BuildRequires:	libgdata-devel >= 0.10
-BuildRequires:	libgweather-devel >= 3.8.0
+BuildRequires:	libgweather-devel >= 3.10.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
@@ -617,8 +616,6 @@ rm -rf $RPM_BUILD_ROOT
 
 # itip-formatter
 %attr(755,root,root) %{_libdir}/evolution/modules/module-itip-formatter.so
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-itip-formatter.so
-%{evo_plugins_dir}/org-gnome-itip-formatter.eplug
 %{_datadir}/evolution/errors/org-gnome-itip-formatter.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.itip.gschema.xml
 
