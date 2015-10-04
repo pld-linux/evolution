@@ -1,6 +1,6 @@
-# TODO: gnome-autoar
 #
 # Conditional build:
+%bcond_without	autoar		# archives support in attachments via gnome-autoar
 %bcond_without	ldap		# LDAP support
 %bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
 %bcond_without	glade		# Glade catalog
@@ -40,6 +40,10 @@ BuildRequires:	geoclue-devel >= 0.12.0
 BuildRequires:	gettext-tools >= 0.18.1
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
 BuildRequires:	glib2-devel >= 1:2.40.0
+%if %{with autoar}
+BuildRequires:	gnome-autoar-devel >= 0.1
+BuildRequires:	gnome-autoar-gtk-devel >= 0.1
+%endif
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
@@ -127,6 +131,10 @@ Requires:	enchant >= 1.1.7
 Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
 Requires:	glib2 >= 1:2.40.0
+%if %{with autoar}
+Requires:	gnome-autoar >= 0.1
+Requires:	gnome-autoar-gtk >= 0.1
+%endif
 Requires:	gtk+3 >= 3.10.0
 Requires:	gtk-webkit3 >= 2.2.0
 Requires:	gtkhtml >= 4.5.2
@@ -244,7 +252,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.40.0
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgdata >= 0.10
-Requires:	libgweather >= 3.8.0
+Requires:	libgweather >= 3.10.0
 Provides:	%{name}-component = %{version}-%{release}
 Obsoletes:	evolution-caldav
 Obsoletes:	evolution-webcal
@@ -290,6 +298,7 @@ Dokumentacja API Evolution.
 	SPAMC="/usr/bin/spamc" \
 	SPAMD="/usr/bin/spamd" \
 	ac_cv_libiconv=no \
+	%{!?with_autoar:--disable-autoar} \
 	--enable-canberra \
 	%{?with_contact_maps:--enable-contact-maps} \
 	--enable-gtk-doc \
@@ -297,7 +306,6 @@ Dokumentacja API Evolution.
 	%{__with_without ldap openldap} \
 	--enable-plugins=all \
 	--enable-pst-import \
-	--disable-autoar \
 	--disable-silent-rules \
 	--enable-smime \
 	--enable-static \
