@@ -6,19 +6,19 @@
 %bcond_without	glade		# Glade catalog
 
 #define		eds_ver		%{version}
-%define		eds_ver		3.18.5
+%define		eds_ver		3.20.0
 
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.18.5.1
+Version:	3.20.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.18/%{name}-%{version}.tar.xz
-# Source0-md5:	0d095f94e180ed1acbb2da92a7c86fd3
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.20/%{name}-%{version}.tar.xz
+# Source0-md5:	d821da82d09b7dd2bcb693751c080f86
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -644,6 +644,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # pst-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-pst-import.so
+%{_datadir}/appdata/evolution-pst.metainfo.xml
 %{evo_plugins_dir}/org-gnome-pst-import.eplug
 
 # spamassassin
@@ -696,9 +697,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/modules/module-calendar.so
 %{_datadir}/evolution/etspec/e-cal-list-view.etspec
-%{_datadir}/evolution/etspec/e-calendar-table.etspec
 %{_datadir}/evolution/etspec/e-meeting-time-sel.etspec
 %{_datadir}/evolution/etspec/e-memo-table.etspec
+%{_datadir}/evolution/etspec/e-task-table.etspec
 %{_datadir}/evolution/errors/calendar.error
 %{_datadir}/evolution/views/calendar
 %{_datadir}/evolution/views/memos
