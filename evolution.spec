@@ -5,8 +5,7 @@
 %bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
 %bcond_without	glade		# Glade catalog
 
-#define		eds_ver		%{version}
-%define		eds_ver		3.20.1
+%define		eds_ver		%{version}
 
 Summary:	The GNOME Email/Calendar/Addressbook Suite
 Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
