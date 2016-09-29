@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.20.4
+Version:	3.22.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.20/%{name}-%{version}.tar.xz
-# Source0-md5:	5d36e943816a8f6dc33998bb264c07a8
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.22/%{name}-%{version}.tar.xz
+# Source0-md5:	16e508bb90ab7ca9861e26195a866b73
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -39,10 +39,10 @@ BuildRequires:	geoclue-devel >= 0.12.0
 %{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
 BuildRequires:	gettext-tools >= 0.18.1
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
-BuildRequires:	glib2-devel >= 1:2.40.0
+BuildRequires:	glib2-devel >= 1:2.46.0
 %if %{with autoar}
-BuildRequires:	gnome-autoar-devel >= 0.1
-BuildRequires:	gnome-autoar-gtk-devel >= 0.1
+BuildRequires:	gnome-autoar-devel >= 0.1.1
+BuildRequires:	gnome-autoar-gtk-devel >= 0.1.1
 %endif
 BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
@@ -50,8 +50,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit3-devel >= 2.2.0
-BuildRequires:	gtkhtml-devel >= 4.5.2
+BuildRequires:	gtk-webkit4-devel >= 2.14.0
 BuildRequires:	gtkspell3-devel >= 3.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	iso-codes >= 0.49
@@ -83,7 +82,7 @@ BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xz
 BuildRequires:	yelp-tools
-Requires(post,postun):	glib2 >= 1:2.40.0
+Requires(post,postun):	glib2 >= 1:2.46.0
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
@@ -130,14 +129,13 @@ Group:		X11/Libraries
 Requires:	enchant >= 1.1.7
 Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
-Requires:	glib2 >= 1:2.40.0
+Requires:	glib2 >= 1:2.46.0
 %if %{with autoar}
-Requires:	gnome-autoar >= 0.1
-Requires:	gnome-autoar-gtk >= 0.1
+Requires:	gnome-autoar >= 0.1.1
+Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
 Requires:	gtk+3 >= 3.10.0
-Requires:	gtk-webkit3 >= 2.2.0
-Requires:	gtkhtml >= 4.5.2
+Requires:	gtk-webkit4 >= 2.14.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup >= 2.42.0
 Requires:	libxml2 >= 1:2.7.3
@@ -157,11 +155,10 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{eds_ver}
-Requires:	glib2-devel >= 1:2.40.0
+Requires:	glib2-devel >= 1:2.46.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.10.0
-Requires:	gtk-webkit3-devel >= 2.2.0
-Requires:	gtkhtml-devel >= 4.5.3
+Requires:	gtk-webkit4-devel >= 2.14.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
@@ -330,7 +327,8 @@ rm -rf $RPM_BUILD_ROOT
 cp -p %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 # remove useless files
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/{modules,plugins}/*.{a,la}
+%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/evolution/test-gio-modules
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/{modules,plugins,web-extensions{,/webkit-editor}}/*.{a,la}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/*.la
 %if %{with glade}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/glade/modules/libgladeevolution.{la,a}
@@ -391,7 +389,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/modules/module-plugin-lib.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-plugin-manager.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-settings.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-web-inspector.so
+%attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-editor.so
+%attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-inspector.so
+%dir %{_libdir}/evolution/web-extensions
+%attr(755,root,root) %{_libdir}/evolution/web-extensions/libedomutils.so
+%attr(755,root,root) %{_libdir}/evolution/web-extensions/libewebextension.so
+%attr(755,root,root) %{_libdir}/evolution/web-extensions/libmoduleitipformatterwebextension.so
+%dir %{_libdir}/evolution/web-extensions/webkit-editor
+%attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/libewebkiteditorwebextension.so
 
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
@@ -668,8 +673,6 @@ rm -rf $RPM_BUILD_ROOT
 %files addressbook
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/modules/module-addressbook.so
-%attr(755,root,root) %{_libdir}/evolution/csv2vcard
-%attr(755,root,root) %{_libdir}/evolution/evolution-addressbook-export
 %{_datadir}/evolution/ecps
 %{_datadir}/evolution/errors/addressbook.error
 %{_datadir}/evolution/etspec/e-addressbook-view.etspec
