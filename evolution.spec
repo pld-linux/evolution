@@ -211,7 +211,7 @@ Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.40.0
+Requires(post,postun):	glib2 >= 1:2.46.0
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Requires:	libpst >= 0.6.54
@@ -228,7 +228,7 @@ Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.40.0
+Requires(post,postun):	glib2 >= 1:2.46.0
 Requires:	%{name} = %{version}-%{release}
 %{?with_contact_maps:Requires:	clutter-gtk >= 0.90}
 %{?with_contact_maps:Requires:	geocode-glib >= 3.10.0}
@@ -246,7 +246,7 @@ Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.40.0
+Requires(post,postun):	glib2 >= 1:2.46.0
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgdata >= 0.10
 Requires:	libgweather >= 3.10.0
