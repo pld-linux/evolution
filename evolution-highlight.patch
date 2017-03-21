@@ -1,0 +1,20 @@
+--- evolution-3.24.0/CMakeLists.txt.fixhighlight	2017-03-21 20:36:57.843919570 +0100
++++ evolution-3.24.0/CMakeLists.txt	2017-03-21 20:38:53.841009779 +0100
+@@ -627,11 +627,14 @@ set(plugins_standard
+ add_printable_option(ENABLE_TEXT_HIGHLIGHT "Enable text-highlight plugin" ON)
+ 
+ if(ENABLE_TEXT_HIGHLIGHT)
+-	find_program(HIGHLIGHT_COMMAND highlight)
++	set(HIGHLIGHT_COMMAND "")
++	if(HIGHLIGHT_COMMAND STREQUAL "")
++		set(HIGHLIGHT_COMMAND "$ENV{HIGHLIGHT}")
++	endif(HIGHLIGHT_COMMAND STREQUAL "")
+ 
+-	if(NOT HIGHLIGHT_COMMAND)
++	if(HIGHLIGHT_COMMAND STREQUAL "")
+ 		message(FATAL_ERROR "The 'highlight' program not found; either give it into PATH or disable higlight plugin with -DENABLE_TEXT_HIGHLIGHT=OFF")
+-	endif(NOT HIGHLIGHT_COMMAND)
++	endif(HIGHLIGHT_COMMAND STREQUAL "")
+ endif(ENABLE_TEXT_HIGHLIGHT)
+ 
+ # weather calendar

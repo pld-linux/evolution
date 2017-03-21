@@ -23,6 +23,7 @@ Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-gtkdoc.patch
+Patch1:		%{name}-highlight.patch
 URL:		http://wiki.gnome.org/Apps/Evolution/
 BuildRequires:	atk-devel
 BuildRequires:	bison
@@ -278,6 +279,7 @@ Dokumentacja API Evolution.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 export BOGOFILTER="/usr/bin/bogofilter"
