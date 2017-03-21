@@ -12,24 +12,23 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.22.6
+Version:	3.24.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.22/%{name}-%{version}.tar.xz
-# Source0-md5:	0b839838df678bc6e50b41059856fadb
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.24/%{name}-%{version}.tar.xz
+# Source0-md5:	ec1283c33e7be9de6aec326a40f86682
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
-Patch0:		%{name}-nolibs.patch
+Patch0:		%{name}-gtkdoc.patch
 URL:		http://wiki.gnome.org/Apps/Evolution/
 BuildRequires:	atk-devel
-BuildRequires:	autoconf >= 2.64
-BuildRequires:	automake >= 1:1.10
 BuildRequires:	bison
 BuildRequires:	cairo-gobject-devel
 %{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
+BuildRequires:	cmake >= 3.1
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant-devel >= 1.1.7
 BuildRequires:	evolution-data-server-devel >= %{eds_ver}
@@ -52,8 +51,8 @@ BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit4-devel >= 2.14.0
 BuildRequires:	gtkspell3-devel >= 3.0
-BuildRequires:	intltool >= 0.40.0
 BuildRequires:	iso-codes >= 0.49
+BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 %{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
 BuildRequires:	libcryptui-devel
@@ -100,6 +99,7 @@ Suggests:	adwaita-icon-theme
 Obsoletes:	evolution-mono
 Obsoletes:	evolution-pilot
 Obsoletes:	evolution-python
+Obsoletes:	evolution-static
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
 # sr@Latn vs. sr@latin
@@ -280,41 +280,22 @@ Dokumentacja API Evolution.
 %patch0 -p1
 
 %build
-%{__intltoolize}
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoheader}
-%{__autoconf}
-%{__automake}
-# ac_cv_libiconv=no to look iconv in libc (configure has inverted logic)
-%configure \
-	BOGOFILTER="/usr/bin/bogofilter" \
-	HIGHLIGHT="/usr/bin/highlight" \
-	SPAMASSASSIN="/usr/bin/spamassassin" \
-	SA_LEARN="/usr/bin/sa-learn" \
-	SPAMC="/usr/bin/spamc" \
-	SPAMD="/usr/bin/spamd" \
-	ac_cv_libiconv=no \
-	%{!?with_autoar:--disable-autoar} \
-	--enable-canberra \
-	%{?with_contact_maps:--enable-contact-maps} \
-	--enable-gtk-doc \
-	--enable-nss \
-	%{__with_without ldap openldap} \
-	--enable-plugins=all \
-	--enable-pst-import \
-	--disable-silent-rules \
-	--enable-smime \
-	--enable-static \
-	--enable-weather \
-	%{?with_glade:--with-glade-catalog} \
-	--with-html-dir=%{_gtkdocdir} \
-	--with-nspr-includes="%{_includedir}/nspr" \
-	--with-nspr-libs="%{_libdir}" \
-	--with-nss-includes="%{_includedir}/nss" \
-	--with-nss-libs="%{_libdir}" \
-	--without-static-ldap \
-	--with-sub-version=" PLD Linux"
+export BOGOFILTER="/usr/bin/bogofilter"
+export HIGHLIGHT="/usr/bin/highlight"
+export SPAMASSASSIN="/usr/bin/spamassassin"
+export SA_LEARN="/usr/bin/sa-learn"
+export SPAMC="/usr/bin/spamc"
+export SPAMD="/usr/bin/spamd"
+%cmake \
+	-DLIBEXEC_INSTALL_DIR=%{_libdir} \
+	%{!?with_autoar:-DENABLE_AUTOAR=OFF} \
+	%{?with_contact_maps:-DENABLE_CONTACT_MAPS=ON} \
+	-DWITH_OPENLDAP=%{?with_ldap:ON}%{!?with_ldap:OFF} \
+	-DWITH_STATIC_LDAP=OFF \
+	-DWITH_GLADE_CATALOG=%{?with_glade:ON} \
+	-DENABLE_GTK_DOC=ON \
+	-DENABLE_SCHEMAS_COMPILE=OFF \
+	-DVERSION_SUBSTRING=" PLD Linux"
 
 %{__make}
 
@@ -326,13 +307,6 @@ rm -rf $RPM_BUILD_ROOT
 
 cp -p %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
-# remove useless files
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/evolution/test-gio-modules
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/{modules,plugins,web-extensions{,/webkit-editor}}/*.{a,la}
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/evolution/*.la
-%if %{with glade}
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/glade/modules/libgladeevolution.{la,a}
-%endif
 %{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
 
 %find_lang %{name} --all-name --with-gnome
@@ -383,6 +357,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/killev
 %dir %{_libdir}/evolution/modules
 %attr(755,root,root) %{_libdir}/evolution/modules/module-composer-autosave.so
+%attr(755,root,root) %{_libdir}/evolution/modules/module-composer-to-meeting.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-contact-photos.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-gravatar.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-offline-alert.so
@@ -392,11 +367,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-editor.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-inspector.so
 %dir %{_libdir}/evolution/web-extensions
-%attr(755,root,root) %{_libdir}/evolution/web-extensions/libedomutils.so
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/libewebextension.so
-%attr(755,root,root) %{_libdir}/evolution/web-extensions/libmoduleitipformatterwebextension.so
+%attr(755,root,root) %{_libdir}/evolution/web-extensions/module-itip-formatter-webextension.so
 %dir %{_libdir}/evolution/web-extensions/webkit-editor
-%attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/libewebkiteditorwebextension.so
+%attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/module-webkit-editor-webextension.so
 
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
@@ -463,6 +437,8 @@ rm -rf $RPM_BUILD_ROOT
 %lang(hu) %{_datadir}/evolution/help/quickref/hu/quickref.pdf
 %lang(it) %dir %{_datadir}/evolution/help/quickref/it
 %lang(it) %{_datadir}/evolution/help/quickref/it/quickref.pdf
+%lang(oc) %dir %{_datadir}/evolution/help/quickref/oc
+%lang(oc) %{_datadir}/evolution/help/quickref/oc/quickref.pdf
 %lang(pl) %dir %{_datadir}/evolution/help/quickref/pl
 %lang(pl) %{_datadir}/evolution/help/quickref/pl/quickref.pdf
 %lang(pt) %dir %{_datadir}/evolution/help/quickref/pt
@@ -509,8 +485,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution
 %dir %{evo_plugins_dir}
 %attr(755,root,root) %{_libdir}/evolution/libeabutil.so
+%attr(755,root,root) %{_libdir}/evolution/libeabwidgets.so
 %attr(755,root,root) %{_libdir}/evolution/libecontacteditor.so
+%attr(755,root,root) %{_libdir}/evolution/libecontactprint.so
 %attr(755,root,root) %{_libdir}/evolution/libecontactlisteditor.so
+%attr(755,root,root) %{_libdir}/evolution/libedomutils.so
 %attr(755,root,root) %{_libdir}/evolution/libemail-engine.so
 %attr(755,root,root) %{_libdir}/evolution/libessmime.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-addressbook-importers.so
@@ -532,25 +511,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/evolution-calendar-3.0.pc
 %{_pkgconfigdir}/evolution-mail-3.0.pc
 %{_pkgconfigdir}/evolution-shell-3.0.pc
-
-%files static
-%defattr(644,root,root,755)
-%{_libdir}/evolution/libeabutil.a
-%{_libdir}/evolution/libecontacteditor.a
-%{_libdir}/evolution/libecontactlisteditor.a
-%{_libdir}/evolution/libemail-engine.a
-%{_libdir}/evolution/libessmime.a
-%{_libdir}/evolution/libevolution-addressbook-importers.a
-%{_libdir}/evolution/libevolution-calendar.a
-%{_libdir}/evolution/libevolution-calendar-importers.a
-%{_libdir}/evolution/libevolution-mail-composer.a
-%{_libdir}/evolution/libevolution-mail-formatter.a
-%{_libdir}/evolution/libevolution-mail-importers.a
-%{_libdir}/evolution/libevolution-mail.a
-%{_libdir}/evolution/libevolution-shell.a
-%{_libdir}/evolution/libevolution-smime.a
-%{_libdir}/evolution/libevolution-util.a
-%{_libdir}/evolution/libgnomecanvas.a
 
 %if %{with glade}
 %files glade
