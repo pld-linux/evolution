@@ -24,6 +24,7 @@ Source5:	%{name}-mail.desktop
 Source6:	%{name}-tasks.desktop
 Patch0:		%{name}-gtkdoc.patch
 Patch1:		%{name}-highlight.patch
+Patch2:		%{name}-destdir.patch
 URL:		http://wiki.gnome.org/Apps/Evolution/
 BuildRequires:	atk-devel
 BuildRequires:	bison
@@ -280,6 +281,7 @@ Dokumentacja API Evolution.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 export BOGOFILTER="/usr/bin/bogofilter"
@@ -292,11 +294,12 @@ export SPAMD="/usr/bin/spamd"
 	-DLIBEXEC_INSTALL_DIR=%{_libdir} \
 	%{!?with_autoar:-DENABLE_AUTOAR=OFF} \
 	%{?with_contact_maps:-DENABLE_CONTACT_MAPS=ON} \
+	-DENABLE_GTK_DOC=ON \
+	-DENABLE_SCHEMAS_COMPILE=OFF \
+	-DGTK_UPDATE_ICON_CACHE=/bin/true \
 	-DWITH_OPENLDAP=%{?with_ldap:ON}%{!?with_ldap:OFF} \
 	-DWITH_STATIC_LDAP=OFF \
 	-DWITH_GLADE_CATALOG=%{?with_glade:ON} \
-	-DENABLE_GTK_DOC=ON \
-	-DENABLE_SCHEMAS_COMPILE=OFF \
 	-DVERSION_SUBSTRING=" PLD Linux"
 
 %{__make}

@@ -1,0 +1,21 @@
+--- evolution-3.24.1/cmake/modules/IconCache.cmake.orig	2017-04-10 10:02:00.000000000 +0200
++++ evolution-3.24.1/cmake/modules/IconCache.cmake	2017-04-25 22:21:16.309917778 +0200
+@@ -45,9 +45,6 @@
+ 			DESTINATION ${_destdir}/icons/${theme}/${size}/${context}
+ 			RENAME ${iconfile}
+ 		)
+-		set(${_install_codevar} "${${_install_codevar}}
+-			COMMAND ${CMAKE_COMMAND} -E copy_if_different \"${CMAKE_CURRENT_SOURCE_DIR}/${srcfile}\" \"${_destdir}/icons/${theme}/${size}/${context}/${iconfile}\""
+-		)
+ 	endforeach(srcfile)
+ endmacro(process_icons)
+ 
+@@ -60,7 +57,7 @@
+ 
+ 	if(GTK_UPDATE_ICON_CACHE)
+ 		install(CODE
+-			"execute_process(${_install_code}
++			"execute_process(
+ 				COMMAND ${CMAKE_COMMAND} -E chdir . ${_update_icon_cache_cmd}
+ 			)")
+ 	endif(GTK_UPDATE_ICON_CACHE)
