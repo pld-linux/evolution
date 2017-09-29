@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.24.4
+Version:	3.26.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.24/%{name}-%{version}.tar.xz
-# Source0-md5:	540ea3c4515c73e76b6491af03b01bf0
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.26/%{name}-%{version}.tar.xz
+# Source0-md5:	91d587417aba71301a4d4a6294a331c1
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -51,7 +51,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.10.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit4-devel >= 2.14.0
+BuildRequires:	gtk-webkit4-devel >= 2.16.0
 BuildRequires:	gtkspell3-devel >= 3.0
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
@@ -137,7 +137,7 @@ Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
 Requires:	gtk+3 >= 3.10.0
-Requires:	gtk-webkit4 >= 2.14.0
+Requires:	gtk-webkit4 >= 2.16.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup >= 2.42.0
 Requires:	libxml2 >= 1:2.7.3
@@ -160,7 +160,7 @@ Requires:	evolution-data-server-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.46.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.10.0
-Requires:	gtk-webkit4-devel >= 2.14.0
+Requires:	gtk-webkit4-devel >= 2.16.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
@@ -361,8 +361,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/killev
 %dir %{_libdir}/evolution/modules
+%attr(755,root,root) %{_libdir}/evolution/modules/module-accounts-window.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-composer-autosave.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-composer-to-meeting.so
+%attr(755,root,root) %{_libdir}/evolution/modules/module-config-lookup.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-contact-photos.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-gravatar.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-offline-alert.so
@@ -628,6 +630,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # text-highlight
 %attr(755,root,root) %{_libdir}/evolution/modules/module-text-highlight.so
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.text-highlight.gschema.xml
 
 # tnef-attachment
 %attr(755,root,root) %{_libdir}/evolution/modules/module-tnef-attachment.so
