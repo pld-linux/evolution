@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.26.4
+Version:	3.28.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.26/%{name}-%{version}.tar.xz
-# Source0-md5:	5b26bea6eaf007c376fa25cc5dfc20fb
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.28/%{name}-%{version}.tar.xz
+# Source0-md5:	f3e2971ae1d5f738e0bf0c642be20453
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -48,7 +48,7 @@ BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gstreamer-devel
-BuildRequires:	gtk+3-devel >= 3.10.0
+BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit4-devel >= 2.16.0
 BuildRequires:	gtkspell3-devel >= 3.0
@@ -158,7 +158,7 @@ Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.46.0
 Requires:	gnome-desktop-devel >= 3.2.0
-Requires:	gtk+3-devel >= 3.10.0
+Requires:	gtk+3-devel >= 3.22.0
 Requires:	gtk-webkit4-devel >= 2.16.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
@@ -310,7 +310,7 @@ rm -rf $RPM_BUILD_ROOT
 
 cp -p %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
-%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/evolution.desktop
+%{__rm} $RPM_BUILD_ROOT%{_desktopdir}/org.gnome.Evolution.desktop
 
 %find_lang %{name} --all-name --with-gnome
 
@@ -382,7 +382,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.importer.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.shell.gschema.xml
 
-%{_datadir}/appdata/evolution.appdata.xml
+%{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
 
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/default
@@ -460,7 +460,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/ui
 
 %{_iconsdir}/hicolor/*/apps/*
-%{_sysconfdir}/xdg/autostart/evolution-alarm-notify.desktop
+%{_sysconfdir}/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop
 
 # PLUGINS
 # backup-restore
@@ -580,7 +580,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # bogofilter
 %attr(755,root,root) %{_libdir}/evolution/modules/module-bogofilter.so
-%{_datadir}/appdata/evolution-bogofilter.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.bogofilter.gschema.xml
 
 # dbx-import
@@ -613,12 +613,12 @@ rm -rf $RPM_BUILD_ROOT
 
 # pst-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-pst-import.so
-%{_datadir}/appdata/evolution-pst.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 %{evo_plugins_dir}/org-gnome-pst-import.eplug
 
 # spamassassin
 %attr(755,root,root) %{_libdir}/evolution/modules/module-spamassassin.so
-%{_datadir}/appdata/evolution-spamassassin.metainfo.xml
+%{_datadir}/metainfo/org.gnome.Evolution-spamassassin.metainfo.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.spamassassin.gschema.xml
 
 # templates
