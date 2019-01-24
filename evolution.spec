@@ -12,12 +12,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.28.3
+Version:	3.30.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.28/%{name}-%{version}.tar.xz
-# Source0-md5:	4434c6e3bf8f852e12d8a38f58b6b0b4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.30/%{name}-%{version}.tar.xz
+# Source0-md5:	f43c29a8884548af32ad0ba3b2f19661
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -356,7 +356,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog MAINTAINERS NEWS* README
 %attr(755,root,root) %{_bindir}/evolution
-%attr(755,root,root) %{_libdir}/evolution/evolution-alarm-notify
 %attr(755,root,root) %{_libdir}/evolution/killev
 %dir %{_libdir}/evolution/modules
 %attr(755,root,root) %{_libdir}/evolution/modules/module-accounts-window.so
@@ -376,6 +375,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/module-itip-formatter-webextension.so
 %dir %{_libdir}/evolution/web-extensions/webkit-editor
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/module-webkit-editor-webextension.so
+%dir %{_libdir}/evolution-data-server/ui-modules
+%attr(755,root,root) %{_libdir}/evolution-data-server/ui-modules/module-evolution-alarm-notify.so
 
 %{_datadir}/GConf/gsettings/evolution.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
@@ -423,36 +424,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/errors/evolution-offline-alert.error
 %{_datadir}/evolution/errors/widgets.error
 
-%dir %{_datadir}/evolution/help
-%dir %{_datadir}/evolution/help/quickref
-%dir %{_datadir}/evolution/help/quickref/C
-
-%{_datadir}/evolution/help/quickref/C/quickref.pdf
-%lang(ca) %dir %{_datadir}/evolution/help/quickref/ca
-%lang(ca) %{_datadir}/evolution/help/quickref/ca/quickref.pdf
-%lang(cs) %dir %{_datadir}/evolution/help/quickref/cs
-%lang(cs) %{_datadir}/evolution/help/quickref/cs/quickref.pdf
-%lang(de) %dir %{_datadir}/evolution/help/quickref/de
-%lang(de) %{_datadir}/evolution/help/quickref/de/quickref.pdf
-%lang(es) %dir %{_datadir}/evolution/help/quickref/es
-%lang(es) %{_datadir}/evolution/help/quickref/es/quickref.pdf
-%lang(fr) %dir %{_datadir}/evolution/help/quickref/fr
-%lang(fr) %{_datadir}/evolution/help/quickref/fr/quickref.pdf
-%lang(hu) %dir %{_datadir}/evolution/help/quickref/hu
-%lang(hu) %{_datadir}/evolution/help/quickref/hu/quickref.pdf
-%lang(it) %dir %{_datadir}/evolution/help/quickref/it
-%lang(it) %{_datadir}/evolution/help/quickref/it/quickref.pdf
-%lang(oc) %dir %{_datadir}/evolution/help/quickref/oc
-%lang(oc) %{_datadir}/evolution/help/quickref/oc/quickref.pdf
-%lang(pl) %dir %{_datadir}/evolution/help/quickref/pl
-%lang(pl) %{_datadir}/evolution/help/quickref/pl/quickref.pdf
-%lang(pt) %dir %{_datadir}/evolution/help/quickref/pt
-%lang(pt) %{_datadir}/evolution/help/quickref/pt/quickref.pdf
-%lang(sq) %dir %{_datadir}/evolution/help/quickref/sq
-%lang(sq) %{_datadir}/evolution/help/quickref/sq/quickref.pdf
-%lang(sv) %dir %{_datadir}/evolution/help/quickref/sv
-%lang(sv) %{_datadir}/evolution/help/quickref/sv/quickref.pdf
-
 %{_datadir}/evolution/icons
 %{_datadir}/evolution/images
 %{_datadir}/evolution/sounds
@@ -460,7 +431,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/ui
 
 %{_iconsdir}/hicolor/*/apps/*
-%{_sysconfdir}/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop
 
 # PLUGINS
 # backup-restore
@@ -658,8 +628,9 @@ rm -rf $RPM_BUILD_ROOT
 # addressbook-local
 %attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-local.so
 
-# webdav-accounts-setup
-%attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-webdav.so
+# carddav-accounts-setup
+%attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-carddav.so
+
 
 %files calendar
 %defattr(644,root,root,755)
