@@ -1,3 +1,4 @@
+# TODO: libunity >= 7.1.4?
 #
 # Conditional build:
 %bcond_without	autoar		# archives support in attachments via gnome-autoar
@@ -12,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.30.4
-Release:	2
+Version:	3.32.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.30/%{name}-%{version}.tar.xz
-# Source0-md5:	f43c29a8884548af32ad0ba3b2f19661
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.32/%{name}-%{version}.tar.xz
+# Source0-md5:	1f1bfdab569b4213821aa7efde350593
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -26,16 +27,14 @@ Patch0:		%{name}-gtkdoc.patch
 Patch1:		%{name}-highlight.patch
 URL:		http://wiki.gnome.org/Apps/Evolution/
 BuildRequires:	atk-devel
-BuildRequires:	bison
 BuildRequires:	cairo-gobject-devel
 %{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
 BuildRequires:	cmake >= 3.1
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	enchant-devel >= 1.1.7
+BuildRequires:	enchant2-devel >= 2.2.0
 BuildRequires:	evolution-data-server-devel >= %{eds_ver}
 BuildRequires:	gcr-devel >= 3.4
 BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
-BuildRequires:	geoclue-devel >= 0.12.0
 %{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
 BuildRequires:	gettext-tools >= 0.18.1
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
@@ -44,10 +43,8 @@ BuildRequires:	glib2-devel >= 1:2.46.0
 BuildRequires:	gnome-autoar-devel >= 0.1.1
 BuildRequires:	gnome-autoar-gtk-devel >= 0.1.1
 %endif
-BuildRequires:	gnome-common >= 2.26.0
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
-BuildRequires:	gstreamer-devel
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit4-devel >= 2.16.0
@@ -56,7 +53,6 @@ BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 %{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
-BuildRequires:	libcryptui-devel
 BuildRequires:	libgweather-devel >= 3.10.0
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
@@ -77,14 +73,9 @@ BuildRequires:	rpmbuild(macros) >= 1.527
 BuildRequires:	shared-mime-info >= 0.22
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
-BuildRequires:	xorg-lib-libICE-devel
-BuildRequires:	xorg-lib-libSM-devel
-BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xz
-BuildRequires:	yelp-tools
 Requires(post,postun):	glib2 >= 1:2.46.0
 Requires(post,postun):	gtk-update-icon-cache
-Requires(post,postun):	scrollkeeper
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	evolution-data-server >= %{eds_ver}
@@ -103,8 +94,6 @@ Obsoletes:	evolution-python
 Obsoletes:	evolution-static
 Obsoletes:	evolution2
 Obsoletes:	gnome-pim
-# sr@Latn vs. sr@latin
-Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		evo_plugins_dir		%{_libdir}/evolution/plugins
@@ -127,7 +116,7 @@ ferramentas interessantes.
 Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
-Requires:	enchant >= 1.1.7
+Requires:	enchant2 >= 2.2.0
 Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
 Requires:	glib2 >= 1:2.46.0
@@ -135,7 +124,7 @@ Requires:	glib2 >= 1:2.46.0
 Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
-Requires:	gtk+3 >= 3.10.0
+Requires:	gtk+3 >= 3.22.0
 Requires:	gtk-webkit4 >= 2.16.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup >= 2.42.0
@@ -282,19 +271,22 @@ Dokumentacja API Evolution.
 %patch1 -p1
 
 %build
+install -d build
+cd build
 export BOGOFILTER="/usr/bin/bogofilter"
 export HIGHLIGHT="/usr/bin/highlight"
 export SPAMASSASSIN="/usr/bin/spamassassin"
 export SA_LEARN="/usr/bin/sa-learn"
 export SPAMC="/usr/bin/spamc"
 export SPAMD="/usr/bin/spamd"
-%cmake \
-	-DLIBEXEC_INSTALL_DIR=%{_libdir} \
+%cmake .. \
+	-DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
 	%{!?with_autoar:-DENABLE_AUTOAR=OFF} \
 	%{?with_contact_maps:-DENABLE_CONTACT_MAPS=ON} \
 	-DENABLE_GTK_DOC=ON \
 	-DENABLE_SCHEMAS_COMPILE=OFF \
 	-DGTK_UPDATE_ICON_CACHE=/bin/true \
+	-DWITH_ENCHANT_VERSION=2 \
 	-DWITH_OPENLDAP=%{?with_ldap:ON}%{!?with_ldap:OFF} \
 	-DWITH_STATIC_LDAP=OFF \
 	-DWITH_GLADE_CATALOG=%{?with_glade:ON} \
@@ -305,7 +297,7 @@ export SPAMD="/usr/bin/spamd"
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 cp -p %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
@@ -356,7 +348,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog MAINTAINERS NEWS* README
 %attr(755,root,root) %{_bindir}/evolution
-%attr(755,root,root) %{_libdir}/evolution/killev
+
+%if "%{_libexecdir}" != "%{_libdir}"
+%dir %{_libexecdir}/evolution
+%endif
+%attr(755,root,root) %{_libexecdir}/evolution/killev
+
 %dir %{_libdir}/evolution/modules
 %attr(755,root,root) %{_libdir}/evolution/modules/module-accounts-window.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-composer-autosave.so
@@ -382,15 +379,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.importer.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.shell.gschema.xml
-
 %{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
+%{_mandir}/man1/evolution.1*
 
 %dir %{_datadir}/evolution
-%dir %{_datadir}/evolution/default
-%dir %{_datadir}/evolution/default/C
 %dir %{_datadir}/evolution/etspec
 %dir %{_datadir}/evolution/views
 
+%dir %{_datadir}/evolution/default
+%dir %{_datadir}/evolution/default/C
 %lang(ca) %dir %{_datadir}/evolution/default/ca
 %lang(cs) %dir %{_datadir}/evolution/default/cs
 %lang(de) %dir %{_datadir}/evolution/default/de
@@ -434,7 +431,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # PLUGINS
 # backup-restore
-%attr(755,root,root) %{_libdir}/evolution/evolution-backup
+%attr(755,root,root) %{_libexecdir}/evolution/evolution-backup
 %attr(755,root,root) %{_libdir}/evolution/modules/module-backup-restore.so
 %{_datadir}/evolution/errors/org-gnome-backup-restore.error
 
@@ -501,15 +498,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/modules/module-mailto-handler.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-mdn.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-startup-wizard.so
-%{_datadir}/evolution/etspec/message-list.etspec
 %{_datadir}/evolution/errors/evolution-mdn.error
 %{_datadir}/evolution/errors/mail.error
+%{_datadir}/evolution/etspec/message-list.etspec
+%{_datadir}/evolution/views/mail
 %{_datadir}/evolution/filtertypes.xml
 %{_datadir}/evolution/vfoldertypes.xml
 %{_datadir}/evolution/searchtypes.xml
-%{_datadir}/evolution/default/C/mail
-%{_datadir}/evolution/views/mail
 
+%{_datadir}/evolution/default/C/mail
 %lang(ca) %{_datadir}/evolution/default/ca/mail
 %lang(cs) %{_datadir}/evolution/default/cs/mail
 %lang(de) %{_datadir}/evolution/default/de/mail
@@ -550,8 +547,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # bogofilter
 %attr(755,root,root) %{_libdir}/evolution/modules/module-bogofilter.so
-%{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.bogofilter.gschema.xml
+%{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
 
 # dbx-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-dbx-import.so
@@ -583,8 +580,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # pst-import
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-pst-import.so
-%{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 %{evo_plugins_dir}/org-gnome-pst-import.eplug
+%{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 
 # spamassassin
 %attr(755,root,root) %{_libdir}/evolution/modules/module-spamassassin.so
@@ -631,15 +628,14 @@ rm -rf $RPM_BUILD_ROOT
 # carddav-accounts-setup
 %attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-carddav.so
 
-
 %files calendar
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/evolution/modules/module-calendar.so
+%{_datadir}/evolution/errors/calendar.error
 %{_datadir}/evolution/etspec/e-cal-list-view.etspec
 %{_datadir}/evolution/etspec/e-meeting-time-sel.etspec
 %{_datadir}/evolution/etspec/e-memo-table.etspec
 %{_datadir}/evolution/etspec/e-task-table.etspec
-%{_datadir}/evolution/errors/calendar.error
 %{_datadir}/evolution/views/calendar
 %{_datadir}/evolution/views/memos
 %{_datadir}/evolution/views/tasks
