@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.32.4
+Version:	3.34.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.32/%{name}-%{version}.tar.xz
-# Source0-md5:	cef13237672ab95b2222265b50ec3733
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.34/%{name}-%{version}.tar.xz
+# Source0-md5:	5f7b87e5db8d2ae971f4d62355272a44
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -45,10 +45,10 @@ BuildRequires:	gnome-autoar-gtk-devel >= 0.1.1
 %endif
 BuildRequires:	gnome-desktop-devel >= 3.2.0
 BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
+BuildRequires:	gspell-devel >= 1
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit4-devel >= 2.16.0
-BuildRequires:	gtkspell3-devel >= 3.0
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
@@ -346,7 +346,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog MAINTAINERS NEWS* README
+# COPYING contains general license summary
+%doc AUTHORS COPYING ChangeLog MAINTAINERS NEWS* README.md
 %attr(755,root,root) %{_bindir}/evolution
 
 %if "%{_libexecdir}" != "%{_libdir}"
@@ -369,7 +370,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-inspector.so
 %dir %{_libdir}/evolution/web-extensions
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/libewebextension.so
-%attr(755,root,root) %{_libdir}/evolution/web-extensions/module-itip-formatter-webextension.so
 %dir %{_libdir}/evolution/web-extensions/webkit-editor
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/module-webkit-editor-webextension.so
 %dir %{_libdir}/evolution-data-server/ui-modules
