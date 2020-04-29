@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.34.4
-Release:	2
+Version:	3.36.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.34/%{name}-%{version}.tar.xz
-# Source0-md5:	a39f2f35113618870d30f65e57f9701b
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.36/%{name}-%{version}.tar.xz
+# Source0-md5:	425a2061b96cdb39e1df1e5dc9265fbb
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -48,7 +48,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gspell-devel >= 1
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit4-devel >= 2.16.0
+BuildRequires:	gtk-webkit4-devel >= 2.24.0
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
@@ -125,7 +125,7 @@ Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
 Requires:	gtk+3 >= 3.22.0
-Requires:	gtk-webkit4 >= 2.16.0
+Requires:	gtk-webkit4 >= 2.24.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup >= 2.42.0
 Requires:	libxml2 >= 1:2.7.3
@@ -148,7 +148,7 @@ Requires:	evolution-data-server-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.46.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
-Requires:	gtk-webkit4-devel >= 2.16.0
+Requires:	gtk-webkit4-devel >= 2.24.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
@@ -375,13 +375,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/evolution-data-server/ui-modules
 %attr(755,root,root) %{_libdir}/evolution-data-server/ui-modules/module-evolution-alarm-notify.so
 
-%{_datadir}/GConf/gsettings/evolution.convert
-%{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.evolution.importer.gschema.xml
-%{_datadir}/glib-2.0/schemas/org.gnome.evolution.shell.gschema.xml
-%{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
-%{_mandir}/man1/evolution.1*
-
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/etspec
 %dir %{_datadir}/evolution/views
@@ -424,10 +417,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/icons
 %{_datadir}/evolution/images
 %{_datadir}/evolution/sounds
-%{_datadir}/evolution/theme
 %{_datadir}/evolution/ui
+%{_datadir}/evolution/webkit
 
-%{_iconsdir}/hicolor/*/apps/*
+%{_datadir}/GConf/gsettings/evolution.convert
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.importer.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.shell.gschema.xml
+%{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
+
+%{_iconsdir}/hicolor/scalable/apps/evolution.svg
+%{_iconsdir}/hicolor/symbolic/apps/evolution-symbolic.svg
+%{_mandir}/man1/evolution.1*
 
 # PLUGINS
 # backup-restore
@@ -461,7 +462,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/libecontacteditor.so
 %attr(755,root,root) %{_libdir}/evolution/libecontactprint.so
 %attr(755,root,root) %{_libdir}/evolution/libecontactlisteditor.so
-%attr(755,root,root) %{_libdir}/evolution/libedomutils.so
 %attr(755,root,root) %{_libdir}/evolution/libemail-engine.so
 %attr(755,root,root) %{_libdir}/evolution/libessmime.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-addressbook-importers.so
@@ -529,9 +529,10 @@ rm -rf $RPM_BUILD_ROOT
 %lang(sv) %{_datadir}/evolution/default/sv/mail
 %lang(zh_CN) %{_datadir}/evolution/default/zh_CN/mail
 
-%{_desktopdir}/evolution-mail.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.mail.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.external-editor.gschema.xml
+%{_desktopdir}/evolution-mail.desktop
+%{_iconsdir}/hicolor/*x*/apps/evolution-mail.png
 
 # PLUGINS
 # attachment-reminder
@@ -612,8 +613,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/views/addressbook
 %{_datadir}/evolution/addresstypes.xml
 
-%{_desktopdir}/%{name}-addressbook.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.addressbook.gschema.xml
+%{_desktopdir}/%{name}-addressbook.desktop
 
 # PLUGINS
 # ldap accounts config
@@ -643,9 +644,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/evolution/memotypes.xml
 %{_datadir}/evolution/tasktypes.xml
 
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.calendar.gschema.xml
+%{_iconsdir}/hicolor/*x*/apps/evolution-memos.png
+%{_iconsdir}/hicolor/*x*/apps/evolution-tasks.png
 %{_desktopdir}/%{name}-calendar.desktop
 %{_desktopdir}/%{name}-tasks.desktop
-%{_datadir}/glib-2.0/schemas/org.gnome.evolution.calendar.gschema.xml
 
 # PLUGINS
 # caldav
