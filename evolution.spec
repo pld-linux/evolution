@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.36.5
+Version:	3.38.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.36/%{name}-%{version}.tar.xz
-# Source0-md5:	600368015f20cc256c2f1a94e60ed455
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/evolution/3.38/%{name}-%{version}.tar.xz
+# Source0-md5:	a25fe974d297c1023fdec9f71cb0b131
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -48,7 +48,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gspell-devel >= 1
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit4-devel >= 2.24.0
+BuildRequires:	gtk-webkit4-devel >= 2.28.0
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
@@ -125,7 +125,7 @@ Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
 Requires:	gtk+3 >= 3.22.0
-Requires:	gtk-webkit4 >= 2.24.0
+Requires:	gtk-webkit4 >= 2.28.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup >= 2.42.0
 Requires:	libxml2 >= 1:2.7.3
@@ -148,7 +148,7 @@ Requires:	evolution-data-server-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.46.0
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
-Requires:	gtk-webkit4-devel >= 2.24.0
+Requires:	gtk-webkit4-devel >= 2.28.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel
@@ -390,7 +390,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(hu) %dir %{_datadir}/evolution/default/hu
 %lang(id) %dir %{_datadir}/evolution/default/id
 %lang(it) %dir %{_datadir}/evolution/default/it
-%lang(ja) %dir %{_datadir}/evolution/default/ja
 %lang(ko) %dir %{_datadir}/evolution/default/ko
 %lang(lt) %dir %{_datadir}/evolution/default/lt
 %lang(mk) %dir %{_datadir}/evolution/default/mk
@@ -516,7 +515,6 @@ rm -rf $RPM_BUILD_ROOT
 %lang(hu) %{_datadir}/evolution/default/hu/mail
 %lang(id) %{_datadir}/evolution/default/id/mail
 %lang(it) %{_datadir}/evolution/default/it/mail
-%lang(ja) %{_datadir}/evolution/default/ja/mail
 %lang(ko) %{_datadir}/evolution/default/ko/mail
 %lang(lt) %{_datadir}/evolution/default/lt/mail
 %lang(mk) %{_datadir}/evolution/default/mk/mail
@@ -657,6 +655,9 @@ rm -rf $RPM_BUILD_ROOT
 # contacts
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-contacts.so
 
+# google-account-setup
+%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-google.so
+
 # calendar-local
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-local.so
 
@@ -666,8 +667,8 @@ rm -rf $RPM_BUILD_ROOT
 # calendar-weather
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-webcal.so
 
-# google-account-setup
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-google.so
+# calendar-webdav-notes
+%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-webdav-notes.so
 
 # publish-calendar
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-publish-calendar.so
