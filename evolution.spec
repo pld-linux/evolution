@@ -255,7 +255,7 @@ Summary:	Evolution API documentation
 Summary(pl.UTF-8):	Dokumentacja API Evolution
 Group:		Documentation
 Requires:	gtk-doc-common
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 Evolution API documentation.
