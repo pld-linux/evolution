@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.38.4
+Version:	3.40.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.38/%{name}-%{version}.tar.xz
-# Source0-md5:	30127e91eebbb7b38994bf715eb078f7
+Source0:	https://download.gnome.org/sources/evolution/3.40/%{name}-%{version}.tar.xz
+# Source0-md5:	913ced26496c3a5876d2c8ab488f9073
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -38,7 +38,7 @@ BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
 %{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
 BuildRequires:	gettext-tools >= 0.18.1
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
-BuildRequires:	glib2-devel >= 1:2.46.0
+BuildRequires:	glib2-devel >= 1:2.56
 %if %{with autoar}
 BuildRequires:	gnome-autoar-devel >= 0.1.1
 BuildRequires:	gnome-autoar-gtk-devel >= 0.1.1
@@ -49,6 +49,7 @@ BuildRequires:	gspell-devel >= 1
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
 BuildRequires:	gtk-webkit4-devel >= 2.28.0
+BuildRequires:	intltool
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
@@ -67,14 +68,14 @@ BuildRequires:	nss-devel >= 3
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	psmisc
-BuildRequires:	python
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	shared-mime-info >= 0.22
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.46.0
+Requires(post,postun):	glib2 >= 1:2.56
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
@@ -88,12 +89,12 @@ Requires:	libnotify >= 0.7
 Requires:	psmisc
 Requires:	shared-mime-info >= 0.22
 Suggests:	adwaita-icon-theme
-Obsoletes:	evolution-mono
-Obsoletes:	evolution-pilot
-Obsoletes:	evolution-python
-Obsoletes:	evolution-static
-Obsoletes:	evolution2
-Obsoletes:	gnome-pim
+Obsoletes:	evolution-mono < 3.6
+Obsoletes:	evolution-pilot < 2.32
+Obsoletes:	evolution-python < 3.6
+Obsoletes:	evolution-static < 3.24
+Obsoletes:	evolution2 < 3
+Obsoletes:	gnome-pim < 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		evo_plugins_dir		%{_libdir}/evolution/plugins
@@ -119,7 +120,7 @@ Group:		X11/Libraries
 Requires:	enchant2 >= 2.2.0
 Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
-Requires:	glib2 >= 1:2.46.0
+Requires:	glib2 >= 1:2.56
 %if %{with autoar}
 Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
@@ -145,7 +146,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{eds_ver}
-Requires:	glib2-devel >= 1:2.46.0
+Requires:	glib2-devel >= 1:2.56
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
 Requires:	gtk-webkit4-devel >= 2.28.0
@@ -201,7 +202,7 @@ Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.46.0
+Requires(post,postun):	glib2 >= 1:2.56
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Requires:	libpst >= 0.6.54
@@ -218,7 +219,7 @@ Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.46.0
+Requires(post,postun):	glib2 >= 1:2.56
 Requires:	%{name} = %{version}-%{release}
 %{?with_contact_maps:Requires:	clutter-gtk >= 0.90}
 %{?with_contact_maps:Requires:	geocode-glib >= 3.10.0}
@@ -236,7 +237,7 @@ Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.46.0
+Requires(post,postun):	glib2 >= 1:2.56
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgdata >= 0.10
 Requires:	libgweather >= 3.10.0
@@ -428,12 +429,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/evolution.1*
 
 # PLUGINS
-# backup-restore
+# backup-restore module
 %attr(755,root,root) %{_libexecdir}/evolution/evolution-backup
 %attr(755,root,root) %{_libdir}/evolution/modules/module-backup-restore.so
 %{_datadir}/evolution/errors/org-gnome-backup-restore.error
 
-# prefer-plain
+# prefer-plain module+plugin
 %attr(755,root,root) %{_libdir}/evolution/modules/module-prefer-plain.so
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-prefer-plain.so
 %{evo_plugins_dir}/org-gnome-prefer-plain.eplug
@@ -531,73 +532,79 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*x*/apps/evolution-mail.png
 
 # PLUGINS
-# attachment-reminder
+# attachment-reminder plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-attachment-reminder.so
 %{evo_plugins_dir}/org-gnome-evolution-attachment-reminder.eplug
 %{_datadir}/evolution/errors/org-gnome-attachment-reminder.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.attachment-reminder.gschema.xml
 
-# bbdb
+# bbdb plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-bbdb.so
 %{evo_plugins_dir}/org-gnome-evolution-bbdb.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.autocontacts.gschema.xml
 
-# bogofilter
+# bogofilter module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-bogofilter.so
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.bogofilter.gschema.xml
 %{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
 
-# dbx-import
+# dbx-import plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-dbx-import.so
 %{evo_plugins_dir}/org-gnome-dbx-import.eplug
 
-# email-custom-header
+# email-custom-header plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-email-custom-header.so
 %{evo_plugins_dir}/org-gnome-email-custom-header.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.email-custom-header.gschema.xml
 
-# itip-formatter
+# itip-formatter module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-itip-formatter.so
 %{_datadir}/evolution/errors/org-gnome-itip-formatter.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.itip.gschema.xml
 
-# mail-notification
+# mail-notification plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mail-notification.so
 %{evo_plugins_dir}/org-gnome-mail-notification.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.mail-notification.gschema.xml
 
-# mail-to-task
+# mail-to-task plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mail-to-task.so
 %{evo_plugins_dir}/org-gnome-mail-to-task.eplug
 
-# mailing-list-actions
+# mailing-list-actions plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mailing-list-actions.so
 %{evo_plugins_dir}/org-gnome-mailing-list-actions.eplug
 %{_datadir}/evolution/errors/org-gnome-mailing-list-actions.error
 
-# pst-import
+# pst-import plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-pst-import.so
 %{evo_plugins_dir}/org-gnome-pst-import.eplug
 %{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 
-# spamassassin
+# sender-validation plugin
+%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-sender-validation.so
+%{evo_plugins_dir}/org-gnome-evolution-sender-validation.eplug
+%{_datadir}/evolution/errors/org-gnome-sender-validation.error
+%{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.sender-validator.gschema.xml
+
+# spamassassin module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-spamassassin.so
 %{_datadir}/metainfo/org.gnome.Evolution-spamassassin.metainfo.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.spamassassin.gschema.xml
 
-# templates
+# templates plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-templates.so
 %{evo_plugins_dir}/org-gnome-templates.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.templates.gschema.xml
 
-# text-highlight
+# text-highlight module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-text-highlight.so
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.text-highlight.gschema.xml
 
-# tnef-attachment
+# tnef-attachment module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-tnef-attachment.so
 
-# vcard-inline
+# vcard-inline module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-vcard-inline.so
 
 %files addressbook
@@ -613,16 +620,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}-addressbook.desktop
 
 # PLUGINS
-# ldap accounts config
+# ldap accounts config module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-ldap.so
 
-# google accounts config
+# google accounts config module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-google.so
 
-# addressbook-local
+# addressbook-local module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-local.so
 
-# carddav-accounts-setup
+# carddav-accounts-setup module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-carddav.so
 
 %files calendar
@@ -647,33 +654,33 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/%{name}-tasks.desktop
 
 # PLUGINS
-# caldav
+# caldav module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-caldav.so
 
-# contacts
+# contacts module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-contacts.so
 
-# google-account-setup
+# google-account-setup module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-google.so
 
-# calendar-local
+# calendar-local module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-local.so
 
-# calendar-weather
+# calendar-weather module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-weather.so
 
-# calendar-weather
+# calendar-weather module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-webcal.so
 
-# calendar-webdav-notes
+# calendar-webdav-notes module
 %attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-webdav-notes.so
 
-# publish-calendar
+# publish-calendar plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-publish-calendar.so
 %{evo_plugins_dir}/org-gnome-publish-calendar.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.publish-calendar.gschema.xml
 
-# save-calendar
+# save-calendar plugin
 %attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-save-calendar.so
 %{evo_plugins_dir}/org-gnome-save-calendar.eplug
 
