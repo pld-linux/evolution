@@ -4,6 +4,7 @@
 %bcond_without	autoar		# archives support in attachments via gnome-autoar
 %bcond_without	ldap		# LDAP support
 %bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
+%bcond_with	gweather4	# libgweather4 instead of libgweather 3.x (should match evolution-data-server)
 %bcond_without	glade		# Glade catalog
 
 %define		eds_ver		%{version}
@@ -13,12 +14,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.42.4
+Version:	3.44.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.42/%{name}-%{version}.tar.xz
-# Source0-md5:	1945406e55bef5f90687569afcc6bd4a
+Source0:	https://download.gnome.org/sources/evolution/3.44/%{name}-%{version}.tar.xz
+# Source0-md5:	a4ce29d806624bfd5d5e4750ad2c3881
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -55,7 +56,8 @@ BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 %{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
-BuildRequires:	libgweather-devel >= 3.10.0
+%{!?with_gweather4:BuildRequires:	libgweather-devel >= 3.10.0}
+%{?with_gweather4:BuildRequires:	libgweather4-devel >= 4}
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
@@ -73,6 +75,7 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	shared-mime-info >= 0.22
+BuildRequires:	sqlite3-devel >= 3.7.17
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
@@ -131,6 +134,7 @@ Requires:	gtk-webkit4 >= 2.28.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup >= 2.42.0
 Requires:	libxml2 >= 1:2.7.3
+Requires:	sqlite3 >= 3.7.17
 
 %description libs
 This package contains Evolution libraries.
@@ -153,7 +157,7 @@ Requires:	gtk+3-devel >= 3.22.0
 Requires:	gtk-webkit4-devel >= 2.28.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
-Obsoletes:	evolution2-devel
+Obsoletes:	evolution2-devel < 3
 
 %description devel
 This package contains the files necessary to develop applications
@@ -173,7 +177,7 @@ Summary(pl.UTF-8):	Biblioteki statyczne dla evolution
 Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
-Obsoletes:	evolution2-static
+Obsoletes:	evolution2-static < 3
 
 %description static
 This package contains static libraries for Evolution.
@@ -241,10 +245,10 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.56
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgdata >= 0.10
-Requires:	libgweather >= 3.10.0
+%{!?with_gweather4:Requires:	libgweather >= 3.10.0}
 Provides:	%{name}-component = %{version}-%{release}
-Obsoletes:	evolution-caldav
-Obsoletes:	evolution-webcal
+Obsoletes:	evolution-caldav < 2.4
+Obsoletes:	evolution-webcal < 3
 
 %description calendar
 Evolution calendar and todo component.
@@ -287,6 +291,7 @@ export SPAMD="/usr/bin/spamd"
 	-DENABLE_SCHEMAS_COMPILE=OFF \
 	-DGTK_UPDATE_ICON_CACHE=/bin/true \
 	-DWITH_ENCHANT_VERSION=2 \
+	%{?with_gweather4:-DWITH_GWEATHER4=ON} \
 	-DWITH_OPENLDAP=%{?with_ldap:ON}%{!?with_ldap:OFF} \
 	-DWITH_STATIC_LDAP=OFF \
 	-DWITH_GLADE_CATALOG=%{?with_glade:ON} \
