@@ -4,7 +4,6 @@
 %bcond_without	autoar		# archives support in attachments via gnome-autoar
 %bcond_without	ldap		# LDAP support
 %bcond_without	contact_maps	# contact maps (libchamplain+clutter+geocode)
-%bcond_with	gweather4	# libgweather4 instead of libgweather 3.x (should match evolution-data-server)
 %bcond_without	glade		# Glade catalog
 
 %define		eds_ver		%{version}
@@ -14,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.44.4
-Release:	2
+Version:	3.46.4
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.44/%{name}-%{version}.tar.xz
-# Source0-md5:	754e8b888024291a6836bdec5bbfc7b1
+Source0:	https://download.gnome.org/sources/evolution/3.46/%{name}-%{version}.tar.xz
+# Source0-md5:	f5ac4c6088d6ec734d019cd42d6cca2d
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -36,10 +35,10 @@ BuildRequires:	enchant2-devel >= 2.2.0
 BuildRequires:	evolution-data-server-devel >= %{eds_ver}
 BuildRequires:	gcr-devel >= 3.4
 BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
-%{?with_contact_maps:BuildRequires:	geocode-glib-devel >= 3.10.0}
+%{?with_contact_maps:BuildRequires:	geocode-glib2-devel >= 3.26.3}
 BuildRequires:	gettext-tools >= 0.18.1
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
-BuildRequires:	glib2-devel >= 1:2.56
+BuildRequires:	glib2-devel >= 1:2.66
 %if %{with autoar}
 BuildRequires:	gnome-autoar-devel >= 0.1.1
 BuildRequires:	gnome-autoar-gtk-devel >= 0.1.1
@@ -49,19 +48,17 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gspell-devel >= 1
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
-# libsoup2 based, not ready for 4.1
-BuildRequires:	gtk-webkit4-devel >= 2.28.0
+BuildRequires:	gtk-webkit4.1-devel >= 2.34.0
 BuildRequires:	intltool
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
 %{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
-%{!?with_gweather4:BuildRequires:	libgweather-devel >= 3.10.0}
-%{?with_gweather4:BuildRequires:	libgweather4-devel >= 4}
+BuildRequires:	libgweather4-devel >= 4
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
-BuildRequires:	libsoup-devel >= 2.42.0
+BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
 BuildRequires:	libytnef-devel
@@ -79,7 +76,7 @@ BuildRequires:	sqlite3-devel >= 3.7.17
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.56
+Requires(post,postun):	glib2 >= 1:2.66
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
@@ -124,15 +121,15 @@ Group:		X11/Libraries
 Requires:	enchant2 >= 2.2.0
 Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
-Requires:	glib2 >= 1:2.56
+Requires:	glib2 >= 1:2.66
 %if %{with autoar}
 Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
 Requires:	gtk+3 >= 3.22.0
-Requires:	gtk-webkit4 >= 2.28.0
+Requires:	gtk-webkit4.1 >= 2.34.0
 Requires:	libcanberra-gtk3 >= 0.25
-Requires:	libsoup >= 2.42.0
+Requires:	libsoup3 >= 3.0
 Requires:	libxml2 >= 1:2.7.3
 Requires:	sqlite3 >= 3.7.17
 
@@ -151,10 +148,10 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{eds_ver}
-Requires:	glib2-devel >= 1:2.56
+Requires:	glib2-devel >= 1:2.66
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
-Requires:	gtk-webkit4-devel >= 2.28.0
+Requires:	gtk-webkit4.1-devel >= 2.34.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel < 3
@@ -207,7 +204,7 @@ Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.56
+Requires(post,postun):	glib2 >= 1:2.66
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Requires:	libpst >= 0.6.54
@@ -224,10 +221,10 @@ Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.56
+Requires(post,postun):	glib2 >= 1:2.66
 Requires:	%{name} = %{version}-%{release}
 %{?with_contact_maps:Requires:	clutter-gtk >= 0.90}
-%{?with_contact_maps:Requires:	geocode-glib >= 3.10.0}
+%{?with_contact_maps:Requires:	geocode-glib2 >= 3.26.3}
 %{?with_contact_maps:Requires:	libchamplain >= 0.12}
 Provides:	%{name}-component = %{version}-%{release}
 
@@ -242,10 +239,10 @@ Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.56
+Requires(post,postun):	glib2 >= 1:2.66
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgdata >= 0.10
-%{!?with_gweather4:Requires:	libgweather >= 3.10.0}
+Requires:	libgweather4 >= 4
 Provides:	%{name}-component = %{version}-%{release}
 Obsoletes:	evolution-caldav < 2.4
 Obsoletes:	evolution-webcal < 3
@@ -291,7 +288,6 @@ export SPAMD="/usr/bin/spamd"
 	-DENABLE_SCHEMAS_COMPILE=OFF \
 	-DGTK_UPDATE_ICON_CACHE=/bin/true \
 	-DWITH_ENCHANT_VERSION=2 \
-	%{?with_gweather4:-DWITH_GWEATHER4=ON} \
 	-DWITH_OPENLDAP=%{?with_ldap:ON}%{!?with_ldap:OFF} \
 	-DWITH_STATIC_LDAP=OFF \
 	-DWITH_GLADE_CATALOG=%{?with_glade:ON} \
@@ -370,6 +366,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/modules/module-offline-alert.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-plugin-lib.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-plugin-manager.so
+%attr(755,root,root) %{_libdir}/evolution/modules/module-rss.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-settings.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-editor.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-inspector.so
@@ -377,6 +374,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/libewebextension.so
 %dir %{_libdir}/evolution/web-extensions/webkit-editor
 %attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/module-webkit-editor-webextension.so
+
+%attr(755,root,root) %{_libdir}/evolution-data-server/camel-providers/libcamelrss.so
+%{_libdir}/evolution-data-server/camel-providers/libcamelrss.urls
+
 %dir %{_libdir}/evolution-data-server/ui-modules
 %attr(755,root,root) %{_libdir}/evolution-data-server/ui-modules/module-evolution-alarm-notify.so
 
