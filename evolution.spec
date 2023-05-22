@@ -14,7 +14,7 @@ Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de 
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
 Version:	3.46.4
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications/Mail
 Source0:	https://download.gnome.org/sources/evolution/3.46/%{name}-%{version}.tar.xz
@@ -304,6 +304,9 @@ rm -rf $RPM_BUILD_ROOT
 cp -p %{SOURCE3} %{SOURCE4} %{SOURCE5} %{SOURCE6} $RPM_BUILD_ROOT%{_desktopdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_desktopdir}/org.gnome.Evolution.desktop
+
+# not supported by glibc (as of 2.37)
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/ie
 
 %find_lang %{name} --all-name --with-gnome
 
