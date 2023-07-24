@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.46.4
-Release:	2
+Version:	3.48.4
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.46/%{name}-%{version}.tar.xz
-# Source0-md5:	f5ac4c6088d6ec734d019cd42d6cca2d
+Source0:	https://download.gnome.org/sources/evolution/3.48/%{name}-%{version}.tar.xz
+# Source0-md5:	a41d0fdd6e818f7902a90d3b2e1777c0
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -360,6 +360,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/evolution/killev
 
 %dir %{_libdir}/evolution/modules
+%attr(755,root,root) %{_libdir}/evolution/modules/module-appearance-settings.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-accounts-window.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-composer-autosave.so
 %attr(755,root,root) %{_libdir}/evolution/modules/module-composer-to-meeting.so
