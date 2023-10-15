@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.48.4
+Version:	3.50.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.48/%{name}-%{version}.tar.xz
-# Source0-md5:	a41d0fdd6e818f7902a90d3b2e1777c0
+Source0:	https://download.gnome.org/sources/evolution/3.50/%{name}-%{version}.tar.xz
+# Source0-md5:	65570fa4e7ebc88e551f912ea608969a
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -33,7 +33,7 @@ BuildRequires:	cmake >= 3.1
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant2-devel >= 2.2.0
 BuildRequires:	evolution-data-server-devel >= %{eds_ver}
-BuildRequires:	gcr-devel >= 3.4
+BuildRequires:	evolution-data-server-gtk3-devel >= %{eds_ver}
 BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
 %{?with_contact_maps:BuildRequires:	geocode-glib2-devel >= 3.26.3}
 BuildRequires:	gettext-tools >= 0.18.1
@@ -53,11 +53,12 @@ BuildRequires:	intltool
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
 BuildRequires:	libcanberra-gtk3-devel >= 0.25
-%{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12}
+%{?with_contact_maps:BuildRequires:	libchamplain-devel >= 0.12.21}
 BuildRequires:	libgweather4-devel >= 4
 BuildRequires:	libical-devel
 BuildRequires:	libnotify-devel >= 0.7
 BuildRequires:	libpst-devel >= 0.6.54
+BuildRequires:	libsecret-devel >= 0.5
 BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libxml2-devel >= 1:2.7.3
@@ -119,7 +120,6 @@ Summary:	Evolution libraries
 Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
 Requires:	enchant2 >= 2.2.0
-Requires:	gcr >= 3.4
 Requires:	gdk-pixbuf2 >= 2.24.0
 Requires:	glib2 >= 1:2.66
 %if %{with autoar}
@@ -148,6 +148,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{eds_ver}
+Requires:	evolution-data-server-gtk3-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.66
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
@@ -225,7 +226,7 @@ Requires(post,postun):	glib2 >= 1:2.66
 Requires:	%{name} = %{version}-%{release}
 %{?with_contact_maps:Requires:	clutter-gtk >= 0.90}
 %{?with_contact_maps:Requires:	geocode-glib2 >= 3.26.3}
-%{?with_contact_maps:Requires:	libchamplain >= 0.12}
+%{?with_contact_maps:Requires:	libchamplain >= 0.12.21}
 Provides:	%{name}-component = %{version}-%{release}
 
 %description addressbook
