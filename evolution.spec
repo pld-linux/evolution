@@ -30,6 +30,7 @@ BuildRequires:	atk-devel
 BuildRequires:	cairo-gobject-devel
 %{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
 BuildRequires:	cmake >= 3.1
+BuildRequires:	cmark-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant2-devel >= 2.2.0
 BuildRequires:	evolution-data-server-devel >= %{eds_ver}
