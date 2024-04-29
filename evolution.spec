@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.50.4
+Version:	3.52.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.50/%{name}-%{version}.tar.xz
-# Source0-md5:	3c50af619df5d3578f100d781c10fd79
+Source0:	https://download.gnome.org/sources/evolution/3.52/%{name}-%{version}.tar.xz
+# Source0-md5:	6a74512b94ae9ffa51929e1960d88e73
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -29,7 +29,7 @@ URL:		https://wiki.gnome.org/Apps/Evolution/
 BuildRequires:	atk-devel
 BuildRequires:	cairo-gobject-devel
 %{?with_contact_maps:BuildRequires:	clutter-gtk-devel >= 0.90}
-BuildRequires:	cmake >= 3.1
+BuildRequires:	cmake >= 3.15
 BuildRequires:	cmark-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	enchant2-devel >= 2.2.0
@@ -274,15 +274,13 @@ Dokumentacja API Evolution.
 %patch1 -p1
 
 %build
-install -d build
-cd build
 export BOGOFILTER="/usr/bin/bogofilter"
 export HIGHLIGHT="/usr/bin/highlight"
 export SPAMASSASSIN="/usr/bin/spamassassin"
 export SA_LEARN="/usr/bin/sa-learn"
 export SPAMC="/usr/bin/spamc"
 export SPAMD="/usr/bin/spamd"
-%cmake .. \
+%cmake -B build \
 	-DLIBEXEC_INSTALL_DIR=%{_libexecdir} \
 	%{!?with_autoar:-DENABLE_AUTOAR=OFF} \
 	%{?with_contact_maps:-DENABLE_CONTACT_MAPS=ON} \
@@ -295,7 +293,7 @@ export SPAMD="/usr/bin/spamd"
 	-DWITH_GLADE_CATALOG=%{?with_glade:ON} \
 	-DVERSION_SUBSTRING=" PLD Linux"
 
-%{__make}
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -482,6 +480,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/evolution/libevolution-mail-composer.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-mail-importers.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-mail.so
+%attr(755,root,root) %{_libdir}/evolution/libevolution-rss-common.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-shell.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-smime.so
 %attr(755,root,root) %{_libdir}/evolution/libevolution-util.so
