@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.54.2
+Version:	3.54.3
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
 Source0:	https://download.gnome.org/sources/evolution/3.54/%{name}-%{version}.tar.xz
-# Source0-md5:	a3772f3b7b75d30f380942340ea6bbea
+# Source0-md5:	5e2bb6cc4a3c6b4563edf7ac507d8cce
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -270,8 +270,8 @@ Dokumentacja API Evolution.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 export BOGOFILTER="/usr/bin/bogofilter"
