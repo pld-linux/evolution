@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.54.3
+Version:	3.56.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.54/%{name}-%{version}.tar.xz
-# Source0-md5:	5e2bb6cc4a3c6b4563edf7ac507d8cce
+Source0:	https://download.gnome.org/sources/evolution/3.56/%{name}-%{version}.tar.xz
+# Source0-md5:	4a8f4b0519d932b33f23016e40b2e858
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -39,7 +39,7 @@ BuildRequires:	gdk-pixbuf2-devel >= 2.24.0
 %{?with_contact_maps:BuildRequires:	geocode-glib2-devel >= 3.26.3}
 BuildRequires:	gettext-tools >= 0.18.1
 %{?with_glade:BuildRequires:	glade-devel >= 3.10.0}
-BuildRequires:	glib2-devel >= 1:2.66
+BuildRequires:	glib2-devel >= 1:2.70
 %if %{with autoar}
 BuildRequires:	gnome-autoar-devel >= 0.1.1
 BuildRequires:	gnome-autoar-gtk-devel >= 0.1.1
@@ -78,7 +78,7 @@ BuildRequires:	sqlite3-devel >= 3.7.17
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
-Requires(post,postun):	glib2 >= 1:2.66
+Requires(post,postun):	glib2 >= 1:2.70
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-component = %{version}-%{release}
 Requires:	%{name}-libs = %{version}-%{release}
@@ -122,7 +122,7 @@ Summary(pl.UTF-8):	Biblioteki Evolution
 Group:		X11/Libraries
 Requires:	enchant2 >= 2.2.0
 Requires:	gdk-pixbuf2 >= 2.24.0
-Requires:	glib2 >= 1:2.66
+Requires:	glib2 >= 1:2.70
 %if %{with autoar}
 Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
@@ -150,7 +150,7 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	cyrus-sasl-devel
 Requires:	evolution-data-server-devel >= %{eds_ver}
 Requires:	evolution-data-server-gtk3-devel >= %{eds_ver}
-Requires:	glib2-devel >= 1:2.66
+Requires:	glib2-devel >= 1:2.70
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
 Requires:	gtk-webkit4.1-devel >= 2.34.0
@@ -206,7 +206,7 @@ Summary:	Evolution mail component
 Summary(pl.UTF-8):	Moduł pocztowy Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.66
+Requires(post,postun):	glib2 >= 1:2.70
 # mail composer requires addressbook component
 Requires:	%{name}-addressbook = %{version}-%{release}
 Requires:	libpst >= 0.6.54
@@ -223,7 +223,7 @@ Summary:	Evolution addressbook component
 Summary(pl.UTF-8):	Moduł książki adresowej Evolution
 Group:		X11/Applications/Mail
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.66
+Requires(post,postun):	glib2 >= 1:2.70
 Requires:	%{name} = %{version}-%{release}
 %{?with_contact_maps:Requires:	clutter-gtk >= 0.90}
 %{?with_contact_maps:Requires:	geocode-glib2 >= 3.26.3}
@@ -241,7 +241,7 @@ Summary:	Evolution calendar and todo component
 Summary(pl.UTF-8):	Moduł kalendarza i listy zadań Evolution
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.66
+Requires(post,postun):	glib2 >= 1:2.70
 Requires:	%{name} = %{version}-%{release}
 Requires:	libgdata >= 0.10
 Requires:	libgweather4 >= 4
