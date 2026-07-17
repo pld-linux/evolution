@@ -13,12 +13,12 @@ Summary(pl.UTF-8):	Klient poczty, kalendarz i książka adresowa dla GNOME
 Summary(pt_BR.UTF-8):	Cliente de email integrado com calendário e catálogo de endereços
 Summary(zh_CN.UTF-8):	Evolution - GNOME个人和工作组信息管理工具(包括电子邮件，日历和地址薄)
 Name:		evolution
-Version:	3.56.2
-Release:	3
+Version:	3.60.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications/Mail
-Source0:	https://download.gnome.org/sources/evolution/3.56/%{name}-%{version}.tar.xz
-# Source0-md5:	ec80bf54d6ae5cb02b903948db6d7a53
+Source0:	https://download.gnome.org/sources/evolution/3.60/%{name}-%{version}.tar.xz
+# Source0-md5:	4ec00dcb2c280798f61642746fcbdf49
 Source3:	%{name}-addressbook.desktop
 Source4:	%{name}-calendar.desktop
 Source5:	%{name}-mail.desktop
@@ -49,7 +49,7 @@ BuildRequires:	gsettings-desktop-schemas-devel >= 3.2.0
 BuildRequires:	gspell-devel >= 1
 BuildRequires:	gtk+3-devel >= 3.22.0
 BuildRequires:	gtk-doc >= 1.14
-BuildRequires:	gtk-webkit4.1-devel >= 2.34.0
+BuildRequires:	gtk-webkit4.1-devel >= 2.40.0
 BuildRequires:	intltool
 BuildRequires:	iso-codes >= 0.49
 BuildRequires:	itstool
@@ -128,7 +128,7 @@ Requires:	gnome-autoar >= 0.1.1
 Requires:	gnome-autoar-gtk >= 0.1.1
 %endif
 Requires:	gtk+3 >= 3.22.0
-Requires:	gtk-webkit4.1 >= 2.34.0
+Requires:	gtk-webkit4.1 >= 2.40.0
 Requires:	libcanberra-gtk3 >= 0.25
 Requires:	libsoup3 >= 3.0
 Requires:	libxml2 >= 1:2.7.3
@@ -153,7 +153,7 @@ Requires:	evolution-data-server-gtk3-devel >= %{eds_ver}
 Requires:	glib2-devel >= 1:2.70
 Requires:	gnome-desktop-devel >= 3.2.0
 Requires:	gtk+3-devel >= 3.22.0
-Requires:	gtk-webkit4.1-devel >= 2.34.0
+Requires:	gtk-webkit4.1-devel >= 2.40.0
 Requires:	libxml2-devel >= 1:2.7.3
 %{?with_ldap:Requires:	openldap-devel >= 2.4.6}
 Obsoletes:	evolution2-devel < 3
@@ -360,30 +360,30 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/evolution/killev
 
 %dir %{_libdir}/evolution/modules
-%attr(755,root,root) %{_libdir}/evolution/modules/module-appearance-settings.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-accounts-window.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-composer-autosave.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-composer-to-meeting.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-config-lookup.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-contact-photos.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-gravatar.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-offline-alert.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-plugin-lib.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-plugin-manager.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-rss.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-settings.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-editor.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-webkit-inspector.so
+%{_libdir}/evolution/modules/module-appearance-settings.so
+%{_libdir}/evolution/modules/module-accounts-window.so
+%{_libdir}/evolution/modules/module-composer-autosave.so
+%{_libdir}/evolution/modules/module-composer-to-meeting.so
+%{_libdir}/evolution/modules/module-config-lookup.so
+%{_libdir}/evolution/modules/module-contact-photos.so
+%{_libdir}/evolution/modules/module-gravatar.so
+%{_libdir}/evolution/modules/module-offline-alert.so
+%{_libdir}/evolution/modules/module-plugin-lib.so
+%{_libdir}/evolution/modules/module-plugin-manager.so
+%{_libdir}/evolution/modules/module-rss.so
+%{_libdir}/evolution/modules/module-settings.so
+%{_libdir}/evolution/modules/module-webkit-editor.so
+%{_libdir}/evolution/modules/module-webkit-inspector.so
 %dir %{_libdir}/evolution/web-extensions
-%attr(755,root,root) %{_libdir}/evolution/web-extensions/libewebextension.so
+%{_libdir}/evolution/web-extensions/libewebextension.so
 %dir %{_libdir}/evolution/web-extensions/webkit-editor
-%attr(755,root,root) %{_libdir}/evolution/web-extensions/webkit-editor/module-webkit-editor-webextension.so
+%{_libdir}/evolution/web-extensions/webkit-editor/module-webkit-editor-webextension.so
 
-%attr(755,root,root) %{_libdir}/evolution-data-server/camel-providers/libcamelrss.so
+%{_libdir}/evolution-data-server/camel-providers/libcamelrss.so
 %{_libdir}/evolution-data-server/camel-providers/libcamelrss.urls
 
 %dir %{_libdir}/evolution-data-server/ui-modules
-%attr(755,root,root) %{_libdir}/evolution-data-server/ui-modules/module-evolution-alarm-notify.so
+%{_libdir}/evolution-data-server/ui-modules/module-evolution-alarm-notify.so
 
 %dir %{_datadir}/evolution
 %dir %{_datadir}/evolution/etspec
@@ -433,7 +433,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.importer.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.shell.gschema.xml
-%{_datadir}/metainfo/org.gnome.Evolution.appdata.xml
+%{_datadir}/metainfo/org.gnome.Evolution.metainfo.xml
 
 %{_iconsdir}/hicolor/scalable/apps/evolution.svg
 %{_iconsdir}/hicolor/scalable/apps/evolution-symbolic.svg
@@ -442,23 +442,23 @@ rm -rf $RPM_BUILD_ROOT
 # PLUGINS
 # backup-restore module
 %attr(755,root,root) %{_libexecdir}/evolution/evolution-backup
-%attr(755,root,root) %{_libdir}/evolution/modules/module-backup-restore.so
+%{_libdir}/evolution/modules/module-backup-restore.so
 %{_datadir}/evolution/errors/org-gnome-backup-restore.error
 
 # prefer-plain module+plugin
-%attr(755,root,root) %{_libdir}/evolution/modules/module-prefer-plain.so
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-prefer-plain.so
+%{_libdir}/evolution/modules/module-prefer-plain.so
+%{evo_plugins_dir}/liborg-gnome-prefer-plain.so
 %{evo_plugins_dir}/org-gnome-prefer-plain.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.prefer-plain.gschema.xml
 
 # face plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-face.so
+%{evo_plugins_dir}/liborg-gnome-face.so
 %{evo_plugins_dir}/org-gnome-face.eplug
 %{_datadir}/evolution/errors/org-gnome-face.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.face-picture.gschema.xml
 
 # external editor plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-external-editor.so
+%{evo_plugins_dir}/liborg-gnome-external-editor.so
 %{evo_plugins_dir}/org-gnome-external-editor.eplug
 %{_datadir}/evolution/errors/org-gnome-external-editor.error
 
@@ -466,25 +466,26 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{_libdir}/evolution
 %dir %{evo_plugins_dir}
-%attr(755,root,root) %{_libdir}/evolution/libeabutil.so
-%attr(755,root,root) %{_libdir}/evolution/libeabwidgets.so
-%attr(755,root,root) %{_libdir}/evolution/libecontacteditor.so
-%attr(755,root,root) %{_libdir}/evolution/libecontactprint.so
-%attr(755,root,root) %{_libdir}/evolution/libecontactlisteditor.so
-%attr(755,root,root) %{_libdir}/evolution/libemail-engine.so
-%attr(755,root,root) %{_libdir}/evolution/libessmime.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-addressbook-importers.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-calendar.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-calendar-importers.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-mail-formatter.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-mail-composer.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-mail-importers.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-mail.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-rss-common.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-shell.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-smime.so
-%attr(755,root,root) %{_libdir}/evolution/libevolution-util.so
-%attr(755,root,root) %{_libdir}/evolution/libgnomecanvas.so
+%{_libdir}/evolution/libeabutil.so
+%{_libdir}/evolution/libeabwidgets.so
+%{_libdir}/evolution/libecontacteditor.so
+%{_libdir}/evolution/libecontactprint.so
+%{_libdir}/evolution/libecontactlisteditor.so
+%{_libdir}/evolution/libemail-engine.so
+%{_libdir}/evolution/libessmime.so
+%{_libdir}/evolution/libevcardeditor.so
+%{_libdir}/evolution/libevolution-addressbook-importers.so
+%{_libdir}/evolution/libevolution-calendar.so
+%{_libdir}/evolution/libevolution-calendar-importers.so
+%{_libdir}/evolution/libevolution-mail-formatter.so
+%{_libdir}/evolution/libevolution-mail-composer.so
+%{_libdir}/evolution/libevolution-mail-importers.so
+%{_libdir}/evolution/libevolution-mail.so
+%{_libdir}/evolution/libevolution-rss-common.so
+%{_libdir}/evolution/libevolution-shell.so
+%{_libdir}/evolution/libevolution-smime.so
+%{_libdir}/evolution/libevolution-util.so
+%{_libdir}/evolution/libgnomecanvas.so
 
 %files devel
 %defattr(644,root,root,755)
@@ -497,17 +498,17 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with glade}
 %files glade
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/glade/modules/libgladeevolution.so
+%{_libdir}/glade/modules/libgladeevolution.so
 %{_datadir}/glade/catalogs/evolution.xml
 %endif
 
 %files mail
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/modules/module-mail.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-mail-config.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-mailto-handler.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-mdn.so
-%attr(755,root,root) %{_libdir}/evolution/modules/module-startup-wizard.so
+%{_libdir}/evolution/modules/module-mail.so
+%{_libdir}/evolution/modules/module-mail-config.so
+%{_libdir}/evolution/modules/module-mailto-handler.so
+%{_libdir}/evolution/modules/module-mdn.so
+%{_libdir}/evolution/modules/module-startup-wizard.so
 %{_datadir}/evolution/errors/evolution-mdn.error
 %{_datadir}/evolution/errors/mail.error
 %{_datadir}/evolution/etspec/message-list.etspec
@@ -545,83 +546,83 @@ rm -rf $RPM_BUILD_ROOT
 
 # PLUGINS
 # attachment-reminder plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-attachment-reminder.so
+%{evo_plugins_dir}/liborg-gnome-evolution-attachment-reminder.so
 %{evo_plugins_dir}/org-gnome-evolution-attachment-reminder.eplug
 %{_datadir}/evolution/errors/org-gnome-attachment-reminder.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.attachment-reminder.gschema.xml
 
 # bbdb plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-bbdb.so
+%{evo_plugins_dir}/liborg-gnome-evolution-bbdb.so
 %{evo_plugins_dir}/org-gnome-evolution-bbdb.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.autocontacts.gschema.xml
 
 # bogofilter module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-bogofilter.so
+%{_libdir}/evolution/modules/module-bogofilter.so
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.bogofilter.gschema.xml
 %{_datadir}/metainfo/org.gnome.Evolution-bogofilter.metainfo.xml
 
 # dbx-import plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-dbx-import.so
+%{evo_plugins_dir}/liborg-gnome-dbx-import.so
 %{evo_plugins_dir}/org-gnome-dbx-import.eplug
 
 # email-custom-header plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-email-custom-header.so
+%{evo_plugins_dir}/liborg-gnome-email-custom-header.so
 %{evo_plugins_dir}/org-gnome-email-custom-header.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.email-custom-header.gschema.xml
 
 # itip-formatter module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-itip-formatter.so
+%{_libdir}/evolution/modules/module-itip-formatter.so
 %{_datadir}/evolution/errors/org-gnome-itip-formatter.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.itip.gschema.xml
 
 # mail-notification plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mail-notification.so
+%{evo_plugins_dir}/liborg-gnome-mail-notification.so
 %{evo_plugins_dir}/org-gnome-mail-notification.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.mail-notification.gschema.xml
 
 # mail-to-task plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mail-to-task.so
+%{evo_plugins_dir}/liborg-gnome-mail-to-task.so
 %{evo_plugins_dir}/org-gnome-mail-to-task.eplug
 
 # mailing-list-actions plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-mailing-list-actions.so
+%{evo_plugins_dir}/liborg-gnome-mailing-list-actions.so
 %{evo_plugins_dir}/org-gnome-mailing-list-actions.eplug
 %{_datadir}/evolution/errors/org-gnome-mailing-list-actions.error
 
 # pst-import plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-pst-import.so
+%{evo_plugins_dir}/liborg-gnome-pst-import.so
 %{evo_plugins_dir}/org-gnome-pst-import.eplug
 %{_datadir}/metainfo/org.gnome.Evolution-pst.metainfo.xml
 
 # sender-validation plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-evolution-sender-validation.so
+%{evo_plugins_dir}/liborg-gnome-evolution-sender-validation.so
 %{evo_plugins_dir}/org-gnome-evolution-sender-validation.eplug
 %{_datadir}/evolution/errors/org-gnome-sender-validation.error
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.sender-validator.gschema.xml
 
 # spamassassin module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-spamassassin.so
+%{_libdir}/evolution/modules/module-spamassassin.so
 %{_datadir}/metainfo/org.gnome.Evolution-spamassassin.metainfo.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.spamassassin.gschema.xml
 
 # templates plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-templates.so
+%{evo_plugins_dir}/liborg-gnome-templates.so
 %{evo_plugins_dir}/org-gnome-templates.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.templates.gschema.xml
 
 # text-highlight module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-text-highlight.so
+%{_libdir}/evolution/modules/module-text-highlight.so
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.text-highlight.gschema.xml
 
 # tnef-attachment module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-tnef-attachment.so
+%{_libdir}/evolution/modules/module-tnef-attachment.so
 
 # vcard-inline module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-vcard-inline.so
+%{_libdir}/evolution/modules/module-vcard-inline.so
 
 %files addressbook
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/modules/module-addressbook.so
+%{_libdir}/evolution/modules/module-addressbook.so
 %{_datadir}/evolution/ecps
 %{_datadir}/evolution/errors/addressbook.error
 %{_datadir}/evolution/etspec/e-addressbook-view.etspec
@@ -633,20 +634,20 @@ rm -rf $RPM_BUILD_ROOT
 
 # PLUGINS
 # ldap accounts config module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-ldap.so
+%{_libdir}/evolution/modules/module-book-config-ldap.so
 
 # google accounts config module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-google.so
+%{_libdir}/evolution/modules/module-book-config-google.so
 
 # addressbook-local module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-local.so
+%{_libdir}/evolution/modules/module-book-config-local.so
 
 # carddav-accounts-setup module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-book-config-carddav.so
+%{_libdir}/evolution/modules/module-book-config-carddav.so
 
 %files calendar
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/evolution/modules/module-calendar.so
+%{_libdir}/evolution/modules/module-calendar.so
 %{_datadir}/evolution/errors/calendar.error
 %{_datadir}/evolution/etspec/e-cal-list-view.etspec
 %{_datadir}/evolution/etspec/e-meeting-time-sel.etspec
@@ -667,33 +668,33 @@ rm -rf $RPM_BUILD_ROOT
 
 # PLUGINS
 # caldav module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-caldav.so
+%{_libdir}/evolution/modules/module-cal-config-caldav.so
 
 # contacts module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-contacts.so
+%{_libdir}/evolution/modules/module-cal-config-contacts.so
 
 # google-account-setup module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-google.so
+%{_libdir}/evolution/modules/module-cal-config-google.so
 
 # calendar-local module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-local.so
+%{_libdir}/evolution/modules/module-cal-config-local.so
 
 # calendar-weather module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-weather.so
+%{_libdir}/evolution/modules/module-cal-config-weather.so
 
 # calendar-weather module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-webcal.so
+%{_libdir}/evolution/modules/module-cal-config-webcal.so
 
 # calendar-webdav-notes module
-%attr(755,root,root) %{_libdir}/evolution/modules/module-cal-config-webdav-notes.so
+%{_libdir}/evolution/modules/module-cal-config-webdav-notes.so
 
 # publish-calendar plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-publish-calendar.so
+%{evo_plugins_dir}/liborg-gnome-publish-calendar.so
 %{evo_plugins_dir}/org-gnome-publish-calendar.eplug
 %{_datadir}/glib-2.0/schemas/org.gnome.evolution.plugin.publish-calendar.gschema.xml
 
 # save-calendar plugin
-%attr(755,root,root) %{evo_plugins_dir}/liborg-gnome-save-calendar.so
+%{evo_plugins_dir}/liborg-gnome-save-calendar.so
 %{evo_plugins_dir}/org-gnome-save-calendar.eplug
 
 %files apidocs
